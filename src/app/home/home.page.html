@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-row size="12">
+      <ion-col size="12" class="ion-text-right">
+        <div class="cont-img">
+          <img class="custom-img-header" src="assets/login/logo.jpg">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div  class="div-mapa" id="map_id"></div>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+</ion-content>
+<ion-footer>
+  <ion-toolbar >
+    <ion-row size="12">
+      <ion-col size="6">
+        <h2 > Proximo bus:</h2>
+        <span >15 minutos</span>
+
+      </ion-col>
+      <ion-col size="2">
+        <ion-icon color="tertiary" class="custom-qr ion-padding-top" name="qr-code-outline"></ion-icon>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        <ion-icon class="custom-icon-op" color="medium" name="radio-button-on-outline"></ion-icon><br>
+        <ion-icon class="custom-icon-op" name="map-outline"></ion-icon>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        <ion-icon class="custom-icon-op" color="medium" name="bus-outline"></ion-icon><br>
+        <ion-icon class="custom-icon-op" color="medium" name="pin"></ion-icon>
+        <ion-icon class="custom-icon-op" color="medium" name="man"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

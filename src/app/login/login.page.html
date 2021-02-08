@@ -1,0 +1,78 @@
+<!--<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>-->
+
+<ion-content>
+  <ion-row size="12" class="custom-logo">
+    <ion-col size="12" class="ion-text-center">
+      <div class="cont-img">
+        <img src="assets/login/logo.jpg">
+      </div>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-row size="12" class="custom-row-login">
+    <ion-col size="12" class="ion-text-center">
+      <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+        <ion-item lines="none">
+          <ion-label position="stacked" class="ion-padding-bottom"> USUARIO</ion-label>
+          <ion-input name="email" formControlName="email" [(ngModel)]="model.email"
+                     required type="email"  class="custom-input"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="errorControl.email.errors?.required && ionicForm.get('email').touched">
+      Es un campo requerido.
+    </span>
+        <span class="error ion-padding" *ngIf="errorControl.email.errors?.pattern && ionicForm.get('email').touched">
+      No es un email valido.
+    </span>
+
+        <ion-item lines="none" class="ion-margin-top">
+          <ion-label position="stacked" class="ion-padding-bottom"> CONTRASEÑA</ion-label>
+          <ion-input  name="password" formControlName="password" [(ngModel)]="model.password"
+                      required type="password"  class="custom-input"></ion-input>
+        </ion-item>
+        <span  class="error ion-padding" *ngIf="errorControl.password.errors?.required && ionicForm.get('password').touched">
+      Es un campo requerido.
+    </span>
+        <div class="custom-cont-recovery">
+          <ion-row size="12">
+            <ion-col size="6" class="ion-text-left">
+              <span (click)="register()" class="custom-span-recovery ion-padding-start"> Regístrate </span>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right">
+              <span class="custom-span-recovery ion-padding-end">¿ Olvidó su conraseña ?</span>
+            </ion-col>
+          </ion-row>
+        </div>
+      </form>
+      <div class="custom-cont-butt-login">
+        <ion-button [disabled]="!ionicForm.valid" size="small" color="medium" class="custon-button-start" (click)="login()">
+          Iniciar
+        </ion-button>
+      </div>
+    </ion-col>
+
+
+  </ion-row>
+  <ion-row size="12" class="ion-no-padding ion-text-center">
+    <ion-col size="5" class="ion-text-center"><hr class="line-sep"></ion-col>
+    <ion-col size="2" class="ion-text-center"> ó </ion-col>
+    <ion-col size="5" class="ion-text-center"><hr class="line-sep"></ion-col>
+  </ion-row>
+
+  <ion-row size="12">
+    <ion-col size="12" class="ion-text-center">
+      <div class="cont-google">
+        <ion-button  size="medium" color="light" class="custon-button-start">
+          <img class="custom-img-goo" src="assets/icon/search.svg">
+          Iniciar con Google
+        </ion-button>
+      </div>
+    </ion-col>
+
+  </ion-row>
+
+</ion-content>

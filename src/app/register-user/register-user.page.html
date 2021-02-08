@@ -1,0 +1,130 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-row size="12">
+            <ion-col size="12" class="ion-text-right">
+                <div class="cont-img">
+                    <img class="custom-img-header" src="assets/login/logo.jpg">
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-row size="12" class="ion-no-padding ion-no-margin custom-row-nav">
+    <ion-col size="6" class="ion-no-padding ion-no-margin ion-text-left">
+        <ion-icon name="arrow-back-outline" class="ion-padding-start custon-icon-nav"></ion-icon>
+    </ion-col>
+    <ion-col size="6" class="ion-no-padding ion-no-margin ion-text-right">
+        <ion-icon *ngIf="ionicForm.valid" name="checkmark-outline" class="ion-padding-end custon-icon-nav" (click)="register()"></ion-icon>
+    </ion-col>
+  </ion-row>
+
+  <ion-row size="12" class="custom-row-login">
+    <ion-col size="12" class="ion-text-center">
+      <div class="eti-user">
+        USUARIO
+      </div>
+    </ion-col>
+    <ion-col size="12" class="ion-text-center">
+      <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+        <ion-item lines="none">
+          <ion-label position="stacked" class="ion-padding-bottom"> Nombre</ion-label>
+          <ion-input name="text" formControlName="nombre" [(ngModel)]="model.nombre"
+                     required type="email"  class="custom-input"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="errorControl.nombre.errors?.required && ionicForm.get('nombre').touched">
+      Es un campo requerido.
+    </span>
+        <span class="error ion-padding" *ngIf="errorControl.nombre.errors?.pattern && ionicForm.get('nombre').touched">
+      No es un email valido.
+    </span>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">Empresa </ion-label>
+          <ion-select class="custon-select" formControlName="empresa"  type="text" [(ngModel)]="model.empresa" multiple="false" cancelText="Cancelar"  okText="Ok">
+            <ion-select-option value="bacon">Empresa 01</ion-select-option>
+            <ion-select-option value="olives">Empresa 02</ion-select-option>
+            <ion-select-option value="xcheese">Empresa 03</ion-select-option>
+          </ion-select>
+        </ion-item>
+          <span class="error ion-padding" *ngIf="errorControl.empresa.errors?.required && ionicForm.get('empresa').touched">
+      Es un campo requerido.
+    </span>
+
+
+        <ion-item lines="none">
+          <ion-label position="stacked">Departamento </ion-label>
+          <ion-select class="custon-select" formControlName="departamento"  type="text" [(ngModel)]="model.departamento" multiple="false" cancelText="Cancelar"  okText="Ok">
+            <ion-select-option value="bacon">Departamento 01</ion-select-option>
+            <ion-select-option value="olives">Departamento 02</ion-select-option>
+            <ion-select-option value="xcheese">Departamento 03</ion-select-option>
+          </ion-select>
+        </ion-item>
+          <span class="error ion-padding" *ngIf="errorControl.departamento.errors?.required && ionicForm.get('departamento').touched">
+      Es un campo requerido.
+    </span>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">Cargo </ion-label>
+          <ion-select class="custon-select" formControlName="cargo"  type="text" [(ngModel)]="model.cargo" multiple="false" cancelText="Cancelar"  okText="Ok">
+            <ion-select-option value="bacon">Supervisor </ion-select-option>
+            <ion-select-option value="olives">Operador </ion-select-option>
+            <ion-select-option value="xcheese">Planificador </ion-select-option>
+          </ion-select>
+        </ion-item>
+          <span class="error ion-padding" *ngIf="errorControl.cargo.errors?.required && ionicForm.get('cargo').touched">
+      Es un campo requerido.
+    </span>
+
+        <ion-item lines="none">
+          <ion-label position="stacked" class="ion-padding-bottom"> Correo</ion-label>
+          <ion-input name="email" formControlName="email" [(ngModel)]="model.email"
+                     required type="email"  class="custom-input"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="errorControl.email.errors?.required && ionicForm.get('email').touched">
+      Es un campo requerido.
+    </span>
+        <span class="error ion-padding" *ngIf="errorControl.email.errors?.pattern && ionicForm.get('email').touched">
+      No es un email valido.
+    </span>
+
+        <ion-item lines="none" class="ion-margin-top">
+          <ion-label position="stacked" class="ion-padding-bottom"> Contraseña</ion-label>
+          <ion-input  name="password" formControlName="password" [(ngModel)]="model.password"
+                      required type="password"  class="custom-input"></ion-input>
+        </ion-item>
+        <span  class="error ion-padding" *ngIf="errorControl.password.errors?.required && ionicForm.get('password').touched">
+      Es un campo requerido.
+    </span>
+        <ion-item lines="none" class="ion-margin-top">
+          <ion-label position="stacked" class="ion-padding-bottom"> Repetir Contraseña</ion-label>
+          <ion-input  name="password" formControlName="recpass" [(ngModel)]="model.recpass"
+                      required type="password"  class="custom-input"></ion-input>
+        </ion-item>
+        <span  class="error ion-padding" *ngIf="errorControl.recpass.errors?.required && ionicForm.get('recpass').touched">
+      Es un campo requerido.
+    </span>
+<!--        <div class="custom-cont-recovery">
+          <ion-row size="12">
+            <ion-col size="6" class="ion-text-left">
+              <span (click)="register()" class="custom-span-recovery ion-padding-start"> Regístrate </span>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right">
+              <span class="custom-span-recovery ion-padding-end">¿ Olvidó su conraseña ?</span>
+            </ion-col>
+          </ion-row>
+        </div>-->
+      </form>
+
+    </ion-col>
+
+
+  </ion-row>
+
+</ion-content>
