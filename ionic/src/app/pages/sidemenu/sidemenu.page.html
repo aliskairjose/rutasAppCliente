@@ -1,51 +1,53 @@
 <div class="appwrapper">
   <!-- <ion-split-pane> -->
-    <ion-menu contentId="home" type="overlay">
-      <ion-content class="content">
-        <div class="d-flex flex-column h-100 justify-content-between">
+  <ion-menu contentId="home" type="overlay">
+    <ion-content class="content">
+      <div class="d-flex flex-column h-100 justify-content-between">
 
-          <div>
-            <ion-list id="inbox-list">
-  
-              <div class="menu-list-header">
-                <span class="profile-pic">MJ</span>
-    
-                <div class="heading">
-                  <ion-note class="align-16">Hola</ion-note>
-                  <span class="align-16 heading-name">Maria Jose Castilo</span>
-                </div>
-    
-                <ion-icon class="more align-16" name="ellipsis-horizontal"></ion-icon>
+        <div>
+          <ion-list id="inbox-list">
+
+            <div class="menu-list-header">
+              <span class="profile-pic">MJ</span>
+
+              <div class="heading">
+                <ion-note class="align-16">Hola</ion-note>
+                <span class="align-16 heading-name">Maria Jose Castilo</span>
               </div>
-    
-              <ion-menu-toggle  auto-hide="false" *ngFor="let p of appPages; let i = index">
-                <ion-item  routerDirection="root" (click)="menuOptionClickHandle(p, i)" lines="none" detail="false"
-                  >
-                  <img class="px-3 menuIcon" [src]="p.icon"/>
-                  <!-- <ion-icon [ngClass] = "activeRoute === i ? 'active' : 'deactive'" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon> -->
-                  <ion-label [ngClass] = "activeRoute === i ? 'active' : 'deactive'">{{ p.title }}</ion-label>
-                </ion-item>
-              </ion-menu-toggle>
-            </ion-list>
-          </div>
-  
-          <div class="logout">
-            <ion-button class="logout-btn" (click)="logout()"><ion-icon class="logout-icon" name="log-out-outline" ></ion-icon>Cerrar sesion</ion-button>
-  
-          </div>
+
+              <ion-icon class="more align-16" name="ellipsis-horizontal"></ion-icon>
+            </div>
+
+            <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+              <ion-item routerDirection="root" (click)="menuOptionClickHandle(p, i)" lines="none" detail="false">
+                <img class="px-3 menuIcon" [src]="p.icon" />
+                <!-- <ion-icon [ngClass] = "activeRoute === i ? 'active' : 'deactive'" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon> -->
+                <ion-label [ngClass]="activeRoute === i ? 'active' : 'deactive'">{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
         </div>
-        
-      </ion-content>
-    </ion-menu>
 
-    <ion-buttons slot="start" class="menu-button">
-      <ion-menu-button class="btn-icon"></ion-menu-button>
-    </ion-buttons>
+        <div class="logout">
+          <ion-button class="logout-btn" (click)="logout()">
+            <ion-icon class="logout-icon" name="log-out-outline"></ion-icon>Cerrar sesión
+          </ion-button>
 
-    <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in' : 'fade'" tappable (click)="bottomDrawer.toggleDrawer()"></div>
+        </div>
+      </div>
 
-    <!-- <app-bottom-drawer [component]="drawerVar" (openStateChanged) = "toggleBackdrop($event)" #bottomDrawer></app-bottom-drawer> -->
-    
-    <ion-router-outlet id="home"></ion-router-outlet>
+    </ion-content>
+  </ion-menu>
+
+  <ion-buttons slot="start" class="menu-button">
+    <ion-menu-button class="btn-icon"></ion-menu-button>
+  </ion-buttons>
+
+  <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in' : 'fade'" tappable (click)="bottomDrawer.toggleDrawer()">
+  </div>
+
+  <!-- <app-bottom-drawer [component]="drawerVar" (openStateChanged) = "toggleBackdrop($event)" #bottomDrawer></app-bottom-drawer> -->
+
+  <ion-router-outlet id="home"></ion-router-outlet>
   <!-- </ion-split-pane> -->
 </div>
