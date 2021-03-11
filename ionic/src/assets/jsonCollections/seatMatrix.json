@@ -1,0 +1,262 @@
+{
+    "seats": [
+        [
+            {
+            "position": "front",
+            "floor": 1,
+            "type": "seater",
+            "status": "driver",
+            "isSeat": true
+            },
+            {
+                "isSeat": false
+            },
+            {
+                "isSeat": false
+            },
+            {
+                "isSeat": false
+            },
+            {
+            "position": "front",
+            "floor": 1,
+            "type": "seater",
+            "status": "empty",
+            "isSeat": true 
+            }
+        ],
+        [
+
+        ],
+        [
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "f",
+                "isSeat": true
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "isSeat": false
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            }
+        ],
+        [
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "f",
+                "isSeat": true
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "isSeat": false
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            }
+        ],
+        [
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "f",
+                "isSeat": true
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "isSeat": false
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            }
+        ],
+        [
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "f",
+                "isSeat": true
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "isSeat": false
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            }
+        ],
+        [
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "f",
+                "isSeat": true
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "isSeat": false
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            }
+        ],
+        [
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "f",
+                "isSeat": true
+            },
+            {
+                "position": "mid",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "isSeat": false
+            },
+            {
+                "isSeat": false
+            },
+            {
+                "isSeat": false
+            }
+        ],
+        [
+
+        ],
+        [
+            {
+                "position": "last",
+                "floor": 1,
+                "type": "seater",
+                "status": "f",
+                "isSeat": true
+            },
+            {
+                "position": "last",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "position": "last",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "position": "last",
+                "floor": 1,
+                "type": "seater",
+                "status": "m",
+                "isSeat": true
+            },
+            {
+                "position": "last",
+                "floor": 1,
+                "type": "seater",
+                "status": "empty",
+                "isSeat": true
+            }
+        ]       
+    ]
+}

@@ -1,0 +1,86 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import "./bootstrap.min.css";
+
+.listItemWrapper{
+    display: flex;
+    // flex-direction: row;
+    align-items: center;
+    height: 100%;
+  }
+
+  .listTextWrapper{
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+
+  .listImg{
+    height: 20px;
+    width: 20px;
+    margin: 10px;
+  }
+
+  .listName{
+    font-size: 20px;
+  }
+
+  .timeText{
+    font-size: 12px;
+    color: gray;
+    margin-top: 3px;
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  
+  .gm-fullscreen-control{
+    display: none !important;
+  }
+
+  .gmnoprint{
+    display: none !important;
+  }
+
+  .gm-style-iw-t{
+    .gm-ui-hover-effect{
+      display: none !important;
+    }
+  }
