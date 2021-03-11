@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable( {
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 export class HttpService {
 
   constructor(
-    private _http: HttpService
+    private _http: HttpClient
   ) { }
 
   post( serviceName: string, data: any ): Observable<any> {

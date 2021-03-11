@@ -22,7 +22,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept( request: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
 
-    return from( this.storageService.get( 'token' ) ).pipe(
+    return from( this.storageService.get( '_cap_rp_token' ) ).pipe(
       switchMap( token => {
 
         // Importante: modificamos de forma inmutable, haciendo el clonado de la petición
