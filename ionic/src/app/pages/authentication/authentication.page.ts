@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { ERROR_FORM } from '../../constants/global-constants';
 import { CommonService } from '../../services/common.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component( {
   selector: 'app-authentication',
@@ -21,15 +22,18 @@ export class AuthenticationPage implements OnInit {
   userInfo = null;
   formError = ERROR_FORM;
 
+  private _loading: any;
+
   constructor(
     private router: Router,
     private _auth: AuthService,
     private _storage: StorageService,
     private formBuilder: FormBuilder,
     private _commonService: CommonService,
+    private _loadingController: LoadingController,
   ) {
     this.createForm();
-    const EMAIL_REGEXP = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+
   }
 
   ngOnInit() {
@@ -52,13 +56,17 @@ export class AuthenticationPage implements OnInit {
     this.submitted = true;
 
     if ( this.loginForm.valid ) {
-      this._auth.login( this.loginForm.value ).subscribe( response => {
-        console.log( response );
-        const message = response.message;
-        const color = 'primary';
-        this._commonService.presentToast( { message, color } );
-        this._storage.store( 'rp_token', response.data );
-        this.router.navigate( [ '/sidemenu/Inicio' ] );
+      this.presentLoading().then( () => {
+        this._auth.login( this.loginForm.value ).subscribe( response => {
+          this._loading.dismiss();
+          const message = response.message;
+          const color = 'primary';
+          this._commonService.presentToast( { message, color } );
+          this._storage.store( 'rp_token', response.data );
+          this.router.navigate( [ '/sidemenu/Inicio' ] );
+        } );
+      }, () => {
+        this._loading.dismiss();
       } );
     }
   }
@@ -68,6 +76,14 @@ export class AuthenticationPage implements OnInit {
       email: [ '', [ Validators.required, Validators.email ] ],
       password: [ '', [ Validators.required, Validators.minLength( 6 ) ] ],
     } );
+  }
+
+  private async presentLoading() {
+    this._loading = await this._loadingController.create( {
+      cssClass: 'mycustom-class',
+      message: 'Espere popr favor...'
+    } );
+    await this._loading.present();
   }
 
 }

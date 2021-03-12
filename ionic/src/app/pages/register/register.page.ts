@@ -6,6 +6,7 @@ import { ERROR_FORM } from '../../constants/global-constants';
 import { MustMatch } from '../../helpers/must-match.validator';
 import { AuthService } from '../../services/auth.service';
 import { CommonService } from '../../services/common.service';
+import { Router } from '@angular/router';
 
 @Component( {
   selector: 'app-register',
@@ -21,6 +22,7 @@ export class RegisterPage implements OnInit {
   private _loading: any;
 
   constructor(
+    private _router: Router,
     private _auth: AuthService,
     private _formBuilder: FormBuilder,
     private _commonService: CommonService,
@@ -46,6 +48,9 @@ export class RegisterPage implements OnInit {
           const message = response.message;
           const color = 'primary';
           this._commonService.presentToast( { message, color } );
+          setTimeout( () => {
+            this._router.navigate( [ '/signin' ] );
+          }, 2000 );
         } );
       }, () => this._loading.dismiss() );
     }
@@ -65,13 +70,13 @@ export class RegisterPage implements OnInit {
       name: [ '', [ Validators.required, Validators.email ] ],
       email: [ '', [ Validators.required, Validators.email ] ],
       password: [ '', [ Validators.required, Validators.minLength( 8 ) ] ],
-      passwordConfirmation: [ '', Validators.required, Validators.minLength( 8 ) ],
+      passwordConfirmation: [ '', [ Validators.required, Validators.minLength( 8 ) ] ],
       department: [ '', [ Validators.required ] ],
       charge: [ '', [ Validators.required ] ],
       client_id: [ '', [ Validators.required ] ],
     }, {
       validator: MustMatch( 'password', 'passwordConfirmation' )
-    } )
+    } );
   }
 
   private async presentLoading() {

@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AuthenticationPageRoutingModule } from './authentication-routing.module';
+import { RegisterPageRoutingModule } from './register-routing.module';
 
-import { AuthenticationPage } from './authentication.page';
+import { RegisterPage } from './register.page';
 
 @NgModule( {
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AuthenticationPageRoutingModule,
+    RegisterPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [ AuthenticationPage ]
+  declarations: [ RegisterPage ]
 } )
-export class AuthenticationPageModule { }
+export class RegisterPageModule { }

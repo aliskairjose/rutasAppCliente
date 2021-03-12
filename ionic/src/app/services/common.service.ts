@@ -8,7 +8,7 @@ export class CommonService {
 
   constructor(
     private loading: LoadingController,
-    public toastController: ToastController,
+    private toastController: ToastController,
   ) { }
 
   async presentLoading() {
@@ -16,9 +16,10 @@ export class CommonService {
       message: 'Por favor espere...',
       duration: 2000
     } );
-    await loading.present();
+    return loading;
+    // await loading.present();
 
-    await loading.onDidDismiss();
+    // await loading.onDidDismiss();
   }
 
   /**
