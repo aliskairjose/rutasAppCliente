@@ -50,8 +50,8 @@ export class RegisterPage implements OnInit {
           setTimeout( () => {
             this._router.navigate( [ '/signin' ] );
           }, 2000 );
-        } );
-      }, () => this._loading.dismiss() );
+        }, () => this._loading.dismiss() );
+      } );
     }
   }
 
