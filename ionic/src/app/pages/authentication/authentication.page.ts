@@ -47,7 +47,6 @@ export class AuthenticationPage implements OnInit {
   }
 
   onSubmit(): void {
-    console.log( 'submmited' );
     this.submitted = true;
 
     if ( this.loginForm.valid ) {

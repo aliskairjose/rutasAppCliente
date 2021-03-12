@@ -6,6 +6,7 @@ import { catchError, switchMap } from 'rxjs/operators';
 // import { CommonService } from '../common/common.service';
 import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
+import { CommonService } from './common.service';
 
 @Injectable( {
   providedIn: 'root'
@@ -14,8 +15,9 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   token = '';
   constructor(
-    private storageService: StorageService,
     private router: Router,
+    private commonService: CommonService,
+    private storageService: StorageService,
   ) {
 
   }
@@ -30,8 +32,12 @@ export class AuthInterceptorService implements HttpInterceptor {
 
         // Pasamos al siguiente interceptor de la cadena la petición modificada
         return next.handle( headers ).pipe(
-          catchError( error => {
-            return throwError( error );
+          catchError( result => {
+
+            const message = result.error.message;
+            const color = 'danger';
+            this.commonService.presentToast( { message, color } );
+            return throwError( result );
           } )
         );
       } )
