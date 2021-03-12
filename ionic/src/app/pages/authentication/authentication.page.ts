@@ -7,6 +7,7 @@ import { Plugins } from '@capacitor/core';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { ERROR_FORM } from '../../constants/global-constants';
+import { CommonService } from '../../services/common.service';
 
 @Component( {
   selector: 'app-authentication',
@@ -25,6 +26,7 @@ export class AuthenticationPage implements OnInit {
     private _auth: AuthService,
     private _storage: StorageService,
     private formBuilder: FormBuilder,
+    private _commonService: CommonService,
   ) {
     this.createForm();
     const EMAIL_REGEXP = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
@@ -51,6 +53,10 @@ export class AuthenticationPage implements OnInit {
 
     if ( this.loginForm.valid ) {
       this._auth.login( this.loginForm.value ).subscribe( response => {
+        console.log( response );
+        const message = response.message;
+        const color = 'primary';
+        this._commonService.presentToast( { message, color } );
         this._storage.store( 'rp_token', response.data );
         this.router.navigate( [ '/sidemenu/Inicio' ] );
       } );
