@@ -60,8 +60,8 @@ export class RegisterPage implements OnInit {
       this._clientService.getClients().subscribe( result => {
         this._loading.dismiss();
         this.clients = [ ...result.data ];
-      } );
-    }, () => this._loading.dismiss() );
+      }, () => this._loading.dismiss() );
+    } );
   }
 
   private createForm(): void {
