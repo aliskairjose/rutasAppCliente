@@ -40,7 +40,6 @@ export class RegisterPage implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-    console.log( this.registerForm.value );
     if ( this.registerForm.valid ) {
       this.presentLoading().then( () => {
         this._auth.register( this.registerForm.value ).subscribe( response => {
@@ -67,7 +66,7 @@ export class RegisterPage implements OnInit {
 
   private createForm(): void {
     this.registerForm = this._formBuilder.group( {
-      name: [ '', [ Validators.required, Validators.email ] ],
+      name: [ '', [ Validators.required ] ],
       email: [ '', [ Validators.required, Validators.email ] ],
       password: [ '', [ Validators.required, Validators.minLength( 8 ) ] ],
       passwordConfirmation: [ '', [ Validators.required, Validators.minLength( 8 ) ] ],
@@ -75,7 +74,7 @@ export class RegisterPage implements OnInit {
       charge: [ '', [ Validators.required ] ],
       client_id: [ '', [ Validators.required ] ],
     }, {
-      validator: MustMatch( 'password', 'passwordConfirmation' )
+      validator: MustMatch( 'password', 'passwordConfirmation' ),
     } );
   }
 
