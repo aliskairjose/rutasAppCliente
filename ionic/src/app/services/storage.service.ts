@@ -21,7 +21,7 @@ export class StorageService {
   }
 
   /**
-   * @description Recuerpa la data almacenada en el localStorage
+   * @description Recupera la data almacenada en el localStorage
    * @param key Identificador del dato que se desea recuperar
    * @returns value { any }
    */
