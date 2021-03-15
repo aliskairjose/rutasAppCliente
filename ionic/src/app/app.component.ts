@@ -19,11 +19,8 @@ export class AppComponent {
     private _auth: AuthService,
   ) {
     const isLoggedin = localStorage.getItem( '_cap_rp_token' );
-
-    if ( isLoggedin ) {
-      this.router.navigate( [ '/sidemenu/Inicio' ] );
-    } else {
-      this.router.navigate( [ '/initial' ] );
-    }
+    const route = isLoggedin ? '/sidemenu/Inicio' : '/initial';
+    this.router.navigate( [ route ] );
   }
+
 }
