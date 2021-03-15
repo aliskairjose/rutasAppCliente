@@ -72,7 +72,7 @@ export class AuthenticationPage implements OnInit {
   private createForm(): void {
     this.loginForm = this.formBuilder.group( {
       email: [ '', [ Validators.required, Validators.email ] ],
-      password: [ '', [ Validators.required, Validators.minLength( 6 ) ] ],
+      password: [ '', [ Validators.required, Validators.minLength( 8 ) ] ],
     } );
   }
 
