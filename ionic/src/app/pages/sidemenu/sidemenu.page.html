@@ -3,16 +3,14 @@
   <ion-menu contentId="home" type="overlay">
     <ion-content class="content">
       <div class="d-flex flex-column h-100 justify-content-between">
-
         <div>
           <ion-list id="inbox-list">
-
             <div class="menu-list-header">
               <span class="profile-pic">MJ</span>
 
               <div class="heading">
                 <ion-note class="align-16">Hola</ion-note>
-                <span class="align-16 heading-name">Maria Jose Castilo</span>
+                <span class="align-16 heading-name">{{ user.name }}</span>
               </div>
 
               <ion-icon class="more align-16" name="ellipsis-horizontal"></ion-icon>
@@ -32,10 +30,8 @@
           <ion-button class="logout-btn" (click)="logout()">
             <ion-icon class="logout-icon" name="log-out-outline"></ion-icon>Cerrar sesión
           </ion-button>
-
         </div>
       </div>
-
     </ion-content>
   </ion-menu>
 

@@ -26,4 +26,7 @@ export class AuthService {
     return this._httpService.post( '/users', data );
   }
 
+  isLoggedIn(): boolean {
+    return this._storage.get( '_cap_rp_token' ) ? true : false;
+  }
 }

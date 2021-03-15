@@ -62,7 +62,8 @@ export class AuthenticationPage implements OnInit {
           const message = response.message;
           const color = 'primary';
           this._commonService.presentToast( { message, color } );
-          this._storage.store( 'rp_token', response.data );
+          this._storage.set( 'rp_token', response.data );
+          this._storage.set( 'rp_user', response.user );
           this.router.navigate( [ '/sidemenu/Inicio' ] );
         }, () => this._loading.dismiss() );
       } );

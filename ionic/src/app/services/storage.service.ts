@@ -9,25 +9,37 @@ const { Storage } = Plugins;
 export class StorageService {
   constructor() { }
 
-  // Store the value
-  async store( key: string, value: any ) {
-    await Storage.set( {
-      key, value: JSON.stringify( value )
-    } );
+  /**
+    * @description Almacena la data en el localStorage
+    * @param key Identificador del valor a almacenar
+    * @param value Valor a almacenar
+    */
+  set( key: string, value: any ): void {
+    localStorage.setItem( key, JSON.stringify( value ) );
   }
 
-  // Get the value
-  async get( key: string ): Promise<{ value: any }> {
-    const item = await Storage.get( { key } );
-    return JSON.parse( item.value );
+  /**
+   * @description Recuerpa la data almacenada en el localStorage
+   * @param key Identificador del dato que se desea recuperar
+   * @returns value { any }
+   */
+  get( key: string ): any {
+    const value = localStorage.getItem( key );
+    return JSON.parse( value );
   }
 
-  async removeStorageItem( key: string ) {
-    await Storage.remove( { key } );
+  /**
+   * @description Elimina la data almacenada según el identificador
+   * @param key Identificador de la data que se desea eliminar
+   */
+  remove( key: string ): void {
+    localStorage.removeItem( key );
   }
 
-  // Clear storage
-  async clear() {
-    await Storage.clear();
+  /**
+   * @description Elimina toda la data almacenada en el localStorage
+   */
+  clear(): void {
+    localStorage.clear();
   }
 }
