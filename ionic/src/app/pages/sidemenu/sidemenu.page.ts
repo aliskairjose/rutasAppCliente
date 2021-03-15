@@ -1,7 +1,8 @@
 import { Router } from '@angular/router';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { StorageService } from '../../services/storage.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component( {
@@ -9,7 +10,7 @@ import { StorageService } from '../../services/storage.service';
   templateUrl: './sidemenu.page.html',
   styleUrls: [ './sidemenu.page.scss' ],
 } )
-export class SidemenuPage implements OnInit {
+export class SidemenuPage implements OnInit, OnChanges {
 
   backdropVisible = false;
   drawerVar = 'Inicio';
@@ -27,12 +28,18 @@ export class SidemenuPage implements OnInit {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private _storage: StorageService,
-    private router: Router
+    private _auth: AuthService,
+    private router: Router,
   ) {
+  }
+  ngOnChanges( changes: SimpleChanges ): void {
+
   }
 
   ngOnInit() {
-    this._storage.get( 'rp_user' ).then( ( user: any ) => this.user = { ...user } );
+    this._storage.get( 'rp_user' ).then( ( user: any ) => {
+      this.user = { ...user }
+    } );
   }
 
   toggleBackdrop( isVisible ) {
