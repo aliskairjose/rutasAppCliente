@@ -32,7 +32,7 @@ export class SidemenuPage implements OnInit {
   }
 
   ngOnInit() {
-    this.user = JSON.parse( localStorage.getItem( '_cap_rp_user' ) );
+    this._storage.get( 'rp_user' ).then( ( user: any ) => this.user = { ...user } );
   }
 
   toggleBackdrop( isVisible ) {
