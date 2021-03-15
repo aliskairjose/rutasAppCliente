@@ -57,8 +57,8 @@ export class AuthenticationPage implements OnInit {
     if ( this.loginForm.valid ) {
       this.presentLoading().then( () => {
         this._auth.login( this.loginForm.value ).subscribe( response => {
-          this._auth.authSubject( true );
           this._loading.dismiss();
+          this._auth.AuthSubject( response.user );
           const message = response.message;
           const color = 'primary';
           this._commonService.presentToast( { message, color } );

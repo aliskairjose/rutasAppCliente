@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Observable, Subject } from 'rxjs';
 import { StorageService } from './storage.service';
+import { User } from '@codetrix-studio/capacitor-google-auth/dist/esm/user';
 
 @Injectable( {
   providedIn: 'root'
@@ -34,15 +35,18 @@ export class AuthService {
   /**
    * @description Genera el stream de eventos usando next() para crear el evento
    */
-  authSubject( isAuth: boolean ): void {
-    this.$auth.next( isAuth );
+  AuthSubject( user: User ): void {
+    this.$auth.next( user );
+    this.$auth.complete();
   }
 
   /**
    * @description Creación del observer mediante el método asObserver(), el cual sera consumido por el componente
    * @returns Observable
    */
-  authObserver(): Observable<any> {
+  authObserver(): Observable<User> {
     return this.$auth.asObservable();
   }
+
+
 }

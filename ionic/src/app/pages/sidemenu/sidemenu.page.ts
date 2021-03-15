@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '
 import { User } from '../../interfaces/user';
 import { StorageService } from '../../services/storage.service';
 import { AuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs';
 
 
 @Component( {
@@ -17,8 +18,9 @@ export class SidemenuPage implements OnInit, OnChanges {
   activeRoute = 0;
   addressClicked = 0;
   user: User = {};
+  abrv = '';
 
-  public appPages = [
+  appPages = [
     { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/prueba 1Recurso 29.png' },
     { title: 'Rutas', url: '/sidemenu/Rutas', icon: '../../../assets/prueba 1Recurso 30.png' },
     { title: 'Experiencia', url: '/sidemenu/Experiencia', icon: '../../../assets/prueba 1Recurso 31.png' },
@@ -31,16 +33,20 @@ export class SidemenuPage implements OnInit, OnChanges {
     private _auth: AuthService,
     private router: Router,
   ) {
-  }
-  ngOnChanges( changes: SimpleChanges ): void {
 
+  }
+
+  ngOnChanges( changes: SimpleChanges ): void {
   }
 
   ngOnInit() {
     this._storage.get( 'rp_user' ).then( ( user: any ) => {
-      this.user = { ...user }
+      this.user = { ...user };
+      const value = this.user.name.split( ' ' );
+      this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
     } );
   }
+
 
   toggleBackdrop( isVisible ) {
     this.backdropVisible = isVisible;

@@ -9,7 +9,7 @@ export interface User {
   department?: string;
   email?: string;
   email_verified_at?: string;
-  id?: number;
+  id?: string;
   identification?: null
   license?: string;
   license_expiration?: string;
