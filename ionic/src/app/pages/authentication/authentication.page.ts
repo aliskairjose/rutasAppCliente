@@ -54,7 +54,6 @@ export class AuthenticationPage implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-
     if ( this.loginForm.valid ) {
       this.presentLoading().then( () => {
         this._auth.login( this.loginForm.value ).subscribe( response => {
@@ -62,8 +61,8 @@ export class AuthenticationPage implements OnInit {
           const message = response.message;
           const color = 'primary';
           this._commonService.presentToast( { message, color } );
-          this._storage.set( 'rp_token', response.data );
-          this._storage.set( 'rp_user', response.user );
+          this._storage.store( 'rp_token', response.data );
+          this._storage.store( 'rp_user', response.user );
           this.router.navigate( [ '/sidemenu/Inicio' ] );
         }, () => this._loading.dismiss() );
       } );

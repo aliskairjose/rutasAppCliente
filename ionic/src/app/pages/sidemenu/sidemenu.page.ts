@@ -29,10 +29,10 @@ export class SidemenuPage implements OnInit {
     private _storage: StorageService,
     private router: Router
   ) {
-    this.user = this._storage.get( '_cap_rp_user' );
   }
 
   ngOnInit() {
+    this.user = JSON.parse( localStorage.getItem( '_cap_rp_user' ) );
   }
 
   toggleBackdrop( isVisible ) {
