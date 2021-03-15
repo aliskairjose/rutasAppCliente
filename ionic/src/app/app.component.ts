@@ -1,6 +1,5 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { AuthService } from './services/auth.service';
 @Component( {
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -16,7 +15,6 @@ export class AppComponent {
   public labels = [ 'Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders' ];
   constructor(
     private router: Router,
-    private _auth: AuthService,
   ) {
     const isLoggedin = localStorage.getItem( '_cap_rp_token' );
     const route = isLoggedin ? '/sidemenu/Inicio' : '/initial';
