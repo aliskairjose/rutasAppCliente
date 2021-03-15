@@ -1,7 +1,8 @@
 {
   "name": "myFirstIonicProject",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular",
   "id": "04f68b35"

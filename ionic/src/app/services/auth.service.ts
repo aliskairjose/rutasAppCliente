@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
+import { StorageService } from './storage.service';
 
 @Injectable( {
   providedIn: 'root'
@@ -8,7 +9,8 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   constructor(
-    private _httpService: HttpService
+    private _storage: StorageService,
+    private _httpService: HttpService,
   ) { }
 
   /**
@@ -23,4 +25,5 @@ export class AuthService {
   register( data: any ): Observable<any> {
     return this._httpService.post( '/users', data );
   }
+
 }
