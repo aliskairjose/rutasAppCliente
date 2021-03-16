@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '
 import { User } from '../../interfaces/user';
 import { StorageService } from '../../services/storage.service';
 import { AuthService } from '../../services/auth.service';
-import { Observable } from 'rxjs';
 
 
 @Component( {
@@ -33,7 +32,12 @@ export class SidemenuPage implements OnInit, OnChanges {
     private _auth: AuthService,
     private router: Router,
   ) {
-
+    this.user = {};
+    this._auth.authObserver().subscribe( ( user: any ) => {
+      this.user = { ...user };
+      const value = this.user.name.split( ' ' );
+      this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
+    } );
   }
 
   ngOnChanges( changes: SimpleChanges ): void {
