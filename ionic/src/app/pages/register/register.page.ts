@@ -20,7 +20,6 @@ export class RegisterPage implements OnInit {
   formError = ERROR_FORM;
   clients = [];
   logo = LOGO;
-  private _loading: any;
 
   constructor(
     private _router: Router,
@@ -33,36 +32,36 @@ export class RegisterPage implements OnInit {
     this.createForm();
   }
 
-  ngOnInit() {
-    this.loadClients();
+  async ngOnInit() {
+    await this.loadClients();
   }
 
   get f() { return this.registerForm.controls; }
 
-  onSubmit(): void {
+  async onSubmit() {
     this.submitted = true;
     if ( this.registerForm.valid ) {
-      this.presentLoading().then( () => {
-        this._auth.register( this.registerForm.value ).subscribe( response => {
-          this._loading.dismiss();
-          const message = response.message;
-          const color = 'primary';
-          this._commonService.presentToast( { message, color } );
-          setTimeout( () => {
-            this._router.navigate( [ '/signin' ] );
-          }, 2000 );
-        }, () => this._loading.dismiss() );
-      } );
+      const loading = await this._commonService.presentLoading();
+      loading.present();
+      this._auth.register( this.registerForm.value ).subscribe( response => {
+        loading.dismiss();
+        const message = response.message;
+        const color = 'primary';
+        this._commonService.presentToast( { message, color } );
+        setTimeout( () => {
+          this._router.navigate( [ '/signin' ] );
+        }, 2000 );
+      }, () => loading.dismiss() );
     }
   }
 
-  loadClients(): void {
-    this.presentLoading().then( () => {
-      this._clientService.getClients().subscribe( result => {
-        this._loading.dismiss();
-        this.clients = [ ...result.data ];
-      }, () => this._loading.dismiss() );
-    } );
+  async loadClients() {
+    const loading = await this._commonService.presentLoading();
+    loading.present();
+    this._clientService.getClients().subscribe( result => {
+      loading.dismiss();
+      this.clients = [ ...result.data ];
+    }, () => loading.dismiss() );
   }
 
   private createForm(): void {
@@ -77,14 +76,6 @@ export class RegisterPage implements OnInit {
     }, {
       validator: MustMatch( 'password', 'passwordConfirmation' ),
     } );
-  }
-
-  private async presentLoading() {
-    this._loading = await this._loadingController.create( {
-      cssClass: 'mycustom-class',
-      message: 'Espere popr favor...'
-    } );
-    await this._loading.present();
   }
 
 }
