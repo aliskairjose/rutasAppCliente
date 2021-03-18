@@ -7,7 +7,6 @@
       <ion-text class="signupTitleText">Inicie sesion</ion-text>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate class="signupForm">
         <ion-item>
-          <!-- <ion-label class="signupSmallText signupGrayText">Usuario</ion-label> -->
           <ion-input type="email" class="form-controll" formControlName="email" placeholder="Usuario"></ion-input>
         </ion-item>
         <div *ngIf="submitted && f.email.errors">
@@ -23,7 +22,6 @@
           </div>
         </div>
         <ion-item>
-          <!-- <ion-label class="signupSmallText signupGrayText">Contrasena</ion-label> -->
           <ion-input type="password" class="form-controll" formControlName="password" placeholder="Contrasena">
           </ion-input>
         </ion-item>
