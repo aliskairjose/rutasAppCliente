@@ -33,6 +33,16 @@ export class AuthService {
   }
 
   /**
+   * @description Almacenamiendo de data de login google, enviando objeto {email, google_id}
+   * @param Email del usuario
+   * @param GoogleId el id proporcionado por el login de google
+   * @returns 
+   */
+  googleLogin( data: any ): Observable<any> {
+    return this._httpService.post( '', data );
+  }
+
+  /**
    * @description Genera el stream de eventos usando next() para crear el evento
    */
   AuthSubject( user: User ): void {

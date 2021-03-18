@@ -43,9 +43,15 @@ export class AuthenticationPage implements OnInit {
   async googleLogin() {
     const googleUser = await Plugins.GoogleAuth.signIn();
     if ( googleUser.authentication.idToken ) {
-      this._storage.store( 'rp_token', googleUser.authentication.idToken );
-      this._storage.store( 'rp_user', googleUser );
-      this.router.navigate( [ '/sidemenu/Inicio' ] );
+      this.presentLoading().then( () => {
+        this._auth.googleLogin( googleUser ).subscribe( async ( result ) => {
+          this._loading.dismiss();
+
+          const token = await this._storage.store( 'rp_token', googleUser.authentication.idToken );
+          const user = await this._storage.store( 'rp_user', googleUser );
+          this.router.navigate( [ '/sidemenu/Inicio' ] );
+        }, () => this._loading.dismiss() );
+      } );
     }
   }
 
@@ -53,14 +59,14 @@ export class AuthenticationPage implements OnInit {
     this.submitted = true;
     if ( this.loginForm.valid ) {
       this.presentLoading().then( () => {
-        this._auth.login( this.loginForm.value ).subscribe( response => {
+        this._auth.login( this.loginForm.value ).subscribe( async ( response ) => {
           this._loading.dismiss();
           this._auth.AuthSubject( response.user );
           const message = response.message;
           const color = 'primary';
           this._commonService.presentToast( { message, color } );
-          this._storage.store( 'rp_token', response.data );
-          this._storage.store( 'rp_user', response.user );
+          const token = await this._storage.store( 'rp_token', response.data );
+          const user = await this._storage.store( 'rp_user', response.user );
           this.router.navigate( [ '/sidemenu/Inicio' ] );
         }, () => this._loading.dismiss() );
       } );
