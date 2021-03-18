@@ -1,31 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ERROR_FORM, LOGO } from '../../../constants/global-constants';
 
-@Component({
+@Component( {
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.page.html',
-  styleUrls: ['./../../authentication/authentication.page.scss'],
-})
+  styleUrls: [ './../../authentication/authentication.page.scss' ],
+} )
 export class ForgotPasswordPage implements OnInit {
 
-  public registerForgotForm: FormGroup;
-  constructor(public formBuilder: FormBuilder, private router: Router) {
-    const EMAIL_REGEXP = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-    this.registerForgotForm = formBuilder.group({
-      email:  ['', Validators.compose([Validators.required, Validators.pattern(EMAIL_REGEXP)])]
-    });
+  registerForgotForm: FormGroup;
+  submmited: boolean;
+  formError = ERROR_FORM;
+  logo = LOGO;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
+    this.createForm();
   }
+
+  get f() { return this.registerForgotForm.controls }
 
   ngOnInit() {
   }
 
-  confirm() {
-    const email = this.registerForgotForm.controls.email.value;
-    const emailValid = this.registerForgotForm.controls.email.valid;
-    if (email && emailValid) {
-      this.router.navigate(['/signin']);
-    }
+  async onSubmit() {
+    this.submmited = true;
+
+  }
+
+  private createForm(): void {
+    this.registerForgotForm = this.formBuilder.group(
+      {
+        email: [ '', [ Validators.required, Validators.email ] ]
+      }
+    );
   }
 
 }

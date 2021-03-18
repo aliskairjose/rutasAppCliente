@@ -7,3 +7,5 @@ export const ERROR_FORM = {
   onlyDigits: 'Sólo se permiten números',
   minLength: 'El mínimo de caracteres es de '
 };
+
+export const LOGO = './../../../assets/loginLogo.png';

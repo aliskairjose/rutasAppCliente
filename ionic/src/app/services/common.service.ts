@@ -17,9 +17,6 @@ export class CommonService {
       duration: 2000
     } );
     return loading;
-    // await loading.present();
-
-    // await loading.onDidDismiss();
   }
 
   /**

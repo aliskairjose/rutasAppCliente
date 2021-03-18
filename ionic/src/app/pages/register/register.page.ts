@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientsService } from '../../services/clients.service';
 import { LoadingController } from '@ionic/angular';
-import { ERROR_FORM } from '../../constants/global-constants';
+import { ERROR_FORM, LOGO } from '../../constants/global-constants';
 import { MustMatch } from '../../helpers/must-match.validator';
 import { AuthService } from '../../services/auth.service';
 import { CommonService } from '../../services/common.service';
@@ -19,6 +19,7 @@ export class RegisterPage implements OnInit {
   submitted: boolean;
   formError = ERROR_FORM;
   clients = [];
+  logo = LOGO;
   private _loading: any;
 
   constructor(

@@ -7,13 +7,14 @@ import { StorageService } from './services/storage.service';
   styleUrls: [ 'app.component.scss' ],
 } )
 export class AppComponent implements OnInit {
-  public appPages = [
+  appPages = [
     { title: 'Inicio', url: '/folder/Inicio', icon: 'home' },
     { title: 'Rutas', url: '/folder/Rutas', icon: 'bus' },
     { title: 'Experiencia', url: '/folder/Experiencia', icon: 'medal' },
     { title: 'Soporte/Ayuda', url: '/folder/Soporte', icon: 'help-buoy' },
   ];
-  public labels = [ 'Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders' ];
+  labels = [ 'Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders' ];
+
   constructor(
     private router: Router,
     private _storage: StorageService,
