@@ -6,7 +6,14 @@
         <div>
           <ion-list id="inbox-list">
             <div class="menu-list-header">
-              <span class="profile-pic">{{ abrv | uppercase }}</span>
+              <ng-container *ngIf="user.imageUrl; else elseTemplate">
+                <ion-avatar>
+                  <img [src]="user.imageUrl">
+                </ion-avatar>
+              </ng-container>
+              <ng-template #elseTemplate>
+                <span class="profile-pic">{{ abrv | uppercase }}</span>
+              </ng-template>
 
               <div class="heading">
                 <ion-note class="align-16">Hola</ion-note>

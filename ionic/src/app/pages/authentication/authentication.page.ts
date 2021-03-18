@@ -19,7 +19,6 @@ export class AuthenticationPage implements OnInit {
 
   loginForm: FormGroup;
   submitted: boolean;
-  userInfo = null;
   formError = ERROR_FORM;
 
   private _loading: any;
@@ -42,12 +41,10 @@ export class AuthenticationPage implements OnInit {
   get f() { return this.loginForm.controls; }
 
   async googleLogin() {
-    console.log( 'entered in googla login' );
     const googleUser = await Plugins.GoogleAuth.signIn();
-    this.userInfo = googleUser;
-    console.log( 'google log in', googleUser );
-    if ( this.userInfo.authentication.idToken ) {
-      localStorage.setItem( 'userToken', this.userInfo.authentication.idToken );
+    if ( googleUser.authentication.idToken ) {
+      this._storage.store( 'rp_token', googleUser.authentication.idToken );
+      this._storage.store( 'rp_user', googleUser );
       this.router.navigate( [ '/sidemenu/Inicio' ] );
     }
   }
