@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ERROR_FORM, LOGO } from '../../../constants/global-constants';
+import { ERROR_FORM, LOGO } from '../../constants/global-constants';
 
 @Component( {
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.page.html',
-  styleUrls: [ './../../authentication/authentication.page.scss' ],
+  styleUrls: [ './../authentication/authentication.page.scss' ],
 } )
 export class ForgotPasswordPage implements OnInit {
 

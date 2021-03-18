@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'forgot-password',
-    loadChildren: () => import( './pages/forgotPassword/forgot-password/forgot-password.module' ).then( m => m.ForgotPasswordPageModule )
+    loadChildren: () => import( './pages/forgot-password/forgot-password.module' ).then( m => m.ForgotPasswordPageModule )
   },
   {
     path: 'sidemenu',
@@ -30,16 +30,7 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import( './pages/register/register.module' ).then( m => m.RegisterPageModule )
-  },
-
-  // {
-  //   path: 'inicio',
-  //   loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
-  // },
-  // {
-  //   path: 'feedback',
-  //   loadChildren: () => import('./pages/feedback/feedback.module').then( m => m.FeedbackPageModule)
-  // },
+  }
 ];
 
 @NgModule( {

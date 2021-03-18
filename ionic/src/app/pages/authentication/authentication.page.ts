@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
