@@ -40,13 +40,15 @@
           </div>
         </div>
         <div class="forgotLinkWrapper">
-          <ion-text [routerLink]="['/register']" class="signupSmallText ion-float-left">Registrese</ion-text>
           <ion-text [routerLink]="['/forgot-password']" class="signupSmallText ion-float-right">Olvido su contraseña?
           </ion-text>
         </div>
-        <div class="text-center mt-4">
+        <div class="ion-text-center ion-margin-vertical">
           <ion-button color="warning" class="signupMedText" type="submit">
             Iniciar sesion</ion-button>
+        </div>
+        <div class="ion-text-center">
+          <ion-text [routerLink]="['/register']" class="signupSmallTex">Registrese</ion-text>
         </div>
       </form>
     </div>

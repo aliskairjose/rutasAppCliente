@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ERROR_FORM, LOGO } from '../../constants/global-constants';
+import { CommonService } from '../../services/common.service';
 
 @Component( {
   selector: 'app-forgot-password',
@@ -11,12 +12,13 @@ import { ERROR_FORM, LOGO } from '../../constants/global-constants';
 export class ForgotPasswordPage implements OnInit {
 
   registerForgotForm: FormGroup;
-  submmited: boolean;
+  submitted: boolean;
   formError = ERROR_FORM;
   logo = LOGO;
 
   constructor(
     private formBuilder: FormBuilder,
+    private _common: CommonService,
     private router: Router
   ) {
     this.createForm();
@@ -28,8 +30,12 @@ export class ForgotPasswordPage implements OnInit {
   }
 
   async onSubmit() {
-    this.submmited = true;
-
+    console.log( 'submitted' );
+    this.submitted = true;
+    if ( this.registerForgotForm.valid ) {
+      const loading = await this._common.presentLoading();
+      loading.present();
+    }
   }
 
   private createForm(): void {
