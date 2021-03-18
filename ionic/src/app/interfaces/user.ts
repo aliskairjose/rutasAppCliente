@@ -7,6 +7,7 @@ export interface User {
   created_at?: string;
   deleted_at?: string;
   department?: string;
+  imageUrl?: string;
   email?: string;
   email_verified_at?: string;
   id?: string;
@@ -16,7 +17,7 @@ export interface User {
   name?: string;
   phone?: string;
   roles?: Array<Role>;
-  updated_at?: "2021-03-15T17?:27?:48.000000Z"
+  updated_at?: string;
   verified_by_admin?: number
   verified_by_client?: number
   years_experiencie?: number;
