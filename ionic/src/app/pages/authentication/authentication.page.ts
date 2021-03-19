@@ -27,7 +27,6 @@ export class AuthenticationPage implements OnInit {
     private _storage: StorageService,
     private formBuilder: FormBuilder,
     private _common: CommonService,
-    private _loadingController: LoadingController,
   ) {
     this.createForm();
 
@@ -77,7 +76,5 @@ export class AuthenticationPage implements OnInit {
       password: [ '', [ Validators.required, Validators.minLength( 8 ) ] ],
     } );
   }
-
-
 
 }

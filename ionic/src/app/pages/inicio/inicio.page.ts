@@ -2,8 +2,8 @@ import { Plugins } from '@capacitor/core';
 import { UserService } from 'src/app/services/user.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-
-const { Geolocation } = Plugins;
+import { Geolocation as Geo } from '@ionic-native/geolocation/ngx';
+// const { Geolocation } = Plugins;
 
 declare var google;
 @Component( {
@@ -22,7 +22,8 @@ export class InicioPage implements OnInit {
   selectedItem: any;
 
   constructor(
-    public userService: UserService
+    public userService: UserService,
+    private geolocation: Geo
   ) { }
 
   ngOnInit() {
@@ -42,11 +43,10 @@ export class InicioPage implements OnInit {
   }
 
   loadMap() {
-    this.watch = Geolocation.watchPosition( {}, ( position, err ) => {
-      if ( position ) {
-        this.currLat = position.coords.latitude;
-        this.currLng = position.coords.longitude;
-      }
+    this.geolocation.getCurrentPosition().then( ( resp ) => {
+      console.log( resp );
+      this.currLat = resp.coords.latitude;
+      this.currLng = resp.coords.longitude;
       const latLng = new google.maps.LatLng( this.currLat, this.currLng );
       const mapOptions = {
         center: latLng,
@@ -55,7 +55,24 @@ export class InicioPage implements OnInit {
       };
       this.map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
       this.updateMap( [ latLng ], '' );
+    } ).catch( ( error ) => {
+      console.log( 'Error getting location', error );
     } );
+    // this.watch = Geolocation.watchPosition( {}, ( position, err ) => {
+    //   console.log( position );
+    //   if ( position ) {
+    //     this.currLat = position.coords.latitude;
+    //     this.currLng = position.coords.longitude;
+    //   }
+    //   const latLng = new google.maps.LatLng( this.currLat, this.currLng );
+    //   const mapOptions = {
+    //     center: latLng,
+    //     zoom: 7,
+    //     mapTypeId: google.maps.MapTypeId.ROADMAP
+    //   };
+    //   this.map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
+    //   this.updateMap( [ latLng ], '' );
+    // } );
   }
 
   updateMap( locations, extraInfo ) {

@@ -21,6 +21,7 @@ import { FeedbackPageModule } from './pages/feedback/feedback.module';
 import { RatingComponent } from './Components/rating/rating.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule( {
   declarations: [ AppComponent,
@@ -45,6 +46,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 
   ],
   providers: [
+    Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],

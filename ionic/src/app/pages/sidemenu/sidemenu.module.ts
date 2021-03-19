@@ -10,7 +10,7 @@ import { SharedComponentsModule } from 'src/app/Components/shared-components.mod
 
 import { SidemenuPage } from './sidemenu.page';
 
-@NgModule({
+@NgModule( {
   imports: [
     CommonModule,
     FormsModule,
@@ -18,7 +18,7 @@ import { SidemenuPage } from './sidemenu.page';
     SidemenuPageRoutingModule,
     SharedComponentsModule
   ],
-  declarations: [SidemenuPage],
-  exports: []
-})
-export class SidemenuPageModule {}
+  declarations: [ SidemenuPage ],
+  exports: [],
+} )
+export class SidemenuPageModule { }
