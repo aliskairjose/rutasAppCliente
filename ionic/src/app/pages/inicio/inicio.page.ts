@@ -2,8 +2,7 @@ import { Plugins } from '@capacitor/core';
 import { UserService } from 'src/app/services/user.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Geolocation as Geo } from '@ionic-native/geolocation/ngx';
-// const { Geolocation } = Plugins;
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 declare var google;
 @Component( {
@@ -16,14 +15,12 @@ export class InicioPage implements OnInit {
   map: any;
   markers = [];
   locations: Observable<any>;
-  currLat = 20.7766443;
-  currLng = 12.3288527;
   watch = null;
   selectedItem: any;
 
   constructor(
     public userService: UserService,
-    private geolocation: Geo
+    private geolocation: Geolocation
   ) { }
 
   ngOnInit() {
@@ -42,53 +39,23 @@ export class InicioPage implements OnInit {
     }, 100 );
   }
 
-  loadMap() {
-    this.geolocation.getCurrentPosition().then( ( resp ) => {
-      console.log( resp );
-      this.currLat = resp.coords.latitude;
-      this.currLng = resp.coords.longitude;
-      const latLng = new google.maps.LatLng( this.currLat, this.currLng );
-      const mapOptions = {
-        center: latLng,
-        zoom: 7,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      this.map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
-      this.updateMap( [ latLng ], '' );
-    } ).catch( ( error ) => {
-      console.log( 'Error getting location', error );
-    } );
-    // this.watch = Geolocation.watchPosition( {}, ( position, err ) => {
-    //   console.log( position );
-    //   if ( position ) {
-    //     this.currLat = position.coords.latitude;
-    //     this.currLng = position.coords.longitude;
-    //   }
-    //   const latLng = new google.maps.LatLng( this.currLat, this.currLng );
-    //   const mapOptions = {
-    //     center: latLng,
-    //     zoom: 7,
-    //     mapTypeId: google.maps.MapTypeId.ROADMAP
-    //   };
-    //   this.map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
-    //   this.updateMap( [ latLng ], '' );
-    // } );
+  async loadMap() {
+    const resp = await this.geolocation.getCurrentPosition();
+    const latLng = new google.maps.LatLng( resp.coords.latitude, resp.coords.longitude );
+    const mapOptions = {
+      center: latLng,
+      zoom: 7,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
+    this.updateMap( [ latLng ], '' );
   }
 
   updateMap( locations, extraInfo ) {
     this.markers.map( marker => marker.setMap( null ) );
     this.markers = [];
     for ( const loc of locations ) {
-      // const geocoder = new google.maps.Geocoder();
-      // geocoder.geocode({latLng: loc}, (results, status) => {
-      //   if (status === google.maps.GeocoderStatus.OK) {
-      //   const add = results[0].formatted_address;
-      //   // document.write(add);
-      //   console.log('address from geocode', add);
-      //   }else {
-      //     console.log('error for getting address', status);
-      //   }
-      // });
+
       const marker = new google.maps.Marker( {
         position: loc,
         animation: google.maps.Animation.DROP,
@@ -98,12 +65,9 @@ export class InicioPage implements OnInit {
       const iw = new google.maps.InfoWindow( {
         content: loc.lat() + ', ' + loc.lng()
       } );
-      // google.maps.event.addListener(marker, 'click', function(e) {
       if ( extraInfo !== 'noTooltip' ) {
         iw.open( this.map, marker );
       }
-
-      // });
       this.markers.push( marker );
     }
   }
