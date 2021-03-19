@@ -1,4 +1,3 @@
-import { Plugins } from '@capacitor/core';
 import { UserService } from 'src/app/services/user.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
