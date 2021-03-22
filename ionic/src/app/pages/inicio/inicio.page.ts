@@ -72,13 +72,12 @@ export class InicioPage implements OnInit {
   }
 
   bottomDrawerEvent( event: any ) {
-    console.log( 'hi', event );
     if ( event.type === 'item-selected' ) {
       this.handleItemSelect( event.data );
     }
   }
 
-  handleItemSelect( data ) {
+  handleItemSelect( data: any ) {
     this.selectedItem = data;
     const coor1 = this.selectedItem?.from;
     const coor2 = this.selectedItem?.to;
