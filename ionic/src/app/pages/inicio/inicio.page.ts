@@ -16,6 +16,8 @@ export class InicioPage implements OnInit {
   locations: Observable<any>;
   watch = null;
   selectedItem: any;
+  watchId = null;
+  trackMarker = null;
 
   constructor(
     public userService: UserService,
@@ -72,9 +74,13 @@ export class InicioPage implements OnInit {
   }
 
   bottomDrawerEvent( event: any ) {
-    console.log( 'hi', event );
     if ( event.type === 'item-selected' ) {
       this.handleItemSelect( event.data );
+    } else if ( event.type === 'scan-success' ) {
+      console.log( 'start tracking' );
+      this.startTracking();
+    } else if ( event.type === 'stop-track' ) {
+      this.stopTracking();
     }
   }
 
@@ -106,5 +112,26 @@ export class InicioPage implements OnInit {
         directionsRenderer.setDirections( res );
       }
     } );
+  }
+
+  startTracking() {
+    this.watchId = navigator.geolocation.watchPosition( ( position ) => {
+
+      const loc = new google.maps.LatLng( position.coords.latitude, position.coords.longitude );
+      this.trackMarker?.setMap( null );
+      this.trackMarker = new google.maps.Marker( {
+        position: loc,
+        map: this.map,
+        icon: {
+          scaledSize: new google.maps.Size( 25, 25 ),
+          url: './../../../assets/bus.png'
+        }
+      } );
+    } );
+  }
+
+  stopTracking() {
+    navigator.geolocation.clearWatch( this.watchId );
+    this.trackMarker.setMap( null );
   }
 }
