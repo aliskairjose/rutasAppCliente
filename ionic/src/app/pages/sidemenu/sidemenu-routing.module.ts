@@ -22,7 +22,6 @@ const routes: Routes = [
         path: 'Feedback',
         component: FeedbackPage
       },
-      
       {
         path: 'Soporte',
         component: SoportePage

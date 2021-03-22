@@ -1,80 +1,62 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
-import { AuthService } from '../../services/auth.service';
-import { StorageService } from '../../services/storage.service';
-import { ERROR_FORM, LOGO } from '../../constants/global-constants';
-import { CommonService } from '../../services/common.service';
-import { LoadingController } from '@ionic/angular';
 
-@Component( {
+@Component({
   selector: 'app-authentication',
   templateUrl: './authentication.page.html',
-  styleUrls: [ './authentication.page.scss' ],
-} )
+  styleUrls: ['./authentication.page.scss'],
+})
 export class AuthenticationPage implements OnInit {
 
-  loginForm: FormGroup;
-  submitted: boolean;
-  formError = ERROR_FORM;
-  logo = LOGO;
+  public registerForm: FormGroup;
+  userInfo = null;
+  // validationMessages = {
+  //   'email': [
+  //       { type: 'required', message: 'Username is required.' },
+  //       { type: 'pattern', message: 'Your username must contain only numbers and letters.' },
+  //       { type: 'pattern', message: 'Your username has already been taken.' }
+  //     ],
+  //     'password': [
+  //       { type: 'required', message: 'Name is required.' },
+  //       { type: 'minlength', message: 'Username must be at least 5 characters long.' },
+  //       { type: 'maxlength', message: 'Username cannot be more than 25 characters long.' },
+  //     ],
+  //   }
 
-  constructor(
-    private router: Router,
-    private _auth: AuthService,
-    private _storage: StorageService,
-    private formBuilder: FormBuilder,
-    private _common: CommonService,
-  ) {
-    this.createForm();
-
+  constructor(public formBuilder: FormBuilder, private userService: UserService, private router: Router) {
+    const EMAIL_REGEXP = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    this.registerForm = formBuilder.group({
+      email: ['', Validators.compose([Validators.required, Validators.pattern(EMAIL_REGEXP)])],
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+    });
   }
 
   ngOnInit() {
   }
 
-  get f() { return this.loginForm.controls; }
-
   async googleLogin() {
+    console.log('entered in googla login');
     const googleUser = await Plugins.GoogleAuth.signIn();
-    if ( googleUser.authentication.idToken ) {
-      const loading = await this._common.presentLoading();
-      loading.present();
-
-      this._auth.googleLogin( googleUser ).subscribe( async ( result ) => {
-        loading.dismiss();
-        await this._storage.store( 'rp_token', googleUser.authentication.idToken );
-        await this._storage.store( 'rp_user', googleUser );
-        this.router.navigate( [ '/sidemenu/Inicio' ] );
-      }, () => loading.dismiss() );
+    this.userInfo = googleUser;
+    console.log('google log in', googleUser);
+    if (this.userInfo.authentication.idToken) {
+      localStorage.setItem('userToken', this.userInfo.authentication.idToken);
+      this.router.navigate(['/sidemenu/Inicio']);
     }
   }
 
-  async onSubmit() {
-    this.submitted = true;
-    if ( this.loginForm.valid ) {
-      const loading = await this._common.presentLoading();
-      loading.present();
-      this._auth.login( this.loginForm.value ).subscribe( async ( response ) => {
-        loading.dismiss();
-        this._auth.AuthSubject( response.user );
-        const message = response.message;
-        const color = 'primary';
-        this._common.presentToast( { message, color } );
-        await this._storage.store( 'rp_token', response.data );
-        await this._storage.store( 'rp_user', response.user );
-        this.router.navigate( [ '/sidemenu/Inicio' ] );
-      }, () => loading.dismiss() );
+  signin() {
+    const email = this.registerForm.controls.email.value;
+    const pass = this.registerForm.controls.password.value;
+    const emailValid = this.registerForm.controls.email.valid;
+    const passValid = this.registerForm.controls.password.valid;
+    if (email && pass && emailValid && passValid) {
+      localStorage.setItem('userToken', 'test-valid user');
+      this.router.navigate(['/sidemenu/Inicio']);
     }
   }
-
-  private createForm(): void {
-    this.loginForm = this.formBuilder.group( {
-      email: [ '', [ Validators.required, Validators.email ] ],
-      password: [ '', [ Validators.required, Validators.minLength( 8 ) ] ],
-    } );
-  }
-
 }

@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  api: 'http://api.rutaspanama.dev.cronapis.com/api',
   firebase: {
     apiKey: 'AIzaSyAwpsAm2BlfpUCa20hymcmxrp97tjCIlPs',
     authDomain: 'rutasapp-305809.firebaseapp.com',
