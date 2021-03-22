@@ -24,14 +24,8 @@ export class InicioPage implements OnInit {
   currLng = 12.3288527;
   watch = null;
   selectedItem: any;
-  trackMarker = null;
   watchId = null;
-  addr = '';
-  // currentMapTrack = null;
-  // isTracking = false;
-  // trackedRoute = [];
-  // previousTracks = [];
-  // postionSubscription: Subscription;
+  trackMarker = null;
 
   constructor(
     public userService: UserService,
@@ -175,5 +169,26 @@ export class InicioPage implements OnInit {
         directionsRenderer.setDirections( res );
       }
     } );
+  }
+
+  startTracking() {
+    this.watchId = navigator.geolocation.watchPosition( ( position ) => {
+
+      const loc = new google.maps.LatLng( position.coords.latitude, position.coords.longitude );
+      this.trackMarker?.setMap( null );
+      this.trackMarker = new google.maps.Marker( {
+        position: loc,
+        map: this.map,
+        icon: {
+          scaledSize: new google.maps.Size( 25, 25 ),
+          url: './../../../assets/bus.png'
+        }
+      } );
+    } );
+  }
+
+  stopTracking() {
+    navigator.geolocation.clearWatch( this.watchId );
+    this.trackMarker.setMap( null );
   }
 }
