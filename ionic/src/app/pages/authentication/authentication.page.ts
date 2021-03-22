@@ -8,6 +8,8 @@ import { StorageService } from '../../services/storage.service';
 import { ERROR_FORM, LOGO } from '../../constants/global-constants';
 import { CommonService } from '../../services/common.service';
 import { LoadingController } from '@ionic/angular';
+import { ClientsService } from '../../services/clients.service';
+import { Client } from '../../interfaces/client';
 
 @Component( {
   selector: 'app-authentication',
@@ -20,13 +22,15 @@ export class AuthenticationPage implements OnInit {
   submitted: boolean;
   formError = ERROR_FORM;
   logo = LOGO;
+  clients: Client[] = [];
 
   constructor(
     private router: Router,
     private _auth: AuthService,
-    private _storage: StorageService,
-    private formBuilder: FormBuilder,
     private _common: CommonService,
+    private formBuilder: FormBuilder,
+    private _storage: StorageService,
+    private _clientService: ClientsService,
   ) {
     this.createForm();
 
@@ -43,14 +47,24 @@ export class AuthenticationPage implements OnInit {
       const loading = await this._common.presentLoading();
       loading.present();
 
-      this._auth.googleLogin( googleUser ).subscribe( async ( result ) => {
+      /* this._auth.googleLogin( googleUser ).subscribe( async ( result ) => {
         loading.dismiss();
         await this._storage.store( 'rp_token', googleUser.authentication.idToken );
         await this._storage.store( 'rp_user', googleUser );
         this.router.navigate( [ '/sidemenu/Inicio' ] );
-      }, () => loading.dismiss() );
+      }, () => loading.dismiss() ); */
     }
   }
+
+  async loadClients() {
+    const loading = await this._common.presentLoading();
+    loading.present();
+    this._clientService.getClients().subscribe( result => {
+      loading.dismiss();
+      this.clients = [ ...result.data ];
+    }, () => loading.dismiss() );
+  }
+
 
   async onSubmit() {
     this.submitted = true;

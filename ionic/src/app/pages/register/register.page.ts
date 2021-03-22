@@ -7,6 +7,7 @@ import { MustMatch } from '../../helpers/must-match.validator';
 import { AuthService } from '../../services/auth.service';
 import { CommonService } from '../../services/common.service';
 import { Router } from '@angular/router';
+import { Client } from '../../interfaces/client';
 
 @Component( {
   selector: 'app-register',
@@ -18,7 +19,7 @@ export class RegisterPage implements OnInit {
   registerForm: FormGroup
   submitted: boolean;
   formError = ERROR_FORM;
-  clients = [];
+  clients: Client[] = [];
   logo = LOGO;
 
   constructor(
