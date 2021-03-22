@@ -16,7 +16,7 @@ import { Client } from '../../interfaces/client';
 } )
 export class RegisterPage implements OnInit {
 
-  registerForm: FormGroup
+  registerForm: FormGroup;
   submitted: boolean;
   formError = ERROR_FORM;
   clients: Client[] = [];
@@ -28,7 +28,6 @@ export class RegisterPage implements OnInit {
     private _formBuilder: FormBuilder,
     private _commonService: CommonService,
     private _clientService: ClientsService,
-    private _loadingController: LoadingController,
   ) {
     this.createForm();
   }
