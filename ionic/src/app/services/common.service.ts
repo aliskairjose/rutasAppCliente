@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 
 @Injectable( {
   providedIn: 'root'
@@ -9,6 +9,7 @@ export class CommonService {
   constructor(
     private loading: LoadingController,
     private toastController: ToastController,
+    private modalController: ModalController,
   ) { }
 
   async presentLoading() {
@@ -17,6 +18,18 @@ export class CommonService {
       duration: 2000
     } );
     return loading;
+  }
+
+  /**
+   * 
+   * @param component Componente que se mostrará en el modal
+   * @param cssClass Clase personalizada
+   * @returns Instancia del Modal
+   */
+  async presentModal( { component, cssClass, componentProps }: { component: any; cssClass?: string; componentProps?: any } ) {
+    console.log( { component, cssClass, componentProps } )
+    const modal = await this.modalController.create( { component, cssClass, componentProps } );
+    return modal;
   }
 
   /**

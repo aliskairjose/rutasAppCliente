@@ -10,7 +10,7 @@ import { CommonService } from '../../services/common.service';
 import { LoadingController } from '@ionic/angular';
 import { ClientsService } from '../../services/clients.service';
 import { Client } from '../../interfaces/client';
-
+import { ClientsModalPage } from '../../modals/clients-modal/clients-modal.page';
 @Component( {
   selector: 'app-authentication',
   templateUrl: './authentication.page.html',
@@ -22,7 +22,6 @@ export class AuthenticationPage implements OnInit {
   submitted: boolean;
   formError = ERROR_FORM;
   logo = LOGO;
-  clients: Client[] = [];
 
   constructor(
     private router: Router,
@@ -43,26 +42,33 @@ export class AuthenticationPage implements OnInit {
 
   async googleLogin() {
     const googleUser = await Plugins.GoogleAuth.signIn();
+
     if ( googleUser.authentication.idToken ) {
+      // this._auth.exist( googleUser.email );
+      const clients: Client[] = await this.loadClients();
+      const modal = await this._common.presentModal( { component: ClientsModalPage, cssClass: '', componentProps: { clients } } );
+      modal.present();
+
+      /*
       const loading = await this._common.presentLoading();
       loading.present();
 
-      /* this._auth.googleLogin( googleUser ).subscribe( async ( result ) => {
+       this._auth.googleLogin( googleUser ).subscribe( async ( result ) => {
         loading.dismiss();
         await this._storage.store( 'rp_token', googleUser.authentication.idToken );
-        await this._storage.store( 'rp_user', googleUser );
+        await this._storage.store( 'rp_user', googleUser );p
         this.router.navigate( [ '/sidemenu/Inicio' ] );
-      }, () => loading.dismiss() ); */
+      }, () => loading.dismiss() ); 
+      */
     }
   }
 
-  async loadClients() {
-    const loading = await this._common.presentLoading();
-    loading.present();
-    this._clientService.getClients().subscribe( result => {
-      loading.dismiss();
-      this.clients = [ ...result.data ];
-    }, () => loading.dismiss() );
+  loadClients(): Promise<Client[]> {
+    return new Promise<Client[]>( ( resolve ) => {
+      this._clientService.getClients().subscribe( result => {
+        resolve( result.data );
+      } );
+    } );
   }
 
 
