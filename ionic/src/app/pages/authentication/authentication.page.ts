@@ -11,6 +11,7 @@ import { LoadingController } from '@ionic/angular';
 import { ClientsService } from '../../services/clients.service';
 import { Client } from '../../interfaces/client';
 import { ClientsModalPage } from '../../modals/clients-modal/clients-modal.page';
+import { from } from 'rxjs';
 @Component( {
   selector: 'app-authentication',
   templateUrl: './authentication.page.html',
@@ -48,7 +49,10 @@ export class AuthenticationPage implements OnInit {
       const clients: Client[] = await this.loadClients();
       const modal = await this._common.presentModal( { component: ClientsModalPage, cssClass: '', componentProps: { clients } } );
       modal.present();
-
+      const modalData = await modal.onDidDismiss();
+      if ( modalData.data.type === 'submit' ) {
+        // modalData.data.form
+      }
       /*
       const loading = await this._common.presentLoading();
       loading.present();

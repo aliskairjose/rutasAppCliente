@@ -27,7 +27,6 @@ export class CommonService {
    * @returns Instancia del Modal
    */
   async presentModal( { component, cssClass, componentProps }: { component: any; cssClass?: string; componentProps?: any } ) {
-    console.log( { component, cssClass, componentProps } )
     const modal = await this.modalController.create( { component, cssClass, componentProps } );
     return modal;
   }

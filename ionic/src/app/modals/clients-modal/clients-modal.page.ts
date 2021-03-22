@@ -30,13 +30,13 @@ export class ClientsModalPage implements OnInit {
   async onSubmit() {
     this.submitted = true;
 
-    /* if ( this.registerForm.valid ) {
-      
-    } */
+    if ( this.registerForm.valid ) {
+      await this.modalController.dismiss( { form: this.registerForm.value, type: 'submit' } );
+    }
   }
 
   async closeModal() {
-    await this.modalController.dismiss();
+    await this.modalController.dismiss( { type: 'close' } );
   }
 
   private createForm(): void {
