@@ -15,16 +15,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _authentication_page_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./authentication.page.scss */ "+K4q");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @codetrix-studio/capacitor-google-auth */ "OTqH");
-/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @capacitor/core */ "gcOT");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/auth.service */ "lGQG");
-/* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../services/storage.service */ "n90K");
-/* harmony import */ var _constants_global_constants__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../constants/global-constants */ "s8rx");
-/* harmony import */ var _services_common_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../services/common.service */ "OlR4");
-
-
-
+/* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/user.service */ "qfBg");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _codetrix_studio_capacitor_google_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @codetrix-studio/capacitor-google-auth */ "OTqH");
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @capacitor/core */ "gcOT");
 
 
 
@@ -35,66 +29,58 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AuthenticationPage = class AuthenticationPage {
-    constructor(router, _auth, _storage, formBuilder, _common) {
-        this.router = router;
-        this._auth = _auth;
-        this._storage = _storage;
+    // validationMessages = {
+    //   'email': [
+    //       { type: 'required', message: 'Username is required.' },
+    //       { type: 'pattern', message: 'Your username must contain only numbers and letters.' },
+    //       { type: 'pattern', message: 'Your username has already been taken.' }
+    //     ],
+    //     'password': [
+    //       { type: 'required', message: 'Name is required.' },
+    //       { type: 'minlength', message: 'Username must be at least 5 characters long.' },
+    //       { type: 'maxlength', message: 'Username cannot be more than 25 characters long.' },
+    //     ],
+    //   }
+    constructor(formBuilder, userService, router) {
         this.formBuilder = formBuilder;
-        this._common = _common;
-        this.formError = _constants_global_constants__WEBPACK_IMPORTED_MODULE_10__["ERROR_FORM"];
-        this.logo = _constants_global_constants__WEBPACK_IMPORTED_MODULE_10__["LOGO"];
-        this.createForm();
+        this.userService = userService;
+        this.router = router;
+        this.userInfo = null;
+        const EMAIL_REGEXP = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+        this.registerForm = formBuilder.group({
+            email: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern(EMAIL_REGEXP)])],
+            password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].compose([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].minLength(6), _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required])]
+        });
     }
     ngOnInit() {
     }
-    get f() { return this.loginForm.controls; }
     googleLogin() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const googleUser = yield _capacitor_core__WEBPACK_IMPORTED_MODULE_7__["Plugins"].GoogleAuth.signIn();
-            if (googleUser.authentication.idToken) {
-                const loading = yield this._common.presentLoading();
-                loading.present();
-                this._auth.googleLogin(googleUser).subscribe((result) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                    loading.dismiss();
-                    yield this._storage.store('rp_token', googleUser.authentication.idToken);
-                    yield this._storage.store('rp_user', googleUser);
-                    this.router.navigate(['/sidemenu/Inicio']);
-                }), () => loading.dismiss());
+            console.log('entered in googla login');
+            const googleUser = yield _capacitor_core__WEBPACK_IMPORTED_MODULE_8__["Plugins"].GoogleAuth.signIn();
+            this.userInfo = googleUser;
+            console.log('google log in', googleUser);
+            if (this.userInfo.authentication.idToken) {
+                localStorage.setItem('userToken', this.userInfo.authentication.idToken);
+                this.router.navigate(['/sidemenu/Inicio']);
             }
         });
     }
-    onSubmit() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            this.submitted = true;
-            if (this.loginForm.valid) {
-                const loading = yield this._common.presentLoading();
-                loading.present();
-                this._auth.login(this.loginForm.value).subscribe((response) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-                    loading.dismiss();
-                    this._auth.AuthSubject(response.user);
-                    const message = response.message;
-                    const color = 'primary';
-                    this._common.presentToast({ message, color });
-                    yield this._storage.store('rp_token', response.data);
-                    yield this._storage.store('rp_user', response.user);
-                    this.router.navigate(['/sidemenu/Inicio']);
-                }), () => loading.dismiss());
-            }
-        });
-    }
-    createForm() {
-        this.loginForm = this.formBuilder.group({
-            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].email]],
-            password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].minLength(8)]],
-        });
+    signin() {
+        const email = this.registerForm.controls.email.value;
+        const pass = this.registerForm.controls.password.value;
+        const emailValid = this.registerForm.controls.email.valid;
+        const passValid = this.registerForm.controls.password.valid;
+        if (email && pass && emailValid && passValid) {
+            localStorage.setItem('userToken', 'test-valid user');
+            this.router.navigate(['/sidemenu/Inicio']);
+        }
     }
 };
 AuthenticationPage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
-    { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_8__["AuthService"] },
-    { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_9__["StorageService"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] },
-    { type: _services_common_service__WEBPACK_IMPORTED_MODULE_11__["CommonService"] }
+    { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] }
 ];
 AuthenticationPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -177,8 +163,7 @@ AuthenticationPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
-            _authentication_routing_module__WEBPACK_IMPORTED_MODULE_5__["AuthenticationPageRoutingModule"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"]
+            _authentication_routing_module__WEBPACK_IMPORTED_MODULE_5__["AuthenticationPageRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"]
         ],
         declarations: [_authentication_page__WEBPACK_IMPORTED_MODULE_6__["AuthenticationPage"]]
     })
@@ -372,7 +357,7 @@ Object(_capacitor_core__WEBPACK_IMPORTED_MODULE_0__["registerWebPlugin"])(Google
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n  <div class=\"signupPageWrapper\">\r\n    <div class=\"signupLogoWrapper\">\r\n      <img [src]=\"logo\" alt=\"broken\" height=\"50vh\" />\r\n    </div>\r\n    <div class=\"signupFormWrapper\">\r\n      <ion-text class=\"signupTitleText\">Inicie sesion</ion-text>\r\n      <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\" novalidate class=\"signupForm\">\r\n        <ion-item>\r\n          <ion-input type=\"email\" class=\"form-controll\" formControlName=\"email\" placeholder=\"Usuario\"></ion-input>\r\n        </ion-item>\r\n        <div *ngIf=\"submitted && f.email.errors\">\r\n          <div *ngIf=\"f.email.errors.required\">\r\n            <ion-label text-wrap color=\"danger\">\r\n              {{formError.required}}\r\n            </ion-label>\r\n          </div>\r\n          <div *ngIf=\"f.email.errors.email\">\r\n            <ion-label text-wrap color=\"danger\">\r\n              {{formError.invalidEmail}}\r\n            </ion-label>\r\n          </div>\r\n        </div>\r\n        <ion-item>\r\n          <ion-input type=\"password\" class=\"form-controll\" formControlName=\"password\" placeholder=\"Contrasena\">\r\n          </ion-input>\r\n        </ion-item>\r\n        <div *ngIf=\"submitted && f.password.errors\">\r\n          <div *ngIf=\"f.password.errors.required\">\r\n            <ion-label text-wrap color=\"danger\">\r\n              {{formError.required}}\r\n            </ion-label>\r\n          </div>\r\n          <div *ngIf=\"f.password.errors.minlength\">\r\n            <ion-label text-wrap color=\"danger\">\r\n              {{formError.minLength}} 6\r\n            </ion-label>\r\n          </div>\r\n        </div>\r\n        <div class=\"forgotLinkWrapper\">\r\n          <ion-text [routerLink]=\"['/forgot-password']\" class=\"signupSmallText ion-float-right\">Olvido su contraseña?\r\n          </ion-text>\r\n        </div>\r\n        <div class=\"ion-text-center ion-margin-vertical\">\r\n          <ion-button color=\"warning\" class=\"signupMedText\" type=\"submit\">\r\n            Iniciar sesion</ion-button>\r\n        </div>\r\n        <div class=\"ion-text-center\">\r\n          <ion-text [routerLink]=\"['/register']\" class=\"signupSmallTex\">Registrese</ion-text>\r\n        </div>\r\n      </form>\r\n    </div>\r\n    <div class=\"btnWrapper\">\r\n      <ion-text class=\"signupSmallText signupGrayText\">Inicie sesion con</ion-text>\r\n      <ion-button color=\"light\" (click)=\"googleLogin()\">\r\n        <img src=\"./../../../assets/icon/googleLogo.png\" alt=\"broken\" width=\"30\" height=\"30\" class=\"googleLogoMargin\" />\r\n        <ion-text class=\"signupMedText signupGrayText googleText\">Google</ion-text>\r\n      </ion-button>\r\n    </div>\r\n  </div>\r\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n<div class=\"signupPageWrapper\">\n  <div class=\"signupLogoWrapper\">\n      <img src=\"./../../../assets/loginLogo.png\" alt=\"broken\" height=\"50vh\"/>\n  </div>\n  <div class=\"signupFormWrapper\">\n    <ion-text class=\"signupTitleText\">Inicie sesion</ion-text>\n    <form [formGroup]=\"registerForm\" novalidate class=\"signupForm\">\n      <ion-item>\n        <!-- <ion-label class=\"signupSmallText signupGrayText\">Usuario</ion-label> -->\n        <ion-input type=\"email\" class=\"form-controll\" formControlName=\"email\" placeholder=\"Usuario\"></ion-input>\n      </ion-item>\n      <ion-text color=\"danger\" class=\"signupErrText\">\n        <p class=\"danger-text\" *ngIf=\"!registerForm.controls.email.valid && registerForm.controls.email.touched\">\n            Please enter a valid Email!\n        </p>\n      </ion-text>\n      <ion-item>\n        <!-- <ion-label class=\"signupSmallText signupGrayText\">Contrasena</ion-label> -->\n        <ion-input type=\"password\" class=\"form-controll\" formControlName=\"password\" placeholder=\"Contrasena\"></ion-input>\n      </ion-item>\n      <ion-text color=\"danger\" class=\"signupErrText\">\n        <p class=\"danger-text\" *ngIf=\"!registerForm.controls.password.valid && registerForm.controls.password.touched\">\n            This field must be at least 6 characters long!\n        </p>\n    </ion-text>\n    </form>\n    <div class=\"forgotLinkWrapper\">\n      <ion-text [routerLink]=\"['/signup']\" class=\"signupSmallText\">Signup</ion-text>\n      <ion-text [routerLink]=\"['/forgot-password']\" class=\"signupSmallText\">Olvido su contrasena?</ion-text>\n    </div>\n    <ion-button color=\"warning\" class=\"signupMedText\" type=\"submit\" (click)=\"signin()\" [disabled]=\"registerForm.invalid\">Iniciar sesion</ion-button>\n  </div>\n  <div class=\"btnWrapper\">\n    <ion-text class=\"signupSmallText signupGrayText\">Inicie sesion con</ion-text>\n    <ion-button color=\"light\" (click)=\"googleLogin()\">\n      <img src=\"./../../../assets/icon/googleLogo.png\" alt=\"broken\" width=\"30\" height=\"30\" class=\"googleLogoMargin\"/>\n      <ion-text class=\"signupMedText signupGrayText googleText\">Google</ion-text>\n    </ion-button>\n  </div>\n</div>\n</ion-content>");
 
 /***/ })
 

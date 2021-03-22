@@ -14,7 +14,7 @@
 
     <div *ngSwitchCase = 0>
 
-      <ion-input class="searchField" placeholder="Buscar ruta" (click)="stopDrag()" (ionBlur)="startDrag()"></ion-input>
+      <ion-input class="searchField" placeholder="Buscar ruta" ></ion-input>
       <div class='itemWrapper' *ngFor="let item of searchList" (click) ="routeHandler(item)">
           <img class="listImg" *ngIf="item.status === 'pending'" src="../../../assets/clockYellow.png"/>
           <img class="listImg" *ngIf="item.status === 'completed'" src="../../../assets/briefcase.png"/>
@@ -34,11 +34,10 @@
             <span >Proxima unidad</span>
             <ion-note>15 minutes</ion-note>
           </div>
-         
         </div>
         
         
-        <div class="justify-content-around d-flex flex-grow-1">
+        <div class="justify-content-around d-flex flex-grow-1 imgSet">
           <img (click) = "startScan()" class="scan" src="../../../assets/prueba 1Recurso 45.png"/>
 
           <img class="scan" (click)="goToSeatArrangement()" src="../../../assets/prueba 1Recurso 42.png"/>
@@ -56,11 +55,10 @@
           <ion-note>Please scan this QR to verify your bus</ion-note>
           <img class="scannerImg" src="../../../assets/scanner.png"/>
         </div>
-        <div [ngClass]="!showScan ? 'd-none' : 'd-block'">
+        <div  [ngClass]="!showScan ? 'd-none' : 'd-block'">
           <video class="vdo" [hidden] = '!scanActive' #video></video>
         <canvas #canvas hidden></canvas>
         </div>
-        
       </div>
 
       <ion-button *ngIf="!showScan" (click) = "scannerOn()" fill="clear"  class="confirmRutas my-3 ">Start scan</ion-button>
@@ -102,7 +100,8 @@
           </div>  
           <div class="equalLength">
             <ion-text>4/5</ion-text>
-            <img class="starImg" src="../../../assets/yellowStar.png"/>
+            <ion-icon class="starImg" name="star"></ion-icon>
+            <!-- <img class="starImg" src="../../../assets/yellowStar.png"/> -->
           </div>
         </div>
 
@@ -142,7 +141,7 @@
           <ion-note>{{selectedItem?.timeRange}}</ion-note>
         </div>
       </div>
-      <div class="rowWrapper">
+      <div #seat class="rowWrapper">
       <div *ngFor="let row of seats">
         <div class="rowView" *ngIf="row.length">
         <div class="imgWrapper" *ngFor="let col of row">
@@ -164,12 +163,12 @@
             <ion-note class="seatType">Aslenios dispenible</ion-note>
           </div>
           <div class="bottomSeatWrapper extendedHeight">
-            <img class="seatImg" src="../../../assets/chair (2).png"/>
+            <img class="seatImg bigseats" src="../../../assets/chair (2).png"/>
             <ion-note class="seatType">Asionto del chofer</ion-note>
           </div>
           <div class="bottomSeatWrapper extendedHeight">
             <ion-note class="totalSeatCount">15/32</ion-note>
-            <img class="seatImg" src="../../../assets/chair (3).png"/>
+            <img class="seatImg bigseats" src="../../../assets/chair (3).png"/>
             <ion-note class="seatType">Asientos ocupados</ion-note>
           </div>
           <div class="bottomSeatWrapper noMargin smallSeatWrapper">
@@ -187,7 +186,7 @@
 
     <div *ngSwitchCase = 5>
 
-      <div class="d-flex justify-content-center h-100 flex-column">
+      <div #editRutas class="d-flex justify-content-center h-100 flex-column">
         <ion-button fill="clear" color="clear" class="flow-4-btn-1 borderRad"><ion-icon name="options-outline" class="mx-2"></ion-icon> Panel de Control</ion-button>
 
         <div class="d-flex">
@@ -214,11 +213,23 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th >Ruta</th>
-                <th >Detalles de Ruta</th>
+                <th class="roundBorderLeft">Ruta</th>
+                <th class="roundBorderRight">Detalles de Ruta</th>
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td >foo</td>
+                <td >bar</td>
+              </tr>
+              <tr>
+                <td >foo</td>
+                <td >bar</td>
+              </tr>
+              <tr>
+                <td >foo</td>
+                <td >bar</td>
+              </tr>
               <tr>
                 <td >foo</td>
                 <td >bar</td>

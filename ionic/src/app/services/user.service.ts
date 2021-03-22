@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
-@Injectable( {
+@Injectable({
   providedIn: 'root'
-} )
+})
 
 export class UserService {
   rutasData: any;
   rutasFlow = 0;
   rutasBarEdit = false;
-  constructor( private platform: Platform ) {
+ constructor(private platform: Platform) {
 
-  }
+ }
 
-  subscribeBackHandler() {
+  subscribeBackHandler(){
     this.platform.backButton.subscribe();
   }
 
-  unsubscribeBackHandler() {
+  unsubscribeBackHandler(){
     this.platform.backButton.unsubscribe();
   }
 }

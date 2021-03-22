@@ -1,61 +1,42 @@
 <ion-content>
-  <div class="signupPageWrapper">
-    <div class="signupLogoWrapper">
-      <img [src]="logo" alt="broken" height="50vh" />
-    </div>
-    <div class="signupFormWrapper">
-      <ion-text class="signupTitleText">Inicie sesion</ion-text>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate class="signupForm">
-        <ion-item>
-          <ion-input type="email" class="form-controll" formControlName="email" placeholder="Usuario"></ion-input>
-        </ion-item>
-        <div *ngIf="submitted && f.email.errors">
-          <div *ngIf="f.email.errors.required">
-            <ion-label text-wrap color="danger">
-              {{formError.required}}
-            </ion-label>
-          </div>
-          <div *ngIf="f.email.errors.email">
-            <ion-label text-wrap color="danger">
-              {{formError.invalidEmail}}
-            </ion-label>
-          </div>
-        </div>
-        <ion-item>
-          <ion-input type="password" class="form-controll" formControlName="password" placeholder="Contrasena">
-          </ion-input>
-        </ion-item>
-        <div *ngIf="submitted && f.password.errors">
-          <div *ngIf="f.password.errors.required">
-            <ion-label text-wrap color="danger">
-              {{formError.required}}
-            </ion-label>
-          </div>
-          <div *ngIf="f.password.errors.minlength">
-            <ion-label text-wrap color="danger">
-              {{formError.minLength}} 6
-            </ion-label>
-          </div>
-        </div>
-        <div class="forgotLinkWrapper">
-          <ion-text [routerLink]="['/forgot-password']" class="signupSmallText ion-float-right">Olvido su contraseña?
-          </ion-text>
-        </div>
-        <div class="ion-text-center ion-margin-vertical">
-          <ion-button color="warning" class="signupMedText" type="submit">
-            Iniciar sesion</ion-button>
-        </div>
-        <div class="ion-text-center">
-          <ion-text [routerLink]="['/register']" class="signupSmallTex">Registrese</ion-text>
-        </div>
-      </form>
-    </div>
-    <div class="btnWrapper">
-      <ion-text class="signupSmallText signupGrayText">Inicie sesion con</ion-text>
-      <ion-button color="light" (click)="googleLogin()">
-        <img src="./../../../assets/icon/googleLogo.png" alt="broken" width="30" height="30" class="googleLogoMargin" />
-        <ion-text class="signupMedText signupGrayText googleText">Google</ion-text>
-      </ion-button>
-    </div>
+<div class="signupPageWrapper">
+  <div class="signupLogoWrapper">
+      <img src="./../../../assets/loginLogo.png" alt="broken" height="50vh"/>
   </div>
+  <div class="signupFormWrapper">
+    <ion-text class="signupTitleText">Inicie sesion</ion-text>
+    <form [formGroup]="registerForm" novalidate class="signupForm">
+      <ion-item>
+        <!-- <ion-label class="signupSmallText signupGrayText">Usuario</ion-label> -->
+        <ion-input type="email" class="form-controll" formControlName="email" placeholder="Usuario"></ion-input>
+      </ion-item>
+      <ion-text color="danger" class="signupErrText">
+        <p class="danger-text" *ngIf="!registerForm.controls.email.valid && registerForm.controls.email.touched">
+            Please enter a valid Email!
+        </p>
+      </ion-text>
+      <ion-item>
+        <!-- <ion-label class="signupSmallText signupGrayText">Contrasena</ion-label> -->
+        <ion-input type="password" class="form-controll" formControlName="password" placeholder="Contrasena"></ion-input>
+      </ion-item>
+      <ion-text color="danger" class="signupErrText">
+        <p class="danger-text" *ngIf="!registerForm.controls.password.valid && registerForm.controls.password.touched">
+            This field must be at least 6 characters long!
+        </p>
+    </ion-text>
+    </form>
+    <div class="forgotLinkWrapper">
+      <ion-text [routerLink]="['/signup']" class="signupSmallText">Signup</ion-text>
+      <ion-text [routerLink]="['/forgot-password']" class="signupSmallText">Olvido su contrasena?</ion-text>
+    </div>
+    <ion-button color="warning" class="signupMedText" type="submit" (click)="signin()" [disabled]="registerForm.invalid">Iniciar sesion</ion-button>
+  </div>
+  <div class="btnWrapper">
+    <ion-text class="signupSmallText signupGrayText">Inicie sesion con</ion-text>
+    <ion-button color="light" (click)="googleLogin()">
+      <img src="./../../../assets/icon/googleLogo.png" alt="broken" width="30" height="30" class="googleLogoMargin"/>
+      <ion-text class="signupMedText signupGrayText googleText">Google</ion-text>
+    </ion-button>
+  </div>
+</div>
 </ion-content>

@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "resources": "cordova-res ios && cordova-res android && node scripts/resources.js",
-    "resgen": "crgen -s './src/assets/splash.png'  -p android"
+    "resgen": "crgen -S './resources/splashnew.png'  -p android"
   },
   "private": true,
   "dependencies": {
@@ -26,12 +26,10 @@
     "@capacitor/core": "2.4.6",
     "@codetrix-studio/capacitor-google-auth": "^2.1.3",
     "@ionic-native/core": "^5.31.1",
-    "@ionic-native/geolocation": "^5.31.1",
-    "@ionic-native/native-storage": "^5.31.1",
+    "@ionic-native/native-page-transitions": "^5.31.1",
     "@ionic/angular": "^5.5.2",
     "@types/hammerjs": "^2.0.36",
-    "cordova-plugin-geolocation": "^4.1.0",
-    "cordova-plugin-nativestorage": "^2.3.2",
+    "com.telerik.plugins.nativepagetransitions": "^0.7.0",
     "firebase": "^8.2.9",
     "hammerjs": "^2.0.8",
     "ion-bottom-drawer": "^2.0.0",

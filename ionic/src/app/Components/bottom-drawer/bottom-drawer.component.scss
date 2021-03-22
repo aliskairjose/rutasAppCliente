@@ -103,6 +103,7 @@
   .clock {
     height: 18px;
     margin-right: 5px;
+    margin-top: 1.5%;
   }
 
   .item-native {
@@ -189,6 +190,7 @@
   .starImg{
     height: 15px;
     padding-left: 5px;
+    color: #fae345;
   }
 
   .expanded-driverName{
@@ -240,13 +242,15 @@
     border-radius: 15%;
     width: fit-content;
     padding-top: 8%;
-    padding-bottom: 10%;
+    padding-bottom: 8%;
     padding-left: 10px;
     padding-right: 10px;
+    margin-top: 6px;
+    margin-bottom: 6px;
   }
 
   .extraShadow{
-    box-shadow: 1px 2px 1px 1px #ccc;
+    box-shadow: 2px 4px 6px #ccc;
     margin-bottom: 3%;
     width: 99%;
     border-radius: 7px;
@@ -260,7 +264,7 @@
     position: sticky;
     bottom: 0%;
     background: white;
-    border-top: 1px solid gray;
+    border-top: 1px solid #ccc;
     padding-top: 10px;
     display: flex;
     flex-direction: column;
@@ -298,15 +302,16 @@
     border-radius: 5px;
     position: absolute;
     top: 0;
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .smallSeat{
     height: 4vh;
+    margin-top: 23%;
   }
 
   .smallSeatWrapper{
-    height: 14vh;
+    height: 11vh;
   }
 
   .seatType{
@@ -332,7 +337,7 @@
 
   .car-loc-btn {
     position: absolute;
-    top: -8%;
+    top: -14%;
     right: 3%;
     width: 40px;
     height: 40px;
@@ -370,8 +375,12 @@
     padding: 2px;
   }
 
+  .bigseats{
+    margin-top: 25%;
+  }
+
   .extendedHeight{
-    height: 16vh;
+    height: 12vh;
   }
 
   .borderRad {
@@ -380,7 +389,18 @@
 
   .tbl {
     border-collapse: separate;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    
 
+  }
+
+  .roundBorderLeft {
+    border-top-left-radius: 10px;
+  }
+
+  .roundBorderRight {
+    border-top-right-radius: 10px;
+  }
+
+  .imgSet{
+    align-items: center;
   }
