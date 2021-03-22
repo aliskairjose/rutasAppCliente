@@ -50,7 +50,7 @@ export class AuthenticationPage implements OnInit {
       const modal = await this._common.presentModal( { component: ClientsModalPage, cssClass: '', componentProps: { clients } } );
       modal.present();
       const modalData = await modal.onDidDismiss();
-      if ( modalData.data.type === 'submit' ) {
+      if ( modalData.role === 'submit' ) {
         // modalData.data.form
       }
       /*

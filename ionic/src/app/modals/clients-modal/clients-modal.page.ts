@@ -19,7 +19,7 @@ export class ClientsModalPage implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private modalController: ModalController,
+    public modalController: ModalController,
   ) {
     this.createForm();
   }
@@ -31,12 +31,12 @@ export class ClientsModalPage implements OnInit {
     this.submitted = true;
 
     if ( this.registerForm.valid ) {
-      await this.modalController.dismiss( { form: this.registerForm.value, type: 'submit' } );
+      await this.modalController.dismiss( this.registerForm.value, 'submit' );
     }
   }
 
   async closeModal() {
-    await this.modalController.dismiss( { type: 'close' } );
+    await this.modalController.dismiss( '', 'close' );
   }
 
   private createForm(): void {
