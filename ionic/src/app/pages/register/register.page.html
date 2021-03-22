@@ -3,6 +3,12 @@
     <div class="signupLogoWrapper">
       <img [src]="logo" alt="broken" height="50vh" />
     </div>
+    <div class="btnWrapper">
+      <ion-icon class="signupIcon" name="arrow-back-outline" (click)="gotoLogin()"></ion-icon>
+      <ion-button class="btnWrap" [disabled]="registerForm.invalid ? true : undefined" (click)="gotoLogin()">
+        <ion-icon class="signupIcon" name="checkmark-outline"></ion-icon>
+      </ion-button>
+    </div>
     <div class="signupFormWrapper">
       <ion-text class="signupTitleText">Registro</ion-text>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate class="signupForm">
