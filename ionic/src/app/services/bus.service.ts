@@ -15,7 +15,7 @@ export class BusService {
    * @description Muestra la lista de los buses
    * @returns Lista de buses
    */
-  busesList(): Observable<any> {
+  busList(): Observable<any> {
     return this._http.get( '/buses' );
   }
 
@@ -24,7 +24,7 @@ export class BusService {
    * @param bus Data del bus a agregar
    * @returns Bus agregado
    */
-  add( bus: any ): Observable<any> {
+  addBus( bus: any ): Observable<any> {
     return this._http.post( '/buses', bus );
   }
 
@@ -33,7 +33,7 @@ export class BusService {
    * @param id Id del bus a eliminar
    * @returns Notificación
    */
-  delete( id: number ): Observable<any> {
+  deleteBus( id: number ): Observable<any> {
     return this._http.delete( `/buses/${id}` );
   }
 
@@ -42,9 +42,47 @@ export class BusService {
    * @param ids Arreglo de ids de buses a eliminar {ids: []}
    * @returns Notificación
    */
-  deleteList( ids: number[] ): Observable<any> {
+  deleteBuses( ids: number[] ): Observable<any> {
     return this._http.delete( `/buses/massive-delete`, ids );
   }
 
 
+  /*******  Tipo de bus  *******************************/
+
+
+  /**
+   * @description Tipos de buses
+   * @returns Retorna la lista de tipos de buses
+   */
+  typeList(): Observable<any> {
+    return this._http.get( '/bus-types' );
+  }
+
+  /**
+   * @description Agrega un nuevo tipo de bus a la db
+   * @param data Tipos de bus
+   * @returns Tipo de bus agregado
+   */
+  addBusType( data: any ): Observable<any> {
+    return this._http.post( '/bus-types', data );
+  }
+
+  /**
+   * @description Actualiza el tipo de bus
+   * @param id Id de tipo de bus
+   * @param data data de Tipo de bus
+   * @returns Tipo de bus actualizado
+   */
+  updateBusType( id: number, data: any ): Observable<any> {
+    return this._http.put( `/bus-types/${id}`, data );
+  }
+
+  /**
+   * @description Eliminación de tipo de bus de la db
+   * @param id Id del tipo de bus a eliminar
+   * @returns Confirmación de proceso
+   */
+  deleteBusType( id: number ): Observable<any> {
+    return this._http.delete( `/bus-types/${id}` );
+  }
 }
