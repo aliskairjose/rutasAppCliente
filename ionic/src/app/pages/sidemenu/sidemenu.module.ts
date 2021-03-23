@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { SidemenuPageRoutingModule } from './sidemenu-routing.module';
 import { SharedComponentsModule } from 'src/app/Components/shared-components.module';
 import { SidemenuPage } from './sidemenu.page';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 @NgModule( {
   imports: [
     CommonModule,
@@ -15,5 +16,6 @@ import { SidemenuPage } from './sidemenu.page';
   ],
   declarations: [ SidemenuPage ],
   exports: [],
+  providers: [ NativePageTransitions ]
 } )
 export class SidemenuPageModule { }
