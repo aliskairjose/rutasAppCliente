@@ -17,8 +17,9 @@
             </ion-label>
           </div>
         </div>
+        <!-- Empresa -->
         <ion-item>
-          <ion-select placeholder="Empresa" formControlName="client_id">
+          <ion-select placeholder="Empresa" formControlName="client_id" class="form-controll">
             <ion-select-option [value]="client.id" *ngFor="let client of clients; let i=index">{{ client.name }}
             </ion-select-option>
           </ion-select>

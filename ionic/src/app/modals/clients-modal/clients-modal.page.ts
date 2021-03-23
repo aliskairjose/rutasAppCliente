@@ -19,24 +19,27 @@ export class ClientsModalPage implements OnInit {
   formError = ERROR_FORM;
   clients: Client[] = [];
 
+  @Input() user;
+
   constructor(
     private _fb: FormBuilder,
     private _common: CommonService,
     private _clientService: ClientsService,
     public modalController: ModalController,
   ) {
-    this.createForm();
+    // this.createForm();
   }
 
   get f() { return this.registerForm.controls; }
 
   async ngOnInit() {
+    this.createForm();
     this.clients = await this.loadClients();
   }
 
   async onSubmit() {
     this.submitted = true;
-
+    this.registerForm.value.email = this.user.email;
     if ( this.registerForm.valid ) {
       await this.modalController.dismiss( this.registerForm.value, 'submit' );
     }
@@ -59,6 +62,9 @@ export class ClientsModalPage implements OnInit {
 
   private createForm(): void {
     this.registerForm = this._fb.group( {
+      google_id: [ this.user.id ],
+      name: [ this.user.name ],
+      email: [ this.user.email ],
       department: [ '', [ Validators.required ] ],
       charge: [ '', [ Validators.required ] ],
       client_id: [ '', [ Validators.required ] ],

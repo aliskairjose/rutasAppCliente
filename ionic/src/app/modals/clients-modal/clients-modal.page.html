@@ -17,9 +17,13 @@
     <div class="signupFormWrapper">
       <ion-text class="signupTitleText">Registro</ion-text>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate class="signupForm">
+        <!-- Nombre -->
+        <ion-item>
+          <ion-input type="text" class="form-controll" formControlName="name" placeholder="Nombre" readonly></ion-input>
+        </ion-item>
         <!-- Clientes -->
         <ion-item>
-          <ion-select placeholder="Empresa" formControlName="client_id">
+          <ion-select placeholder="Empresa" formControlName="client_id" class="form-controll">
             <ion-select-option [value]="client.id" *ngFor="let client of clients; let i=index">{{ client.name }}
             </ion-select-option>
           </ion-select>
@@ -54,6 +58,11 @@
             </ion-label>
           </div>
         </div>
+        <!-- Email -->
+        <ion-item>
+          <ion-input type="email" class="form-controll" formControlName="email" placeholder="Email" readonly>
+          </ion-input>
+        </ion-item>
         <div class="text-center mt-2">
           <ion-button color="warning" class="signupMedText" type="submit">
             Registrese
