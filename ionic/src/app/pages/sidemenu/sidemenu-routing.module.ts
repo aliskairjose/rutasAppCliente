@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SidemenuPage } from './sidemenu.page';
 // import {InicioComponent} from '../../Components/inicio/inicio.component';
-import {MapComponent} from '../../Components/map/map.component';
+import { MapComponent } from '../../Components/map/map.component';
 import { FeedbackPage } from '../feedback/feedback.page';
 import { SoportePage } from '../soporte/soporte.page';
 
@@ -29,9 +29,8 @@ const routes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
-export class SidemenuPageRoutingModule {}
+@NgModule( {
+  imports: [ RouterModule.forChild( routes ) ],
+  exports: [ RouterModule ],
+} )
+export class SidemenuPageRoutingModule { }
