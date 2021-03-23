@@ -6,11 +6,12 @@ import jsQR from 'jsqr';
 import { Router } from '@angular/router';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
 import { NavController } from '@ionic/angular';
-import { Plugins } from "@capacitor/core";
-
-const { Keyboard } = Plugins;
-
+import { Plugins } from '@capacitor/core';
 // import { DrawerState } from 'ion-bottom-drawer';
+import { RouteService } from '../../services/route.service';
+import { Route } from 'src/app/interfaces/route';
+import { CommonService } from '../../services/common.service';
+const { Keyboard } = Plugins;
 @Component( {
   selector: 'app-bottom-drawer',
   templateUrl: './bottom-drawer.component.html',
@@ -51,18 +52,20 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   stream = null;
   seats = [];
   showScan = false;
+  routes: Route[] = [];
 
   constructor(
     private plt: Platform,
+    private router: Router,
+    public navctl: NavController,
+    private _common: CommonService,
+    private userService: UserService,
+    private _routesService: RouteService,
+    private loadingCtrl: LoadingController,
     private gestureCtlr: GestureController,
     private changeDetectorRef: ChangeDetectorRef,
-    private userService: UserService,
-    private loadingCtrl: LoadingController,
-    private router: Router,
     private nativePageTransitions: NativePageTransitions,
-    public navctl: NavController,
   ) {
-    console.log( 'bottom drawer' );
     this.searchList = [
       {
         status: 'completed',
@@ -105,8 +108,9 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       }
     ];
   }
-  ngOnInit() {
 
+  ngOnInit() {
+    this.loadRoutes();
     window.addEventListener( 'keyboardWillShow', ( e ) => {
       console.log( 'keyboard will show with height' );
       this.dragable = false;
@@ -411,5 +415,14 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       }
     } );
     this.seatGesture.enable( true );
+  }
+
+  private async loadRoutes() {
+    const loading = await this._common.presentLoading();
+    loading.present();
+    this._routesService.list().subscribe( ( routes: Route[] ) => {
+      loading.dismiss();
+      this.routes = [ ...routes ];
+    } );
   }
 }

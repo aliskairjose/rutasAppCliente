@@ -3,6 +3,7 @@ import { Platform } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 import { User } from '../interfaces/user';
+import { map } from 'rxjs/operators';
 
 @Injectable( {
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class UserService {
    * @returns Lista de usuarios
    */
   list(): Observable<User[]> {
-    return this._httpService.get( '/users' );
+    return this._httpService.get( '/users' ).pipe( map( response => response.data ) );
   }
 
   /**

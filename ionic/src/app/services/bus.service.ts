@@ -3,6 +3,7 @@ import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
 import { Bus } from '../interfaces/bus';
 import { BusType } from '../interfaces/bus-type';
+import { map } from 'rxjs/operators';
 
 @Injectable( {
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class BusService {
    * @returns Lista de buses
    */
   list(): Observable<Bus[]> {
-    return this._http.get( '/buses' );
+    return this._http.get( '/buses' ).pipe( map( response => response.data ) );
   }
 
   /**
