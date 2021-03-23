@@ -15,7 +15,7 @@ export class ClientsService {
    * @description Consulta la lista de clientes
    * @returns Listado de clientes
    */
-  getClients(): Observable<any> {
+  clientList(): Observable<any> {
     return this._httpService.get( '/clients' );
   }
 

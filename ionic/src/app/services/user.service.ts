@@ -2,26 +2,38 @@ import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
+import { User } from '../interfaces/user';
 
 @Injectable( {
   providedIn: 'root'
 } )
 
 export class UserService {
+
   rutasData: any;
   rutasFlow = 0;
   rutasBarEdit = false;
+
   constructor(
     private platform: Platform,
     private _httpService: HttpService
   ) { }
+
+
+  /**
+   * @description Mustra la lista de usuario
+   * @returns Lista de usuarios
+   */
+  userList(): Observable<User[]> {
+    return this._httpService.get( '/users' );
+  }
 
   /**
    * @description Registra un nuevo usuario
    * @param usuario Datos del usuario
    * @returns usuario registrado
    */
-  add( usuario: any ): Observable<any> {
+  add( usuario: User ): Observable<any> {
     return this._httpService.post( '/users', usuario );
   }
 

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
+import { Bus } from '../interfaces/bus';
+import { BusType } from '../interfaces/bus-type';
 
 @Injectable( {
   providedIn: 'root'
@@ -15,7 +17,7 @@ export class BusService {
    * @description Muestra la lista de los buses
    * @returns Lista de buses
    */
-  busList(): Observable<any> {
+  busList(): Observable<Bus[]> {
     return this._http.get( '/buses' );
   }
 
@@ -24,7 +26,7 @@ export class BusService {
    * @param bus Data del bus a agregar
    * @returns Bus agregado
    */
-  addBus( bus: any ): Observable<any> {
+  addBus( bus: Bus ): Observable<any> {
     return this._http.post( '/buses', bus );
   }
 
@@ -54,7 +56,7 @@ export class BusService {
    * @description Tipos de buses
    * @returns Retorna la lista de tipos de buses
    */
-  typeList(): Observable<any> {
+  busTypeList(): Observable<BusType[]> {
     return this._http.get( '/bus-types' );
   }
 
@@ -63,7 +65,7 @@ export class BusService {
    * @param data Tipos de bus
    * @returns Tipo de bus agregado
    */
-  addBusType( data: any ): Observable<any> {
+  addBusType( data: BusType ): Observable<any> {
     return this._http.post( '/bus-types', data );
   }
 
@@ -85,4 +87,5 @@ export class BusService {
   deleteBusType( id: number ): Observable<any> {
     return this._http.delete( `/bus-types/${id}` );
   }
+
 }

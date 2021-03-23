@@ -55,7 +55,7 @@ export class ClientsModalPage implements OnInit {
     return new Promise<Client[]>( async ( resolve ) => {
       const loading = await this._common.presentLoading();
       loading.present();
-      this._clientService.getClients().subscribe( result => {
+      this._clientService.clientList().subscribe( result => {
         loading.dismiss();
         resolve( result.data );
       } );
