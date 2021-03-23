@@ -32,8 +32,8 @@ export class HttpService {
     return this._http.patch( url, data );
   }
 
-  delete( serviceName: string ): Observable<any> {
+  delete( serviceName: string, data?: any ): Observable<any> {
     const url = environment.api + serviceName;
-    return this._http.delete( url );
+    return this._http.delete( url, data );
   }
 }
