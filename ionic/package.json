@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "resources": "cordova-res ios && cordova-res android && node scripts/resources.js",
-    "resgen": "crgen -S './resources/splashnew.png'  -p android"
+    "resgen": "crgen -s './src/assets/splash.png'  -p android"
   },
   "private": true,
   "dependencies": {
