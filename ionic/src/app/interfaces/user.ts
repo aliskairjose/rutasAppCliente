@@ -1,6 +1,7 @@
 import { Role } from './role';
 
 export interface User {
+  id?: string;
   address?: string;
   charge?: string;
   client_id?: number;
@@ -10,7 +11,6 @@ export interface User {
   imageUrl?: string;
   email?: string;
   email_verified_at?: string;
-  id?: string;
   identification?: string;
   license?: string;
   license_expiration?: string;
@@ -21,4 +21,6 @@ export interface User {
   verified_by_admin?: number;
   verified_by_client?: number;
   years_experiencie?: number;
+  facebook_id?: string;
+  google_id?: string;
 }
