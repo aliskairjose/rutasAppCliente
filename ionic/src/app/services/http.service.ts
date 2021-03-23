@@ -29,7 +29,7 @@ export class HttpService {
 
   patch( serviceName: string, data: any ): Observable<any> {
     const url = environment.api + serviceName;
-    return this._http.patch( url, data )ñ
+    return this._http.patch( url, data );
   }
 
   delete( serviceName: string ): Observable<any> {

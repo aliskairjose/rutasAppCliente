@@ -43,7 +43,7 @@ export class ClientsService {
    * @param id Id del cliente a eliminar
    * @returns Notificación
    */
-  delet( id: number ): Observable<any> {
+  delete( id: number ): Observable<any> {
     return this._httpService.delete( `/clients/${id}` );
   }
 
