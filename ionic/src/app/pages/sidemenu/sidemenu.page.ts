@@ -1,23 +1,25 @@
-import { Router, NavigationEnd } from '@angular/router';
-import { ChangeDetectorRef, Component, OnInit, } from '@angular/core';
+import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { User } from '../../interfaces/user';
+import { StorageService } from '../../services/storage.service';
+import { AuthService } from '../../services/auth.service';
 
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
-import { NavController } from '@ionic/angular';
-import { filter } from 'rxjs/operators'
 
-@Component({
+@Component( {
   selector: 'app-sidemenu',
   templateUrl: './sidemenu.page.html',
-  styleUrls: ['./sidemenu.page.scss'],
-})
-export class SidemenuPage implements OnInit {
+  styleUrls: [ './sidemenu.page.scss' ],
+} )
+export class SidemenuPage implements OnInit, OnChanges {
 
   backdropVisible = false;
   drawerVar = 'Inicio';
-  activeRoute = '/sidemenu/Inicio';
+  activeRoute = 0;
   addressClicked = 0;
+  user: User = {};
+  abrv = '';
 
-  public appPages = [
+  appPages = [
     { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/prueba 1Recurso 29.png' },
     { title: 'Rutas', url: '/sidemenu/Rutas', icon: '../../../assets/prueba 1Recurso 30.png' },
     { title: 'Experiencia', url: '/sidemenu/Experiencia', icon: '../../../assets/prueba 1Recurso 31.png' },
@@ -26,77 +28,44 @@ export class SidemenuPage implements OnInit {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
+    private _storage: StorageService,
+    private _auth: AuthService,
     private router: Router,
-    private nativePageTransitions: NativePageTransitions,
-    public navctl: NavController
-  ) { }
-
-  ngOnInit() {
-    console.log('hey I am in sidemenu');
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    )
-      .subscribe(event => {
-        console.log("router event", event['url']);
-        if (event['url'] === '/sidemenu/Feedback') {
-          this.activeRoute = '/sidemenu/Inicio'
-        }
-        else {
-          this.activeRoute = event['url']
-        }
-        
-      });
+  ) {
+    this.user = {};
+    this._auth.authObserver().subscribe( ( user: any ) => {
+      this.user = { ...user };
+      const value = this.user.name.split( ' ' );
+      this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
+    } );
   }
 
-  toggleBackdrop(isVisible) {
+  ngOnChanges( changes: SimpleChanges ): void {
+  }
+
+  ngOnInit() {
+    this._storage.get( 'rp_user' ).then( ( user: any ) => {
+      this.user = { ...user };
+      const value = this.user.name.split( ' ' );
+      this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
+    } );
+  }
+
+
+  toggleBackdrop( isVisible ) {
     this.backdropVisible = isVisible;
     this.changeDetectorRef.detectChanges();
   }
 
   logout() {
     localStorage.clear();
-    this.router.navigate(['/signin']);
+    this.router.navigate( [ '/signin' ] );
   }
 
-  // ionViewWillLeave() {
-
-  //   let options: NativeTransitionOptions = {
-  //      direction: 'left',
-  //      duration: 500,
-  //      slowdownfactor: 3,
-  //      slidePixels: 20,
-  //      iosdelay: 100,
-  //      androiddelay: 150,
-  //      fixedPixelsTop: 0,
-  //      fixedPixelsBottom: 60
-  //     }
-
-  //   this.nativePageTransitions.slide(options)
-  //     .then((onSuccess) => {
-
-  //     })
-  //     .catch((onError) => console.log("onError", onError)
-  //     );
-
-  //  }
-
-
-  menuOptionClickHandle(p, i) {
-    let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: 50,
-      //slidePixels: 20,
-      iosdelay: 100,
-      androiddelay: 550,
-      // fixedPixelsTop: 0,
-      // fixedPixelsBottom: 60
-    }
-    //this.activeRoute = i;
+  menuOptionClickHandle( p, i ) {
+    this.activeRoute = i;
     this.drawerVar = p.title;
-    // this.nativePageTransitions.slide(options)
-    this.router.navigate([p.url]);
-    // this.navctl.navigateRoot([p.url])
+    this.router.navigate( [ p.url ] );
   }
 
 }
