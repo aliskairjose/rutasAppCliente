@@ -41,6 +41,7 @@ export class ForgotPasswordPage implements OnInit {
         const message = response.message;
         const color = 'primary';
         this._common.presentToast( { message, color } );
+        this.router.navigate( [ '/signin' ] );
       } );
     }
   }
