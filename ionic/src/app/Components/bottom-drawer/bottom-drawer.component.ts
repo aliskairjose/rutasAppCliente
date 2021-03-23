@@ -144,7 +144,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
     // if(userService.rutasFlow == 2 )
     // this.videoElement = this.video.nativeElement;
-    console.log( 'ngafter' );
     this.openHeight = ( this.plt.height() / 100 ) * 60;
 
     this.gesture = await this.gestureCtlr.create( {

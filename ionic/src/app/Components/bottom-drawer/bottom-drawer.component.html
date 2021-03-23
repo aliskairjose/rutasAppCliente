@@ -16,20 +16,20 @@
       <div *ngSwitchCase=0>
         <ion-input class="searchField" placeholder="Buscar ruta"></ion-input>
         <ng-container *ngIf="routes.length; else elseTemplate">
-          <div class='itemWrapper' *ngFor="let route of routes" (click)="routeHandler(item)">
+          <div class='itemWrapper' *ngFor="let route of routes" (click)="routeHandler(route)">
             <img class="listImg" *ngIf="item.status === 'pending'" src="../../../assets/clockYellow.png" />
             <img class="listImg" *ngIf="item.status === 'completed'" src="../../../assets/briefcase.png" />
             <div class="">
               <div class="listName">{{route.name}}</div>
-              <ion-note>{{route.start_time}} - {{ route.end_time }}</ion-note>
+              <ion-note>{{route.start_time | date:'shortTime'}} - {{route.end_time | date:'shortTime'}}</ion-note>
             </div>
           </div>
         </ng-container>
         <ng-template #elseTemplate>
-          No hay rutas disponibles
+          <div class="ion-text-center">
+            No hay rutas disponibles
+          </div>
         </ng-template>
-
-
       </div>
 
       <div *ngSwitchCase=1 class="px-2">
