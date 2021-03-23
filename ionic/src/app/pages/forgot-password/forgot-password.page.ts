@@ -24,7 +24,7 @@ export class ForgotPasswordPage implements OnInit {
     this.createForm();
   }
 
-  get f() { return this.registerForgotForm.controls }
+  get f() { return this.registerForgotForm.controls; }
 
   ngOnInit() {
   }
