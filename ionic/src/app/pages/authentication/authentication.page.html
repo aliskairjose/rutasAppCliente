@@ -4,7 +4,7 @@
       <img [src]="logo" alt="broken" height="50vh" />
     </div>
     <div class="signupFormWrapper">
-      <ion-text class="signupTitleText">Inicie sesion</ion-text>
+      <ion-text class="signupTitleText">Inicie sesión</ion-text>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate class="signupForm">
         <ion-item>
           <ion-input type="email" class="form-controll" formControlName="email" placeholder="Usuario"></ion-input>
@@ -22,7 +22,7 @@
           </div>
         </div>
         <ion-item>
-          <ion-input type="password" class="form-controll" formControlName="password" placeholder="Contrasena">
+          <ion-input type="password" class="form-controll" formControlName="password" placeholder="Contraseña">
           </ion-input>
         </ion-item>
         <div *ngIf="submitted && f.password.errors">
@@ -51,7 +51,7 @@
       </form>
     </div>
     <div class="btnWrapper">
-      <ion-text class="signupSmallText signupGrayText">Inicie sesion con</ion-text>
+      <ion-text class="signupSmallText signupGrayText">Inicie sesión con</ion-text>
       <ion-button color="light" (click)="googleLogin()">
         <img src="./../../../assets/icon/googleLogo.png" alt="broken" width="30" height="30" class="googleLogoMargin" />
         <ion-text class="signupMedText signupGrayText googleText">Google</ion-text>
