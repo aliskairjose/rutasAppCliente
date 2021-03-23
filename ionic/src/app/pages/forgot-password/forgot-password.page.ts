@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ERROR_FORM, LOGO } from '../../constants/global-constants';
 import { CommonService } from '../../services/common.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component( {
   selector: 'app-forgot-password',
@@ -17,9 +18,10 @@ export class ForgotPasswordPage implements OnInit {
   logo = LOGO;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private router: Router,
+    private _auth: AuthService,
     private _common: CommonService,
-    private router: Router
+    private formBuilder: FormBuilder,
   ) {
     this.createForm();
   }
@@ -34,6 +36,12 @@ export class ForgotPasswordPage implements OnInit {
     if ( this.registerForgotForm.valid ) {
       const loading = await this._common.presentLoading();
       loading.present();
+      this._auth.recoverPassword( this.registerForgotForm.value ).subscribe( response => {
+        loading.dismiss();
+        const message = response.message;
+        const color = 'primary';
+        this._common.presentToast( { message, color } );
+      } );
     }
   }
 

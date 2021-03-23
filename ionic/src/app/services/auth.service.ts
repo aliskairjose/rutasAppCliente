@@ -27,6 +27,10 @@ export class AuthService {
     return this._httpService.post( '/users', data );
   }
 
+  recoverPassword( data ): Observable<any> {
+    return this._httpService.post( '/reset-password', data );
+  }
+
   isLoggedIn(): boolean {
     return this._storage.get( '_cap_rp_token' ) ? true : false;
   }
