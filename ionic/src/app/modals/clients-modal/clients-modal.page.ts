@@ -47,6 +47,10 @@ export class ClientsModalPage implements OnInit {
     await this.modalController.dismiss( '', 'close' );
   }
 
+  /**
+   * @description Carga la lista de compañias
+   * @returns Arreglo de Compañias (Clientes)
+   */
   private loadClients(): Promise<Client[]> {
     return new Promise<Client[]>( async ( resolve ) => {
       const loading = await this._common.presentLoading();
