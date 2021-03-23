@@ -24,7 +24,7 @@ export class UserService {
    * @description Mustra la lista de usuario
    * @returns Lista de usuarios
    */
-  userList(): Observable<User[]> {
+  list(): Observable<User[]> {
     return this._httpService.get( '/users' );
   }
 

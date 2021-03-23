@@ -58,7 +58,7 @@ export class RegisterPage implements OnInit {
   async loadClients() {
     const loading = await this._commonService.presentLoading();
     loading.present();
-    this._clientService.clientList().subscribe( result => {
+    this._clientService.list().subscribe( result => {
       loading.dismiss();
       this.clients = [ ...result.data ];
     }, () => loading.dismiss() );

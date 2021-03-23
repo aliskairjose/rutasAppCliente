@@ -17,7 +17,7 @@ export class BusService {
    * @description Muestra la lista de los buses
    * @returns Lista de buses
    */
-  busList(): Observable<Bus[]> {
+  list(): Observable<Bus[]> {
     return this._http.get( '/buses' );
   }
 
@@ -26,7 +26,7 @@ export class BusService {
    * @param bus Data del bus a agregar
    * @returns Bus agregado
    */
-  addBus( bus: Bus ): Observable<any> {
+  add( bus: Bus ): Observable<any> {
     return this._http.post( '/buses', bus );
   }
 
@@ -35,7 +35,7 @@ export class BusService {
    * @param id Id del bus a eliminar
    * @returns Notificación
    */
-  deleteBus( id: number ): Observable<any> {
+  delete( id: number ): Observable<any> {
     return this._http.delete( `/buses/${id}` );
   }
 
@@ -44,7 +44,7 @@ export class BusService {
    * @param ids Arreglo de ids de buses a eliminar {ids: []}
    * @returns Notificación
    */
-  deleteBuses( ids: number[] ): Observable<any> {
+  deleteList( ids: number[] ): Observable<any> {
     return this._http.delete( `/buses/massive-delete`, ids );
   }
 
@@ -56,7 +56,7 @@ export class BusService {
    * @description Tipos de buses
    * @returns Retorna la lista de tipos de buses
    */
-  busTypeList(): Observable<BusType[]> {
+  typeList(): Observable<BusType[]> {
     return this._http.get( '/bus-types' );
   }
 
@@ -65,7 +65,7 @@ export class BusService {
    * @param data Tipos de bus
    * @returns Tipo de bus agregado
    */
-  addBusType( data: BusType ): Observable<any> {
+  addType( data: BusType ): Observable<any> {
     return this._http.post( '/bus-types', data );
   }
 
@@ -75,7 +75,7 @@ export class BusService {
    * @param data data de Tipo de bus
    * @returns Tipo de bus actualizado
    */
-  updateBusType( id: number, data: any ): Observable<any> {
+  updateType( id: number, data: any ): Observable<any> {
     return this._http.put( `/bus-types/${id}`, data );
   }
 
@@ -84,7 +84,7 @@ export class BusService {
    * @param id Id del tipo de bus a eliminar
    * @returns Confirmación de proceso
    */
-  deleteBusType( id: number ): Observable<any> {
+  deleteType( id: number ): Observable<any> {
     return this._http.delete( `/bus-types/${id}` );
   }
 
