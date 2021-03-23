@@ -45,12 +45,7 @@ export class AuthenticationPage implements OnInit {
       const exist = await this.userExist( googleUser.email );
       console.log( exist );
       loading.dismiss();
-      if ( !exist ) {
-        this.registerGoogleUSer( googleUser );
-        return;
-      }
-
-      this.googleAccess( { email: googleUser.email, google_id: googleUser.id } );
+      ( exist ) ? this.googleAccess( { email: googleUser.email, google_id: googleUser.id } ) : this.registerGoogleUSer( googleUser );
     }
   }
 
@@ -87,10 +82,15 @@ export class AuthenticationPage implements OnInit {
   /**
    * @description Registro / Acceso del usuario google
    */
-  private googleAccess( accessData: any ): void {
-    console.log( accessData );
+  private async googleAccess( accessData: any ) {
+    const loading = await this._common.presentLoading();
+    loading.present();
     this._auth.login( accessData ).subscribe( async ( response ) => {
-      console.log( response );
+      loading.dismiss();
+      this._auth.AuthSubject( response.user );
+      const message = response.message;
+      const color = 'primary';
+      this._common.presentToast( { message, color } );
       await this._storage.store( 'rp_token', response.data );
       await this._storage.store( 'rp_user', response.user );
       this.router.navigate( [ '/sidemenu/Inicio' ] );
