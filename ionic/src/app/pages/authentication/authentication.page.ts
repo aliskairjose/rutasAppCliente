@@ -79,11 +79,9 @@ export class AuthenticationPage implements OnInit {
    * @description Registro del usuario google
    */
   private async registerGoogleUSer( googleUser ): Promise<void> {
-    console.log( googleUser )
     const modal = await this._common.presentModal( { component: ClientsModalPage, cssClass: '', componentProps: { user: googleUser } } );
     modal.present();
     const modalData = await modal.onDidDismiss();
-    console.log( modalData.data );
     if ( modalData.role === 'submit' ) {
       // Registro con modalData.data
     }

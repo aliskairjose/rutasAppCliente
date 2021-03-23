@@ -25,9 +25,8 @@ export class ClientsModalPage implements OnInit {
     private _fb: FormBuilder,
     private _common: CommonService,
     private _clientService: ClientsService,
-    public modalController: ModalController,
+    private modalController: ModalController,
   ) {
-    // this.createForm();
   }
 
   get f() { return this.registerForm.controls; }
@@ -39,7 +38,6 @@ export class ClientsModalPage implements OnInit {
 
   async onSubmit() {
     this.submitted = true;
-    this.registerForm.value.email = this.user.email;
     if ( this.registerForm.valid ) {
       await this.modalController.dismiss( this.registerForm.value, 'submit' );
     }
