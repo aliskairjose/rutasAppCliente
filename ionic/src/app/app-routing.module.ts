@@ -9,38 +9,39 @@ const routes: Routes = [
   },
   {
     path: 'initial',
-    loadChildren: () => import('./pages/initial/initial.module').then( m => m.InitialPageModule)
+    loadChildren: () => import( './pages/initial/initial.module' ).then( m => m.InitialPageModule )
   },
   {
     path: 'signin',
-    loadChildren: () => import('./pages/authentication/authentication.module').then(m => m.AuthenticationPageModule)
+    loadChildren: () => import( './pages/authentication/authentication.module' ).then( m => m.AuthenticationPageModule )
   },
   {
     path: 'forgot-password',
-    loadChildren: () => import('./pages/forgotPassword/forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
+    loadChildren: () => import( './pages/forgot-password/forgot-password.module' ).then( m => m.ForgotPasswordPageModule )
   },
   {
     path: 'sidemenu',
-    loadChildren: () => import('./pages/sidemenu/sidemenu.module').then(m => m.SidemenuPageModule)
+    loadChildren: () => import( './pages/sidemenu/sidemenu.module' ).then( m => m.SidemenuPageModule )
   },
   {
     path: 'soporte',
-    loadChildren: () => import('./pages/soporte/soporte.module').then( m => m.SoportePageModule)
+    loadChildren: () => import( './pages/soporte/soporte.module' ).then( m => m.SoportePageModule )
   },
   {
-    path: 'signup',
-    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
+    path: 'register',
+    loadChildren: () => import( './pages/register/register.module' ).then( m => m.RegisterPageModule )
   },
   {
-    path: 'signup',
-    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
+    path: 'clients-modal',
+    loadChildren: () => import( './modals/clients-modal/clients-modal.module' ).then( m => m.ClientsModalPageModule )
   }
+
 ];
 
-@NgModule({
+@NgModule( {
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot( routes, { preloadingStrategy: PreloadAllModules } )
   ],
-  exports: [RouterModule]
-})
+  exports: [ RouterModule ]
+} )
 export class AppRoutingModule { }

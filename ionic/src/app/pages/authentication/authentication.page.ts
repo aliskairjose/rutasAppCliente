@@ -4,59 +4,85 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
-
-@Component({
+import { AuthService } from '../../services/auth.service';
+import { StorageService } from '../../services/storage.service';
+import { ERROR_FORM, LOGO } from '../../constants/global-constants';
+import { CommonService } from '../../services/common.service';
+import { ClientsModalPage } from '../../modals/clients-modal/clients-modal.page';
+@Component( {
   selector: 'app-authentication',
   templateUrl: './authentication.page.html',
-  styleUrls: ['./authentication.page.scss'],
-})
+  styleUrls: [ './authentication.page.scss' ],
+} )
 export class AuthenticationPage implements OnInit {
 
-  public registerForm: FormGroup;
-  userInfo = null;
-  // validationMessages = {
-  //   'email': [
-  //       { type: 'required', message: 'Username is required.' },
-  //       { type: 'pattern', message: 'Your username must contain only numbers and letters.' },
-  //       { type: 'pattern', message: 'Your username has already been taken.' }
-  //     ],
-  //     'password': [
-  //       { type: 'required', message: 'Name is required.' },
-  //       { type: 'minlength', message: 'Username must be at least 5 characters long.' },
-  //       { type: 'maxlength', message: 'Username cannot be more than 25 characters long.' },
-  //     ],
-  //   }
+  loginForm: FormGroup;
+  submitted: boolean;
+  formError = ERROR_FORM;
+  logo = LOGO;
 
-  constructor(public formBuilder: FormBuilder, private userService: UserService, private router: Router) {
-    const EMAIL_REGEXP = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-    this.registerForm = formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.pattern(EMAIL_REGEXP)])],
-      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
-    });
+  constructor(
+    private router: Router,
+    private _auth: AuthService,
+    private _common: CommonService,
+    private formBuilder: FormBuilder,
+    private _storage: StorageService,
+  ) {
+    this.createForm();
+
   }
 
   ngOnInit() {
   }
 
   async googleLogin() {
-    console.log('entered in googla login');
+    console.log( 'entered in googla login' );
     const googleUser = await Plugins.GoogleAuth.signIn();
-    this.userInfo = googleUser;
-    console.log('google log in', googleUser);
-    if (this.userInfo.authentication.idToken) {
-      localStorage.setItem('userToken', this.userInfo.authentication.idToken);
-      this.router.navigate(['/sidemenu/Inicio']);
+
+    if ( googleUser.authentication.idToken ) {
+      const loading = await this._common.presentLoading();
+      loading.present();
+      const exist = await this._auth.exist( googleUser.email );
+      loading.dismiss();
+      ( exist ) ? this.googleAccess( { email: googleUser.email, google_id: googleUser.id } ) : this.registerGoogleUSer( googleUser );
     }
   }
 
-  signin() {
-    const email = this.registerForm.controls.email.value;
-    const pass = this.registerForm.controls.password.value;
-    const emailValid = this.registerForm.controls.email.valid;
-    const passValid = this.registerForm.controls.password.valid;
-    if (email && pass && emailValid && passValid) {
-      localStorage.setItem('userToken', 'test-valid user');
-      this.router.navigate(['/sidemenu/Inicio']);
+  /**
+   * @description Registro del usuario google
+   */
+  private async registerGoogleUSer( googleUser ): Promise<void> {
+    const modal = await this._common.presentModal( { component: ClientsModalPage, cssClass: '', componentProps: { user: googleUser } } );
+    modal.present();
+    const modalData = await modal.onDidDismiss();
+    if ( modalData.role === 'submit' ) {
+      this.googleAccess( modalData.data );
     }
   }
+
+  /**
+   * @description Registro / Acceso del usuario google
+   */
+  private async googleAccess( accessData: any ) {
+    const loading = await this._common.presentLoading();
+    loading.present();
+    this._auth.login( accessData ).subscribe( async ( response ) => {
+      loading.dismiss();
+      this._auth.AuthSubject( response.user );
+      const message = response.message;
+      const color = 'primary';
+      this._common.presentToast( { message, color } );
+      await this._storage.store( 'rp_token', response.data );
+      await this._storage.store( 'rp_user', response.user );
+      this.router.navigate( [ '/sidemenu/Inicio' ] );
+    } );
+  }
+
+  private createForm(): void {
+    this.loginForm = this.formBuilder.group( {
+      email: [ '', [ Validators.required, Validators.email ] ],
+      password: [ '', [ Validators.required, Validators.minLength( 8 ) ] ],
+    } );
+  }
+
 }
