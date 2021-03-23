@@ -40,27 +40,20 @@ export class AuthenticationPage implements OnInit {
     const googleUser = await Plugins.GoogleAuth.signIn();
 
     if ( googleUser.authentication.idToken ) {
-      let modalData: any;
 
-      // if ( this._auth.exist( googleUser.email ) ) {
-      if ( modalData ) {
-        const loading = await this._common.presentLoading();
-        loading.present();
-        this._auth.googleLogin( googleUser ).subscribe( async ( result ) => {
-          loading.dismiss();
-          await this._storage.store( 'rp_token', googleUser.authentication.idToken );
-          await this._storage.store( 'rp_user', googleUser );
-          this.router.navigate( [ '/sidemenu/Inicio' ] );
-        }, () => loading.dismiss() );
-
-      } else { // Si el email no esta en el sistema se procede a un registro
-        const modal = await this._common.presentModal( { component: ClientsModalPage } );
-        modal.present();
-        modalData = await modal.onDidDismiss();
-        if ( modalData.role === 'submit' ) {
-          // Registro con modalData.data
-        }
+      if ( !this._auth.exist( googleUser.email ) ) {
+        this.registerGoogleUSer();
+        return;
       }
+
+      const loading = await this._common.presentLoading();
+      loading.present();
+      this._auth.googleLogin( googleUser ).subscribe( async ( result ) => {
+        loading.dismiss();
+        await this._storage.store( 'rp_token', googleUser.authentication.idToken );
+        await this._storage.store( 'rp_user', googleUser );
+        this.router.navigate( [ '/sidemenu/Inicio' ] );
+      }, () => loading.dismiss() );
     }
   }
 
@@ -79,6 +72,18 @@ export class AuthenticationPage implements OnInit {
         await this._storage.store( 'rp_user', response.user );
         this.router.navigate( [ '/sidemenu/Inicio' ] );
       }, () => loading.dismiss() );
+    }
+  }
+
+  /**
+   * @description Registro del usuario google
+   */
+  private async registerGoogleUSer(): Promise<void> {
+    const modal = await this._common.presentModal( { component: ClientsModalPage } );
+    modal.present();
+    const modalData = await modal.onDidDismiss();
+    if ( modalData.role === 'submit' ) {
+      // Registro con modalData.data
     }
   }
 

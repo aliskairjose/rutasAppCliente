@@ -46,8 +46,9 @@ export class AuthService {
    * @param email Email del usuario a consultar
    * @returns True o False
    */
-  exist( email: string ): Observable<any> {
-    return this._httpService.get( '' );
+  exist( email: string ): boolean {
+    // return this._httpService.get( '' );
+    return false;
   }
 
   /**
