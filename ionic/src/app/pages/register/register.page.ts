@@ -43,11 +43,8 @@ export class RegisterPage implements OnInit {
     if ( this.registerForm.valid ) {
       const loading = await this._commonService.presentLoading();
       loading.present();
-      this._auth.register( this.registerForm.value ).subscribe( response => {
+      this._auth.register( this.registerForm.value ).subscribe( () => {
         loading.dismiss();
-        const message = response.message;
-        const color = 'primary';
-        this._commonService.presentToast( { message, color } );
         setTimeout( () => {
           this._router.navigate( [ '/signin' ] );
         }, 2000 );

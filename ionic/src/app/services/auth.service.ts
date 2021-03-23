@@ -3,6 +3,8 @@ import { HttpService } from './http.service';
 import { Observable, Subject } from 'rxjs';
 import { StorageService } from './storage.service';
 import { User } from '@codetrix-studio/capacitor-google-auth/dist/esm/user';
+import { map } from 'rxjs/operators';
+import { CommonService } from './common.service';
 
 @Injectable( {
   providedIn: 'root'
@@ -11,6 +13,7 @@ export class AuthService {
   $auth: Subject<any> = new Subject<any>();
 
   constructor(
+    private _common: CommonService,
     private _storage: StorageService,
     private _httpService: HttpService,
   ) { }
@@ -24,7 +27,11 @@ export class AuthService {
   }
 
   register( data: any ): Observable<any> {
-    return this._httpService.post( '/users', data );
+    return this._httpService.post( '/users', data ).pipe(
+      map( response => {
+        this.toastMessage( response.message );
+      } )
+    );
   }
 
   recoverPassword( data ): Observable<any> {
@@ -44,6 +51,11 @@ export class AuthService {
     return new Promise<boolean>( resolve => {
       this._httpService.get( `/verify-email/${email}` ).subscribe( res => resolve( res ) );
     } );
+  }
+
+  private toastMessage( message: string ): void {
+    const color = 'primary';
+    this._common.presentToast( { message, color } );
   }
 
   /**

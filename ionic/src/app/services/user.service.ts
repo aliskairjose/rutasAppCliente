@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 import { User } from '../interfaces/user';
 import { map } from 'rxjs/operators';
+import { CommonService } from './common.service';
 
 @Injectable( {
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class UserService {
 
   constructor(
     private platform: Platform,
+    private _common: CommonService,
     private _httpService: HttpService
   ) { }
 
@@ -54,7 +56,16 @@ export class UserService {
    * @returns Notificación
    */
   delete( id: number ): Observable<any> {
-    return this._httpService.delete( `/users/${id}` );
+    return this._httpService.delete( `/users/${id}` ).pipe(
+      map( response => {
+        this.toastMessage( response.message );
+      } )
+    );
+  }
+
+  private toastMessage( message: string ): void {
+    const color = 'primary';
+    this._common.presentToast( { message, color } );
   }
 
   subscribeBackHandler() {
