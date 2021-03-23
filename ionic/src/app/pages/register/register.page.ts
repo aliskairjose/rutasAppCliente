@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientsService } from '../../services/clients.service';
 import { LoadingController } from '@ionic/angular';
-import { ERROR_FORM, LOGO } from '../../constants/global-constants';
 import { MustMatch } from '../../helpers/must-match.validator';
 import { AuthService } from '../../services/auth.service';
 import { CommonService } from '../../services/common.service';
 import { Router } from '@angular/router';
 import { Client } from '../../interfaces/client';
+import { ERROR_FORM, LOGO } from '../../constants/global-constants';
 
 @Component( {
   selector: 'app-register',
