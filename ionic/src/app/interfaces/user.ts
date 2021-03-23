@@ -11,14 +11,14 @@ export interface User {
   email?: string;
   email_verified_at?: string;
   id?: string;
-  identification?: null
+  identification?: string;
   license?: string;
   license_expiration?: string;
   name?: string;
   phone?: string;
   roles?: Array<Role>;
   updated_at?: string;
-  verified_by_admin?: number
-  verified_by_client?: number
+  verified_by_admin?: number;
+  verified_by_client?: number;
   years_experiencie?: number;
 }
