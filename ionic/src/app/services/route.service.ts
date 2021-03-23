@@ -3,6 +3,7 @@ import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
 import { Route } from '../interfaces/route';
 import { map } from 'rxjs/operators';
+import { CommonService } from './common.service';
 
 @Injectable( {
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { map } from 'rxjs/operators';
 export class RouteService {
 
   constructor(
-    private _http: HttpService
+    private _http: HttpService,
+    private _common: CommonService
   ) { }
 
   /**
@@ -26,7 +28,17 @@ export class RouteService {
    * @param data Ruta
    * @returns Confirmación de agregado
    */
-  add( data: any ): Observable<any> {
-    return this._http.post( '/routes', data );
+  add( data: Route ): Observable<Route> {
+    return this._http.post( '/routes', data ).pipe(
+      map( response => {
+        this.toastMessage( response.message );
+        return response.data;
+      } )
+    );
+  }
+
+  private toastMessage( message: string ): void {
+    const color = 'primary';
+    this._common.presentToast( { message, color } );
   }
 }

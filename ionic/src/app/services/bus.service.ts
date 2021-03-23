@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Bus } from '../interfaces/bus';
 import { BusType } from '../interfaces/bus-type';
 import { map } from 'rxjs/operators';
+import { CommonService } from './common.service';
 
 @Injectable( {
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { map } from 'rxjs/operators';
 export class BusService {
 
   constructor(
-    private _http: HttpService
+    private _http: HttpService,
+    private _common: CommonService,
   ) { }
 
   /**
@@ -28,7 +30,12 @@ export class BusService {
    * @returns Bus agregado
    */
   add( bus: Bus ): Observable<any> {
-    return this._http.post( '/buses', bus );
+    return this._http.post( '/buses', bus ).pipe(
+      map( response => {
+        this.toastMessage( response.message );
+        return response.data;
+      } )
+    );
   }
 
   /**
@@ -37,7 +44,9 @@ export class BusService {
    * @returns Notificación
    */
   delete( id: number ): Observable<any> {
-    return this._http.delete( `/buses/${id}` );
+    return this._http.delete( `/buses/${id}` ).pipe(
+      map( response => this.toastMessage( response.message ) )
+    );
   }
 
   /**
@@ -87,6 +96,11 @@ export class BusService {
    */
   deleteType( id: number ): Observable<any> {
     return this._http.delete( `/bus-types/${id}` );
+  }
+
+  private toastMessage( message: string ): void {
+    const color = 'primary';
+    this._common.presentToast( { message, color } );
   }
 
 }
