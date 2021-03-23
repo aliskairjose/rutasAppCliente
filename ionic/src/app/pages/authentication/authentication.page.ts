@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
@@ -35,8 +34,9 @@ export class AuthenticationPage implements OnInit {
   ngOnInit() {
   }
 
+  get f() { return this.loginForm.controls; }
+
   async googleLogin() {
-    console.log( 'entered in googla login' );
     const googleUser = await Plugins.GoogleAuth.signIn();
 
     if ( googleUser.authentication.idToken ) {
@@ -45,6 +45,24 @@ export class AuthenticationPage implements OnInit {
       const exist = await this._auth.exist( googleUser.email );
       loading.dismiss();
       ( exist ) ? this.googleAccess( { email: googleUser.email, google_id: googleUser.id } ) : this.registerGoogleUSer( googleUser );
+    }
+  }
+
+  async onSubmit() {
+    this.submitted = true;
+    if ( this.loginForm.valid ) {
+      const loading = await this._common.presentLoading();
+      loading.present();
+      this._auth.login( this.loginForm.value ).subscribe( async ( response ) => {
+        loading.dismiss();
+        this._auth.AuthSubject( response.user );
+        const message = response.message;
+        const color = 'primary';
+        this._common.presentToast( { message, color } );
+        await this._storage.store( 'rp_token', response.data );
+        await this._storage.store( 'rp_user', response.user );
+        this.router.navigate( [ '/sidemenu/Inicio' ] );
+      }, () => loading.dismiss() );
     }
   }
 
