@@ -30,7 +30,6 @@ export class ForgotPasswordPage implements OnInit {
   }
 
   async onSubmit() {
-    console.log( 'submitted' );
     this.submitted = true;
     if ( this.registerForgotForm.valid ) {
       const loading = await this._common.presentLoading();

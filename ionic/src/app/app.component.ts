@@ -26,7 +26,4 @@ export class AppComponent implements OnInit {
     const route = isLoggedin ? '/sidemenu/Inicio' : '/initial';
     this.router.navigate( [ route ] );
   }
-
-
-
 }

@@ -1,236 +1,244 @@
 <!-- <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in' : 'fade'" tappable (click)="bottomDrawer.toggleDrawer()"></div> -->
-<div  class="bottom-drawer" [ngStyle]= "{'bottom': 'calc('+ bottomPosition +'vh + env(safe-area-inset-bottom))'}" #bottomDrawer>
-  <div *ngIf = "userService.rutasFlow === 5" class="car-loc-btn"><ion-icon name="locate"></ion-icon></div>
+<div class="bottom-drawer" [ngStyle]="{'bottom': 'calc('+ bottomPosition +'vh + env(safe-area-inset-bottom))'}"
+  #bottomDrawer>
+  <div *ngIf="userService.rutasFlow === 5" class="car-loc-btn">
+    <ion-icon name="locate"></ion-icon>
+  </div>
   <div *ngIf="dragable" class="ion-text-center ">
-    <ion-button  fill="clear" expand="full" (click) ="toggleDrawer()" class="minH">
+    <ion-button fill="clear" expand="full" (click)="toggleDrawer()" class="minH">
       <div class="drawer-pull"></div>
     </ion-button>
   </div>
 
   <div class="content-container mt-2" *ngIf="component === 'Inicio'">
- 
+    <ion-content [ngSwitch]="userService.rutasFlow">
 
-  <ion-content [ngSwitch] = "userService.rutasFlow">
-
-    <div *ngSwitchCase = 0>
-
-      <ion-input class="searchField" placeholder="Buscar ruta" (click)="stopDrag()" (ionBlur)="startDrag()"></ion-input>
-      <div class='itemWrapper' *ngFor="let item of searchList" (click) ="routeHandler(item)">
-          <img class="listImg" *ngIf="item.status === 'pending'" src="../../../assets/clockYellow.png"/>
-          <img class="listImg" *ngIf="item.status === 'completed'" src="../../../assets/briefcase.png"/>
+      <div *ngSwitchCase=0>
+        <ion-input class="searchField" placeholder="Buscar ruta"></ion-input>
+        <div class='itemWrapper' *ngFor="let item of searchList" (click)="routeHandler(item)">
+          <img class="listImg" *ngIf="item.status === 'pending'" src="../../../assets/clockYellow.png" />
+          <img class="listImg" *ngIf="item.status === 'completed'" src="../../../assets/briefcase.png" />
           <div class="">
             <div class="listName">{{item.name}}</div>
-            <ion-note >{{item.timeRange}}</ion-note>
+            <ion-note>{{item.timeRange}}</ion-note>
           </div>
         </div>
-    </div>
+      </div>
 
-    <div class="px-2" *ngSwitchCase = 1>
-      <div class="d-flex flex-row">
-        
-        <div class="d-flex flex-grow-1">
-          <img class="clock" src="../../../assets/clock.png"/>
-          <div class="d-flex flex-column">
-            <span >Proxima unidad</span>
-            <ion-note>15 minutes</ion-note>
+      <div *ngSwitchCase=1 class="px-2">
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-grow-1">
+            <img class="clock" src="../../../assets/clock.png" />
+            <div class="d-flex flex-column">
+              <span>Proxima unidad</span>
+              <ion-note>15 minutes</ion-note>
+            </div>
           </div>
-         
-        </div>
-        
-        
-        <div class="justify-content-around d-flex flex-grow-1">
-          <img (click) = "startScan()" class="scan" src="../../../assets/prueba 1Recurso 45.png"/>
+          <div class="justify-content-around d-flex flex-grow-1 imgSet">
+            <img (click)="startScan()" class="scan" src="../../../assets/prueba 1Recurso 45.png" />
 
-          <img class="scan" (click)="goToSeatArrangement()" src="../../../assets/prueba 1Recurso 42.png"/>
-          <img class="scan" (click)="editRoute()" src="../../../assets/prueba 1Recurso 47.png"/>
-        </div>
-        
-      </div>
-      <ion-button fill="clear" expand="full" class="confirmRutas my-3">Abordar este bus</ion-button>
-      
-    </div>
-
-    <div class="d-flex flex-column align-items-center" *ngSwitchCase = 2>
-      <div class="scanBlock">
-        <div class="d-flex flex-column align-items-center justify-content-center" *ngIf="!showScan">
-          <ion-note>Please scan this QR to verify your bus</ion-note>
-          <img class="scannerImg" src="../../../assets/scanner.png"/>
-        </div>
-        <div [ngClass]="!showScan ? 'd-none' : 'd-block'">
-          <video class="vdo" [hidden] = '!scanActive' #video></video>
-        <canvas #canvas hidden></canvas>
-        </div>
-        
-      </div>
-
-      <ion-button *ngIf="!showScan" (click) = "scannerOn()" fill="clear"  class="confirmRutas my-3 ">Start scan</ion-button>
-
-      <ion-button *ngIf="showScan"  (click) = "stopScan()" fill="clear"  class="confirmRutas my-3 ">Back</ion-button>
-    </div>
-
-    
-    <div *ngSwitchCase = 3>
-
-      <div class="driverWrapper" *ngIf="!isOpen">
-        <div class="driverOverview">
-        <img class = "dp" src="../../../assets/prueba 1Recurso 59.png"/>
-        <div class="driverDetail">
-          <ion-text class="drivername">{{scanResult}}</ion-text>
-          <div class="driverPlaceDetail">
-            <ion-text class="placePadding">Modelo: Yutong V55</ion-text>
-            <ion-text>Placa: 456yht7</ion-text>
-          </div>
-          <ion-note>Tiempo de llegada a destino: 25min</ion-note>
-        </div>
-      </div>
-      <ion-button fill="clear" (click) = "goToFeedback()" class="confirmDriverBtn"> 
-        <ion-icon class="" name="log-out-outline"></ion-icon>
-        <ion-text>Finalizar viaje</ion-text>
-      </ion-button>
-      </div>
-
-      <div class="expandedDetailWrapper" *ngIf="isOpen">
-        <ion-text class="drivername">Datos de tu viaje</ion-text>
-
-        <img class = "expandedDp" src="../../../assets/prueba 1Recurso 59.png"/>
-
-        <ion-note>Tu conductor</ion-note>
-
-        <div class="expandedSelectedItem">
-          <div class="equalLength expanded-driverName">
-            <ion-text class="brokenTxt">{{scanResult}}</ion-text>
-          </div>  
-          <div class="equalLength">
-            <ion-text>4/5</ion-text>
-            <img class="starImg" src="../../../assets/yellowStar.png"/>
+            <img class="scan" (click)="goToSeatArrangement()" src="../../../assets/prueba 1Recurso 42.png" />
+            <img class="scan" (click)="editRoute()" src="../../../assets/prueba 1Recurso 47.png" />
           </div>
         </div>
+        <ion-button fill="clear" expand="full" class="confirmRutas my-3">Abordar este bus</ion-button>
+      </div>
 
-        <ion-note>Tu ruta</ion-note>
+      <div *ngSwitchCase=2 class="d-flex flex-column align-items-center">
+        <div class="scanBlock">
+          <div class="d-flex flex-column align-items-center justify-content-center" *ngIf="!showScan">
+            <ion-note>Please scan this QR to verify your bus</ion-note>
+            <img class="scannerImg" src="../../../assets/scanner.png" />
+          </div>
+          <div [ngClass]="!showScan ? 'd-none' : 'd-block'">
+            <video class="vdo" [hidden]='!scanActive' #video></video>
+            <canvas #canvas hidden></canvas>
+          </div>
+        </div>
+        <ion-button *ngIf="!showScan" (click)="scannerOn()" fill="clear" class="confirmRutas my-3 ">Start scan
+        </ion-button>
+        <ion-button *ngIf="showScan" (click)="stopScan()" fill="clear" class="confirmRutas my-3 ">Back</ion-button>
+      </div>
 
-        <div class="listItemWrapper cardInDrawer">
+      <div *ngSwitchCase=3>
+        <div class="driverWrapper" *ngIf="!isOpen">
+          <div class="driverOverview">
+            <img class="dp" src="../../../assets/prueba 1Recurso 59.png" />
+            <div class="driverDetail">
+              <ion-text class="drivername">{{scanResult}}</ion-text>
+              <div class="driverPlaceDetail">
+                <ion-text class="placePadding">Modelo: Yutong V55</ion-text>
+                <ion-text>Placa: 456yht7</ion-text>
+              </div>
+              <ion-note>Tiempo de llegada a destino: 25min</ion-note>
+            </div>
+          </div>
+          <ion-button fill="clear" (click)="goToFeedback()" class="confirmDriverBtn">
+            <ion-icon class="" name="log-out-outline"></ion-icon>
+            <ion-text>Finalizar viaje</ion-text>
+          </ion-button>
+        </div>
+        <div class="expandedDetailWrapper" *ngIf="isOpen">
+          <ion-text class="drivername">Datos de tu viaje</ion-text>
+          <img class="expandedDp" src="../../../assets/prueba 1Recurso 59.png" />
+
+          <ion-note>Tu conductor</ion-note>
+
+          <div class="expandedSelectedItem">
+            <div class="equalLength expanded-driverName">
+              <ion-text class="brokenTxt">{{scanResult}}</ion-text>
+            </div>
+            <div class="equalLength">
+              <ion-text>4/5</ion-text>
+              <ion-icon class="starImg" name="star"></ion-icon>
+              <!-- <img class="starImg" src="../../../assets/yellowStar.png"/> -->
+            </div>
+          </div>
+
+          <ion-note>Tu ruta</ion-note>
+
+          <div class="listItemWrapper cardInDrawer">
+            <img class="listImg" src="../../../assets/route.png" />
+            <div class="listTextWrapper">
+              <div class="listName">{{selectedItem?.name}}</div>
+              <ion-note>{{selectedItem?.timeRange}}</ion-note>
+            </div>
+          </div>
+
+          <ion-note>Tu unidad</ion-note>
+
+          <ion-text>Modelo: Yutong V55</ion-text>
+
+          <ion-text>Placa: 456yht7</ion-text>
+
+          <ion-note>Puestos disponibles</ion-note>
+
+          <ion-text>15/30</ion-text>
+
+          <ion-button (click)="goToFeedback()" class="confirmDriverBtn setAtBottom">
+            <ion-icon class="" name="log-out-outline"></ion-icon>
+            <ion-text>Finalizar viaje</ion-text>
+          </ion-button>
+        </div>
+
+      </div>
+
+      <div *ngSwitchCase=4 class="seatContentWrapper">
+        <div class="listItemWrapper extraShadow">
           <img class="listImg" src="../../../assets/route.png" />
           <div class="listTextWrapper">
             <div class="listName">{{selectedItem?.name}}</div>
             <ion-note>{{selectedItem?.timeRange}}</ion-note>
           </div>
         </div>
-
-        <ion-note>Tu unidad</ion-note>
-
-        <ion-text>Modelo: Yutong V55</ion-text>
-
-        <ion-text>Placa: 456yht7</ion-text>
-
-        <ion-note>Puestos disponibles</ion-note>
-
-        <ion-text>15/30</ion-text>
-
-        <ion-button (click) = "goToFeedback()" class="confirmDriverBtn setAtBottom">
-          <ion-icon class="" name="log-out-outline"></ion-icon>
-          <ion-text>Finalizar viaje</ion-text>
-        </ion-button>
-      </div>
-
-    </div>
-
-    <div *ngSwitchCase = 4 class="seatContentWrapper">
-      <div class="listItemWrapper extraShadow">
-        <img class="listImg" src="../../../assets/route.png" />
-        <div class="listTextWrapper">
-          <div class="listName">{{selectedItem?.name}}</div>
-          <ion-note>{{selectedItem?.timeRange}}</ion-note>
-        </div>
-      </div>
-      <div class="rowWrapper">
-      <div *ngFor="let row of seats">
-        <div class="rowView" *ngIf="row.length">
-        <div class="imgWrapper" *ngFor="let col of row">
-            <img *ngIf="col.isSeat && col.status==='driver'" class="seatImg" src="../../../assets/chair (2).png" />
-            <img *ngIf="col.isSeat && col.status==='empty'" class="seatImg" src="../../../assets/chair (1).png" />
-            <img *ngIf="col.isSeat && col.status==='f'" class="seatImg" src="../../../assets/chair (3).png" />
-            <img *ngIf="col.isSeat && col.status==='m'" class="seatImg" src="../../../assets/chair.png" />
-          <div *ngIf="!col.isSeat" class="emptySeat"></div>
-        </div>
-      </div>
-      <div *ngIf="row.length === 0" class="emptyRow"></div>
-      </div>
-      </div>
-      <div *ngIf="isOpen" class="totalSeats">
-        <div class="rowView">
-          <div class="bottomSeatWrapper smallSeatWrapper">
-            <ion-note class="totalSeatCount">8/32</ion-note>
-            <img class="seatImg smallSeat" src="../../../assets/chair (1).png"/>
-            <ion-note class="seatType">Aslenios dispenible</ion-note>
-          </div>
-          <div class="bottomSeatWrapper extendedHeight">
-            <img class="seatImg" src="../../../assets/chair (2).png"/>
-            <ion-note class="seatType">Asionto del chofer</ion-note>
-          </div>
-          <div class="bottomSeatWrapper extendedHeight">
-            <ion-note class="totalSeatCount">15/32</ion-note>
-            <img class="seatImg" src="../../../assets/chair (3).png"/>
-            <ion-note class="seatType">Asientos ocupados</ion-note>
-          </div>
-          <div class="bottomSeatWrapper noMargin smallSeatWrapper">
-            <ion-note class="totalSeatCount">5/32</ion-note>
-            <img class="seatImg smallSeat" src="../../../assets/chair.png"/>
-            <ion-note class="seatType">Asientos selecclonacos</ion-note>
+        <div #seat class="rowWrapper">
+          <div *ngFor="let row of seats">
+            <div class="rowView" *ngIf="row.length">
+              <div class="imgWrapper" *ngFor="let col of row">
+                <img *ngIf="col.isSeat && col.status==='driver'" class="seatImg" src="../../../assets/chair (2).png" />
+                <img *ngIf="col.isSeat && col.status==='empty'" class="seatImg" src="../../../assets/chair (1).png" />
+                <img *ngIf="col.isSeat && col.status==='f'" class="seatImg" src="../../../assets/chair (3).png" />
+                <img *ngIf="col.isSeat && col.status==='m'" class="seatImg" src="../../../assets/chair.png" />
+                <div *ngIf="!col.isSeat" class="emptySeat"></div>
+              </div>
+            </div>
+            <div *ngIf="row.length === 0" class="emptyRow"></div>
           </div>
         </div>
-        <ion-button class="seatBtn" (click)="goToHome()">
-          <ion-icon name="log-out-outline" ></ion-icon>
-          Asignar Asientos
-        </ion-button>
-      </div>
-    </div>
-
-    <div *ngSwitchCase = 5>
-
-      <div class="d-flex justify-content-center h-100 flex-column">
-        <ion-button fill="clear" color="clear" class="flow-4-btn-1 borderRad"><ion-icon name="options-outline" class="mx-2"></ion-icon> Panel de Control</ion-button>
-
-        <div class="d-flex">
-          <ion-select class="btn-select" placeholder="Cliente">
-            <ion-select-option value="brown">Brown</ion-select-option>
-            <ion-select-option value="brown">Brown</ion-select-option>
-          </ion-select>
-          <ion-select class="btn-select" placeholder="Rutas">
-            <ion-select-option value="brown">Brown</ion-select-option>
-            <ion-select-option value="brown">Brown</ion-select-option>
-          </ion-select>
-        </div>
-
-        <ion-button fill="clear" color="clear" class="flow-4-btn-1 borderRad"><ion-icon name="search-outline" class="mx-1"></ion-icon>Buscar</ion-button>
-
-        <div class="d-flex justify-content-center my-4">
-          <ion-button fill="clear" color="clear" class="flow-4-btn-2 btn35 mx-1 borderRad" placeholder="Cliente">Ida <ion-icon name="return-up-forward-outline" class="mx-1 borderRad"></ion-icon></ion-button>
-          <ion-button fill="clear" color="clear" class="flow-4-btn-1 btn35 mx-1 borderRad" placeholder="Rutas">Regreso <ion-icon name="return-down-back-outline" class="mx-1 borderRad"></ion-icon></ion-button>
-        </div>
-
-        <div class="d-flex flex-column align-items-center">
-          <ion-note class="mb-2">Informacion de Ruta</ion-note>
-
-          <table class="tbl">
-            <thead>
-              <tr>
-                <th >Ruta</th>
-                <th >Detalles de Ruta</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td >foo</td>
-                <td >bar</td>
-              </tr>
-            </tbody>
-          </table>
+        <div *ngIf="isOpen" class="totalSeats">
+          <div class="rowView">
+            <div class="bottomSeatWrapper smallSeatWrapper">
+              <ion-note class="totalSeatCount">8/32</ion-note>
+              <img class="seatImg smallSeat" src="../../../assets/chair (1).png" />
+              <ion-note class="seatType">Aslenios dispenible</ion-note>
+            </div>
+            <div class="bottomSeatWrapper extendedHeight">
+              <img class="seatImg bigseats" src="../../../assets/chair (2).png" />
+              <ion-note class="seatType">Asionto del chofer</ion-note>
+            </div>
+            <div class="bottomSeatWrapper extendedHeight">
+              <ion-note class="totalSeatCount">15/32</ion-note>
+              <img class="seatImg bigseats" src="../../../assets/chair (3).png" />
+              <ion-note class="seatType">Asientos ocupados</ion-note>
+            </div>
+            <div class="bottomSeatWrapper noMargin smallSeatWrapper">
+              <ion-note class="totalSeatCount">5/32</ion-note>
+              <img class="seatImg smallSeat" src="../../../assets/chair.png" />
+              <ion-note class="seatType">Asientos selecclonacos</ion-note>
+            </div>
+          </div>
+          <ion-button class="seatBtn" (click)="goToHome()">
+            <ion-icon name="log-out-outline"></ion-icon>
+            Asignar Asientos
+          </ion-button>
         </div>
       </div>
 
-    </div>
-  
-</ion-content>
-</div>
+      <div *ngSwitchCase=5>
+        <div #editRutas class="d-flex justify-content-center h-100 flex-column">
+          <ion-button fill="clear" color="clear" class="flow-4-btn-1 borderRad">
+            <ion-icon name="options-outline" class="mx-2"></ion-icon>
+            Panel de Control
+          </ion-button>
 
+          <div class="d-flex">
+            <ion-select class="btn-select" placeholder="Cliente">
+              <ion-select-option value="brown">Brown</ion-select-option>
+              <ion-select-option value="brown">Brown</ion-select-option>
+            </ion-select>
+            <ion-select class="btn-select" placeholder="Rutas">
+              <ion-select-option value="brown">Brown</ion-select-option>
+              <ion-select-option value="brown">Brown</ion-select-option>
+            </ion-select>
+          </div>
+
+          <ion-button fill="clear" color="clear" class="flow-4-btn-1 borderRad">
+            <ion-icon name="search-outline" class="mx-1"></ion-icon>
+            Buscar
+          </ion-button>
+
+          <div class="d-flex justify-content-center my-4">
+            <ion-button fill="clear" color="clear" class="flow-4-btn-2 btn35 mx-1 borderRad" placeholder="Cliente">Ida
+              <ion-icon name="return-up-forward-outline" class="mx-1 borderRad"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" color="clear" class="flow-4-btn-1 btn35 mx-1 borderRad" placeholder="Rutas">Regreso
+              <ion-icon name="return-down-back-outline" class="mx-1 borderRad"></ion-icon>
+            </ion-button>
+          </div>
+
+          <div class="d-flex flex-column align-items-center">
+            <ion-note class="mb-2">Informacion de Ruta</ion-note>
+
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th class="roundBorderLeft">Ruta</th>
+                  <th class="roundBorderRight">Detalles de Ruta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>foo</td>
+                  <td>bar</td>
+                </tr>
+                <tr>
+                  <td>foo</td>
+                  <td>bar</td>
+                </tr>
+                <tr>
+                  <td>foo</td>
+                  <td>bar</td>
+                </tr>
+                <tr>
+                  <td>foo</td>
+                  <td>bar</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </ion-content>
+  </div>
 </div>

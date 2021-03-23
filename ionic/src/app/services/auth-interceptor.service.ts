@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable, throwError, from } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-// import { CommonService } from '../common/common.service';
 import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
 import { CommonService } from './common.service';
