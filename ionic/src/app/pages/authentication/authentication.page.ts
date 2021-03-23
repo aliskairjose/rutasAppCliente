@@ -42,8 +42,7 @@ export class AuthenticationPage implements OnInit {
     if ( googleUser.authentication.idToken ) {
       const loading = await this._common.presentLoading();
       loading.present();
-      const exist = await this.userExist( googleUser.email );
-      console.log( exist );
+      const exist = await this._auth.exist( googleUser.email );
       loading.dismiss();
       ( exist ) ? this.googleAccess( { email: googleUser.email, google_id: googleUser.id } ) : this.registerGoogleUSer( googleUser );
     }
@@ -97,11 +96,11 @@ export class AuthenticationPage implements OnInit {
     } );
   }
 
-  private userExist( email: string ): Promise<boolean> {
-    return new Promise<boolean>( resolve => {
-      this._auth.exist( email ).subscribe( exist => resolve( exist ) );
-    } );
-  }
+  // private userExist( email: string ): Promise<boolean> {
+  //   return new Promise<boolean>( resolve => {
+  //     this._auth.exist( email ).subscribe( exist => resolve( exist ) );
+  //   } );
+  // }
 
   private createForm(): void {
     this.loginForm = this.formBuilder.group( {

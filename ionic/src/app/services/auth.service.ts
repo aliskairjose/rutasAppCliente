@@ -36,8 +36,10 @@ export class AuthService {
    * @param email Email del usuario a consultar
    * @returns True o False
    */
-  exist( email: string ): Observable<boolean> {
-    return this._httpService.get( `/verify-email/${email}` );
+  exist( email: string ): Promise<boolean> {
+    return new Promise<boolean>( resolve => {
+      this._httpService.get( `/verify-email/${email}` ).subscribe( res => resolve( res ) );
+    } );
   }
 
   /**
