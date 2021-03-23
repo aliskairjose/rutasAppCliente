@@ -32,23 +32,12 @@ export class AuthService {
   }
 
   /**
-   * @description Almacenamiendo de data de login google, enviando objeto {email, google_id}
-   * @param Email del usuario
-   * @param GoogleId el id proporcionado por el login de google
-   * @returns Google Data User
-   */
-  googleLogin( data: any ): Observable<any> {
-    return this._httpService.post( '', data );
-  }
-
-  /**
    * @description Válida si el correo ya existe en el sistema
    * @param email Email del usuario a consultar
    * @returns True o False
    */
-  exist( email: string ): boolean {
-    // return this._httpService.get( '' );
-    return false;
+  exist( email: string ): Observable<boolean> {
+    return this._httpService.get( `/verify-email/${email}` );
   }
 
   /**

@@ -40,20 +40,17 @@ export class AuthenticationPage implements OnInit {
     const googleUser = await Plugins.GoogleAuth.signIn();
 
     if ( googleUser.authentication.idToken ) {
-
-      if ( !this._auth.exist( googleUser.email ) ) {
+      const loading = await this._common.presentLoading();
+      loading.present();
+      const exist = await this.userExist( googleUser.email );
+      console.log( exist );
+      loading.dismiss();
+      if ( !exist ) {
         this.registerGoogleUSer( googleUser );
         return;
       }
 
-      const loading = await this._common.presentLoading();
-      loading.present();
-      this._auth.googleLogin( googleUser ).subscribe( async ( result ) => {
-        loading.dismiss();
-        await this._storage.store( 'rp_token', googleUser.authentication.idToken );
-        await this._storage.store( 'rp_user', googleUser );
-        this.router.navigate( [ '/sidemenu/Inicio' ] );
-      }, () => loading.dismiss() );
+      this.googleAccess( { email: googleUser.email, google_id: googleUser.id } );
     }
   }
 
@@ -83,8 +80,27 @@ export class AuthenticationPage implements OnInit {
     modal.present();
     const modalData = await modal.onDidDismiss();
     if ( modalData.role === 'submit' ) {
-      // Registro con modalData.data
+      this.googleAccess( modalData.data );
     }
+  }
+
+  /**
+   * @description Registro / Acceso del usuario google
+   */
+  private googleAccess( accessData: any ): void {
+    console.log( accessData );
+    this._auth.login( accessData ).subscribe( async ( response ) => {
+      console.log( response );
+      await this._storage.store( 'rp_token', response.data );
+      await this._storage.store( 'rp_user', response.user );
+      this.router.navigate( [ '/sidemenu/Inicio' ] );
+    } );
+  }
+
+  private userExist( email: string ): Promise<boolean> {
+    return new Promise<boolean>( resolve => {
+      this._auth.exist( email ).subscribe( exist => resolve( exist ) );
+    } );
   }
 
   private createForm(): void {
