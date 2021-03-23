@@ -96,12 +96,6 @@ export class AuthenticationPage implements OnInit {
     } );
   }
 
-  // private userExist( email: string ): Promise<boolean> {
-  //   return new Promise<boolean>( resolve => {
-  //     this._auth.exist( email ).subscribe( exist => resolve( exist ) );
-  //   } );
-  // }
-
   private createForm(): void {
     this.loginForm = this.formBuilder.group( {
       email: [ '', [ Validators.required, Validators.email ] ],
