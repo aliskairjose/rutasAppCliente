@@ -1,17 +1,25 @@
-import { UserService } from './../../services/user.service';
-import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, Output, ViewChild, EventEmitter, AfterViewInit, ChangeDetectorRef, Input, HostListener } from '@angular/core';
-import { GestureController, LoadingController, Platform } from '@ionic/angular';
 import jsQR from 'jsqr';
+import * as moment from 'moment';
+import { Route } from 'src/app/interfaces/route';
+
+import {
+  AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input,
+  OnInit, Output, ViewChild
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
-import { NavController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
+import {
+  NativePageTransitions, NativeTransitionOptions
+} from '@ionic-native/native-page-transitions/ngx';
+import { GestureController, LoadingController, NavController, Platform } from '@ionic/angular';
+
+import { CommonService } from '../../services/common.service';
 // import { DrawerState } from 'ion-bottom-drawer';
 import { RouteService } from '../../services/route.service';
-import { Route } from 'src/app/interfaces/route';
-import { CommonService } from '../../services/common.service';
+import { UserService } from '../../services/user.service';
+
 const { Keyboard } = Plugins;
+
 @Component( {
   selector: 'app-bottom-drawer',
   templateUrl: './bottom-drawer.component.html',
@@ -416,12 +424,13 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.seatGesture.enable( true );
   }
 
+
   private async loadRoutes() {
     const loading = await this._common.presentLoading();
     loading.present();
     this._routesService.list().subscribe( ( routes: Route[] ) => {
-      loading.dismiss();
       this.routes = [ ...routes ];
+      loading.dismiss();
     } );
   }
 }
