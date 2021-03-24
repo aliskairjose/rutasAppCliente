@@ -8,6 +8,8 @@ import { SidemenuPage } from './sidemenu.page';
 import { MapComponent } from '../../Components/map/map.component';
 import { FeedbackPage } from '../feedback/feedback.page';
 import { SoportePage } from '../soporte/soporte.page';
+import { RoutePage } from '../route/route.page';
+import { ExperiencePage } from '../experience/experience.page';
 
 const routes: Routes = [
   {
@@ -25,6 +27,14 @@ const routes: Routes = [
       {
         path: 'Soporte',
         component: SoportePage
+      },
+      {
+        path: 'Rutas',
+        component: RoutePage
+      },
+      {
+        path: 'Experiencia',
+        component: ExperiencePage
       }
     ]
   }
