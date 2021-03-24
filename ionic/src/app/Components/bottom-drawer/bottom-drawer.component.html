@@ -17,11 +17,11 @@
         <ion-input class="searchField" placeholder="Buscar ruta"></ion-input>
         <ng-container *ngIf="routes.length; else elseTemplate">
           <div class='itemWrapper' *ngFor="let route of routes" (click)="routeHandler(route)">
-            <img class="listImg" *ngIf="item.status === 'pending'" src="../../../assets/clockYellow.png" />
-            <img class="listImg" *ngIf="item.status === 'completed'" src="../../../assets/briefcase.png" />
+            <!-- <img class="listImg" *ngIf="item.status === 'pending'" src="../../../assets/clockYellow.png" /> -->
+            <img class="listImg" src="../../../assets/briefcase.png" />
             <div class="">
-              <div class="listName">{{route.name}}</div>
-              <ion-note>{{route.start_time | date:'shortTime'}} - {{route.end_time | date:'shortTime'}}</ion-note>
+              <div class="listName ion-text-capitalize">{{route.name }}</div>
+              <ion-note>{{route.start_time | customeTime }} - {{route.end_time | customeTime }}</ion-note>
             </div>
           </div>
         </ng-container>
