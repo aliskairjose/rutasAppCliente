@@ -14,7 +14,7 @@ export class CustomeTimePipe implements PipeTransform {
       const newHour = hour - 12;
       timeTranform = `${newHour}:${_time[ 1 ]} pm`;
     } else {
-      timeTranform = `${_time[ 0 ]}:${_time[ 1 ]}: am`;
+      timeTranform = `${_time[ 0 ]}:${_time[ 1 ]} am`;
     }
     return timeTranform;
   }
