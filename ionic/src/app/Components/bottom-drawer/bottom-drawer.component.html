@@ -9,10 +9,22 @@
       <div class="drawer-pull"></div>
     </ion-button>
   </div>
+  <div class="clearfix">
+    <img class="scan ion-float-right" src="../../../assets/prueba 1Recurso 47.png" (click)="switchContent(0)" />
+    <img class="scan ion-float-right ion-margin-horizontal" src="../../../assets/prueba 1Recurso 42.png"
+      (click)="switchContent()" />
+    <img class="scan ion-float-right" src="../../../assets/prueba 1Recurso 45.png" (click)="switchContent(2)" />
+  </div>
+  <!-- <div class="clearfix">
+    <img class="scan ion-float-right" src="../../../assets/prueba 1Recurso 47.png" (click)="editRoute()" />
+    <img class="scan ion-float-right ion-margin-horizontal" src="../../../assets/prueba 1Recurso 42.png"
+      (click)="goToSeatArrangement()" />
+    <img class="scan ion-float-right" src="../../../assets/prueba 1Recurso 45.png" (click)="startScan()" />
+  </div> -->
 
   <div class="content-container mt-2" *ngIf="component === 'Inicio'">
     <ion-content [ngSwitch]="userService.rutasFlow">
-
+      <!-- Buscar Ruta -->
       <div *ngSwitchCase=0>
         <ion-input class="searchField" placeholder="Buscar ruta"></ion-input>
         <ng-container *ngIf="routes.length; else elseTemplate">
@@ -43,14 +55,13 @@
           </div>
           <div class="justify-content-around d-flex flex-grow-1 imgSet">
             <img (click)="startScan()" class="scan" src="../../../assets/prueba 1Recurso 45.png" />
-
             <img class="scan" (click)="goToSeatArrangement()" src="../../../assets/prueba 1Recurso 42.png" />
             <img class="scan" (click)="editRoute()" src="../../../assets/prueba 1Recurso 47.png" />
           </div>
         </div>
         <ion-button fill="clear" expand="full" class="confirmRutas my-3">Abordar este bus</ion-button>
       </div>
-
+      <!-- QR Scan -->
       <div *ngSwitchCase=2 class="d-flex flex-column align-items-center">
         <div class="scanBlock">
           <div class="d-flex flex-column align-items-center justify-content-center" *ngIf="!showScan">
@@ -69,7 +80,7 @@
           <label class="label-button" for="">Volver</label>
         </ion-button>
       </div>
-
+      <!-- Scan Result -->
       <div *ngSwitchCase=3>
         <div class="driverWrapper" *ngIf="!isOpen">
           <div class="driverOverview">
@@ -111,7 +122,7 @@
             <img class="listImg" src="../../../assets/route.png" />
             <div class="listTextWrapper">
               <div class="listName">{{selectedItem?.name}}</div>
-              <ion-note>{{selectedItem?.timeRange}}</ion-note>
+              <ion-note>{{selectedItem.start_time | customeTime }} - {{selectedItem.end_time | customeTime }}</ion-note>
             </div>
           </div>
 
@@ -132,13 +143,13 @@
         </div>
 
       </div>
-
+      <!-- Seleccionar asiento -->
       <div *ngSwitchCase=4 class="seatContentWrapper">
         <div class="listItemWrapper extraShadow">
           <img class="listImg" src="../../../assets/route.png" />
           <div class="listTextWrapper">
             <div class="listName">{{selectedItem?.name}}</div>
-            <ion-note>{{selectedItem?.timeRange}}</ion-note>
+            <ion-note>{{selectedItem.start_time | customeTime }} - {{selectedItem.end_time | customeTime }}</ion-note>
           </div>
         </div>
         <div #seat class="rowWrapper">
@@ -183,7 +194,7 @@
           </ion-button>
         </div>
       </div>
-
+      <!-- Panel de control -->
       <div *ngSwitchCase=5>
         <div #editRutas class="d-flex justify-content-center h-100 flex-column">
           <ion-button fill="clear" color="clear" class="flow-4-btn-1 borderRad">

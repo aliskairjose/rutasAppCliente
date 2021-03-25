@@ -4,7 +4,7 @@
     <img class="listImg" src="./../../../assets/route.png" />
     <div class="listTextWrapper">
       <div class="listName">{{selectedItem?.name}}</div>
-      <ion-note>{{selectedItem?.timeRange}}</ion-note>
+      <ion-note>{{selectedItem.start_time | customeTime }} - {{selectedItem.end_time | customeTime }}</ion-note>
     </div>
   </div>
 </div>
