@@ -27,9 +27,6 @@ export class AuthService {
       map( async ( response ) => {
         const message = response.message;
         this._common.presentToast( { message } );
-        this.AuthSubject( response.user );
-        await this._storage.store( 'rp_token', response.data );
-        await this._storage.store( 'rp_user', response.user );
         return true;
       } )
     );
@@ -39,6 +36,7 @@ export class AuthService {
     return this._httpService.post( '/users', data ).pipe(
       map( response => {
         this.toastMessage( response.message );
+        return response;
       } )
     );
   }
