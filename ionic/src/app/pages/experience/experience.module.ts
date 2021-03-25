@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ExperiencePageRoutingModule } from './experience-routing.module';
 
 import { ExperiencePage } from './experience.page';
+import { SharedComponentsModule } from '../../Components/shared-components.module';
 
-@NgModule({
+@NgModule( {
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    ExperiencePageRoutingModule
+    IonicModule, ,
+    SharedComponentsModule,
+    ExperiencePageRoutingModule,
   ],
-  declarations: [ExperiencePage]
-})
-export class ExperiencePageModule {}
+  declarations: [ ExperiencePage ]
+} )
+export class ExperiencePageModule { }
