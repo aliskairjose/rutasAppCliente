@@ -23,16 +23,7 @@ export class AuthService {
    * @param data Objeto { email, password }
    */
   login( data: any ): Observable<any> {
-    return this._httpService.post( '/login/user', data ).pipe(
-      map( async ( response ) => {
-        const message = response.message;
-        this._common.presentToast( { message } );
-        this.AuthSubject( response.user );
-        await this._storage.store( 'rp_token', response.data );
-        await this._storage.store( 'rp_user', response.user );
-        return true;
-      } )
-    );
+    return this._httpService.post( '/login/user', data );
   }
 
   register( data: any ): Observable<any> {
