@@ -36,11 +36,8 @@ export class ForgotPasswordPage implements OnInit {
     if ( this.registerForgotForm.valid ) {
       const loading = await this._common.presentLoading();
       loading.present();
-      this._auth.recoverPassword( this.registerForgotForm.value ).subscribe( response => {
+      this._auth.recoverPassword( this.registerForgotForm.value ).subscribe( () => {
         loading.dismiss();
-        const message = response.message;
-        const color = 'primary';
-        this._common.presentToast( { message, color } );
         this.router.navigate( [ '/signin' ] );
       } );
     }

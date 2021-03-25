@@ -23,7 +23,16 @@ export class AuthService {
    * @param data Objeto { email, password }
    */
   login( data: any ): Observable<any> {
-    return this._httpService.post( '/login/user', data );
+    return this._httpService.post( '/login/user', data ).pipe(
+      map( async ( response ) => {
+        const message = response.message;
+        this._common.presentToast( { message } );
+        this.AuthSubject( response.user );
+        await this._storage.store( 'rp_token', response.data );
+        await this._storage.store( 'rp_user', response.user );
+        return true;
+      } )
+    );
   }
 
   register( data: any ): Observable<any> {
@@ -35,7 +44,12 @@ export class AuthService {
   }
 
   recoverPassword( data ): Observable<any> {
-    return this._httpService.post( '/reset-password', data );
+    return this._httpService.post( '/reset-password', data ).pipe(
+      map( ( response ) => {
+        const message = response.message;
+        this.toastMessage( response.message );
+      } )
+    );
   }
 
   isLoggedIn(): boolean {

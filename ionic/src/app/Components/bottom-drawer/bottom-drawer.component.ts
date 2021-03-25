@@ -217,7 +217,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     }
   }
 
-  routeHandler( item ) {
+  routeHandler( item: Route ) {
     this.selectedItem = item;
     this.userService.rutasData = item;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;

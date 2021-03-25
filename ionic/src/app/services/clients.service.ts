@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Client } from '../interfaces/client';
 
 @Injectable( {
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class ClientsService {
    * @param cliente Datos del cliente
    * @returns Cliente registrado
    */
-  add( cliente: any ): Observable<any> {
+  add( cliente: Client ): Observable<Client> {
     return this._httpService.post( '/clients', cliente ).pipe( map( response => response.data ) );
   }
 
