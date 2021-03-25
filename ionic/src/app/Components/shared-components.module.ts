@@ -5,13 +5,15 @@ import { BottomDrawerComponent } from './bottom-drawer/bottom-drawer.component';
 import { IonicModule } from '@ionic/angular';
 import { RatingComponent } from './rating/rating.component';
 import { CustomeTimePipe } from '../pipes/custome-time.pipe';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule( {
   declarations: [
     BottomDrawerComponent,
     MapComponent,
     RatingComponent,
-    CustomeTimePipe
+    CustomeTimePipe,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { CustomeTimePipe } from '../pipes/custome-time.pipe';
     BottomDrawerComponent,
     MapComponent,
     RatingComponent,
-    CustomeTimePipe
+    CustomeTimePipe,
+    HeaderComponent
   ]
 } )
 export class SharedComponentsModule { }

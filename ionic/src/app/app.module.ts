@@ -44,7 +44,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     AngularFireModule.initializeApp( environment.firebase ),
     AngularFirestoreModule,
     AngularFireAuthModule,
-
   ],
   providers: [
     Geolocation,

@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { RoutePageRoutingModule } from './route-routing.module';
 
 import { RoutePage } from './route.page';
+import { SharedComponentsModule } from '../../Components/shared-components.module';
 
-@NgModule({
+@NgModule( {
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RoutePageRoutingModule
+    RoutePageRoutingModule,
+    SharedComponentsModule
   ],
-  declarations: [RoutePage]
-})
-export class RoutePageModule {}
+  declarations: [ RoutePage ]
+} )
+export class RoutePageModule { }
