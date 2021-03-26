@@ -13,6 +13,7 @@ import { User } from '../../interfaces/user';
 export class RoutePage implements OnInit {
 
   routes: Route[] = [];
+  searchText = '';
 
   constructor(
     private _common: CommonService,
@@ -33,6 +34,12 @@ export class RoutePage implements OnInit {
   selectRoute( route: Route ): void {
     console.log( `Ruta seleccionada` );
     console.log( route );
+  }
+
+  searchRoute( text: string ) {
+    console.log( text )
+    const result = this.routes.filter( item => item.name === text );
+    console.log( result );
   }
 
 }

@@ -32,7 +32,6 @@ export class AuthInterceptorService implements HttpInterceptor {
         // Pasamos al siguiente interceptor de la cadena la petición modificada
         return next.handle( headers ).pipe(
           catchError( result => {
-
             const message = result.error.message;
             const color = 'danger';
             this.commonService.presentToast( { message, color } );

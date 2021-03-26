@@ -8,6 +8,7 @@ import { RoutePageRoutingModule } from './route-routing.module';
 
 import { RoutePage } from './route.page';
 import { SharedComponentsModule } from '../../Components/shared-components.module';
+import { CustomFilterPipe } from '../../pipes/custom-filter.pipe';
 
 @NgModule( {
   imports: [
@@ -17,6 +18,9 @@ import { SharedComponentsModule } from '../../Components/shared-components.modul
     RoutePageRoutingModule,
     SharedComponentsModule
   ],
-  declarations: [ RoutePage ]
+  declarations: [
+    RoutePage,
+    CustomFilterPipe,
+  ]
 } )
 export class RoutePageModule { }
