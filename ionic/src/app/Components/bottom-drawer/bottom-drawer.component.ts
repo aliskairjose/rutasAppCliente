@@ -217,40 +217,13 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     }
   }
 
-  switchContent( content: number ): void {
-
-    switch ( content ) {
-      case 0:
-
-        break;
-      case 1:
-
-        break;
-      case 2:
-        this.startScan( content );
-        break;
-      case 3:
-        // this.startScan();
-        break;
-      case 4:
-        // this.startScan();
-        break;
-      case 5:
-        this.editRoute();
-        break;
-
-      default:
-        break;
-    }
-  }
-
   routeHandler( item: Route ) {
     this.selectedItem = item;
     this.userService.rutasData = item;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
     this.openState.emit( false );
     this.gesture.enable( false );
-    this.dragable = true;
+    this.dragable = false;
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = '';
     // this.userService.setInicioRouteIndex(++userService.rutasFlow);
@@ -263,12 +236,11 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     // this.bottomPosition = -69;
   }
 
-  startScan( val: number ) {
-    console.log( 'startScan' );
+  async startScan() {
     // tslint:disable-next-line:no-unused-expression
-    this.showScan = false;
+    this, this.showScan = false;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
-    this.userService.rutasFlow = val;
+    ++this.userService.rutasFlow;
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight}px`;
   }
@@ -303,7 +275,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       if ( code?.data ) {
         this.scanActive = false;
         this.scanResult = code.data;
-        // ++this.userService.rutasFlow;
+        ++this.userService.rutasFlow;
         this.bottomDrawerElement.style.transition = '.4s ease-out';
         this.bottomDrawerElement.style.transform = '';
         this.stream.getTracks().forEach( track => track.stop() );
@@ -376,7 +348,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   editRoute() { // change height after changing this flow
     this.openHeight = ( this.plt.height() / 100 ) * 60;
     // this.bottomPosition = -89;
-    // this.userService.rutasFlow = 5;
+    this.userService.rutasFlow = 5;
     this.dragable = true;
     this.openState.emit( true );
     this.gesture.enable( true );
@@ -451,6 +423,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     } );
     this.seatGesture.enable( true );
   }
+
 
   private async loadRoutes() {
     const loading = await this._common.presentLoading();
