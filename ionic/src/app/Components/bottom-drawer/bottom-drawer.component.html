@@ -16,8 +16,7 @@
       <div *ngSwitchCase=0>
         <ion-input type="search" class="searchField" placeholder="Buscar ruta" [(ngModel)]="searchText"></ion-input>
         <ng-container *ngIf="routes.length; else elseTemplate">
-          <div class='itemWrapper' *ngFor="let route of routes | customeFilter: searchText"
-            (click)="routeHandler(route)">
+          <div class='itemWrapper' *ngFor="let route of routes | routeFilter: searchText" (click)="routeHandler(route)">
             <!-- <img class="listImg" *ngIf="item.status === 'pending'" src="../../../assets/clockYellow.png" /> -->
             <img class="listImg" src="../../../assets/briefcase.png" />
             <div class="">
