@@ -17,6 +17,7 @@ import { CommonService } from '../../services/common.service';
 // import { DrawerState } from 'ion-bottom-drawer';
 import { RouteService } from '../../services/route.service';
 import { UserService } from '../../services/user.service';
+import { StorageService } from '../../services/storage.service';
 
 const { Keyboard } = Plugins;
 
@@ -68,6 +69,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     public navctl: NavController,
     private _common: CommonService,
     private userService: UserService,
+    private _storage: StorageService,
     private _routesService: RouteService,
     private loadingCtrl: LoadingController,
     private gestureCtlr: GestureController,
@@ -426,9 +428,10 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
 
   private async loadRoutes() {
+    const user: any = await this._storage.getUser();
     const loading = await this._common.presentLoading();
     loading.present();
-    this._routesService.list().subscribe( ( routes: Route[] ) => {
+    this._routesService.list( user.client_id ).subscribe( ( routes: Route[] ) => {
       this.routes = [ ...routes ];
       loading.dismiss();
     } );

@@ -17,10 +17,11 @@ export class RouteService {
 
   /**
    * @description Lista las rutas de los buses
+   * @param Id del cliente
    * @returns Arreglo de Rutas
    */
-  list(): Observable<Route[]> {
-    return this._http.get( '/routes' ).pipe( map( response => response.data ) );
+  list( id: number ): Observable<Route[]> {
+    return this._http.get( `/routes?${id}` ).pipe( map( response => response.data ) );
   }
 
   /**

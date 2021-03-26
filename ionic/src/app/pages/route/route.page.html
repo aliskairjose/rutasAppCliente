@@ -7,11 +7,10 @@
           <ion-card *ngFor="let route of routes" (click)="selectRoute(route)">
             <ion-card-content>
               <div class="">
-                <div class="listName ion-text-capitalize ">{{route.name }}</div>
-                <div>
-                  <ion-note>{{route.start_time | customeTime }} - {{route.end_time | customeTime }}</ion-note>
-                  <ion-note class="ion-float-right" color="danger">N° {{route.bus.unit_number}}</ion-note>
-                </div>
+                <div class="listName ion-text-capitalize text-black">{{route.name }}</div>
+                <ion-note>{{route.start_time | customeTime }} - {{route.end_time | customeTime }}</ion-note>
+                <ion-note class="ion-float-right" color="danger">N° {{route.bus.unit_number}}
+                </ion-note>
               </div>
             </ion-card-content>
           </ion-card>

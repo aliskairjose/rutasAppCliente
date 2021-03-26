@@ -1,6 +1,10 @@
 ion-content {
   top: 10%;
 
+  ion-card {
+    --background: var(--ion-color-warning);
+  }
+
   .listImg {
     width: 42px;
     height: 42px;
