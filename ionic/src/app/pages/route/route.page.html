@@ -1,5 +1,26 @@
 <!-- <app-header></app-header> -->
 
 <ion-content>
-
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-input class="searchField" placeholder="Buscar ruta"></ion-input>
+        <ng-container *ngIf="routes.length; else elseTemplate">
+          <div class='itemWrapper' *ngFor="let route of routes" (click)="routeHandler(route)">
+            <!-- <img class="listImg" *ngIf="item.status === 'pending'" src="../../../assets/clockYellow.png" /> -->
+            <img class="listImg" src="../../../assets/briefcase.png" />
+            <div class="">
+              <div class="listName ion-text-capitalize">{{route.name }}</div>
+              <ion-note>{{route.start_time | customeTime }} - {{route.end_time | customeTime }}</ion-note>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <div class="ion-text-center">
+            No hay rutas disponibles
+          </div>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

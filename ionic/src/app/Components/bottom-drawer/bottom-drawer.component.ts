@@ -223,7 +223,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
     this.openState.emit( false );
     this.gesture.enable( false );
-    this.dragable = false;
+    // this.dragable = false;
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = '';
     // this.userService.setInicioRouteIndex(++userService.rutasFlow);
