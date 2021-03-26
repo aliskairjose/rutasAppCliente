@@ -26,4 +26,9 @@ export class RoutePage implements OnInit {
     } );
   }
 
+  selectRoute( route: Route ): void {
+    console.log( `Ruta seleccionada` );
+    console.log( route );
+  }
+
 }
