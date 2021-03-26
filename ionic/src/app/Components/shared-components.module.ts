@@ -6,6 +6,8 @@ import { IonicModule } from '@ionic/angular';
 import { RatingComponent } from './rating/rating.component';
 import { CustomeTimePipe } from '../pipes/custome-time.pipe';
 import { HeaderComponent } from './header/header.component';
+import { CustomeFilterPipe } from '../pipes/custome-filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule( {
   declarations: [
@@ -13,17 +15,20 @@ import { HeaderComponent } from './header/header.component';
     MapComponent,
     RatingComponent,
     CustomeTimePipe,
+    CustomeFilterPipe,
     HeaderComponent
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    FormsModule,
   ],
   exports: [
     BottomDrawerComponent,
     MapComponent,
     RatingComponent,
     CustomeTimePipe,
+    CustomeFilterPipe,
     HeaderComponent
   ]
 } )

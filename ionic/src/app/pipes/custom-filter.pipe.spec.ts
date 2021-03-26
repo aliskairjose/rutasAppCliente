@@ -1,8 +1,8 @@
-import { CustomFilterPipe } from './custom-filter.pipe';
+import { CustomeFilterPipe } from './custome-filter.pipe';
 
-describe('CustomFilterPipe', () => {
-  it('create an instance', () => {
-    const pipe = new CustomFilterPipe();
-    expect(pipe).toBeTruthy();
-  });
-});
+describe( 'CustomeFilterPipe', () => {
+  it( 'create an instance', () => {
+    const pipe = new CustomeFilterPipe();
+    expect( pipe ).toBeTruthy();
+  } );
+} );

@@ -22,12 +22,10 @@ import { RatingComponent } from './Components/rating/rating.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { CustomFilterPipe } from './pipes/custom-filter.pipe';
 
 @NgModule( {
   declarations: [
     AppComponent,
-    CustomFilterPipe,
   ],
   entryComponents: [],
   imports: [

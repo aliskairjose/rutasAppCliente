@@ -39,7 +39,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   canvasContext: any;
   loading: HTMLIonLoadingElement;
   selectedItem: {};
-
+  searchText = '';
 
   // tslint:disable-next-line:no-output-rename
   @Output( 'openStateChanged' ) openState: EventEmitter<boolean> = new EventEmitter();

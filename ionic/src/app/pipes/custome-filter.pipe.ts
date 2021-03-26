@@ -1,12 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Route } from '../interfaces/route';
 
 @Pipe( {
-  name: 'customFilter'
+  name: 'customeFilter'
 } )
-export class CustomFilterPipe implements PipeTransform {
+export class CustomeFilterPipe implements PipeTransform {
 
-  transform( items: any[], searchText: string ): any[] {
-    console.log( 'customFilterPipe', items );
+  transform( items: Route[], searchText: string ): Route[] {
+    console.log( 'custome', searchText )
     if ( !items ) {
       return [];
     }
