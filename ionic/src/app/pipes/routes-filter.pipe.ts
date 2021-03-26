@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Route } from '../interfaces/route';
 
 @Pipe( {
-  name: 'routeFilter'
+  name: 'routesFilter'
 } )
 export class RoutesFilterPipe implements PipeTransform {
 

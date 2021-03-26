@@ -4,7 +4,7 @@
       <ion-col>
         <ion-input type="search" class="searchField" placeholder="Buscar ruta" [(ngModel)]="searchText"></ion-input>
         <ng-container *ngIf="routes.length; else elseTemplate">
-          <ion-card *ngFor="let route of routes | routeFilter: searchText" (click)="selectRoute(route)">
+          <ion-card *ngFor="let route of routes | routesFilter: searchText" (click)="selectRoute(route)">
             <ion-card-content>
               <div class="">
                 <div class="listName ion-text-capitalize text-black">{{route.name }}</div>

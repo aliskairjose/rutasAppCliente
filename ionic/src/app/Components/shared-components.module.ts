@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { RatingComponent } from './rating/rating.component';
 import { CustomeTimePipe } from '../pipes/custome-time.pipe';
 import { HeaderComponent } from './header/header.component';
-import { RoutesFilterPipe } from '../pipes/custome-filter.pipe';
+import { RoutesFilterPipe } from '../pipes/routes-filter.pipe';
 import { FormsModule } from '@angular/forms';
 
 @NgModule( {

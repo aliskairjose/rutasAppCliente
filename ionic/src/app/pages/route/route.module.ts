@@ -8,7 +8,7 @@ import { RoutePageRoutingModule } from './route-routing.module';
 
 import { RoutePage } from './route.page';
 import { SharedComponentsModule } from '../../Components/shared-components.module';
-import { RoutesFilterPipe } from '../../pipes/custome-filter.pipe';
+import { RoutesFilterPipe } from '../../pipes/routes-filter.pipe';
 
 @NgModule( {
   imports: [
