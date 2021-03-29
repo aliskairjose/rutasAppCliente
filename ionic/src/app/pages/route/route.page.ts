@@ -37,7 +37,6 @@ export class RoutePage implements OnInit {
   }
 
   searchRoute( text: string ) {
-    console.log( text )
     const result = this.routes.filter( item => item.name === text );
     console.log( result );
   }
