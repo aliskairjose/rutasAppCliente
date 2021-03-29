@@ -42,10 +42,12 @@
     </ion-content>
   </ion-menu>
 
-  <ion-buttons slot="start" class="menu-button">
-    <ion-menu-button class="btn-icon"></ion-menu-button>
-  </ion-buttons>
-
+  <div class="menu-header">
+    <ion-buttons slot="start" class="ion-float-left ion-margin-horizontal menu-button">
+      <ion-menu-button class="btn-icon"></ion-menu-button>
+    </ion-buttons>
+    <ion-img [src]="logo" class="ion-float-right mt-1"></ion-img>
+  </div>
   <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in' : 'fade'" tappable (click)="bottomDrawer.toggleDrawer()">
   </div>
 

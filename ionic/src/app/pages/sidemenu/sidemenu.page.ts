@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '
 import { User } from '../../interfaces/user';
 import { StorageService } from '../../services/storage.service';
 import { AuthService } from '../../services/auth.service';
+import { LOGO } from '../../constants/global-constants';
 
 
 @Component( {
@@ -18,6 +19,7 @@ export class SidemenuPage implements OnInit, OnChanges {
   addressClicked = 0;
   user: User = {};
   abrv = '';
+  logo = LOGO;
 
   appPages = [
     { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/prueba 1Recurso 29.png' },

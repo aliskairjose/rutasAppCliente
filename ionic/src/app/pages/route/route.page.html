@@ -1,9 +1,26 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>route</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-input type="search" class="searchField" placeholder="Buscar ruta" [(ngModel)]="searchText"></ion-input>
+        <ng-container *ngIf="routes.length; else elseTemplate">
+          <ion-card *ngFor="let route of routes | routesFilter: searchText" (click)="selectRoute(route)">
+            <ion-card-content>
+              <div class="">
+                <div class="listName ion-text-capitalize text-black">{{route.name}}</div>
+                <ion-note>{{route.start_time | customeTime }} - {{route.end_time | customeTime }}</ion-note>
+                <ion-note class="ion-float-right" color="danger">N° {{route.bus.unit_number}}
+                </ion-note>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <div class="ion-text-center">
+            No hay rutas disponibles
+          </div>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

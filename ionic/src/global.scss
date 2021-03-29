@@ -46,6 +46,22 @@
 
 .listName {
   font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 70vw;
+}
+
+.addressDetails {
+  width: 90%;
+  height: 70px;
+  position: fixed;
+  top: 12%;
+  z-index: 1;
+  left: 5%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 2px 4px 6px #ccc;
 }
 
 .timeText {
@@ -93,4 +109,19 @@ ion-button {
   label {
     padding: 0 6vh;
   }
+}
+
+.itemWrapper {
+  --inner-border-width: 0;
+  margin-top: 18px;
+  display: flex;
+  line-height: initial;
+  align-items: center;
+}
+
+.searchField {
+  background: #efedec;
+  border-radius: 8px;
+  height: 50px;
+  margin-bottom: 20px;
 }

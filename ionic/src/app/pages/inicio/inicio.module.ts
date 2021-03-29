@@ -8,7 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { InicioPageRoutingModule } from './inicio-routing.module';
 
 import { InicioPage } from './inicio.page';
-@NgModule({
+@NgModule( {
   imports: [
     CommonModule,
     FormsModule,
@@ -16,6 +16,6 @@ import { InicioPage } from './inicio.page';
     InicioPageRoutingModule,
     SharedComponentsModule
   ],
-  declarations: [InicioPage]
-})
-export class InicioPageModule {}
+  declarations: [ InicioPage ]
+} )
+export class InicioPageModule { }

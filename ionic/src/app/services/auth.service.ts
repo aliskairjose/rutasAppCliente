@@ -30,6 +30,7 @@ export class AuthService {
     return this._httpService.post( '/users', data ).pipe(
       map( response => {
         this.toastMessage( response.message );
+        return response;
       } )
     );
   }

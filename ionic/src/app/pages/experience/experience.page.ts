@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
-@Component({
+@Component( {
   selector: 'app-experience',
   templateUrl: './experience.page.html',
-  styleUrls: ['./experience.page.scss'],
-})
+  styleUrls: [ './experience.page.scss' ],
+} )
 export class ExperiencePage implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
+    console.log( 'Experience Page' );
   }
 
 }

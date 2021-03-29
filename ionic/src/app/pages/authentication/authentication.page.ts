@@ -53,8 +53,10 @@ export class AuthenticationPage implements OnInit {
     if ( this.loginForm.valid ) {
       const loading = await this._common.presentLoading();
       loading.present();
-      this._auth.login( this.loginForm.value ).subscribe( () => {
-        // tslint:disable-next-line: curly
+      this._auth.login( this.loginForm.value ).subscribe( async ( response ) => {
+        this._auth.AuthSubject( response.user );
+        await this._storage.store( 'rp_token', response.data );
+        await this._storage.store( 'rp_user', response.user );
         this.router.navigate( [ '/sidemenu/Inicio' ] );
         loading.dismiss();
       }, () => loading.dismiss() );

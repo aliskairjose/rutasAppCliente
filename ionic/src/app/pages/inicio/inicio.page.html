@@ -1,9 +1,10 @@
+<!-- <app-header></app-header> -->
 <div class="addressDetails" *ngIf="selectedItem  && !userService.rutasBarEdit && userService.rutasFlow != 4">
   <div class="listItemWrapper">
     <img class="listImg" src="./../../../assets/route.png" />
     <div class="listTextWrapper">
       <div class="listName">{{selectedItem?.name}}</div>
-      <ion-note>{{selectedItem?.timeRange}}</ion-note>
+      <ion-note>{{selectedItem.start_time | customeTime }} - {{selectedItem.end_time | customeTime }}</ion-note>
     </div>
   </div>
 </div>
@@ -11,17 +12,23 @@
 <div class="rutasEdit d-flex flex-column" *ngIf="userService.rutasBarEdit">
   <div class="d-flex align-items-center mb-3">
     <div class="currentLoc"><span class="destLoc"></span></div>
-    <ion-input class="editInp d-flex align-items-center" placeholder="Indico de Ruta"><div class="icon">
-      <ion-icon name="ellipsis-horizontal"></ion-icon>
-    </div></ion-input>
- </div>
-  
+    <ion-input class="editInp d-flex align-items-center" placeholder="Indico de Ruta">
+      <div class="icon">
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
+      </div>
+    </ion-input>
+  </div>
+
   <div class="d-flex align-items-center">
-    <div class="locIcon"> <ion-icon  name="location"></ion-icon></div>
-    <ion-input class="editInp d-flex align-items-center" placeholder="Final de Ruta"><div class="icon">
-      <ion-icon name="swap-vertical"></ion-icon>
-    </div></ion-input> 
-  </div> 
+    <div class="locIcon">
+      <ion-icon name="location"></ion-icon>
+    </div>
+    <ion-input class="editInp d-flex align-items-center" placeholder="Final de Ruta">
+      <div class="icon">
+        <ion-icon name="swap-vertical"></ion-icon>
+      </div>
+    </ion-input>
+  </div>
 </div>
 <div #map id='map'></div>
 <!-- <app-map></app-map> -->

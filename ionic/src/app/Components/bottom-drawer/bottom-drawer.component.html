@@ -14,9 +14,10 @@
     <ion-content [ngSwitch]="userService.rutasFlow">
 
       <div *ngSwitchCase=0>
-        <ion-input class="searchField" placeholder="Buscar ruta"></ion-input>
+        <ion-input type="search" class="searchField" placeholder="Buscar ruta" [(ngModel)]="searchText"></ion-input>
         <ng-container *ngIf="routes.length; else elseTemplate">
-          <div class='itemWrapper' *ngFor="let route of routes" (click)="routeHandler(route)">
+          <div class='itemWrapper' *ngFor="let route of routes | routesFilter: searchText"
+            (click)="routeHandler(route)">
             <!-- <img class="listImg" *ngIf="item.status === 'pending'" src="../../../assets/clockYellow.png" /> -->
             <img class="listImg" src="../../../assets/briefcase.png" />
             <div class="">
@@ -184,6 +185,7 @@
         </div>
       </div>
 
+      <!-- Panel de control -->
       <div *ngSwitchCase=5>
         <div #editRutas class="d-flex justify-content-center h-100 flex-column">
           <ion-button fill="clear" color="clear" class="flow-4-btn-1 borderRad">

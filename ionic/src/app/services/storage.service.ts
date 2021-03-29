@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Plugins } from '@capacitor/core';
+import { User } from '../interfaces/user';
 const { Storage } = Plugins;
 
 @Injectable( {
@@ -25,8 +26,17 @@ export class StorageService {
    * @param key Identificador del dato que se desea recuperar
    * @returns value { any }
    */
-  async get( key: string ): Promise<{ value: any }> {
+  async get( key: string ): Promise<{ value: User }> {
     const item = await Storage.get( { key } );
+    return JSON.parse( item.value );
+  }
+
+  /**
+   * @description Recupera el usuario almacenado en el localStorage
+   * @returns Usuario
+   */
+  async getUser(): Promise<{ value: User }> {
+    const item = await Storage.get( { key: 'rp_user' } );
     return JSON.parse( item.value );
   }
 
