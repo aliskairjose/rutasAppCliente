@@ -2,7 +2,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 declare var google;
 @Component( {
   selector: 'app-inicio',

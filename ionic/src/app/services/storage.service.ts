@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { User } from '../interfaces/user';
+import { USER } from '../constants/global-constants';
 const { Storage } = Plugins;
 
 @Injectable( {
@@ -36,7 +37,7 @@ export class StorageService {
    * @returns Usuario
    */
   async getUser(): Promise<{ value: User }> {
-    const item = await Storage.get( { key: 'rp_user' } );
+    const item = await Storage.get( { key: USER } );
     return JSON.parse( item.value );
   }
 
