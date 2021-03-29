@@ -2,7 +2,7 @@ ion-content {
   top: 10%;
 
   ion-card {
-    --background: #fae345;
+    --background: var(--ion-color-rp-primary);
   }
 
   .listImg {
