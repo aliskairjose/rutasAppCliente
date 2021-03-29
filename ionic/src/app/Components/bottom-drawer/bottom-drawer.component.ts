@@ -347,25 +347,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     // this.router.navigateByUrl('/sidemenu/Feedback');
   }
 
-  editRoute() { // change height after changing this flow
-    this.openHeight = ( this.plt.height() / 100 ) * 60;
-    // this.bottomPosition = -89;
-    this.userService.rutasFlow = 5;
-    this.dragable = true;
-    this.openState.emit( true );
-    this.gesture.enable( true );
-    this.isOpen = true;
-    this.bottomDrawerElement.style.height = '62vh';
-    this.bottomDrawerElement.style.transition = '.4s ease-out';
-    this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight}px`;
-    this.userService.rutasBarEdit = true;
-
-    setTimeout( () => {
-      this.trackScroll( this.editRutas.nativeElement );
-    }, 0 );
-
-  }
-
   goToSeatArrangement() {
     this.userService.rutasFlow = 4;
     this.gesture.enable( true );

@@ -46,7 +46,6 @@
             <img (click)="startScan()" class="scan" src="../../../assets/prueba 1Recurso 45.png" />
 
             <img class="scan" (click)="goToSeatArrangement()" src="../../../assets/prueba 1Recurso 42.png" />
-            <img class="scan" (click)="editRoute()" src="../../../assets/prueba 1Recurso 47.png" />
           </div>
         </div>
         <ion-button fill="clear" expand="full" class="confirmRutas my-3">Abordar este bus</ion-button>
@@ -182,72 +181,6 @@
             <ion-icon name="log-out-outline"></ion-icon>
             Asignar Asientos
           </ion-button>
-        </div>
-      </div>
-
-      <!-- Panel de control -->
-      <div *ngSwitchCase=5>
-        <div #editRutas class="d-flex justify-content-center h-100 flex-column">
-          <ion-button fill="clear" color="clear" class="flow-4-btn-1 borderRad">
-            <ion-icon name="options-outline" class="mx-2"></ion-icon>
-            Panel de Control
-          </ion-button>
-
-          <div class="d-flex">
-            <ion-select class="btn-select" placeholder="Cliente">
-              <ion-select-option value="brown">Brown</ion-select-option>
-              <ion-select-option value="brown">Brown</ion-select-option>
-            </ion-select>
-            <ion-select class="btn-select" placeholder="Rutas">
-              <ion-select-option value="brown">Brown</ion-select-option>
-              <ion-select-option value="brown">Brown</ion-select-option>
-            </ion-select>
-          </div>
-
-          <ion-button fill="clear" color="clear" class="flow-4-btn-1 borderRad">
-            <ion-icon name="search-outline" class="mx-1"></ion-icon>
-            Buscar
-          </ion-button>
-
-          <div class="d-flex justify-content-center my-4">
-            <ion-button fill="clear" color="clear" class="flow-4-btn-2 btn35 mx-1 borderRad" placeholder="Cliente">Ida
-              <ion-icon name="return-up-forward-outline" class="mx-1 borderRad"></ion-icon>
-            </ion-button>
-            <ion-button fill="clear" color="clear" class="flow-4-btn-1 btn35 mx-1 borderRad" placeholder="Rutas">Regreso
-              <ion-icon name="return-down-back-outline" class="mx-1 borderRad"></ion-icon>
-            </ion-button>
-          </div>
-
-          <div class="d-flex flex-column align-items-center">
-            <ion-note class="mb-2">Informacion de Ruta</ion-note>
-
-            <table class="tbl">
-              <thead>
-                <tr>
-                  <th class="roundBorderLeft">Ruta</th>
-                  <th class="roundBorderRight">Detalles de Ruta</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>foo</td>
-                  <td>bar</td>
-                </tr>
-                <tr>
-                  <td>foo</td>
-                  <td>bar</td>
-                </tr>
-                <tr>
-                  <td>foo</td>
-                  <td>bar</td>
-                </tr>
-                <tr>
-                  <td>foo</td>
-                  <td>bar</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
 
