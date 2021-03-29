@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '
 import { User } from '../../interfaces/user';
 import { StorageService } from '../../services/storage.service';
 import { AuthService } from '../../services/auth.service';
-import { LOGO } from '../../constants/global-constants';
+import { LOGO, USER } from '../../constants/global-constants';
 
 
 @Component( {
@@ -46,7 +46,7 @@ export class SidemenuPage implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this._storage.get( 'rp_user' ).then( ( user: any ) => {
+    this._storage.get( USER ).then( ( user: any ) => {
       this.user = { ...user };
       const value = this.user.name.split( ' ' );
       this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;

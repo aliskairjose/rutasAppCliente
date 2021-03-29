@@ -5,7 +5,7 @@ import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
-import { ERROR_FORM, LOGO } from '../../constants/global-constants';
+import { ERROR_FORM, LOGO, TOKEN, USER } from '../../constants/global-constants';
 import { CommonService } from '../../services/common.service';
 import { ClientsModalPage } from '../../modals/clients-modal/clients-modal.page';
 @Component( {
@@ -55,8 +55,8 @@ export class AuthenticationPage implements OnInit {
       loading.present();
       this._auth.login( this.loginForm.value ).subscribe( async ( response ) => {
         this._auth.AuthSubject( response.user );
-        await this._storage.store( 'rp_token', response.data );
-        await this._storage.store( 'rp_user', response.user );
+        await this._storage.store( TOKEN, response.data );
+        await this._storage.store( USER, response.user );
         this.router.navigate( [ '/sidemenu/Inicio' ] );
         loading.dismiss();
       }, () => loading.dismiss() );
@@ -87,8 +87,8 @@ export class AuthenticationPage implements OnInit {
       const message = response.message;
       const color = 'primary';
       this._common.presentToast( { message, color } );
-      await this._storage.store( 'rp_token', response.data );
-      await this._storage.store( 'rp_user', response.user );
+      await this._storage.store( TOKEN, response.data );
+      await this._storage.store( USER, response.user );
       this.router.navigate( [ '/sidemenu/Inicio' ] );
     } );
   }

@@ -6,6 +6,7 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
 import { CommonService } from './common.service';
+import { TOKEN } from '../constants/global-constants';
 
 @Injectable( {
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept( request: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
 
-    return from( this._storage.get( '_cap_rp_token' ) ).pipe(
+    return from( this._storage.get( TOKEN ) ).pipe(
       switchMap( token => {
 
         // Importante: modificamos de forma inmutable, haciendo el clonado de la petición

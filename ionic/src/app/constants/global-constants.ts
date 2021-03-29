@@ -9,3 +9,5 @@ export const ERROR_FORM = {
 };
 
 export const LOGO = './../../../assets/loginLogo.png';
+export const TOKEN = 'rp_token';
+export const USER = 'rp_user';

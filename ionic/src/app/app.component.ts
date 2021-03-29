@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from './services/storage.service';
+import { TOKEN } from './constants/global-constants';
 @Component( {
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
 
   }
   async ngOnInit() {
-    const isLoggedin = await this._storage.get( 'rp_token' );
+    const isLoggedin = await this._storage.get( TOKEN );
     const route = isLoggedin ? '/sidemenu/Inicio' : '/initial';
     this.router.navigate( [ route ] );
   }
