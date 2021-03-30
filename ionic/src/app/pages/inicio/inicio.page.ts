@@ -53,7 +53,7 @@ export class InicioPage implements OnInit {
   }
 
   updateMap( locations, extraInfo ) {
-    this.markers.map( marker => marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
+    this.markers.map( marker => marker.setMap( this.map ) ); // se pasa this.map para mantener el marcador del usuario
     this.markers = [];
     for ( const loc of locations ) {
       const marker = new google.maps.Marker( {
@@ -87,13 +87,14 @@ export class InicioPage implements OnInit {
     }
   }
 
-  handleItemSelect( route: Route ) {
+  async handleItemSelect( route: Route ) {
+    await this.loadMap();
     const stopCoord = [];
     const stops = [ ...route.route_stops ];
     stops.forEach( stop => {
       stopCoord.push( { coord: new google.maps.LatLng( stop.lattitude, stop.longitude ), name: stop.name } );
     } );
-    this.updateMap( stopCoord, '' );
+    // this.updateMap( stopCoord, '' );
     this.calculateAndDisplayRoute( stopCoord );
   }
 
