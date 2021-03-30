@@ -80,7 +80,7 @@ export class UserService {
   /**
    * @description Genera el stream de eventos usando next() para crear el evento
    */
-  flowSubject( flow: string ): void {
+  flowSubject( flow: number ): void {
     this.$flow.next( flow );
     // this.$flow.complete();
   }
@@ -89,7 +89,7 @@ export class UserService {
    * @description Creación del observer mediante el método asObserver(), el cual sera consumido por el componente
    * @returns Observable
    */
-  flowhObserver(): Observable<string> {
+  flowhObserver(): Observable<number> {
     return this.$flow.asObservable();
   }
 }

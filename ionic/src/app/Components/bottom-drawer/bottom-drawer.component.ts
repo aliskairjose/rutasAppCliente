@@ -1,5 +1,4 @@
 import jsQR from 'jsqr';
-import * as moment from 'moment';
 import { Route } from 'src/app/interfaces/route';
 
 import {
@@ -14,8 +13,6 @@ import {
 import { GestureController, LoadingController, NavController, Platform } from '@ionic/angular';
 
 import { CommonService } from '../../services/common.service';
-// import { DrawerState } from 'ion-bottom-drawer';
-import { RouteService } from '../../services/route.service';
 import { UserService } from '../../services/user.service';
 import { StorageService } from '../../services/storage.service';
 
@@ -70,17 +67,15 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     private _common: CommonService,
     private userService: UserService,
     private _storage: StorageService,
-    private _routesService: RouteService,
     private loadingCtrl: LoadingController,
     private gestureCtlr: GestureController,
     private changeDetectorRef: ChangeDetectorRef,
     private nativePageTransitions: NativePageTransitions,
   ) {
-    this.userService.flowhObserver().subscribe( flow => console.log( flow ) );
+    this.userService.flowhObserver().subscribe( flow => this.userService.rutasFlow = flow );
   }
 
   ngOnInit() {
-    this.loadRoutes();
     window.addEventListener( 'keyboardWillShow', ( e ) => {
       console.log( 'keyboard will show with height' );
       this.dragable = false;
@@ -94,9 +89,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       console.log( 'keyboard will hide' );
       this.dragable = true;
       this.gesture.enable( true );
-      // if (!this.isOpen) {
-      //   this.toggleDrawer();
-      // }
     } );
   }
 
@@ -159,7 +151,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
   toggleDrawer() {
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
-    // this.openState.emit(!this.isOpen);
     if ( !this.isOpen ) {
       this.bottomDrawerElement.style.transition = '.4s ease-out';
       this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight}px`;
@@ -179,30 +170,25 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     }
   }
 
-  routeHandler( item: Route ) {
-    this.selectedItem = item;
-    this.userService.rutasData = item;
+  routeHandler( route: Route ) {
+    this.selectedItem = route;
+    this.userService.rutasData = route;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
     this.openState.emit( false );
     this.gesture.enable( false );
-    // this.dragable = false;
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = '';
-    // this.userService.setInicioRouteIndex(++userService.rutasFlow);
-    // this.userService.setClickedSearchList(item);
-    ++this.userService.rutasFlow;
+    // ++this.userService.rutasFlow;
     this.emitEvent.emit( {
       type: 'item-selected',
-      data: item
+      data: route
     } );
-    // this.bottomPosition = -69;
   }
 
   async startScan() {
-    // tslint:disable-next-line:no-unused-expression
-    this, this.showScan = false;
+    this.showScan = false;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
-    ++this.userService.rutasFlow;
+    // ++this.userService.rutasFlow;
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight}px`;
   }
@@ -237,7 +223,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       if ( code?.data ) {
         this.scanActive = false;
         this.scanResult = code.data;
-        ++this.userService.rutasFlow;
+        // ++this.userService.rutasFlow;
         this.bottomDrawerElement.style.transition = '.4s ease-out';
         this.bottomDrawerElement.style.transform = '';
         this.stream.getTracks().forEach( track => track.stop() );
@@ -260,7 +246,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
   stopScan() {
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
-    --this.userService.rutasFlow;
+    // --this.userService.rutasFlow;
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = '';
     this.stream.getTracks().forEach( track => track.stop() );
@@ -276,7 +262,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.showScan = true;
     this.stream = await navigator.mediaDevices.getUserMedia( { video: { facingMode: 'environment' } } );
 
-    // setTimeout(async () => {
     this.videoElement = this.video.nativeElement;
     this.canvasElement = this.canvas.nativeElement;
     this.videoElement.srcObject = this.stream;
@@ -296,15 +281,9 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       direction: 'left',
       duration: 400,
       slowdownfactor: -1,
-      // slidePixels: 20,
-      // iosdelay: 100,
-      // androiddelay: 550,
-      // fixedPixelsTop: 0,
-      // fixedPixelsBottom: 60
     };
     this.nativePageTransitions.slide( options );
     this.navctl.navigateRoot( '/sidemenu/Feedback' );
-    // this.router.navigateByUrl('/sidemenu/Feedback');
   }
 
   goToSeatArrangement() {
@@ -332,25 +311,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
   }
 
-  // stopDrag() {
-  //   this.dragable = false;
-  //   this.gesture.enable(false);
-  //   console.log('drawer==> close ????', this.isOpen);
-  //   if (this.isOpen) {
-  //     this.toggleDrawer();
-  //   }
-  // }
-
-  // startDrag() {
-  //   console.log('happy dragging');
-  //   this.dragable = true;
-  //   this.gesture.enable(true);
-  //   console.log('drawer==> open ????', this.isOpen);
-  //   if (!this.isOpen) {
-  //     this.toggleDrawer();
-  //   }
-  // }
-
   async trackScroll( ele ) {
     this.seatElement = ele;
     this.seatGesture = await this.gestureCtlr.create( {
@@ -367,14 +327,4 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.seatGesture.enable( true );
   }
 
-
-  private async loadRoutes() {
-    const user: any = await this._storage.getUser();
-    const loading = await this._common.presentLoading();
-    loading.present();
-    this._routesService.list( user.client_id ).subscribe( ( routes: Route[] ) => {
-      this.routes = [ ...routes ];
-      loading.dismiss();
-    } );
-  }
 }

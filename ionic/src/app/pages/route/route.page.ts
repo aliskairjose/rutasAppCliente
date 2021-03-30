@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RouteService } from '../../services/route.service';
 import { Route } from '../../interfaces/route';
 import { CommonService } from '../../services/common.service';
@@ -14,6 +14,8 @@ export class RoutePage implements OnInit {
 
   routes: Route[] = [];
   searchText = '';
+
+  @Output() routeEvent: EventEmitter<Route> = new EventEmitter<Route>();
 
   constructor(
     private _common: CommonService,
@@ -32,8 +34,7 @@ export class RoutePage implements OnInit {
   }
 
   selectRoute( route: Route ): void {
-    console.log( `Ruta seleccionada` );
-    console.log( route );
+    this.routeEvent.emit( route );
   }
 
 }

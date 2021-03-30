@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
-@Component({
+@Component( {
   selector: 'app-feedback',
   templateUrl: './feedback.page.html',
-  styleUrls: ['./feedback.page.scss'],
-})
+  styleUrls: [ './feedback.page.scss' ],
+} )
 export class FeedbackPage implements OnInit {
 
   feedbackFlow = 0;
@@ -14,19 +14,16 @@ export class FeedbackPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public userService: UserService,
-    
-    ) {
-      console.log("usfvdgfb rutasdata",userService.rutasData)
-    }
+
+  ) {
+  }
 
   ngOnInit() {
   }
 
-  clickHandler (flow) {
+  clickHandler( flow ) {
     this.userService.rutasFlow = 0;
-    if(flow === 1)
-    this.router.navigate(['/sidemenu/Inicio']);
-    else this.feedbackFlow = 1;
+    ( flow === 1 ) ? this.router.navigate( [ '/sidemenu/Inicio' ] ) : this.feedbackFlow = 1;
   }
 
 }

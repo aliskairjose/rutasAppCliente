@@ -23,10 +23,10 @@ export class SidemenuPage implements OnInit, OnChanges {
   logo = LOGO;
 
   appPages = [
-    { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/prueba 1Recurso 29.png', route: 'dashboard' },
-    { title: 'Rutas', url: '/sidemenu/Rutas', icon: '../../../assets/prueba 1Recurso 30.png', route: 'route' },
-    { title: 'Experiencia', url: '/sidemenu/Experiencia', icon: '../../../assets/prueba 1Recurso 31.png', route: 'experience' },
-    { title: 'Soporte/Ayuda', url: '/sidemenu/Soporte', icon: '../../../assets/prueba 1Recurso 32.png', route: 'support' }
+    { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/prueba 1Recurso 29.png', route: 0 },
+    { title: 'Rutas', url: '/sidemenu/Rutas', icon: '../../../assets/prueba 1Recurso 30.png', route: 1 },
+    { title: 'Experiencia', url: '/sidemenu/Experiencia', icon: '../../../assets/prueba 1Recurso 31.png', route: 2 },
+    { title: 'Soporte/Ayuda', url: '/sidemenu/Soporte', icon: '../../../assets/prueba 1Recurso 32.png', route: 3 }
   ];
 
   constructor(
@@ -70,7 +70,7 @@ export class SidemenuPage implements OnInit, OnChanges {
     this.userService.flowSubject( p.route );
     this.activeRoute = i;
     this.drawerVar = p.title;
-    this.router.navigate( [ p.url ] );
+    // this.router.navigate( [ p.url ] );
   }
 
 }
