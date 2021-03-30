@@ -57,7 +57,28 @@
       <div *ngSwitchCase=3>
         <h2>Suporte / Ayuda</h2>
       </div>
-
+      <!-- QR Scan -->
+      <!-- <div *ngSwitchCase=4 class="d-flex flex-column align-items-center"> -->
+      <div *ngSwitchCase=4>
+        <div class="scanBlock">
+          <div class="d-flex flex-column align-items-center justify-content-center" *ngIf="!showScan">
+            <ion-note class="ion-text-center">Para escanear código enfca el QR ubicado en la entrada del bus</ion-note>
+            <img class="scannerImg" src="../../../assets/scanner.png" />
+          </div>
+          <div [ngClass]="!showScan ? 'd-none' : 'd-block'">
+            <video class="vdo" [hidden]='!scanActive' #video></video>
+            <canvas #canvas hidden></canvas>
+          </div>
+        </div>
+        <div class="ion-text-center">
+          <ion-button *ngIf="!showScan" (click)="scannerOn()" fill="clear" class="confirmRutas my-3 ">
+            Escanear QR
+          </ion-button>
+          <ion-button *ngIf="showScan" (click)="stopScan()" fill="clear" class="confirmRutas my-3 ">
+            <label class="label-button" for="">Volver</label>
+          </ion-button>
+        </div>
+      </div>
     </ion-content>
   </div>
 </div>

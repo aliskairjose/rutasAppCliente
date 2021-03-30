@@ -2,8 +2,7 @@ import jsQR from 'jsqr';
 import { Route } from 'src/app/interfaces/route';
 
 import {
-  AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input,
-  OnInit, Output, ViewChild
+  AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
@@ -12,9 +11,7 @@ import {
 } from '@ionic-native/native-page-transitions/ngx';
 import { GestureController, LoadingController, NavController, Platform } from '@ionic/angular';
 
-import { CommonService } from '../../services/common.service';
 import { UserService } from '../../services/user.service';
-import { StorageService } from '../../services/storage.service';
 
 const { Keyboard } = Plugins;
 
@@ -62,17 +59,13 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     private plt: Platform,
     private router: Router,
     public navctl: NavController,
-    private _common: CommonService,
     private userService: UserService,
-    private _storage: StorageService,
     private loadingCtrl: LoadingController,
     private gestureCtlr: GestureController,
-    private changeDetectorRef: ChangeDetectorRef,
     private nativePageTransitions: NativePageTransitions,
   ) {
     this.userService.flowhObserver().subscribe( flow => this.userService.rutasFlow = flow );
   }
-
 
   ngOnInit() {
     window.addEventListener( 'keyboardWillShow', ( e ) => {
@@ -180,9 +173,10 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   async startScan() {
+    console.log( 'Start Scan' );
+    this.userService.rutasFlow = 4;
     this.showScan = false;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
-    // ++this.userService.rutasFlow;
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight}px`;
   }
