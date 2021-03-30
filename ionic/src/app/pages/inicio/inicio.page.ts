@@ -2,7 +2,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { Route } from '../../interfaces/route';
 declare var google;
 @Component( {
   selector: 'app-inicio',
@@ -42,29 +42,28 @@ export class InicioPage implements OnInit {
 
   async loadMap() {
     const resp = await this.geolocation.getCurrentPosition();
-    const coord = new google.maps.LatLng( resp.coords.latitude, resp.coords.longitude );
+    const data = { coord: new google.maps.LatLng( resp.coords.latitude, resp.coords.longitude ), name: 'Aquí estoy' };
     const mapOptions = {
-      center: coord,
-      zoom: 17,
+      center: data.coord,
+      zoom: 12,
       mapTypeId: google.maps.MapTypeId.map
     };
     this.map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
-    this.updateMap( [ coord, ], '' );
+    this.updateMap( [ data ], '' );
   }
 
   updateMap( locations, extraInfo ) {
-    this.markers.map( marker => marker.setMap( null ) );
+    this.markers.map( marker => marker.setMap( this.map ) ); // se pasa this.map para mantener el marcador del usuario
     this.markers = [];
     for ( const loc of locations ) {
-
       const marker = new google.maps.Marker( {
-        position: loc,
+        position: loc.coord,
         animation: google.maps.Animation.DROP,
         map: this.map,
-        icon: './../../../assets/new_marker.png'
+        icon: './../../../assets/new_marker.png',
       } );
       const iw = new google.maps.InfoWindow( {
-        content: loc.lat() + ', ' + loc.lng()
+        content: loc.name
       } );
       if ( extraInfo !== 'noTooltip' ) {
         iw.open( this.map, marker );
@@ -76,40 +75,63 @@ export class InicioPage implements OnInit {
   bottomDrawerEvent( event: any ) {
     if ( event.type === 'item-selected' ) {
       this.handleItemSelect( event.data );
-    } else if ( event.type === 'scan-success' ) {
-      console.log( 'start tracking' );
+      return;
+    }
+    if ( event.type === 'scan-success' ) {
       this.startTracking();
-    } else if ( event.type === 'stop-track' ) {
+      return;
+    }
+    if ( event.type === 'stop-track' ) {
       this.stopTracking();
+      return;
     }
   }
 
-  handleItemSelect( data ) {
-    this.selectedItem = data;
-    const coor1 = { lat: 10.609010, lng: -66.88834 }
+  /* handleItemSelectOLD( route: Route ) {
+    this.selectedItem = route;
+    const coor1 = { lat: 10.609010, lng: -66.88834 };
     const coor2 = { lat: 10.60326, lng: -66.90159 };
     if ( coor1 && coor2 ) {
       const origin = new google.maps.LatLng( coor1.lat, coor1.lng );
       const destination = new google.maps.LatLng( coor2.lat, coor2.lng );
       this.updateMap( [ origin, destination ], 'noTooltip' );
-      this.showDirections( origin, destination );
+      this.calculateAndDisplayRoute( origin, destination );
     }
+  } */
+
+  handleItemSelect( route: Route ) {
+    const stopCoord = [];
+    const stops = [ ...route.route_stops ];
+    stops.forEach( stop => {
+      stopCoord.push( { coord: new google.maps.LatLng( stop.lattitude, stop.longitude ), name: stop.name } );
+    } );
+    this.updateMap( stopCoord, '' );
+    this.calculateAndDisplayRoute( stopCoord );
   }
 
-  showDirections( origin?: any, destination?: any ) {
-    const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer();
-    directionsRenderer.setMap( this.map );
-    const request = {
-      origin,
-      destination,
-      travelMode: 'DRIVING'
-    };
-    directionsService.route( request, ( res, status ) => {
-      if ( status === 'OK' ) {
-        directionsRenderer.setDirections( res );
+  calculateAndDisplayRoute( data: any ) {
+    for ( const key in data ) {
+      if ( Object.prototype.hasOwnProperty.call( data, key ) ) {
+        const element = data[ key ];
+        if ( key === data.length ) { return; }
+        let _key: number = parseInt( key, 10 );
+        _key++;
+        const directionsService = new google.maps.DirectionsService();
+        const directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap( this.map );
+        const request = {
+          origin: data[ key ].coord,
+          destination: data[ _key ].coord,
+          travelMode: 'DRIVING'
+        };
+        directionsService.route( request, ( res, status ) => {
+          if ( status === 'OK' && res ) {
+            directionsRenderer.setDirections( res );
+          }
+        } );
       }
-    } );
+    }
+
   }
 
   startTracking() {

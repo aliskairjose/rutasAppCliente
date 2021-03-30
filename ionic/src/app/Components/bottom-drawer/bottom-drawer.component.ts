@@ -178,7 +178,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.gesture.enable( false );
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = '';
-    // ++this.userService.rutasFlow;
     this.emitEvent.emit( {
       type: 'item-selected',
       data: route
