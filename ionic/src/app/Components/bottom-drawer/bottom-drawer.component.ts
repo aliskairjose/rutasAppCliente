@@ -69,7 +69,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     window.addEventListener( 'keyboardWillShow', ( e ) => {
-      console.log( 'keyboard will show with height' );
       this.dragable = false;
       this.gesture.enable( false );
       if ( this.isOpen ) {
@@ -159,7 +158,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
   routeHandler( route: Route ) {
     this.selectedRoute = route;
-    console.log( route );
     this.userService.rutasData = route;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
     this.gesture.enable( false );

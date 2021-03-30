@@ -22,7 +22,9 @@ export class InicioPage implements OnInit {
   constructor(
     public userService: UserService,
     private geolocation: Geolocation
-  ) { }
+  ) {
+    this.userService.flowhObserver().subscribe( flow => { if ( [ 0, 2, 3 ].includes( flow ) ) { this.ngOnInit(); } } );
+  }
 
   ngOnInit() {
     this.clearMapError();
