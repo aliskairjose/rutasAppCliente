@@ -18,6 +18,25 @@
       <div *ngSwitchCase=1>
         <app-route (routeEvent)="routeHandler($event)"></app-route>
       </div>
+      <!-- Detalle de ruta -->
+      <div *ngSwitchCase=10>
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-grow-1">
+            <img class="clock" src="../../../assets/clock.png" />
+            <div class="d-flex flex-column">
+              <span>Proxima unidad</span>
+              <ion-note>15 minutes</ion-note>
+            </div>
+          </div>
+          <div class="justify-content-around d-flex flex-grow-1 imgSet">
+            <img (click)="startScan()" class="scan" src="../../../assets/prueba 1Recurso 45.png" />
+
+            <img class="scan" (click)="goToSeatArrangement()" src="../../../assets/prueba 1Recurso 42.png" />
+            <img class="scan" src="../../../assets/prueba 1Recurso 47.png" />
+          </div>
+        </div>
+        <ion-button fill="clear" expand="full" class="confirmRutas my-3">Abordar este bus</ion-button>
+      </div>
       <div *ngSwitchCase=2>
         <h2>Experiencia</h2>
       </div>

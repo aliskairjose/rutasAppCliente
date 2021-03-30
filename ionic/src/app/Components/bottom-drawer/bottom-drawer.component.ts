@@ -182,6 +182,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       type: 'item-selected',
       data: route
     } );
+    this.userService.rutasFlow = 10; // Detalle de ruta
   }
 
   async startScan() {
