@@ -88,6 +88,7 @@ export class InicioPage implements OnInit {
   }
 
   async handleItemSelect( route: Route ) {
+    this.selectedItem = { ...route };
     await this.loadMap();
     const stopCoord = [];
     const stops = [ ...route.route_stops ];

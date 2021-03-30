@@ -38,8 +38,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   selectedRoute: Route = {};
   searchText = '';
 
-  // tslint:disable-next-line:no-output-rename
-  @Output( 'openStateChanged' ) openState: EventEmitter<boolean> = new EventEmitter();
   @Output() emitEvent: EventEmitter<any> = new EventEmitter();
   @Input() component = 'Inicio';
 
@@ -75,6 +73,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.userService.flowhObserver().subscribe( flow => this.userService.rutasFlow = flow );
   }
 
+
   ngOnInit() {
     window.addEventListener( 'keyboardWillShow', ( e ) => {
       console.log( 'keyboard will show with height' );
@@ -86,7 +85,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     } );
 
     Keyboard.addListener( 'keyboardDidHide', () => {
-      console.log( 'keyboard will hide' );
       this.dragable = true;
       this.gesture.enable( true );
     } );
@@ -129,7 +127,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
           // tslint:disable-next-line:quotemark
           this.bottomDrawerElement.style.transition = ".4s ease-out";
           this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight}px)`;
-          this.openState.emit( true );
           this.isOpen = true;
         }
         else if ( ev.deltaY > 50 ) {
@@ -138,7 +135,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
           } else {
             this.bottomDrawerElement.style.transform = ``;
           }
-          this.openState.emit( false );
           this.isOpen = false;
         }
       },
@@ -154,7 +150,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     if ( !this.isOpen ) {
       this.bottomDrawerElement.style.transition = '.4s ease-out';
       this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight}px`;
-      this.openState.emit( true );
       this.isOpen = true;
     }
     else {
@@ -165,16 +160,15 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
         this.bottomDrawerElement.style.transform = ``;
       }
 
-      this.openState.emit( false );
       this.isOpen = false;
     }
   }
 
   routeHandler( route: Route ) {
     this.selectedRoute = route;
+    console.log( route );
     this.userService.rutasData = route;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
-    this.openState.emit( false );
     this.gesture.enable( false );
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = '';
@@ -235,7 +229,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       } else {
         if ( this.scanActive ) {
           requestAnimationFrame( this.scan.bind( this ) );
-
         }
       }
 
@@ -250,7 +243,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = '';
     this.stream.getTracks().forEach( track => track.stop() );
-    this.openState.emit( false );
     this.gesture.enable( false );
     this.showScan = false;
     this.scanActive = false;
@@ -304,7 +296,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.userService.rutasFlow = 1;
     this.showScan = false;
     this.dragable = false;
-    this.openState.emit( false );
     this.gesture.enable( false );
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = ``;

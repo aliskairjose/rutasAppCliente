@@ -50,9 +50,5 @@
   </div>
   <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in' : 'fade'" tappable (click)="bottomDrawer.toggleDrawer()">
   </div>
-
-  <!-- <app-bottom-drawer [component]="drawerVar" (openStateChanged) = "toggleBackdrop($event)" #bottomDrawer></app-bottom-drawer> -->
-
   <ion-router-outlet id="home"></ion-router-outlet>
-  <!-- </ion-split-pane> -->
 </div>

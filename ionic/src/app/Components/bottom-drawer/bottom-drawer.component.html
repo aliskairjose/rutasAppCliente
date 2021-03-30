@@ -33,26 +33,19 @@
             <img class="scan" (click)="goToSeatArrangement()" src="../../../assets/prueba 1Recurso 42.png" />
             <img class="scan" src="../../../assets/prueba 1Recurso 47.png" />
           </div>
-          <div>
-            <ion-list>
-              <ion-item>
-                <ion-label>Pokémon Yellow</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label>Mega Man X</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label>The Legend of Zelda</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label>Pac-Man</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label>Super Mario World</ion-label>
-              </ion-item>
-            </ion-list>
-          </div>
         </div>
+        <ion-grid fixed *ngIf="isOpen">
+          <ion-row>
+            <ion-col size="12">
+              <ion-list>
+                <ion-item *ngFor="let stop of selectedRoute.route_stops">
+                  <ion-label>{{ stop.name }}</ion-label>
+                  <ion-note>{{ stop.arrival_time | customeTime }}</ion-note>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
         <ion-button fill="clear" expand="full" class="confirmRutas my-3">Abordar este bus</ion-button>
       </div>
       <div *ngSwitchCase=2>

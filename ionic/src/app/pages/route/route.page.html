@@ -3,8 +3,8 @@
   <div class='itemWrapper' *ngFor="let route of routes | routesFilter: searchText" (click)="selectRoute(route)">
     <!-- <img class="listImg" *ngIf="item.status === 'pending'" src="../../../assets/clockYellow.png" /> -->
     <img class="listImg" src="../../../assets/briefcase.png" />
-    <div class="">
-      <div class="listName ion-text-capitalize">{{route.name }}</div>
+    <div>
+      <div class="ion-text-capitalize">{{route.name }}</div>
       <ion-note>{{route.start_time | customeTime }} - {{route.end_time | customeTime }}</ion-note>
     </div>
   </div>
