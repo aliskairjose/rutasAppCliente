@@ -42,14 +42,14 @@ export class InicioPage implements OnInit {
 
   async loadMap() {
     const resp = await this.geolocation.getCurrentPosition();
-    const latLng = new google.maps.LatLng( resp.coords.latitude, resp.coords.longitude );
+    const coord = new google.maps.LatLng( resp.coords.latitude, resp.coords.longitude );
     const mapOptions = {
-      center: latLng,
-      zoom: 7,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      center: coord,
+      zoom: 17,
+      mapTypeId: google.maps.MapTypeId.map
     };
     this.map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
-    this.updateMap( [ latLng ], '' );
+    this.updateMap( [ coord, ], '' );
   }
 
   updateMap( locations, extraInfo ) {
@@ -86,8 +86,8 @@ export class InicioPage implements OnInit {
 
   handleItemSelect( data ) {
     this.selectedItem = data;
-    const coor1 = this.selectedItem?.from;
-    const coor2 = this.selectedItem?.to;
+    const coor1 = { lat: 10.609010, lng: -66.88834 }
+    const coor2 = { lat: 10.60326, lng: -66.90159 };
     if ( coor1 && coor2 ) {
       const origin = new google.maps.LatLng( coor1.lat, coor1.lng );
       const destination = new google.maps.LatLng( coor2.lat, coor2.lng );
@@ -96,19 +96,17 @@ export class InicioPage implements OnInit {
     }
   }
 
-  showDirections( origin, destination, mode = 'DRIVING' ) {
+  showDirections( origin?: any, destination?: any ) {
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap( this.map );
     const request = {
       origin,
       destination,
-      travelMode: google.maps.TravelMode[ mode ]
+      travelMode: 'DRIVING'
     };
     directionsService.route( request, ( res, status ) => {
-      console.log( res, status );
       if ( status === 'OK' ) {
-        console.log( 'setting path' );
         directionsRenderer.setDirections( res );
       }
     } );
