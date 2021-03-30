@@ -87,48 +87,37 @@ export class InicioPage implements OnInit {
     }
   }
 
-  /* handleItemSelectOLD( route: Route ) {
-    this.selectedItem = route;
-    const coor1 = { lat: 10.609010, lng: -66.88834 };
-    const coor2 = { lat: 10.60326, lng: -66.90159 };
-    if ( coor1 && coor2 ) {
-      const origin = new google.maps.LatLng( coor1.lat, coor1.lng );
-      const destination = new google.maps.LatLng( coor2.lat, coor2.lng );
-      this.updateMap( [ origin, destination ], 'noTooltip' );
-      this.calculateAndDisplayRoute( origin, destination );
-    }
-  } */
-
   handleItemSelect( route: Route ) {
     const stopCoord = [];
     const stops = [ ...route.route_stops ];
     stops.forEach( stop => {
       stopCoord.push( { coord: new google.maps.LatLng( stop.lattitude, stop.longitude ), name: stop.name } );
     } );
-    this.updateMap( stopCoord, '' );
+    this.markers.map( marker => marker.setMap( this.map ) );
+    // this.updateMap( stopCoord, '' );
     this.calculateAndDisplayRoute( stopCoord );
   }
 
   calculateAndDisplayRoute( data: any ) {
     for ( const key in data ) {
       if ( Object.prototype.hasOwnProperty.call( data, key ) ) {
-        const element = data[ key ];
-        if ( key === data.length ) { return; }
-        let _key: number = parseInt( key, 10 );
-        _key++;
-        const directionsService = new google.maps.DirectionsService();
-        const directionsRenderer = new google.maps.DirectionsRenderer();
-        directionsRenderer.setMap( this.map );
-        const request = {
-          origin: data[ key ].coord,
-          destination: data[ _key ].coord,
-          travelMode: 'DRIVING'
-        };
-        directionsService.route( request, ( res, status ) => {
-          if ( status === 'OK' && res ) {
-            directionsRenderer.setDirections( res );
-          }
-        } );
+        if ( parseInt( key, 10 ) < data.length - 1 ) {
+          let _key: number = parseInt( key, 10 );
+          _key++;
+          const directionsService = new google.maps.DirectionsService();
+          const directionsRenderer = new google.maps.DirectionsRenderer();
+          directionsRenderer.setMap( this.map );
+          const request = {
+            origin: data[ key ].coord,
+            destination: data[ _key ].coord,
+            travelMode: 'DRIVING'
+          };
+          directionsService.route( request, ( res, status ) => {
+            if ( status === 'OK' && res ) {
+              directionsRenderer.setDirections( res );
+            }
+          } );
+        }
       }
     }
 
