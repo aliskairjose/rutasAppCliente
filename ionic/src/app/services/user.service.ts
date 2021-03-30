@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpService } from './http.service';
 import { User } from '../interfaces/user';
 import { map } from 'rxjs/operators';
@@ -15,6 +15,7 @@ export class UserService {
   rutasData: any;
   rutasFlow = 0;
   rutasBarEdit = false;
+  $flow: Subject<any> = new Subject<any>();
 
   constructor(
     private platform: Platform,
@@ -74,5 +75,21 @@ export class UserService {
 
   unsubscribeBackHandler() {
     this.platform.backButton.unsubscribe();
+  }
+
+  /**
+   * @description Genera el stream de eventos usando next() para crear el evento
+   */
+  flowSubject( flow: string ): void {
+    this.$flow.next( flow );
+    // this.$flow.complete();
+  }
+
+  /**
+   * @description Creación del observer mediante el método asObserver(), el cual sera consumido por el componente
+   * @returns Observable
+   */
+  flowhObserver(): Observable<string> {
+    return this.$flow.asObservable();
   }
 }

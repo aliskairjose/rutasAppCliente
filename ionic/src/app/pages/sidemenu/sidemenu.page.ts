@@ -4,6 +4,7 @@ import { User } from '../../interfaces/user';
 import { StorageService } from '../../services/storage.service';
 import { AuthService } from '../../services/auth.service';
 import { LOGO, USER } from '../../constants/global-constants';
+import { UserService } from '../../services/user.service';
 
 
 @Component( {
@@ -22,14 +23,15 @@ export class SidemenuPage implements OnInit, OnChanges {
   logo = LOGO;
 
   appPages = [
-    { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/prueba 1Recurso 29.png' },
-    { title: 'Rutas', url: '/sidemenu/Rutas', icon: '../../../assets/prueba 1Recurso 30.png' },
-    { title: 'Experiencia', url: '/sidemenu/Experiencia', icon: '../../../assets/prueba 1Recurso 31.png' },
-    { title: 'Soporte/Ayuda', url: '/sidemenu/Soporte', icon: '../../../assets/prueba 1Recurso 32.png' }
+    { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/prueba 1Recurso 29.png', route: 'dashboard' },
+    { title: 'Rutas', url: '/sidemenu/Rutas', icon: '../../../assets/prueba 1Recurso 30.png', route: 'route' },
+    { title: 'Experiencia', url: '/sidemenu/Experiencia', icon: '../../../assets/prueba 1Recurso 31.png', route: 'experience' },
+    { title: 'Soporte/Ayuda', url: '/sidemenu/Soporte', icon: '../../../assets/prueba 1Recurso 32.png', route: 'support' }
   ];
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
+    private userService: UserService,
     private _storage: StorageService,
     private _auth: AuthService,
     private router: Router,
@@ -65,6 +67,7 @@ export class SidemenuPage implements OnInit, OnChanges {
   }
 
   menuOptionClickHandle( p, i ) {
+    this.userService.flowSubject( p.route );
     this.activeRoute = i;
     this.drawerVar = p.title;
     this.router.navigate( [ p.url ] );

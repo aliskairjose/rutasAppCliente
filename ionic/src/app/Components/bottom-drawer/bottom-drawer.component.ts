@@ -76,47 +76,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private nativePageTransitions: NativePageTransitions,
   ) {
-    this.searchList = [
-      {
-        status: 'completed',
-        name: 'abc-cba',
-        timeRange: '8:00am - 4:00pm',
-        from: {
-          lat: 22.5726,
-          lng: 88.3639
-        },
-        to: {
-          lat: 22.586193,
-          lng: 88.407760
-        }
-      },
-      {
-        status: 'pending',
-        name: 'def-cba',
-        timeRange: '11:00am - 8:00pm',
-        from: {
-          lat: 45.6483965,
-          lng: 4.7111342
-        },
-        to: {
-          lat: 55.6463965,
-          lng: 34.8111342
-        }
-      },
-      {
-        status: 'pending',
-        name: 'def-cba',
-        timeRange: '11:00am - 8:00pm',
-        from: {
-          lat: 45.6483965,
-          lng: 14.7111342
-        },
-        to: {
-          lat: 15.6463965,
-          lng: 24.8111342
-        }
-      }
-    ];
+    this.userService.flowhObserver().subscribe( flow => console.log( flow ) );
   }
 
   ngOnInit() {
