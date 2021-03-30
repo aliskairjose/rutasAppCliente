@@ -35,7 +35,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   canvasElement: any;
   canvasContext: any;
   loading: HTMLIonLoadingElement;
-  selectedItem: {};
+  selectedRoute: Route = {};
   searchText = '';
 
   // tslint:disable-next-line:no-output-rename
@@ -171,7 +171,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   routeHandler( route: Route ) {
-    this.selectedItem = route;
+    this.selectedRoute = route;
     this.userService.rutasData = route;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
     this.openState.emit( false );

@@ -15,7 +15,7 @@ export class InicioPage implements OnInit {
   markers = [];
   locations: Observable<any>;
   watch = null;
-  selectedItem: any;
+  selectedItem: Route;
   watchId = null;
   trackMarker = null;
 
