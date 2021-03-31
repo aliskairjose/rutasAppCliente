@@ -25,7 +25,7 @@ export class SidemenuPage implements OnInit, OnChanges {
   appPages = [
     { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/prueba 1Recurso 29.png', route: 0 },
     { title: 'Rutas', url: '/sidemenu/Inicio', icon: '../../../assets/prueba 1Recurso 30.png', route: 1 },
-    { title: 'Experiencia', url: '/sidemenu/Inicio', icon: '../../../assets/prueba 1Recurso 31.png', route: 2 },
+    { title: 'Experiencia', url: '/sidemenu/Experiencia', icon: '../../../assets/prueba 1Recurso 31.png', route: 2 },
     { title: 'Soporte/Ayuda', url: '/sidemenu/Soporte', icon: '../../../assets/prueba 1Recurso 32.png', route: 3 }
   ];
 

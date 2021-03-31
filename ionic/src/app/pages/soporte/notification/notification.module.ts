@@ -8,13 +8,13 @@ import { NotificationPageRoutingModule } from './notification-routing.module';
 
 import { NotificationPage } from './notification.page';
 
-@NgModule({
+@NgModule( {
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     NotificationPageRoutingModule
   ],
-  declarations: [NotificationPage]
-})
-export class NotificationPageModule {}
+  declarations: [ NotificationPage ]
+} )
+export class NotificationPageModule { }
