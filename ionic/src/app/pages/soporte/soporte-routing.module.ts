@@ -7,7 +7,15 @@ const routes: Routes = [
   {
     path: '',
     component: SoportePage
+  },  {
+    path: 'support',
+    loadChildren: () => import('./support/support.module').then( m => m.SupportPageModule)
+  },
+  {
+    path: 'notification',
+    loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
   }
+
 ];
 
 @NgModule({

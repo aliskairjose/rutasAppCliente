@@ -8,19 +8,11 @@ import { CommonService } from '../../services/common.service';
 } )
 export class SoportePage implements OnInit {
 
-  question = '';
 
   constructor(
-    private _common: CommonService
   ) { }
 
   ngOnInit() {
-  }
-
-  async sendRequest() {
-    // Send to api
-    const loading = await this._common.presentLoading();
-    loading.present();
   }
 
 }
