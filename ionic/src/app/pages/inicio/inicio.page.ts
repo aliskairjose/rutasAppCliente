@@ -2,8 +2,9 @@ import { UserService } from 'src/app/services/user.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { Route } from '../../interfaces/route';
-declare var google;
+import { Route, RouteStop } from '../../interfaces/route';
+declare var google: any;
+
 @Component( {
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
@@ -89,7 +90,7 @@ export class InicioPage implements OnInit {
     }
   }
 
-  async handleItemSelect( route: Route ) {
+  /* async handleItemSelect( route: Route ) {
     this.selectedItem = { ...route };
     await this.loadMap();
     const stopCoord = [];
@@ -101,31 +102,50 @@ export class InicioPage implements OnInit {
     } );
     this.updateMap( stopCoord, '' );
     this.calculateAndDisplayRoute( stopCoord );
+  } */
+
+  async handleItemSelect( route: Route ) {
+    this.selectedItem = { ...route };
+    await this.loadMap();
+    this.calculateAndDisplayRoute( route.route_stops );
   }
 
-  calculateAndDisplayRoute( data: any ) {
-    for ( const key in data ) {
-      if ( Object.prototype.hasOwnProperty.call( data, key ) ) {
-        if ( parseInt( key, 10 ) < data.length - 1 ) {
-          let _key: number = parseInt( key, 10 );
-          _key++;
-          const directionsService = new google.maps.DirectionsService();
-          const directionsRenderer = new google.maps.DirectionsRenderer();
-          directionsRenderer.setMap( this.map );
-          const request = {
-            origin: data[ key ].coord,
-            destination: data[ _key ].coord,
-            travelMode: 'DRIVING'
-          };
-          directionsService.route( request, ( res, status ) => {
-            if ( status === 'OK' && res ) {
-              console.log( res )
-              directionsRenderer.setDirections( res );
-            }
-          } );
-        }
-      }
+  calculateAndDisplayRoute( locations: RouteStop[] ) {
+    const markers = [];
+    const travelMode = 'DRIVING';
+    const waypoints: google.maps.DirectionsWaypoint[] = [];
+    const origin = new google.maps.LatLng( locations[ 0 ].lattitude, locations[ 0 ].longitude );
+    const destination = new google.maps.LatLng( locations[ locations.length - 1 ].lattitude, locations[ locations.length - 1 ].longitude );
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+
+    directionsRenderer.setMap( this.map );
+
+    if ( locations.length > 2 ) {
+      locations.shift();
+      locations.pop();
+      locations.forEach( location => {
+        waypoints.push( {
+          location: new google.maps.LatLng( location.lattitude, location.longitude ),
+          stopover: true
+        } );
+      } );
     }
+
+    const request = {
+      origin,
+      destination,
+      waypoints,
+      optimizeWaypoints: true,
+      travelMode
+    };
+
+    directionsService.route( request, ( response, status ) => {
+      if ( status === 'OK' ) {
+        directionsRenderer.setDirections( response );
+        const orders = response.routes[ 0 ].waypoint_order;
+      }
+    } );
 
   }
 
