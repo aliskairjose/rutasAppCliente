@@ -3,36 +3,33 @@
   <ion-menu contentId="home" type="overlay">
     <ion-content class="content">
       <div class="d-flex flex-column h-100 justify-content-between">
-        <div>
-          <ion-list id="inbox-list">
-            <div class="menu-list-header">
-              <ng-container *ngIf="user.imageUrl; else elseTemplate">
-                <ion-avatar>
-                  <img [src]="user.imageUrl">
-                </ion-avatar>
-              </ng-container>
-              <ng-template #elseTemplate>
-                <span class="profile-pic">{{ abrv | uppercase }}</span>
-              </ng-template>
+        <ion-list id="inbox-list">
+          <div class="menu-list-header">
+            <ng-container *ngIf="user.imageUrl; else elseTemplate">
+              <ion-avatar>
+                <img [src]="user.imageUrl">
+              </ion-avatar>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <span class="profile-pic">{{ abrv | uppercase }}</span>
+            </ng-template>
 
-              <div class="heading">
-                <ion-note class="align-16">Hola</ion-note>
-                <span class="align-16 heading-name">{{ user.name }}</span>
-              </div>
-
-              <ion-icon class="more align-16" name="ellipsis-horizontal"></ion-icon>
+            <div class="heading">
+              <ion-note class="align-16">Hola</ion-note>
+              <span class="align-16 heading-name">{{ user.name }}</span>
             </div>
 
-            <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-              <ion-item routerDirection="root" (click)="menuOptionClickHandle(p, i)" lines="none" detail="false">
-                <img class="px-3 menuIcon" [src]="p.icon" />
-                <!-- <ion-icon [ngClass] = "activeRoute === i ? 'active' : 'deactive'" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon> -->
-                <ion-label [ngClass]="activeRoute === i ? 'active' : 'deactive'">{{ p.title }}</ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-          </ion-list>
-        </div>
+            <ion-icon class="more align-16" name="ellipsis-horizontal"></ion-icon>
+          </div>
 
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item routerDirection="root" (click)="menuOptionClickHandle(p, i)" lines="none" detail="false">
+              <img class="px-3 menuIcon" [src]="p.icon" />
+              <!-- <ion-icon [ngClass] = "activeRoute === i ? 'active' : 'deactive'" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon> -->
+              <ion-label [ngClass]="activeRoute === i ? 'active' : 'deactive'">{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
         <div class="logout">
           <ion-button class="logout-btn" (click)="logout()">
             <ion-icon class="logout-icon" name="log-out-outline"></ion-icon>Cerrar sesión
