@@ -67,9 +67,9 @@ export class InicioPage implements OnInit {
       const iw = new google.maps.InfoWindow( {
         content: loc.name
       } );
-      if ( extraInfo !== 'noTooltip' ) {
-        iw.open( this.map, marker );
-      }
+      // if ( extraInfo !== 'noTooltip' ) {
+      //   iw.open( this.map, marker );
+      // }
       this.markers.push( marker );
     }
   }
@@ -95,9 +95,11 @@ export class InicioPage implements OnInit {
     const stopCoord = [];
     const stops = [ ...route.route_stops ];
     stops.forEach( stop => {
+      console.log( stop.lattitude, stop.longitude );
+
       stopCoord.push( { coord: new google.maps.LatLng( stop.lattitude, stop.longitude ), name: stop.name } );
     } );
-    // this.updateMap( stopCoord, '' );
+    this.updateMap( stopCoord, '' );
     this.calculateAndDisplayRoute( stopCoord );
   }
 
@@ -117,6 +119,7 @@ export class InicioPage implements OnInit {
           };
           directionsService.route( request, ( res, status ) => {
             if ( status === 'OK' && res ) {
+              console.log( res )
               directionsRenderer.setDirections( res );
             }
           } );

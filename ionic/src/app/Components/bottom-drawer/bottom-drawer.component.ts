@@ -94,8 +94,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
   async ngAfterViewInit() {
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
-    // if(userService.rutasFlow == 2 )
-    // this.videoElement = this.video.nativeElement;
     this.openHeight = ( this.plt.height() / 100 ) * 60;
 
     this.gesture = await this.gestureCtlr.create( {
@@ -231,7 +229,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
   stopScan() {
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
-    // --this.userService.rutasFlow;
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = '';
     this.stream.getTracks().forEach( track => track.stop() );
