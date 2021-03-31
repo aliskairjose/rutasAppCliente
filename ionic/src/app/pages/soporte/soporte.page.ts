@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../services/common.service';
+import { Router } from '@angular/router';
 
 @Component( {
   selector: 'app-soporte',
@@ -10,9 +11,13 @@ export class SoportePage implements OnInit {
 
 
   constructor(
+    private router: Router
   ) { }
 
   ngOnInit() {
   }
 
+  goTo( route: string ): void {
+    this.router.navigate( [ route ] );
+  }
 }
