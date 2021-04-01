@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Route, RouteStop } from '../../interfaces/route';
-import { STOP_MARK, USER_MARK, MAP } from '../../constants/global-constants';
+import { MAP } from '../../constants/global-constants';
 import { CommonService } from '../../services/common.service';
 declare var google: any;
 
@@ -79,11 +79,11 @@ export class InicioPage implements OnInit {
 
   async handleItemSelect( route: Route ) {
     this.selectedItem = { ...route };
-
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer( { map: this.map, suppressMarkers: true } );
     const loading = await this._common.presentLoading();
     loading.present();
+
     await this.calculateAndDisplayRoute( route.route_stops, directionsRenderer, directionsService, this.map );
     loading.dismiss();
   }
@@ -95,7 +95,7 @@ export class InicioPage implements OnInit {
     map: google.maps.Map
   ): Promise<boolean> {
 
-    return new Promise<boolean>( resolve => {
+    return new Promise( () => {
 
       let marker: any = '';
       this.markers.map( _marker => _marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
@@ -146,7 +146,7 @@ export class InicioPage implements OnInit {
             position: route.legs[ 0 ].start_location,
             animation: google.maps.Animation.DROP,
             map,
-            icon: STOP_MARK
+            icon: MAP.STOP_MARK
           } );
           this.markers.push( marker );
 
@@ -156,7 +156,7 @@ export class InicioPage implements OnInit {
               position: route.legs[ i ].start_location,
               animation: google.maps.Animation.DROP,
               map,
-              icon: STOP_MARK
+              icon: MAP.STOP_MARK
             } );
             this.markers.push( marker );
           }
@@ -171,7 +171,6 @@ export class InicioPage implements OnInit {
           this.markers.push( marker );
         }
 
-        resolve( true );
       } );
     } );
 
@@ -207,7 +206,7 @@ export class InicioPage implements OnInit {
         position: loc.coord,
         animation: google.maps.Animation.DROP,
         map: this.map,
-        icon: USER_MARK
+        icon: MAP.USER_MARK
       } );
       const iw = new google.maps.InfoWindow( {
         content: loc.name

@@ -55,7 +55,6 @@ export class SidemenuPage implements OnInit, OnChanges {
     } );
   }
 
-
   toggleBackdrop( isVisible ) {
     this.backdropVisible = isVisible;
     this.changeDetectorRef.detectChanges();
