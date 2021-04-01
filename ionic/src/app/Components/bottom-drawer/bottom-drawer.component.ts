@@ -155,6 +155,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   routeHandler( route: Route ) {
+    this.isOpen = false;
     this.selectedRoute = route;
     this.userService.rutasData = route;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;

@@ -3,7 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Route, RouteStop } from '../../interfaces/route';
-import { STOP_MARK, END_ROUTE_MARK, USER_MARK } from '../../constants/global-constants';
+import { STOP_MARK, USER_MARK, MAP } from '../../constants/global-constants';
+import { CommonService } from '../../services/common.service';
 declare var google: any;
 
 @Component( {
@@ -23,10 +24,13 @@ export class InicioPage implements OnInit {
   trackMarker = null;
 
   constructor(
+    private _common: CommonService,
     public userService: UserService,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
   ) {
-    this.userService.flowhObserver().subscribe( flow => { if ( [ 0, 2, 3 ].includes( flow ) ) { this.ngOnInit(); } } );
+    this.userService
+      .flowhObserver()
+      .subscribe( flow => { if ( [ 0, 2, 3 ].includes( flow ) ) { this.ngOnInit(); } } );
   }
 
   ngOnInit() {
@@ -73,15 +77,15 @@ export class InicioPage implements OnInit {
     this.updateMap( [ data ], '' );
   }
 
-  handleItemSelect( route: Route ) {
+  async handleItemSelect( route: Route ) {
     this.selectedItem = { ...route };
 
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer( { map: this.map, suppressMarkers: true } );
-    // Instantiate an info window to hold step text.
-    const stepDisplay = new google.maps.InfoWindow();
-
-    this.calculateAndDisplayRoute( route.route_stops, directionsRenderer, directionsService, this.map );
+    const loading = await this._common.presentLoading();
+    loading.present();
+    await this.calculateAndDisplayRoute( route.route_stops, directionsRenderer, directionsService, this.map );
+    loading.dismiss();
   }
 
   async calculateAndDisplayRoute(
@@ -89,80 +93,86 @@ export class InicioPage implements OnInit {
     directionsRenderer: google.maps.DirectionsRenderer,
     directionsService: google.maps.DirectionsService,
     map: google.maps.Map
-  ) {
-    let marker: any = '';
-    this.markers.map( _marker => _marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
-    this.markers = [];
-    const travelMode = google.maps.TravelMode.DRIVING;
-    const waypoints: google.maps.DirectionsWaypoint[] = [];
+  ): Promise<boolean> {
 
-    const origin = new google.maps.LatLng(
-      locations[ 0 ].lattitude,
-      locations[ 0 ].longitude
-    );
+    return new Promise<boolean>( resolve => {
 
-    const destination = new google.maps.LatLng(
-      locations[ locations.length - 1 ].lattitude,
-      locations[ locations.length - 1 ].longitude
-    );
+      let marker: any = '';
+      this.markers.map( _marker => _marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
+      this.markers = [];
+      const travelMode = google.maps.TravelMode.DRIVING;
+      const waypoints: google.maps.DirectionsWaypoint[] = [];
 
-    if ( locations.length > 2 ) {
-      locations.shift();
-      locations.pop();
-      locations.forEach( location => {
-        waypoints.push( {
-          location: new google.maps.LatLng( location.lattitude, location.longitude ),
-          stopover: true
+      const origin = new google.maps.LatLng(
+        locations[ 0 ].lattitude,
+        locations[ 0 ].longitude
+      );
+
+      const destination = new google.maps.LatLng(
+        locations[ locations.length - 1 ].lattitude,
+        locations[ locations.length - 1 ].longitude
+      );
+
+      if ( locations.length > 2 ) {
+        locations.shift();
+        locations.pop();
+        locations.forEach( location => {
+          waypoints.push( {
+            location: new google.maps.LatLng( location.lattitude, location.longitude ),
+            stopover: true
+          } );
         } );
-      } );
-    }
+      }
 
-    const request = {
-      origin,
-      destination,
-      waypoints,
-      optimizeWaypoints: true,
-      travelMode
-    };
+      const request = {
+        origin,
+        destination,
+        waypoints,
+        optimizeWaypoints: true,
+        travelMode
+      };
 
-    directionsService.route( request, (
-      result: google.maps.DirectionsResult | null,
-      status: google.maps.DirectionsStatus
-    ) => {
-      if ( status === 'OK' && result ) {
+      directionsService.route( request, (
+        result: google.maps.DirectionsResult | null,
+        status: google.maps.DirectionsStatus
+      ) => {
+        if ( status === 'OK' && result ) {
 
-        directionsRenderer.setDirections( result );
-        const route = result.routes[ 0 ];
+          directionsRenderer.setDirections( result );
+          const route = result.routes[ 0 ];
 
-        // EL primer marcador
-        marker = new google.maps.Marker( {
-          position: route.legs[ 0 ].start_location,
-          animation: google.maps.Animation.DROP,
-          map,
-          icon: STOP_MARK
-        } );
-        this.markers.push( marker );
-
-        // Marcadores para las paradas
-        for ( let i = 1; i < route.legs.length; i++ ) {
+          // EL primer marcador
           marker = new google.maps.Marker( {
-            position: route.legs[ i ].start_location,
+            position: route.legs[ 0 ].start_location,
             animation: google.maps.Animation.DROP,
             map,
             icon: STOP_MARK
           } );
           this.markers.push( marker );
+
+          // Marcadores para las paradas
+          for ( let i = 1; i < route.legs.length; i++ ) {
+            marker = new google.maps.Marker( {
+              position: route.legs[ i ].start_location,
+              animation: google.maps.Animation.DROP,
+              map,
+              icon: STOP_MARK
+            } );
+            this.markers.push( marker );
+          }
+
+          // El ultimo marcador
+          marker = new google.maps.Marker( {
+            position: route.legs[ route.legs.length - 1 ].end_location,
+            animation: google.maps.Animation.DROP,
+            map,
+            icon: MAP.END_ROUTE_MARK
+          } );
+          this.markers.push( marker );
         }
 
-        // El ultimo marcador
-        marker = new google.maps.Marker( {
-          position: route.legs[ route.legs.length - 1 ].end_location,
-          animation: google.maps.Animation.DROP,
-          map,
-          icon: END_ROUTE_MARK
-        } );
-        this.markers.push( marker );
-      }
+        resolve( true );
+      } );
     } );
 
   }
