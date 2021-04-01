@@ -13,7 +13,8 @@ declare var google: any;
 export class InicioPage implements OnInit {
   @ViewChild( 'map' ) mapElement: ElementRef;
   map: any;
-  markers = [];
+  markers: google.maps.Marker[] = [];
+  userMarker: google.maps.Marker[] = [];
   locations: Observable<any>;
   watch = null;
   selectedItem: Route;
@@ -30,6 +31,21 @@ export class InicioPage implements OnInit {
   ngOnInit() {
     this.clearMapError();
     this.loadMap();
+  }
+
+  bottomDrawerEvent( event: any ) {
+    if ( event.type === 'item-selected' ) {
+      this.handleItemSelect( event.data );
+      return;
+    }
+    if ( event.type === 'scan-success' ) {
+      this.startTracking();
+      return;
+    }
+    if ( event.type === 'stop-track' ) {
+      this.stopTracking();
+      return;
+    }
   }
 
   clearMapError() {
@@ -52,74 +68,42 @@ export class InicioPage implements OnInit {
       mapTypeId: google.maps.MapTypeId.map
     };
     this.map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
+
     this.updateMap( [ data ], '' );
   }
 
-  updateMap( locations, extraInfo ) {
-    this.markers.map( marker => marker.setMap( this.map ) ); // se pasa this.map para mantener el marcador del usuario
-    this.markers = [];
-    for ( const loc of locations ) {
-      const marker = new google.maps.Marker( {
-        position: loc.coord,
-        animation: google.maps.Animation.DROP,
-        map: this.map,
-        icon: './../../../assets/new_marker.png',
-      } );
-      const iw = new google.maps.InfoWindow( {
-        content: loc.name
-      } );
-      // if ( extraInfo !== 'noTooltip' ) {
-      //   iw.open( this.map, marker );
-      // }
-      this.markers.push( marker );
-    }
-  }
-
-  bottomDrawerEvent( event: any ) {
-    if ( event.type === 'item-selected' ) {
-      this.handleItemSelect( event.data );
-      return;
-    }
-    if ( event.type === 'scan-success' ) {
-      this.startTracking();
-      return;
-    }
-    if ( event.type === 'stop-track' ) {
-      this.stopTracking();
-      return;
-    }
-  }
-
-  /* async handleItemSelect( route: Route ) {
+  handleItemSelect( route: Route ) {
     this.selectedItem = { ...route };
-    await this.loadMap();
-    const stopCoord = [];
-    const stops = [ ...route.route_stops ];
-    stops.forEach( stop => {
-      console.log( stop.lattitude, stop.longitude );
 
-      stopCoord.push( { coord: new google.maps.LatLng( stop.lattitude, stop.longitude ), name: stop.name } );
-    } );
-    this.updateMap( stopCoord, '' );
-    this.calculateAndDisplayRoute( stopCoord );
-  } */
-
-  async handleItemSelect( route: Route ) {
-    this.selectedItem = { ...route };
-    await this.loadMap();
-    this.calculateAndDisplayRoute( route.route_stops );
-  }
-
-  calculateAndDisplayRoute( locations: RouteStop[] ) {
-    const markers = [];
-    const travelMode = 'DRIVING';
-    const waypoints: google.maps.DirectionsWaypoint[] = [];
-    const origin = new google.maps.LatLng( locations[ 0 ].lattitude, locations[ 0 ].longitude );
-    const destination = new google.maps.LatLng( locations[ locations.length - 1 ].lattitude, locations[ locations.length - 1 ].longitude );
     const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer();
+    const directionsRenderer = new google.maps.DirectionsRenderer( { map: this.map, suppressMarkers: true } );
+    // Instantiate an info window to hold step text.
+    const stepDisplay = new google.maps.InfoWindow();
 
-    directionsRenderer.setMap( this.map );
+    this.calculateAndDisplayRoute( route.route_stops, directionsRenderer, directionsService, this.map );
+  }
+
+  async calculateAndDisplayRoute(
+    locations: RouteStop[],
+    directionsRenderer: google.maps.DirectionsRenderer,
+    directionsService: google.maps.DirectionsService,
+    map: google.maps.Map
+  ) {
+    let marker: any = '';
+    this.markers.map( _marker => _marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
+    this.markers = [];
+    const travelMode = google.maps.TravelMode.DRIVING;
+    const waypoints: google.maps.DirectionsWaypoint[] = [];
+
+    const origin = new google.maps.LatLng(
+      locations[ 0 ].lattitude,
+      locations[ 0 ].longitude
+    );
+
+    const destination = new google.maps.LatLng(
+      locations[ locations.length - 1 ].lattitude,
+      locations[ locations.length - 1 ].longitude
+    );
 
     if ( locations.length > 2 ) {
       locations.shift();
@@ -140,10 +124,41 @@ export class InicioPage implements OnInit {
       travelMode
     };
 
-    directionsService.route( request, ( response, status ) => {
-      if ( status === 'OK' ) {
-        directionsRenderer.setDirections( response );
-        const orders = response.routes[ 0 ].waypoint_order;
+    directionsService.route( request, (
+      result: google.maps.DirectionsResult | null,
+      status: google.maps.DirectionsStatus
+    ) => {
+      if ( status === 'OK' && result ) {
+
+        directionsRenderer.setDirections( result );
+        const route = result.routes[ 0 ];
+
+        // EL primer marcador
+        marker = new google.maps.Marker( {
+          position: route.legs[ 0 ].start_location,
+          animation: google.maps.Animation.DROP,
+          map,
+          icon: './../../../assets/new_marker.png',
+        } );
+        this.markers.push( marker );
+
+        // Marcadores para las paradas
+        for ( let i = 1; i < route.legs.length; i++ ) {
+          marker = new google.maps.Marker( {
+            position: route.legs[ i ].start_location,
+            map,
+            icon: './../../../assets/new_marker.png'
+          } );
+          this.markers.push( marker );
+        }
+
+        // El ultimo marcador
+        marker = new google.maps.Marker( {
+          position: route.legs[ route.legs.length - 1 ].end_location,
+          map,
+          icon: './../../../assets/new_marker.png'
+        } );
+        this.markers.push( marker );
       }
     } );
 
@@ -168,5 +183,25 @@ export class InicioPage implements OnInit {
   stopTracking() {
     navigator.geolocation.clearWatch( this.watchId );
     this.trackMarker.setMap( null );
+  }
+
+  private updateMap( locations, extraInfo ) {
+    this.markers.map( marker => marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
+    this.markers = [];
+    for ( const loc of locations ) {
+      const marker = new google.maps.Marker( {
+        position: loc.coord,
+        animation: google.maps.Animation.DROP,
+        map: this.map,
+        icon: './../../../assets/new_marker.png',
+      } );
+      const iw = new google.maps.InfoWindow( {
+        content: loc.name
+      } );
+      if ( extraInfo !== 'noTooltip' ) {
+        iw.open( this.map, marker );
+      }
+      this.userMarker.push( marker );
+    }
   }
 }
