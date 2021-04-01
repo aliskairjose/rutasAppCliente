@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Route, RouteStop } from '../../interfaces/route';
+import { STOP_MARK, END_ROUTE_MARK, USER_MARK } from '../../constants/global-constants';
 declare var google: any;
 
 @Component( {
@@ -138,7 +139,7 @@ export class InicioPage implements OnInit {
           position: route.legs[ 0 ].start_location,
           animation: google.maps.Animation.DROP,
           map,
-          icon: './../../../assets/new_marker.png',
+          icon: STOP_MARK
         } );
         this.markers.push( marker );
 
@@ -146,8 +147,9 @@ export class InicioPage implements OnInit {
         for ( let i = 1; i < route.legs.length; i++ ) {
           marker = new google.maps.Marker( {
             position: route.legs[ i ].start_location,
+            animation: google.maps.Animation.DROP,
             map,
-            icon: './../../../assets/new_marker.png'
+            icon: STOP_MARK
           } );
           this.markers.push( marker );
         }
@@ -155,8 +157,9 @@ export class InicioPage implements OnInit {
         // El ultimo marcador
         marker = new google.maps.Marker( {
           position: route.legs[ route.legs.length - 1 ].end_location,
+          animation: google.maps.Animation.DROP,
           map,
-          icon: './../../../assets/new_marker.png'
+          icon: END_ROUTE_MARK
         } );
         this.markers.push( marker );
       }
@@ -186,6 +189,7 @@ export class InicioPage implements OnInit {
   }
 
   private updateMap( locations, extraInfo ) {
+
     this.markers.map( marker => marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
     this.markers = [];
     for ( const loc of locations ) {
@@ -193,7 +197,7 @@ export class InicioPage implements OnInit {
         position: loc.coord,
         animation: google.maps.Animation.DROP,
         map: this.map,
-        icon: './../../../assets/new_marker.png',
+        icon: USER_MARK
       } );
       const iw = new google.maps.InfoWindow( {
         content: loc.name
