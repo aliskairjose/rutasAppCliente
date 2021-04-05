@@ -1,7 +1,17 @@
 <div class="bottom-drawer" [ngStyle]="{'bottom': 'calc('+ bottomPosition +'vh + env(safe-area-inset-bottom))'}"
   #bottomDrawer>
-  <div *ngIf="userService.rutasFlow === 'support'" class="car-loc-btn">
-    <ion-icon name="locate"></ion-icon>
+  <div *ngIf="userService.rutasFlow === 10" class="car-loc-btn">
+    <div class="text-end">
+      <ion-note>Parada
+        <img class="scan" src="../../../assets/mark.png" />
+      </ion-note>
+      <ion-note>Parada
+        <img class="scan" src="../../../assets/stop_route.png" />
+      </ion-note>
+      <ion-note>Final de ruta
+        <img class="scan" src="../../../assets/location-sharp.svg" />
+      </ion-note>
+    </div>
   </div>
   <div *ngIf="dragable" class="ion-text-center ">
     <ion-button fill="clear" expand="full" (click)="toggleDrawer()" class="minH">
@@ -27,11 +37,6 @@
               <span>Proxima unidad</span>
               <ion-note>15 minutes</ion-note>
             </div>
-          </div>
-          <div class="justify-content-around d-flex flex-grow-1 imgSet">
-            <img class="scan" src="../../../assets/prueba 1Recurso 47.png" />
-            <img class="scan" src="../../../assets/prueba 1Recurso 42.png" />
-            <img class="scan" src="../../../assets/location-sharp.svg" />
           </div>
         </div>
         <ion-grid fixed *ngIf="isOpen">

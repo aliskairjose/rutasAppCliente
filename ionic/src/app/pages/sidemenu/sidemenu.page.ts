@@ -23,10 +23,10 @@ export class SidemenuPage implements OnInit, OnChanges {
   logo = LOGO;
 
   appPages = [
-    { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/prueba 1Recurso 29.png', route: 0 },
-    { title: 'Rutas', url: '/sidemenu/Inicio', icon: '../../../assets/prueba 1Recurso 30.png', route: 1 },
-    { title: 'Experiencia', url: '/sidemenu/Experiencia', icon: '../../../assets/prueba 1Recurso 31.png', route: 2 },
-    { title: 'Soporte/Ayuda', url: '/sidemenu/Soporte', icon: '../../../assets/prueba 1Recurso 32.png', route: 3 }
+    { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/menu/home.png', route: 0 },
+    { title: 'Rutas', url: '/sidemenu/Inicio', icon: '../../../assets/menu/routes.png', route: 1 },
+    { title: 'Experiencia', url: '/sidemenu/Experiencia', icon: '../../../assets/menu/experience.png', route: 2 },
+    { title: 'Soporte/Ayuda', url: '/sidemenu/Soporte', icon: '../../../assets/menu/support.png', route: 3 }
   ];
 
   constructor(
