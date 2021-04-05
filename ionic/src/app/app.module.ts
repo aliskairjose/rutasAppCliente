@@ -22,6 +22,7 @@ import { RatingComponent } from './Components/rating/rating.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule( {
   declarations: [
@@ -30,6 +31,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   entryComponents: [],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     IonicModule.forRoot( { mode: 'md' } ),
     AppRoutingModule,

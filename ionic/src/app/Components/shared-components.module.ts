@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { RoutesFilterPipe } from '../pipes/routes-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { RoutePage } from '../pages/route/route.page';
+import { TooltipsModule } from 'ionic4-tooltips';
 
 @NgModule( {
   declarations: [
@@ -24,6 +25,7 @@ import { RoutePage } from '../pages/route/route.page';
     CommonModule,
     IonicModule,
     FormsModule,
+    TooltipsModule.forRoot(),
   ],
   exports: [
     BottomDrawerComponent,

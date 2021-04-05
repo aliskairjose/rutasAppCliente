@@ -157,6 +157,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   routeHandler( route: Route ) {
     this.isOpen = false;
     this.selectedRoute = route;
+    // console.log( this.selectedRoute )
     this.userService.rutasData = route;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
     this.gesture.enable( false );
@@ -170,7 +171,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   async startScan() {
-    console.log( 'Start Scan' );
     this.userService.rutasFlow = 4;
     this.showScan = false;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;

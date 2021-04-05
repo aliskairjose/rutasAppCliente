@@ -13,15 +13,16 @@ declare var google: any;
   styleUrls: [ './inicio.page.scss' ],
 } )
 export class InicioPage implements OnInit {
-  @ViewChild( 'map' ) mapElement: ElementRef;
-  map: any;
+
+  map: google.maps.Map;
   markers: google.maps.Marker[] = [];
   userMarker: google.maps.Marker[] = [];
-  locations: Observable<any>;
   watch = null;
   selectedItem: Route;
   watchId = null;
   trackMarker = null;
+
+  @ViewChild( 'map' ) mapElement: ElementRef;
 
   constructor(
     private _common: CommonService,
@@ -74,17 +75,18 @@ export class InicioPage implements OnInit {
     };
     this.map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
 
-    this.updateMap( [ data ], '' );
+    this.updateMap( [ data ], '', this.map );
   }
 
   async handleItemSelect( route: Route ) {
     this.selectedItem = { ...route };
+    const stops: RouteStop[] = [ ...this.selectedItem.route_stops ];
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer( { map: this.map, suppressMarkers: true } );
     const loading = await this._common.presentLoading();
     loading.present();
 
-    await this.calculateAndDisplayRoute( route.route_stops, directionsRenderer, directionsService, this.map );
+    await this.calculateAndDisplayRoute( stops, directionsRenderer, directionsService, this.map );
     loading.dismiss();
   }
 
@@ -98,6 +100,7 @@ export class InicioPage implements OnInit {
     return new Promise( () => {
 
       let marker: any = '';
+      let iw: any = '';
       this.markers.map( _marker => _marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
       this.markers = [];
       const travelMode = google.maps.TravelMode.DRIVING;
@@ -114,11 +117,12 @@ export class InicioPage implements OnInit {
       );
 
       if ( locations.length > 2 ) {
-        locations.shift();
-        locations.pop();
-        locations.forEach( location => {
+        const locs = [ ...locations ];
+        locs.shift();
+        locs.pop();
+        locs.forEach( loc => {
           waypoints.push( {
-            location: new google.maps.LatLng( location.lattitude, location.longitude ),
+            location: new google.maps.LatLng( loc.lattitude, loc.longitude ),
             stopover: true
           } );
         } );
@@ -140,7 +144,6 @@ export class InicioPage implements OnInit {
 
           directionsRenderer.setDirections( result );
           const route = result.routes[ 0 ];
-
           // EL primer marcador
           marker = new google.maps.Marker( {
             position: route.legs[ 0 ].start_location,
@@ -148,6 +151,10 @@ export class InicioPage implements OnInit {
             map,
             icon: MAP.STOP_MARK
           } );
+          iw = new google.maps.InfoWindow( {
+            content: locations[ 0 ].name
+          } );
+          iw.open( this.map, marker );
           this.markers.push( marker );
 
           // Marcadores para las paradas
@@ -158,16 +165,22 @@ export class InicioPage implements OnInit {
               map,
               icon: MAP.STOP_MARK
             } );
+
             this.markers.push( marker );
           }
 
           // El ultimo marcador
+          // console.log( route.legs[ route.legs.length - 1 ].end_address );
           marker = new google.maps.Marker( {
             position: route.legs[ route.legs.length - 1 ].end_location,
             animation: google.maps.Animation.DROP,
             map,
             icon: MAP.END_ROUTE_MARK
           } );
+          iw = new google.maps.InfoWindow( {
+            content: locations[ locations.length - 1 ].name
+          } );
+          iw.open( this.map, marker );
           this.markers.push( marker );
         }
 
@@ -197,7 +210,7 @@ export class InicioPage implements OnInit {
     this.trackMarker.setMap( null );
   }
 
-  private updateMap( locations, extraInfo ) {
+  private updateMap( locations, extraInfo, map: google.maps.Map ) {
 
     this.markers.map( marker => marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
     this.markers = [];
@@ -205,7 +218,7 @@ export class InicioPage implements OnInit {
       const marker = new google.maps.Marker( {
         position: loc.coord,
         animation: google.maps.Animation.DROP,
-        map: this.map,
+        map,
         icon: MAP.USER_MARK
       } );
       const iw = new google.maps.InfoWindow( {
