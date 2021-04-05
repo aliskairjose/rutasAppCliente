@@ -1,7 +1,7 @@
 <div class="bottom-drawer" [ngStyle]="{'bottom': 'calc('+ bottomPosition +'vh + env(safe-area-inset-bottom))'}"
   #bottomDrawer>
   <div *ngIf="userService.rutasFlow === 10" class="car-loc-btn">
-    <div class="text-end">
+    <div class="text-end" *ngIf="!isOpen">
       <ion-note>Parada
         <img class="scan" src="../../../assets/mark.png" />
       </ion-note>

@@ -70,7 +70,7 @@ export class InicioPage implements OnInit {
     const data = { coord: new google.maps.LatLng( resp.coords.latitude, resp.coords.longitude ), name: 'Aquí estoy' };
     const mapOptions = {
       center: data.coord,
-      zoom: 12,
+      zoom: 15,
       mapTypeId: google.maps.MapTypeId.map
     };
     const map: google.maps.Map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
@@ -84,7 +84,7 @@ export class InicioPage implements OnInit {
     const data = { coord: new google.maps.LatLng( resp.coords.latitude, resp.coords.longitude ), name: 'Aquí estoy' };
     const mapOptions = {
       center: data.coord,
-      zoom: 12,
+      zoom: 15,
       mapTypeId: google.maps.MapTypeId.map
     };
     const map: google.maps.Map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
@@ -99,9 +99,7 @@ export class InicioPage implements OnInit {
     const loading = await this._common.presentLoading();
     loading.present();
 
-    console.log( 'pre calculate' )
     await this.calculateAndDisplayRoute( stops, directionsRenderer, directionsService, map );
-    console.log( 'post calculate' )
     loading.dismiss();
   }
 
