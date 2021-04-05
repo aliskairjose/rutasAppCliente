@@ -73,20 +73,32 @@ export class InicioPage implements OnInit {
       zoom: 12,
       mapTypeId: google.maps.MapTypeId.map
     };
-    this.map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
+    const map: google.maps.Map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
 
-    this.updateMap( [ data ], '', this.map );
+    this.updateMap( [ data ], '', map );
   }
 
   async handleItemSelect( route: Route ) {
+
+    const resp = await this.geolocation.getCurrentPosition();
+    const data = { coord: new google.maps.LatLng( resp.coords.latitude, resp.coords.longitude ), name: 'Aquí estoy' };
+    const mapOptions = {
+      center: data.coord,
+      zoom: 12,
+      mapTypeId: google.maps.MapTypeId.map
+    };
+    const map: google.maps.Map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
+
+    await this.updateMap( [ data ], '', map );
+
     this.selectedItem = { ...route };
     const stops: RouteStop[] = [ ...this.selectedItem.route_stops ];
     const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer( { map: this.map, suppressMarkers: true } );
+    const directionsRenderer = new google.maps.DirectionsRenderer( { map, suppressMarkers: true } );
     const loading = await this._common.presentLoading();
     loading.present();
 
-    await this.calculateAndDisplayRoute( stops, directionsRenderer, directionsService, this.map );
+    await this.calculateAndDisplayRoute( stops, directionsRenderer, directionsService, map );
     loading.dismiss();
   }
 
@@ -212,24 +224,28 @@ export class InicioPage implements OnInit {
     this.trackMarker.setMap( null );
   }
 
-  private updateMap( locations, extraInfo, map: google.maps.Map ) {
-
-    this.markers.map( marker => marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
-    this.markers = [];
-    for ( const loc of locations ) {
-      const marker = new google.maps.Marker( {
-        position: loc.coord,
-        animation: google.maps.Animation.DROP,
-        map,
-        icon: MAP.USER_MARK
-      } );
-      const iw = new google.maps.InfoWindow( {
-        content: loc.name
-      } );
-      if ( extraInfo !== 'noTooltip' ) {
-        iw.open( this.map, marker );
+  private async updateMap( locations, extraInfo, map: google.maps.Map ) {
+    console.log( 'map' )
+    return new Promise( ( resolve ) => {
+      this.markers.map( marker => marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
+      this.markers = [];
+      for ( const loc of locations ) {
+        const marker = new google.maps.Marker( {
+          position: loc.coord,
+          animation: google.maps.Animation.DROP,
+          map,
+          icon: MAP.USER_MARK
+        } );
+        const iw = new google.maps.InfoWindow( {
+          content: loc.name
+        } );
+        if ( extraInfo !== 'noTooltip' ) {
+          iw.open( this.map, marker );
+        }
+        this.userMarker.push( marker );
       }
-      this.userMarker.push( marker );
-    }
+      resolve( true );
+    } );
+
   }
 }
