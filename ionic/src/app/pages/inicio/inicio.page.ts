@@ -89,6 +89,7 @@ export class InicioPage implements OnInit {
     };
     const map: google.maps.Map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
 
+    // actualizamos el mapa y limpiamos la rutas previas
     await this.updateMap( [ data ], '', map );
 
     this.selectedItem = { ...route };
@@ -98,18 +99,20 @@ export class InicioPage implements OnInit {
     const loading = await this._common.presentLoading();
     loading.present();
 
+    console.log( 'pre calculate' )
     await this.calculateAndDisplayRoute( stops, directionsRenderer, directionsService, map );
+    console.log( 'post calculate' )
     loading.dismiss();
   }
 
-  async calculateAndDisplayRoute(
+  private async calculateAndDisplayRoute(
     locations: RouteStop[],
     directionsRenderer: google.maps.DirectionsRenderer,
     directionsService: google.maps.DirectionsService,
     map: google.maps.Map
   ): Promise<boolean> {
 
-    return new Promise( () => {
+    return new Promise<boolean>( resolve => {
 
       let marker: any = '';
       let iw: any = '';
@@ -199,6 +202,7 @@ export class InicioPage implements OnInit {
         }
 
       } );
+      resolve( true );
     } );
 
   }
@@ -224,9 +228,12 @@ export class InicioPage implements OnInit {
     this.trackMarker.setMap( null );
   }
 
-  private async updateMap( locations, extraInfo, map: google.maps.Map ) {
-    console.log( 'map' )
-    return new Promise( ( resolve ) => {
+  private async updateMap(
+    locations,
+    extraInfo: string,
+    map: google.maps.Map
+  ): Promise<boolean> {
+    return new Promise<boolean>( ( resolve ) => {
       this.markers.map( marker => marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
       this.markers = [];
       for ( const loc of locations ) {
