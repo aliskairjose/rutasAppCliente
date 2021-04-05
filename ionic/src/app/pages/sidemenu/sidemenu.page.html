@@ -13,20 +13,17 @@
             <ng-template #elseTemplate>
               <span class="profile-pic">{{ abrv | uppercase }}</span>
             </ng-template>
-
             <div class="heading">
               <ion-note class="align-16">Hola</ion-note>
               <span class="align-16 heading-name">{{ user.name }}</span>
             </div>
-
             <ion-icon class="more align-16" name="ellipsis-horizontal"></ion-icon>
           </div>
-
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" (click)="menuOptionClickHandle(p, i)" lines="none" detail="false">
               <img class="px-3 menuIcon" [src]="p.icon" />
-              <!-- <ion-icon [ngClass] = "activeRoute === i ? 'active' : 'deactive'" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon> -->
-              <ion-label [ngClass]="activeRoute === i ? 'active' : 'deactive'">{{ p.title }}</ion-label>
+              <ion-label [ngClass]="activeRoute === i ? 'active' : 'deactive'" class="menu-title">{{ p.title }}
+              </ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
