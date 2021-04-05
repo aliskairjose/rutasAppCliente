@@ -165,12 +165,14 @@ export class InicioPage implements OnInit {
               map,
               icon: MAP.STOP_MARK
             } );
-
+            iw = new google.maps.InfoWindow( {
+              content: locations[ i ].name
+            } );
+            iw.open( this.map, marker );
             this.markers.push( marker );
           }
 
           // El ultimo marcador
-          // console.log( route.legs[ route.legs.length - 1 ].end_address );
           marker = new google.maps.Marker( {
             position: route.legs[ route.legs.length - 1 ].end_location,
             animation: google.maps.Animation.DROP,
