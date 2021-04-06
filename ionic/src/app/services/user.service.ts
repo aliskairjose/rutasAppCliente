@@ -64,6 +64,14 @@ export class UserService {
     );
   }
 
+  comment( comment: string ): Observable<any> {
+    const data = {
+      type_comment_id: 4,
+      comment
+    };
+    return this._httpService.post( '/comments', data );
+  }
+
   private toastMessage( message: string ): void {
     const color = 'primary';
     this._common.presentToast( { message, color } );

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../../services/common.service';
+import { UserService } from '../../../services/user.service';
 
 @Component( {
   selector: 'app-support',
@@ -8,10 +9,11 @@ import { CommonService } from '../../../services/common.service';
 } )
 export class SupportPage implements OnInit {
 
-  question = '';
+  comment = '';
 
   constructor(
-    private _common: CommonService
+    private _user: UserService,
+    private _common: CommonService,
   ) { }
 
   ngOnInit() {
@@ -21,6 +23,11 @@ export class SupportPage implements OnInit {
     // Send to api
     const loading = await this._common.presentLoading();
     loading.present();
+    this._user.comment( this.comment ).subscribe( () => {
+      loading.dismiss();
+      const message = 'Su comentario ha sido procesado, gracias!';
+      this._common.presentToast( { message } );
+    } );
   }
 
 
