@@ -409,13 +409,15 @@ ion-note {
     h5 {
       margin: 0;
     }
-
     ion-note {
       margin: 0;
     }
   }
   ion-note {
     margin: 16px 0 5px;
+  }
+  ion-icon {
+    color: var(--ion-color-rp-primary);
   }
   h5 {
     font-weight: normal;
