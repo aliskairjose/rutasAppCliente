@@ -32,7 +32,6 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-
       </div>
       <!-- Rutas -->
       <div *ngSwitchCase=1>
@@ -100,7 +99,7 @@
       </div>
       <!-- Travel Detail -->
       <div *ngSwitchCase="40">
-        <ion-grid fixed>
+        <ion-grid fixed *ngIf="isOpen">
           <ion-row>
             <ion-col>
               <div class="text-center" id="travel-data">
@@ -138,6 +137,22 @@
             </ion-col>
           </ion-row>
         </ion-grid>
+
+        <div id="travel-data" *ngIf="!isOpen">
+          <div id="info-route">
+            <img src="./../../../assets/route.png" style="margin-left: 0 !important;" />
+            <div>
+              <h5>Luis Duran</h5>
+              <p style="margin: 0;">Modelo Yutong V55 | Placa: 456yht7</p>
+              <ion-note class="ion-float-left">Tiempo de llegada a destino: 25 min</ion-note>
+            </div>
+          </div>
+          <ion-button fill="clear" expand="full" class="confirmRutas my-3" (click)="endTravel()">
+            <ion-icon slot="start" name="log-out-outline" class="logout-icon"></ion-icon>
+            Finalizar viaje
+          </ion-button>
+        </div>
+
       </div>
     </ion-content>
   </div>

@@ -416,10 +416,10 @@ ion-note {
   ion-note {
     margin: 16px 0 5px;
   }
-  ion-icon {
-    color: var(--ion-color-rp-primary);
-  }
   h5 {
     font-weight: normal;
+    ion-icon {
+      color: var(--ion-color-rp-primary);
+    }
   }
 }
