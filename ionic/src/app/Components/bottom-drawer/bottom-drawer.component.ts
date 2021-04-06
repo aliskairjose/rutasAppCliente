@@ -1,5 +1,4 @@
 import jsQR from 'jsqr';
-import { Route } from 'src/app/interfaces/route';
 
 import {
   AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild
@@ -12,6 +11,7 @@ import {
 import { GestureController, LoadingController, NavController, Platform } from '@ionic/angular';
 
 import { UserService } from '../../services/user.service';
+import { Route } from '../../interfaces/route';
 
 const { Keyboard } = Plugins;
 
@@ -171,7 +171,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   async startScan() {
-    this.userService.rutasFlow = 4;
+    // this.userService.rutasFlow = 4;
+    this.userService.rutasFlow = 40;
     this.showScan = false;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
     this.bottomDrawerElement.style.transition = '.4s ease-out';
@@ -249,9 +250,10 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.videoElement.srcObject = this.stream;
     this.videoElement.setAttribute( 'playsinline', true );
     this.videoElement.play();
-
-
     requestAnimationFrame( this.scan.bind( this ) );
+    setTimeout( () => {
+      this.userService.rutasFlow = 40;
+    }, 1000 );
   }
 
   goToFeedback() {

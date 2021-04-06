@@ -21,8 +21,17 @@
 
   <div class="content-container mt-2" *ngIf="component === 'Inicio'">
     <ion-content [ngSwitch]="userService.rutasFlow">
+      <!-- Dashboard -->
       <div *ngSwitchCase=0>
-        <h2>Dashboard</h2>
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col>
+              <div class="text-center">
+                <h2>Dashboard</h2>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
       <!-- Rutas -->
       <div *ngSwitchCase=1>
@@ -54,12 +63,15 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-        <ion-button fill="clear" expand="full" class="confirmRutas my-3" (click)="startScan()">Abordar este bus
+        <ion-button fill="clear" expand="full" class="confirmRutas my-3" (click)="startScan()">
+          Abordar este bus
         </ion-button>
       </div>
+      <!-- Experiencia -->
       <div *ngSwitchCase=2>
         <h2>Experiencia</h2>
       </div>
+      <!-- Support / Help -->
       <div *ngSwitchCase=3>
         <h2>Suporte / Ayuda</h2>
       </div>
@@ -84,6 +96,45 @@
             <label class="label-button" for="">Volver</label>
           </ion-button>
         </div>
+      </div>
+      <!-- Travel Detail -->
+      <div *ngSwitchCase="40">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col>
+              <div class="text-center" id="travel-data">
+                <h2>Datos de tu viaje</h2>
+                <img class="rounded-circle shadow-sm avatar ion-margin-vertical"
+                  src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                <ion-note>Tu conductor</ion-note>
+                <h5>Luis Duran | 4/5</h5>
+
+                <ion-note>Tu ruta</ion-note>
+                <div id="info-route">
+                  <img src="./../../../assets/route.png" />
+                  <div>
+                    <h5>Ruta Ciudad - Tocumen</h5>
+                    <ion-note class="ion-float-left">08:00 AM - 05:00 PM</ion-note>
+                  </div>
+                </div>
+
+                <ion-note>Tu unidad</ion-note>
+                <h5>
+                  Modelo Yutong V55 <br>
+                  Placa: 456yht7
+                </h5>
+
+                <ion-note>Puestos disponibles</ion-note>
+                <h5>15/30</h5>
+
+                <ion-button (click)="endTravel()" class="button-btn">
+                  <ion-icon slot="start" name="log-out" class="logout-icon"></ion-icon>
+                  Finalizar viaje
+                </ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
     </ion-content>
   </div>
