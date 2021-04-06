@@ -12,6 +12,7 @@ import { GestureController, LoadingController, NavController, Platform } from '@
 
 import { UserService } from '../../services/user.service';
 import { Route } from '../../interfaces/route';
+// import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 
 const { Keyboard } = Plugins;
 
@@ -59,6 +60,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     private plt: Platform,
     private router: Router,
     public navctl: NavController,
+    // private qrScanner: QRScanner,
     private userService: UserService,
     private loadingCtrl: LoadingController,
     private gestureCtlr: GestureController,
@@ -202,16 +204,22 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
         inversionAttempts: 'dontInvert'
       } );
 
-      console.log( 'code', code );
-
       if ( code?.data ) {
-        this.scanActive = false;
-        this.scanResult = code.data;
-        this.bottomDrawerElement.style.transition = '.4s ease-out';
-        this.bottomDrawerElement.style.transform = '';
-        this.stream.getTracks().forEach( track => track.stop() );
-        this.gesture.enable( true );
-        this.dragable = true;
+        console.log( code );
+        this.isOpen = true;
+        this.userService.rutasFlow = 40;
+        this.scanActive = true;
+        this.stopScan();
+
+        // llamar al api para recibir información del bus
+
+
+        // this.scanResult = code.data;
+        // this.bottomDrawerElement.style.transition = '.4s ease-out';
+        // this.bottomDrawerElement.style.transform = '';
+        // this.stream.getTracks().forEach( track => track.stop() );
+        // this.gesture.enable( true );
+        // this.dragable = true;
         this.emitEvent.emit( {
           type: 'scan-success'
         } );
@@ -248,9 +256,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.videoElement.setAttribute( 'playsinline', true );
     this.videoElement.play();
     requestAnimationFrame( this.scan.bind( this ) );
-    setTimeout( () => {
-      this.userService.rutasFlow = 40;
-    }, 1000 );
+
   }
 
   goToFeedback() {
