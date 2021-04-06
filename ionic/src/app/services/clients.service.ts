@@ -49,4 +49,12 @@ export class ClientsService {
     return this._httpService.delete( `/clients/${id}` );
   }
 
+  comment( comment: string ): Observable<any> {
+    const data = {
+      type_comment_id: 4,
+      comment
+    };
+    return this._httpService.post( '/comment', data );
+  }
+
 }
