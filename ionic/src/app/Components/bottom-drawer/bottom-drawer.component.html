@@ -2,14 +2,14 @@
   #bottomDrawer>
   <div *ngIf="userService.rutasFlow === 10" class="car-loc-btn">
     <div class="text-end" *ngIf="!isOpen">
-      <ion-note>Parada
-        <img class="scan" src="../../../assets/mark.png" />
+      <ion-note>Tú
+        <img class="scan" src="../../../assets/mark.png" style="margin: 0 5px;" />
       </ion-note>
       <ion-note>Parada
-        <img class="scan" src="../../../assets/stop_route.png" />
+        <img class="scan" src="../../../assets/stop_route.png" style="margin-left: 4px;" />
       </ion-note>
       <ion-note>Final de ruta
-        <img class="scan" src="../../../assets/location-sharp.svg" />
+        <img class="scan" src="../../../assets/location-sharp.svg" style="margin-left: 5px;" />
       </ion-note>
     </div>
   </div>
@@ -23,7 +23,7 @@
     <ion-content [ngSwitch]="userService.rutasFlow">
       <!-- Dashboard -->
       <div *ngSwitchCase=0>
-        <!-- <ion-grid fixed>
+        <ion-grid fixed>
           <ion-row>
             <ion-col>
               <div class="text-center">
@@ -31,45 +31,8 @@
               </div>
             </ion-col>
           </ion-row>
-        </ion-grid> -->
-        <ion-grid fixed>
-          <ion-row>
-            <ion-col>
-              <div class="text-center" id="travel-data">
-                <h2>Datos de tu viaje</h2>
-                <img class="rounded-circle shadow-sm avatar ion-margin-vertical"
-                  src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-                <ion-note>Tu conductor</ion-note>
-                <h5>
-                  Luis Duran | 4/5
-                  <ion-icon slot="end" name="star" part="icon"></ion-icon>
-                </h5>
-                <ion-note>Tu ruta</ion-note>
-                <div id="info-route">
-                  <img src="./../../../assets/route.png" />
-                  <div>
-                    <h5>Ruta Ciudad - Tocumen</h5>
-                    <ion-note class="ion-float-left">08:00 AM - 05:00 PM</ion-note>
-                  </div>
-                </div>
-
-                <ion-note>Tu unidad</ion-note>
-                <h5>
-                  Modelo Yutong V55 <br>
-                  Placa: 456yht7
-                </h5>
-
-                <ion-note>Puestos disponibles</ion-note>
-                <h5>15/30</h5>
-
-                <ion-button (click)="endTravel()" class="button-btn ion-margin-top">
-                  <ion-icon slot="start" name="log-out-outline" class="logout-icon"></ion-icon>
-                  Finalizar viaje
-                </ion-button>
-              </div>
-            </ion-col>
-          </ion-row>
         </ion-grid>
+
       </div>
       <!-- Rutas -->
       <div *ngSwitchCase=1>
@@ -167,7 +130,7 @@
                 <ion-note>Puestos disponibles</ion-note>
                 <h5>15/30</h5>
 
-                <ion-button (click)="endTravel()" class="button-btn">
+                <ion-button (click)="endTravel()" class="button-btn ion-margin-top">
                   <ion-icon slot="start" name="log-out-outline" class="logout-icon"></ion-icon>
                   Finalizar viaje
                 </ion-button>

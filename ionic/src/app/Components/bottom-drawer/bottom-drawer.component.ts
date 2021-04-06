@@ -207,7 +207,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       if ( code?.data ) {
         this.scanActive = false;
         this.scanResult = code.data;
-        // ++this.userService.rutasFlow;
         this.bottomDrawerElement.style.transition = '.4s ease-out';
         this.bottomDrawerElement.style.transform = '';
         this.stream.getTracks().forEach( track => track.stop() );
