@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'experience',
     loadChildren: () => import('./pages/experience/experience.module').then( m => m.ExperiencePageModule)
+  },
+  {
+    path: 'rating',
+    loadChildren: () => import('./pages/rating/rating.module').then( m => m.RatingPageModule)
   }
 
 

@@ -313,4 +313,9 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.seatGesture.enable( true );
   }
 
+  endTravel() {
+  //  console.log('prueba finalizar viaje / redireccion calificar');
+    this.router.navigate(['/rating'], { queryParams: { data: 'example data' } });
+  }
+
 }
