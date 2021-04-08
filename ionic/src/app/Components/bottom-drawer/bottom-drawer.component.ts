@@ -205,14 +205,12 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       } );
 
       if ( code?.data ) {
-        console.log( code );
         this.isOpen = true;
         this.userService.rutasFlow = 40;
         this.scanActive = true;
         this.stopScan();
 
         // llamar al api para recibir información del bus
-
 
         this.scanResult = code.data;
         this.bottomDrawerElement.style.transition = '.4s ease-out';
