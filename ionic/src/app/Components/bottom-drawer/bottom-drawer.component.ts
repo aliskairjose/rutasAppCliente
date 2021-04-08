@@ -13,6 +13,8 @@ import { GestureController, LoadingController, NavController, Platform } from '@
 import { UserService } from '../../services/user.service';
 import { Route } from '../../interfaces/route';
 // import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
+import {AlertController, ModalController, PopoverController} from '@ionic/angular';
+import {RatingPage} from '../../pages/rating/rating.page';
 
 const { Keyboard } = Plugins;
 
@@ -65,6 +67,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     private loadingCtrl: LoadingController,
     private gestureCtlr: GestureController,
     private nativePageTransitions: NativePageTransitions,
+    public popoverCtrl: PopoverController,
+    public modalController: ModalController,
   ) {
     this.userService.flowhObserver().subscribe( flow => this.userService.rutasFlow = flow );
   }
@@ -313,9 +317,23 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.seatGesture.enable( true );
   }
 
-  endTravel() {
+  openModal() {
   //  console.log('prueba finalizar viaje / redireccion calificar');
     this.router.navigate(['/rating'], { queryParams: { data: 'example data' } });
+  }
+
+  endTravel(item) {
+      this.modalController.create({
+        component: RatingPage,
+        componentProps: {
+          data: 'example data',
+        },
+      }).then(m => {
+        m.onDidDismiss().then(d => {
+          item = d;
+        });
+        m.present();
+      });
   }
 
 }

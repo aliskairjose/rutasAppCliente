@@ -1,0 +1,49 @@
+ion-content {
+  --ion-background-color: #fae345 !important;
+}
+.custom-space {
+  height: 15%;
+}
+.custom-space-two {
+  height: 5%;
+}
+.custom-avatar {
+  margin-left: 50%;
+}
+.listImg {
+  height: 42px;
+  width: 42px;
+  margin: 10px;
+}
+.listItemWrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.listTextWrapper {
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.addressDetailsCustom{
+  margin: auto;
+  width: 90%;
+  height: 70px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 2px 4px 6px #ccc;
+}
+.custom-text-area {
+  border-bottom: black 1px solid;
+}
+.custom-button {
+  text-transform: none;
+}
+.custom-title {
+  color: black;
+}
+.custom-close {
+  padding-left: 5%;
+  margin-top: 10%;
+  background-color: transparent;
+  font-size: 2rem;
+}

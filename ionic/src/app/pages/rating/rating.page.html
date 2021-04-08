@@ -1,9 +1,77 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>rating</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="custom-content">
+  <button ion-button icon-only menuToggle start class="bg-transparent" (click)="dismissModal()">
+    <ion-icon name="close-outline" class="custom-close"></ion-icon>
+  </button>
+  <div class="custom-space">
+  </div>
+<ion-row>
+  <ion-col size="12" class="ion-text-center">
+    <h2>
+      !Has llegado a tu destino!
+    </h2>
+  </ion-col>
+</ion-row>
 
-<ion-content>
+  <ion-row size="12">
+    <ion-col size="12" class="ion-text-center">
+      <ion-note class="custom-title">
+        Califica al conductor
+      </ion-note>
+    </ion-col>
+    <ion-col size="6" class="ion-text-right">
+      <ion-avatar class="custom-avatar">
+        <img src="assets/avatar.jpg">
+      </ion-avatar>
+    </ion-col>
+    <ion-col size="6" class="ion-padding-top">
+      <span>{{driver.name}}</span>
+      <app-rating> </app-rating>
+    </ion-col>
+  </ion-row>
+  <div class="custom-space-two">
+  </div>
+  <ion-row>
+    <ion-col size="12" class="ion-text-center">
+      <ion-note class="custom-title">
+        Califica la unidad
+      </ion-note>
+    </ion-col>
+    <ion-col size="5" class="ion-text-center">
+    </ion-col>
+    <ion-col size="7" class="ion-text-center">
+      <app-rating> </app-rating>
+    </ion-col>
+  </ion-row>
+  <div class="custom-space-two">
+  </div>
+  <ion-row>
+    <ion-col size="12" class="ion-text-center">
+      <div class="addressDetailsCustom" >
+      <div class="listItemWrapper">
+        <img class="listImg" src="./../../../assets/route.png" />
+        <div class="listTextWrapper">
+          <div class="listName">{{destination.type}} - {{destination.name}}</div>
+          <ion-note>{{destination.hour_init}} - {{destination.hour_end}}</ion-note>
+        </div>
+      </div>
+      </div>
+    </ion-col>
+  </ion-row>
+  <div class="custom-space-two">
+  </div>
+  <ion-row>
+    <ion-col size="12" class="ion-text-center">
+      <h6>¿Algun comentario?</h6>
+    </ion-col>
+    <ion-col class="ion-margin-start ion-margin-end">
+      <ion-textarea class="custom-text-area" rows="4" cols="20" placeholder="Describe tu experiencia..."></ion-textarea>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12" class="ion-text-center">
+      <ion-button color="light" class="custom-button" (click)="sendRating()" >Enviar</ion-button>
+    </ion-col>
+  </ion-row>
 
 </ion-content>

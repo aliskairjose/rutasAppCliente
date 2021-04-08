@@ -34,7 +34,8 @@ const routes: Routes = [
   {
     path: 'clients-modal',
     loadChildren: () => import( './modals/clients-modal/clients-modal.module' ).then( m => m.ClientsModalPageModule )
-  },  {
+  },
+  {
     path: 'route',
     loadChildren: () => import('./pages/route/route.module').then( m => m.RoutePageModule)
   },
