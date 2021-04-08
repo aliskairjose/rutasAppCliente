@@ -57,6 +57,7 @@ export class AuthenticationPage implements OnInit {
         this._auth.AuthSubject( response.user );
         await this._storage.store( TOKEN, response.data );
         await this._storage.store( USER, response.user );
+        this.loginForm.reset();
         this.router.navigate( [ '/sidemenu/Inicio' ] );
         loading.dismiss();
       }, () => loading.dismiss() );

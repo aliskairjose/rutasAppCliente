@@ -786,18 +786,17 @@ let BottomDrawerComponent = class BottomDrawerComponent {
                     inversionAttempts: 'dontInvert'
                 });
                 if (code === null || code === void 0 ? void 0 : code.data) {
-                    console.log(code);
                     this.isOpen = true;
                     this.userService.rutasFlow = 40;
                     this.scanActive = true;
                     this.stopScan();
                     // llamar al api para recibir información del bus
-                    // this.scanResult = code.data;
-                    // this.bottomDrawerElement.style.transition = '.4s ease-out';
-                    // this.bottomDrawerElement.style.transform = '';
-                    // this.stream.getTracks().forEach( track => track.stop() );
-                    // this.gesture.enable( true );
-                    // this.dragable = true;
+                    this.scanResult = code.data;
+                    this.bottomDrawerElement.style.transition = '.4s ease-out';
+                    this.bottomDrawerElement.style.transform = '';
+                    this.stream.getTracks().forEach(track => track.stop());
+                    this.gesture.enable(true);
+                    this.dragable = true;
                     this.emitEvent.emit({
                         type: 'scan-success'
                     });
