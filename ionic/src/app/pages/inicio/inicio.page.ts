@@ -112,7 +112,6 @@ export class InicioPage implements OnInit {
 
     return new Promise<boolean>( resolve => {
 
-      let marker: any = '';
       let iw: any = '';
       this.markers.map( _marker => _marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
       this.markers = [];
@@ -157,46 +156,58 @@ export class InicioPage implements OnInit {
 
           directionsRenderer.setDirections( result );
           const route = result.routes[ 0 ];
+
+          // InfoWindow se instancia antes del marcador para que no se abra al cargar el mapa
+          iw = new google.maps.InfoWindow( {
+            content: locations[ 0 ].name
+          } );
+
           // EL primer marcador
-          marker = new google.maps.Marker( {
+          const startMarker = new google.maps.Marker( {
             position: route.legs[ 0 ].start_location,
             animation: google.maps.Animation.DROP,
             map,
             icon: MAP.STOP_MARK
           } );
-          iw = new google.maps.InfoWindow( {
-            content: locations[ 0 ].name
+          startMarker.addListener( 'click', () => {
+            iw.open( this.map, startMarker );
           } );
-          iw.open( this.map, marker );
-          this.markers.push( marker );
+          this.markers.push( startMarker );
 
           // Marcadores para las paradas
           for ( let i = 1; i < route.legs.length; i++ ) {
-            marker = new google.maps.Marker( {
+            iw = new google.maps.InfoWindow( {
+              content: locations[ i ].name
+            } );
+
+            const stepMarker = new google.maps.Marker( {
               position: route.legs[ i ].start_location,
               animation: google.maps.Animation.DROP,
               map,
               icon: MAP.STOP_MARK
             } );
-            iw = new google.maps.InfoWindow( {
-              content: locations[ i ].name
+
+            stepMarker.addListener( 'click', () => {
+              iw.open( this.map, stepMarker );
             } );
-            iw.open( this.map, marker );
-            this.markers.push( marker );
+            this.markers.push( stepMarker );
           }
 
           // El ultimo marcador
-          marker = new google.maps.Marker( {
+          iw = new google.maps.InfoWindow( {
+            content: locations[ locations.length - 1 ].name
+          } );
+          const endMarker = new google.maps.Marker( {
             position: route.legs[ route.legs.length - 1 ].end_location,
             animation: google.maps.Animation.DROP,
             map,
             icon: MAP.END_ROUTE_MARK
           } );
-          iw = new google.maps.InfoWindow( {
-            content: locations[ locations.length - 1 ].name
+
+          endMarker.addListener( 'click', () => {
+            iw.open( this.map, endMarker );
           } );
-          iw.open( this.map, marker );
-          this.markers.push( marker );
+          this.markers.push( endMarker );
         }
 
       } );

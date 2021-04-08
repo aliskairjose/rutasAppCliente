@@ -215,6 +215,7 @@ let AuthenticationPage = class AuthenticationPage {
                     this._auth.AuthSubject(response.user);
                     yield this._storage.store(_constants_global_constants__WEBPACK_IMPORTED_MODULE_10__["TOKEN"], response.data);
                     yield this._storage.store(_constants_global_constants__WEBPACK_IMPORTED_MODULE_10__["USER"], response.user);
+                    this.loginForm.reset();
                     this.router.navigate(['/sidemenu/Inicio']);
                     loading.dismiss();
                 }), () => loading.dismiss());
