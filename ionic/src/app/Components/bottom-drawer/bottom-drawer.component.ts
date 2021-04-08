@@ -214,12 +214,12 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
         // llamar al api para recibir información del bus
 
 
-        // this.scanResult = code.data;
-        // this.bottomDrawerElement.style.transition = '.4s ease-out';
-        // this.bottomDrawerElement.style.transform = '';
-        // this.stream.getTracks().forEach( track => track.stop() );
-        // this.gesture.enable( true );
-        // this.dragable = true;
+        this.scanResult = code.data;
+        this.bottomDrawerElement.style.transition = '.4s ease-out';
+        this.bottomDrawerElement.style.transform = '';
+        this.stream.getTracks().forEach( track => track.stop() );
+        this.gesture.enable( true );
+        this.dragable = true;
         this.emitEvent.emit( {
           type: 'scan-success'
         } );
