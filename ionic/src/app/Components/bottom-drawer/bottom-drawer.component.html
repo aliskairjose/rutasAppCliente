@@ -6,7 +6,7 @@
         <img class="scan" src="../../../assets/mark.png" style="margin: 0 5px;" />
       </ion-note>
       <ion-note>Parada
-        <img class="scan" src="../../../assets/stop_route.png" style="margin-left: 4px;" />
+        <img class="scan" src="../../../assets/waypoints.svg" style="margin-left: 4px;" />
       </ion-note>
       <ion-note>Final de ruta
         <img class="scan" src="../../../assets/location-sharp.svg" style="margin-left: 5px;" />
@@ -89,7 +89,7 @@
               <canvas #canvas hidden></canvas>
             </div>
           </div>
-          <ion-button *ngIf="!showScan" (click)="scannerOn()" fill="clear" class="confirmRutas my-3 ">
+          <ion-button *ngIf="!showScan" (click)="scannerOn()" fill="clear" class="button-btn confirmRutas my-3 ">
             Escanear QR
           </ion-button>
           <ion-button *ngIf="showScan" (click)="stopScan()" fill="clear" class="confirmRutas my-3 ">

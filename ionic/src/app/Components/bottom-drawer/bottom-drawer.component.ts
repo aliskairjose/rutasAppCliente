@@ -161,7 +161,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.selectedRoute = route;
     this.userService.rutasData = route;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
-    this.gesture.enable( false );
+    this.gesture.enable( true );
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = '';
     this.emitEvent.emit( {
@@ -237,7 +237,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = '';
     this.stream.getTracks().forEach( track => track.stop() );
-    this.gesture.enable( false );
+    this.gesture.enable( true );
     this.showScan = false;
     this.scanActive = false;
   }
@@ -271,25 +271,12 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.navctl.navigateRoot( '/sidemenu/Feedback' );
   }
 
-  goToSeatArrangement() {
-    this.userService.rutasFlow = 4;
-    this.gesture.enable( true );
-    this.dragable = true;
-    this.readJsonData( '../../../assets/jsonCollections/seatMatrix.json' ).then( ( jsonData ) => {
-      if ( jsonData ) {
-        console.log( 'jsonData ==>>>', JSON.parse( JSON.stringify( jsonData ) ).seats );
-        this.seats = JSON.parse( JSON.stringify( jsonData ) ).seats;
-      }
-      this.trackScroll( this.seat.nativeElement );
-    } );
-  }
-
   goToHome() {
     this.openHeight = ( this.plt.height() / 100 ) * 60;
     this.userService.rutasFlow = 1;
     this.showScan = false;
     this.dragable = false;
-    this.gesture.enable( false );
+    this.gesture.enable( true );
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = ``;
 
@@ -302,7 +289,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       gestureName: 'swipe',
       direction: 'y',
       onStart: ev => {
-        this.gesture.enable( false );
+        this.gesture.enable( true );
       },
       onEnd: ev => {
         this.gesture.enable( true );

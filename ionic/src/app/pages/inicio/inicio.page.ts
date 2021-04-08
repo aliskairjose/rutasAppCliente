@@ -112,7 +112,6 @@ export class InicioPage implements OnInit {
 
     return new Promise<boolean>( resolve => {
 
-      let iw: any = '';
       this.markers.map( _marker => _marker.setMap( null ) ); // se pasa this.map para mantener el marcador del usuario
       this.markers = [];
       const travelMode = google.maps.TravelMode.DRIVING;
@@ -158,7 +157,7 @@ export class InicioPage implements OnInit {
           const route = result.routes[ 0 ];
 
           // InfoWindow se instancia antes del marcador para que no se abra al cargar el mapa
-          iw = new google.maps.InfoWindow( {
+          const iwStartMarker: google.maps.InfoWindow = new google.maps.InfoWindow( {
             content: locations[ 0 ].name
           } );
 
@@ -170,13 +169,14 @@ export class InicioPage implements OnInit {
             icon: MAP.STOP_MARK
           } );
           startMarker.addListener( 'click', () => {
-            iw.open( this.map, startMarker );
+            iwStartMarker.close();
+            iwStartMarker.open( this.map, startMarker );
           } );
           this.markers.push( startMarker );
 
           // Marcadores para las paradas
           for ( let i = 1; i < route.legs.length; i++ ) {
-            iw = new google.maps.InfoWindow( {
+            const iwStepMarker: google.maps.InfoWindow = new google.maps.InfoWindow( {
               content: locations[ i ].name
             } );
 
@@ -188,13 +188,14 @@ export class InicioPage implements OnInit {
             } );
 
             stepMarker.addListener( 'click', () => {
-              iw.open( this.map, stepMarker );
+              iwStepMarker.close();
+              iwStepMarker.open( this.map, stepMarker );
             } );
             this.markers.push( stepMarker );
           }
 
           // El ultimo marcador
-          iw = new google.maps.InfoWindow( {
+          const iwEndMarker: google.maps.InfoWindow = new google.maps.InfoWindow( {
             content: locations[ locations.length - 1 ].name
           } );
           const endMarker = new google.maps.Marker( {
@@ -205,7 +206,7 @@ export class InicioPage implements OnInit {
           } );
 
           endMarker.addListener( 'click', () => {
-            iw.open( this.map, endMarker );
+            iwEndMarker.open( this.map, endMarker );
           } );
           this.markers.push( endMarker );
         }

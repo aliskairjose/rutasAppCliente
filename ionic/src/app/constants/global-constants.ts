@@ -15,6 +15,6 @@ export const USER = 'rp_user';
 export const MAP = {
   END_ROUTE_MARK: './../../../assets/location-sharp.svg',
   USER_MARK: './../../../assets/user_mark.png',
-  STOP_MARK: './../../../assets/stop_route.png'
+  STOP_MARK: './../../../assets/waypoints.svg'
 };
 

@@ -59,8 +59,8 @@ export class AuthenticationPage implements OnInit {
         await this._storage.store( USER, response.user );
         this.submitted = false;
         this.loginForm.reset();
-        this.router.navigate( [ '/sidemenu/Inicio' ] );
         loading.dismiss();
+        this.router.navigate( [ '/sidemenu/Inicio' ] );
       }, () => loading.dismiss() );
     }
   }
