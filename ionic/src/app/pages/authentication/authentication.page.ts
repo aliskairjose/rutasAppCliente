@@ -57,8 +57,10 @@ export class AuthenticationPage implements OnInit {
         this._auth.AuthSubject( response.user );
         await this._storage.store( TOKEN, response.data );
         await this._storage.store( USER, response.user );
-        this.router.navigate( [ '/sidemenu/Inicio' ] );
+        this.submitted = false;
+        this.loginForm.reset();
         loading.dismiss();
+        this.router.navigate( [ '/sidemenu/Inicio' ] );
       }, () => loading.dismiss() );
     }
   }
