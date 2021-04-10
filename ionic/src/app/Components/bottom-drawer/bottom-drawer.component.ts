@@ -121,8 +121,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       },
       onEnd: ev => {
         if ( ev.deltaY < -50 ) {
-          // tslint:disable-next-line:quotemark
-          this.bottomDrawerElement.style.transition = ".4s ease-out";
+          this.bottomDrawerElement.style.transition = '.4s ease-out';
           this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight}px)`;
           this.isOpen = true;
         }
@@ -144,12 +143,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
   toggleDrawer() {
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
-    if ( !this.isOpen ) {
-      this.bottomDrawerElement.style.transition = '.4s ease-out';
-      this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight}px`;
-      this.isOpen = true;
-    }
-    else {
+
+    if ( this.isOpen ) {
       this.bottomDrawerElement.style.transition = '.4s ease-out';
       if ( this.userService.rutasFlow === 5 ) {
         this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight / 2.56}px`;
@@ -158,19 +153,23 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       }
 
       this.isOpen = false;
+      return;
     }
+
+    if ( !this.isOpen ) {
+      this.bottomDrawerElement.style.transition = '.4s ease-out';
+      this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight}px`;
+      this.isOpen = true;
+      return;
+    }
+
   }
 
   routeHandler( route: Route ) {
-    this.isOpen = false;
-    this.selectedRoute = route;
-    console.log( this.selectedRoute )
-    console.log( this.selectedRoute.name );
-    this.userService.rutasData = route;
+    this.userService.rutasData = this.selectedRoute = { ...route };
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
     this.gesture.enable( true );
     this.bottomDrawerElement.style.transition = '.4s ease-out';
-    this.bottomDrawerElement.style.transform = '';
     this.emitEvent.emit( {
       type: 'item-selected',
       data: route
@@ -182,8 +181,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.userService.rutasFlow = 4;
     this.showScan = false;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
-    this.bottomDrawerElement.style.transition = '.4s ease-out';
-    this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight}px`;
+    console.log( this.isOpen );
+    this.toggleDrawer();
   }
 
   async scan() {
@@ -212,22 +211,18 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       } );
 
       if ( code?.data ) {
-        this.isOpen = true;
-        this.userService.rutasFlow = 40;
+        this.isOpen = false;
         this.scanActive = true;
         this.stopScan();
-        console.log( JSON.parse( code.data ) );
-        // llamar al api para recibir información del bus
-
         this.bus = { ...JSON.parse( code.data ) };
-        this.bottomDrawerElement.style.transition = '.4s ease-out';
-        this.bottomDrawerElement.style.transform = '';
-        this.stream.getTracks().forEach( track => track.stop() );
+        // this.stream.getTracks().forEach( track => track.stop() );
         this.gesture.enable( true );
         this.dragable = true;
+        this.userService.rutasFlow = 40;
         this.emitEvent.emit( {
           type: 'scan-success'
         } );
+
       } else {
         if ( this.scanActive ) {
           requestAnimationFrame( this.scan.bind( this ) );
