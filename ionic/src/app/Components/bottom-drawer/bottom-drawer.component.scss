@@ -408,6 +408,10 @@ ion-note {
     }
     h5 {
       margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 60vw;
     }
     ion-note {
       margin: 0;

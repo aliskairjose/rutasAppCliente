@@ -108,26 +108,28 @@
                   src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
                 <ion-note>Tu conductor</ion-note>
                 <h5>
-                  Luis Duran | 4/5
+                  {{selectedRoute.driver.name}} | 4/5
                   <ion-icon slot="end" name="star" part="icon"></ion-icon>
                 </h5>
                 <ion-note>Tu ruta</ion-note>
                 <div id="info-route">
                   <img src="./../../../assets/route.png" />
                   <div>
-                    <h5>Ruta Ciudad - Tocumen</h5>
-                    <ion-note class="ion-float-left">08:00 AM - 05:00 PM</ion-note>
+                    <h5>{{selectedRoute.name}}</h5>
+                    <ion-note class="ion-float-left">
+                      {{selectedRoute.start_time | customeTime }} - {{selectedRoute.end_time | customeTime }}
+                    </ion-note>
                   </div>
                 </div>
 
                 <ion-note>Tu unidad</ion-note>
                 <h5>
-                  Modelo Yutong V55 <br>
-                  Placa: 456yht7
+                  Modelo: {{bus.bus_model.name}} <br>
+                  Placa: {{bus.license_plate | uppercase}}
                 </h5>
 
                 <ion-note>Puestos disponibles</ion-note>
-                <h5>15/30</h5>
+                <h5>15/{{bus.number_positions}}</h5>
 
                 <ion-button (click)="endTravel()" class="button-btn ion-margin-top">
                   <ion-icon slot="start" name="log-out-outline" class="logout-icon"></ion-icon>
@@ -142,8 +144,10 @@
           <div id="info-route">
             <img src="./../../../assets/route.png" style="margin-left: 0 !important;" />
             <div>
-              <h5>Luis Duran</h5>
-              <p style="margin: 0;">Modelo Yutong V55 | Placa: 456yht7</p>
+              <h5>{{selectedRoute.driver.name}}</h5>
+              <p style="margin: 0;">
+                Modelo {{bus.bus_model.name}} | Placa: {{bus.license_plate | uppercase}}
+              </p>
               <ion-note class="ion-float-left">Tiempo de llegada a destino: 25 min</ion-note>
             </div>
           </div>

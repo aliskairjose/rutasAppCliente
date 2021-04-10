@@ -13,8 +13,9 @@ import { GestureController, LoadingController, NavController, Platform } from '@
 import { UserService } from '../../services/user.service';
 import { Route } from '../../interfaces/route';
 // import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
-import {AlertController, ModalController, PopoverController} from '@ionic/angular';
-import {RatingPage} from '../../pages/rating/rating.page';
+import { AlertController, ModalController, PopoverController } from '@ionic/angular';
+import { RatingPage } from '../../pages/rating/rating.page';
+import { Bus } from '../../interfaces/bus';
 
 const { Keyboard } = Plugins;
 
@@ -37,6 +38,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   loading: HTMLIonLoadingElement;
   selectedRoute: Route = {};
   searchText = '';
+  bus: Bus = {};
 
   @Output() emitEvent: EventEmitter<any> = new EventEmitter();
   @Input() component = 'Inicio';
@@ -52,7 +54,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   dragable = true;
   rutasFlow = 0;
   scanActive = false;
-  scanResult = null;
   stream = null;
   seats = [];
   showScan = false;
@@ -163,6 +164,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   routeHandler( route: Route ) {
     this.isOpen = false;
     this.selectedRoute = route;
+    console.log( this.selectedRoute )
+    console.log( this.selectedRoute.name );
     this.userService.rutasData = route;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
     this.gesture.enable( true );
@@ -213,10 +216,10 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
         this.userService.rutasFlow = 40;
         this.scanActive = true;
         this.stopScan();
-
+        console.log( JSON.parse( code.data ) );
         // llamar al api para recibir información del bus
 
-        this.scanResult = code.data;
+        this.bus = { ...JSON.parse( code.data ) };
         this.bottomDrawerElement.style.transition = '.4s ease-out';
         this.bottomDrawerElement.style.transform = '';
         this.stream.getTracks().forEach( track => track.stop() );
@@ -303,22 +306,22 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   openModal() {
-  //  console.log('prueba finalizar viaje / redireccion calificar');
-    this.router.navigate(['/rating'], { queryParams: { data: 'example data' } });
+    //  console.log('prueba finalizar viaje / redireccion calificar');
+    this.router.navigate( [ '/rating' ], { queryParams: { data: 'example data' } } );
   }
 
-  endTravel(item) {
-      this.modalController.create({
-        component: RatingPage,
-        componentProps: {
-          data: 'example data',
-        },
-      }).then(m => {
-        m.onDidDismiss().then(d => {
-          item = d;
-        });
-        m.present();
-      });
+  endTravel( item ) {
+    this.modalController.create( {
+      component: RatingPage,
+      componentProps: {
+        data: 'example data',
+      },
+    } ).then( m => {
+      m.onDidDismiss().then( d => {
+        item = d;
+      } );
+      m.present();
+    } );
   }
 
 }
