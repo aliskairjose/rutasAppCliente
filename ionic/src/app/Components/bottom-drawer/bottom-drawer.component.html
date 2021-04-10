@@ -112,16 +112,17 @@
                   <ion-icon slot="end" name="star" part="icon"></ion-icon>
                 </h5>
                 <ion-note>Tu ruta</ion-note>
-                <div id="info-route">
-                  <img src="./../../../assets/route.png" />
-                  <div>
-                    <h5>{{selectedRoute.name}}</h5>
-                    <ion-note class="ion-float-left">
-                      {{selectedRoute.start_time | customeTime }} - {{selectedRoute.end_time | customeTime }}
-                    </ion-note>
-                  </div>
-                </div>
-
+                <ion-list lines="none">
+                  <ion-item>
+                    <ion-avatar slot="start">
+                      <img src="./../../../assets/route.png">
+                    </ion-avatar>
+                    <ion-label>
+                      <h2>{{selectedRoute.name}}</h2>
+                      <h3>{{selectedRoute.start_time | customeTime }} - {{selectedRoute.end_time | customeTime }}</h3>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
                 <ion-note>Tu unidad</ion-note>
                 <h5>
                   Modelo: {{bus.bus_model.name}} <br>
