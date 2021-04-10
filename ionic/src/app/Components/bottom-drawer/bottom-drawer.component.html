@@ -54,7 +54,7 @@
               <ion-list-header>
                 <ion-label>Paradas de la ruta</ion-label>
               </ion-list-header>
-              <ion-list>
+              <ion-list lines="full">
                 <ion-item *ngFor="let stop of selectedRoute.route_stops">
                   <ion-label>{{ stop.name }}</ion-label>
                   <ion-note>{{ stop.arrival_time | customeTime }}</ion-note>
