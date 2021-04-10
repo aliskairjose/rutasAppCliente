@@ -209,7 +209,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       const code = jsQR( imageData.data, imageData.width, imageData.height, {
         inversionAttempts: 'dontInvert'
       } );
-
+      this.userService.rutasFlow = 40;
       if ( code?.data ) {
         this.isOpen = false;
         this.scanActive = true;
