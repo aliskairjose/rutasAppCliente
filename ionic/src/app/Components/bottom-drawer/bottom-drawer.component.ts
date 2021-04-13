@@ -213,7 +213,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
         this.isOpen = false;
         this.scanActive = true;
         this.stopScan();
-        console.log( JSON.parse( code.data ) );
         this.bus = { ...JSON.parse( code.data ) };
         // this.stream.getTracks().forEach( track => track.stop() );
         this.gesture.enable( true );
