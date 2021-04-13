@@ -1,15 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-@Component({
+@Component( {
   selector: 'app-notification',
   templateUrl: './notification.page.html',
-  styleUrls: ['./notification.page.scss'],
-})
+  styleUrls: [ './notification.page.scss' ],
+} )
 export class NotificationPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit() {
+  }
+
+  search(): void {
+    console.log( 'search' );
+  }
+
+  detail(): void {
+    this.router.navigate( [ 'notification/detail' ] );
   }
 
 }

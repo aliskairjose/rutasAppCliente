@@ -1,0 +1,18 @@
+ion-content {
+  .avatar {
+    border-radius: 0px !important;
+    height: 50%;
+    width: auto;
+  }
+  ion-card {
+    background-color: #f1f2f2;
+    ion-list {
+      background: #f1f2f2;
+
+      ion-item::part(native) {
+        background-color: #f1f2f2;
+        color: #fff;
+      }
+    }
+  }
+}

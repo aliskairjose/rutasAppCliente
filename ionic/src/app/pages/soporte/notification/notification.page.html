@@ -7,8 +7,27 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <div class="incidence-date">
+    <div>
+      <ion-item>
+        <ion-label position="floating">MM/DD/YYYY</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" min="1994-03-14" max="2012-12-09" value="2002-09-23T15:03:46.789">
+        </ion-datetime>
+      </ion-item>
+    </div>
+    <div>
+      <ion-item>
+        <ion-label position="floating">MM/DD/YYYY</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" min="1994-03-14" max="2012-12-09" value="2002-09-23T15:03:46.789">
+        </ion-datetime>
+      </ion-item>
+    </div>
+    <ion-button (click)="search()" color="tertiary">
+      <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+    </ion-button>
+  </div>
   <ion-list>
-    <ion-item>
+    <ion-item button (click)="detail()" detail="false">
       <ion-avatar slot="start">
         <img src="./../../../assets/svg/chat.svg" />
       </ion-avatar>
@@ -18,7 +37,7 @@
       </ion-label>
       <ion-note>Ahora</ion-note>
     </ion-item>
-    <ion-item>
+    <ion-item button (click)="detail()" detail="false">
       <ion-avatar slot="start">
         <img src="./../../../assets/svg/chat.svg" />
       </ion-avatar>
@@ -28,7 +47,7 @@
       </ion-label>
       <ion-note>Lunes</ion-note>
     </ion-item>
-    <ion-item>
+    <ion-item button (click)="detail()" detail="false">
       <ion-avatar slot="start">
         <img src="./../../../assets/svg/chat.svg" />
       </ion-avatar>
