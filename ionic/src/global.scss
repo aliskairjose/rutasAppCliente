@@ -177,6 +177,7 @@ tr:nth-child(even) {
 // }
 
 ion-button {
+  text-transform: none !important;
   label {
     padding: 0 6vh;
   }
@@ -199,10 +200,4 @@ ion-button {
 
 .menu-title {
   font-weight: normal !important;
-}
-
-.button-btn {
-  --background: #fae345;
-  color: black;
-  text-transform: none !important;
 }
