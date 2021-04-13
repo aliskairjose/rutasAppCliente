@@ -104,8 +104,7 @@
             <ion-col>
               <div class="text-center" id="travel-data">
                 <h2>Datos de tu viaje</h2>
-                <img class="rounded-circle shadow-sm avatar ion-margin-vertical"
-                  src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                <img class="rounded-circle shadow-sm avatar ion-margin-vertical" src="./../../../assets/avatar.png">
                 <ion-note>Tu conductor</ion-note>
                 <h5>
                   {{selectedRoute.driver.name}} | 4/5
@@ -143,7 +142,7 @@
 
         <div id="travel-data" *ngIf="!isOpen">
           <div id="info-route">
-            <img src="./../../../assets/route.png" style="margin-left: 0 !important;" />
+            <img src="./../../../assets/avatar.png" style="margin-left: 0 !important;" />
             <div>
               <h5>{{selectedRoute.driver.name}}</h5>
               <p style="margin: 0;">
