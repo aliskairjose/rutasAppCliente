@@ -1,4 +1,28 @@
 ion-content {
   position: absolute;
   top: 15%;
+
+  .rating-face {
+    display: flex;
+    margin: auto;
+    margin-bottom: -1.4em;
+    width: 53%;
+    border: 24px var(--rp-color-primary) solid;
+    border-radius: 50%;
+  }
+
+  .rating-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15vh;
+    background-color: var(--rp-color-primary);
+    border-radius: 10px;
+    ion-icon {
+      margin: 0 4px;
+    }
+    p {
+      margin: 0;
+    }
+  }
 }
