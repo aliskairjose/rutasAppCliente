@@ -55,8 +55,8 @@ export class RouteService {
    * @param bus_id Id del bus
    * @returns
    */
-  abording( busId: number, clientId: number ): Observable<any> {
-    return this._http.post( `/route-boarding?client_id=${clientId}&bus_id=${busId}` );
+  abording( busId: number, clientId: number, routeId: number ): Observable<any> {
+    return this._http.post( `/route-boarding?client_id=${clientId}&bus_id=${busId}&route_id${routeId}` );
   }
 
   /**

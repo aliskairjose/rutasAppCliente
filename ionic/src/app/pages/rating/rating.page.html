@@ -1,14 +1,13 @@
-
 <ion-content class="custom-content">
   <div class="custom-space">
   </div>
-<ion-row>
-  <ion-col size="12" class="ion-text-center">
-    <h2>
-      !Has llegado a tu destino!
-    </h2>
-  </ion-col>
-</ion-row>
+  <ion-row>
+    <ion-col size="12" class="ion-text-center">
+      <h2>
+        !Has llegado a tu destino!
+      </h2>
+    </ion-col>
+  </ion-row>
 
   <ion-row size="12">
     <ion-col size="12" class="ion-text-center">
@@ -18,11 +17,11 @@
     </ion-col>
     <div class="div-avatar">
       <ion-item lines="none">
-        <ion-avatar slot="start" >
+        <ion-avatar slot="start">
           <img class="custom-img-avatar" src="https://toppng.com/uploads/preview/foto-carnet-11550717604z0lxjntkz4.png">
         </ion-avatar>
         <ion-label>
-          <span class="ion-padding-top">{{driver.name}}</span>
+          <span class="ion-padding-top">{{data.driver.name}}</span>
           <app-rating> </app-rating>
         </ion-label>
       </ion-item>
@@ -46,14 +45,16 @@
   </div>
   <ion-row>
     <ion-col size="12" class="ion-text-left">
-      <div class="addressDetailsCustom" >
-      <div class="listItemWrapper">
-        <img class="listImg" src="./../../../assets/route.png" />
-        <div class="listTextWrapper">
-          <div class="listName">{{destination.type}} - {{destination.name}}</div>
-          <ion-note>{{destination.hour_init}} - {{destination.hour_end}}</ion-note>
+      <div class="addressDetailsCustom">
+        <div class="listItemWrapper">
+          <img class="listImg" src="./../../../assets/svg/route_circle.svg" />
+          <div class="listTextWrapper">
+            <div class="listName">
+              <h3 style="margin: 0;">{{ data.name}}</h3>
+            </div>
+            <ion-note>{{data.start_time | customeTime }} - {{data.end_time | customeTime }}</ion-note>
+          </div>
         </div>
-      </div>
       </div>
     </ion-col>
   </ion-row>
@@ -64,13 +65,14 @@
       <h6>¿Algun comentario?</h6>
     </ion-col>
     <ion-col class="ion-margin-start ion-margin-end">
-      <ion-textarea class="custom-text-area" rows="4" cols="20" placeholder="Describe tu experiencia..."></ion-textarea>
+      <ion-textarea class="custom-text-area" rows="4" cols="20" placeholder="Describe tu experiencia..."
+        [(ngModel)]="experience"></ion-textarea>
     </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col size="12" class="ion-text-center">
-      <ion-button color="light" class="custom-button" (click)="sendRating()" >Enviar</ion-button>
+      <ion-button color="light" class="custom-button" (click)="sendRating()">Enviar</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>

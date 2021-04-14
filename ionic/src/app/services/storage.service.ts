@@ -27,7 +27,7 @@ export class StorageService {
    * @param key Identificador del dato que se desea recuperar
    * @returns value { any }
    */
-  async get( key: string ): Promise<{ value: User }> {
+  async get( key: string ): Promise<{ value: any }> {
     const item = await Storage.get( { key } );
     return JSON.parse( item.value );
   }
@@ -36,7 +36,7 @@ export class StorageService {
    * @description Recupera el usuario almacenado en el localStorage
    * @returns Usuario
    */
-  async getUser(): Promise<{ value: User }> {
+  async getUser(): Promise<User> {
     const item = await Storage.get( { key: USER } );
     return JSON.parse( item.value );
   }

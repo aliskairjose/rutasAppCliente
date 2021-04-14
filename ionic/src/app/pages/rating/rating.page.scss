@@ -1,17 +1,26 @@
 ion-content {
   --ion-background-color: #fae345 !important;
 }
-ion-avatar {
-  width: 5rem;
-  height: 5rem;
+
+.avatar-route {
+  border: solid 1px white;
+  height: 80%;
+  width: auto;
 }
+
 .custom-row-name {
   padding-top: 6%;
 }
+
 .div-avatar {
   margin: auto;
+  ion-avatar {
+    width: 5rem;
+    height: 5rem;
+  }
 }
-@media only screen and (max-width: 321px) and (min-width: 5px)  {
+
+@media only screen and (max-width: 321px) and (min-width: 5px) {
   .custom-space {
     height: 1%;
   }
@@ -19,7 +28,7 @@ ion-avatar {
     height: 1%;
   }
 }
-@media only screen and (max-width: 361px) and (min-width: 322px)  {
+@media only screen and (max-width: 361px) and (min-width: 322px) {
   .custom-space {
     height: 8%;
   }
@@ -27,7 +36,7 @@ ion-avatar {
     height: 2%;
   }
 }
-@media only screen and (max-width: 376px) and (min-width: 362px)  {
+@media only screen and (max-width: 376px) and (min-width: 362px) {
   .custom-space {
     height: 8%;
   }
@@ -35,7 +44,7 @@ ion-avatar {
     height: 3%;
   }
 }
-@media only screen and (max-width: 415px) and (min-width: 377px)  {
+@media only screen and (max-width: 415px) and (min-width: 377px) {
   .custom-space {
     height: 15%;
   }
@@ -43,7 +52,7 @@ ion-avatar {
     height: 3%;
   }
 }
-@media only screen and (min-width: 416px)  {
+@media only screen and (min-width: 416px) {
   .custom-space {
     height: 20%;
   }
@@ -51,7 +60,7 @@ ion-avatar {
     height: 8%;
   }
 }
-@media only screen and (min-width: 540px)  {
+@media only screen and (min-width: 540px) {
   .custom-space {
     height: 8%;
   }
@@ -78,7 +87,7 @@ ion-avatar {
   padding-top: 10px;
   padding-bottom: 20px;
 }
-.addressDetailsCustom{
+.addressDetailsCustom {
   margin: auto;
   width: 90%;
   height: 70px;
@@ -94,12 +103,12 @@ ion-avatar {
 }
 .custom-title {
   color: black;
-  .driver{
+  .driver {
     font-size: 1.5rem;
   }
 }
 .custom-row-name {
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
 .custom-close {
   padding-left: 5%;

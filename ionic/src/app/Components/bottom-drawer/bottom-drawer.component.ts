@@ -16,6 +16,11 @@ import { Route } from '../../interfaces/route';
 import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 import { RatingPage } from '../../pages/rating/rating.page';
 import { RouteService } from '../../services/route.service';
+import { Bus } from '../../interfaces/bus';
+import { StorageService } from '../../services/storage.service';
+import { USER } from '../../constants/global-constants';
+import { User } from '../../interfaces/user';
+import { CommonService } from '../../services/common.service';
 
 const { Keyboard } = Plugins;
 
@@ -38,6 +43,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   loading: HTMLIonLoadingElement;
   selectedRoute: Route = {};
   searchText = '';
+  bus: Bus = {};
 
   @Output() emitEvent: EventEmitter<any> = new EventEmitter();
   @Input() component = 'Inicio';
@@ -53,7 +59,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   dragable = true;
   rutasFlow = 0;
   scanActive = false;
-  scanResult = null;
+  scanResult: Bus = {};
   stream = null;
   seats = [];
   showScan = false;
@@ -64,6 +70,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     private router: Router,
     public navctl: NavController,
     // private qrScanner: QRScanner,
+    private _common: CommonService,
     private userService: UserService,
     private routeService: RouteService,
     private loadingCtrl: LoadingController,
@@ -71,6 +78,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     private nativePageTransitions: NativePageTransitions,
     public popoverCtrl: PopoverController,
     public modalController: ModalController,
+    private _storage: StorageService,
   ) {
     this.userService.flowhObserver().subscribe( flow => this.userService.rutasFlow = flow );
   }
@@ -215,13 +223,14 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
         this.userService.rutasFlow = 40;
         this.scanActive = true;
         this.stopScan();
-        this.scanResult = code.data;
+        this.scanResult = { ...JSON.parse( code.data ) };
         console.log( this.scanResult );
+        const user: User = await this._storage.getUser();
         // llamar al api para recibir información del bus
 
-        // this.routeService.abording( busId, clientId ).subscribe( response => {
-        //   console.log( response );
-        // } );
+        this.routeService.abording( this.scanResult.id, user.client_id, this.selectedRoute.id ).subscribe( response => {
+          console.log( response );
+        } );
 
         this.bottomDrawerElement.style.transition = '.4s ease-out';
         this.bottomDrawerElement.style.transform = '';
@@ -312,18 +321,16 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     // this.router.navigate(['/rating'], { queryParams: { data: 'example data' } });
   }
 
-  endTravel( item ) {
-    this.modalController.create( {
+  async endTravel( item ) {
+
+    const modal = await this._common.presentModal( {
       component: RatingPage,
-      componentProps: {
-        data: 'example data',
-      },
-    } ).then( m => {
-      m.onDidDismiss().then( d => {
-        item = d;
-      } );
-      m.present();
+      cssClass: '',
+      componentProps: { data: this.selectedRoute }
     } );
+    modal.present();
+    const modalDismiss = await modal.onDidDismiss();
+    this.router.navigate( [ '/sidemenu/Inicio' ] );
   }
 
 }

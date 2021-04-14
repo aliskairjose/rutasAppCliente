@@ -1,3 +1,4 @@
+import { Driver } from './driver';
 export interface Route {
   id?: number;
   name?: string;
@@ -8,6 +9,7 @@ export interface Route {
   start_time?: string;
   end_time?: string;
   route_stops?: RouteStop[];
+  driver?: Driver;
 }
 
 export interface RouteStop {
