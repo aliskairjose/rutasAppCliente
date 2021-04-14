@@ -43,8 +43,8 @@
         <ion-menu-button class="btn-icon"></ion-menu-button>
       </ion-buttons>
     </div>
-    <div>
-      <ion-img [src]="logo" class="ion-float-right mt-1"></ion-img>
+    <div class="align-self-center">
+      <ion-img [src]="logo"></ion-img>
     </div>
   </div>
   <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in' : 'fade'" tappable (click)="bottomDrawer.toggleDrawer()">
