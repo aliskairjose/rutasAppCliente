@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="incidence-date">
+  <div class="d-flex justify-content-between">
     <div>
       <ion-item>
         <ion-label position="floating">MM/DD/YYYY</ion-label>
@@ -22,11 +22,13 @@
         </ion-datetime>
       </ion-item>
     </div>
-    <ion-button (click)="search()" color="tertiary">
-      <ion-icon slot="icon-only" name="search-outline"></ion-icon>
-    </ion-button>
+    <div>
+      <ion-button (click)="search()" color="tertiary">
+        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+      </ion-button>
+    </div>
   </div>
-  <ion-list>
+  <ion-list lines="none">
     <ion-item button (click)="detail()" detail="false">
       <ion-avatar slot="start">
         <img src="./../../../assets/svg/chat.svg" />
