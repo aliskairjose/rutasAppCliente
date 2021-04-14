@@ -1,40 +1,40 @@
+
 <ion-content class="custom-content">
-  <button ion-button icon-only menuToggle start class="bg-transparent" (click)="dismissModal()">
-    <ion-icon name="close-outline" class="custom-close"></ion-icon>
-  </button>
   <div class="custom-space">
   </div>
-  <ion-row>
-    <ion-col size="12" class="ion-text-center">
-      <h2>
-        !Has llegado a tu destino!
-      </h2>
-    </ion-col>
-  </ion-row>
+<ion-row>
+  <ion-col size="12" class="ion-text-center">
+    <h2>
+      !Has llegado a tu destino!
+    </h2>
+  </ion-col>
+</ion-row>
 
   <ion-row size="12">
     <ion-col size="12" class="ion-text-center">
-      <ion-note class="custom-title">
+      <span class="custom-title driver">
         Califica al conductor
-      </ion-note>
+      </span>
     </ion-col>
-    <ion-col size="6" class="ion-text-right">
-      <ion-avatar class="custom-avatar">
-        <img src="assets/avatar.jpg">
-      </ion-avatar>
-    </ion-col>
-    <ion-col size="6" class="ion-padding-top">
-      <span>{{driver.name}}</span>
-      <app-rating> </app-rating>
-    </ion-col>
+    <div class="div-avatar">
+      <ion-item lines="none">
+        <ion-avatar slot="start" >
+          <img class="custom-img-avatar" src="https://toppng.com/uploads/preview/foto-carnet-11550717604z0lxjntkz4.png">
+        </ion-avatar>
+        <ion-label>
+          <span class="ion-padding-top">{{driver.name}}</span>
+          <app-rating> </app-rating>
+        </ion-label>
+      </ion-item>
+    </div>
   </ion-row>
   <div class="custom-space-two">
   </div>
   <ion-row>
     <ion-col size="12" class="ion-text-center">
-      <ion-note class="custom-title">
+      <span class="custom-title driver">
         Califica la unidad
-      </ion-note>
+      </span>
     </ion-col>
     <ion-col size="5" class="ion-text-center">
     </ion-col>
@@ -45,22 +45,22 @@
   <div class="custom-space-two">
   </div>
   <ion-row>
-    <ion-col size="12" class="ion-text-center">
-      <div class="addressDetailsCustom">
-        <div class="listItemWrapper">
-          <img class="listImg" src="./../../../assets/route.png" />
-          <div class="listTextWrapper">
-            <div class="listName">{{destination.type}} - {{destination.name}}</div>
-            <ion-note>{{destination.hour_init}} - {{destination.hour_end}}</ion-note>
-          </div>
+    <ion-col size="12" class="ion-text-left">
+      <div class="addressDetailsCustom" >
+      <div class="listItemWrapper">
+        <img class="listImg" src="./../../../assets/route.png" />
+        <div class="listTextWrapper">
+          <div class="listName">{{destination.type}} - {{destination.name}}</div>
+          <ion-note>{{destination.hour_init}} - {{destination.hour_end}}</ion-note>
         </div>
+      </div>
       </div>
     </ion-col>
   </ion-row>
   <div class="custom-space-two">
   </div>
   <ion-row>
-    <ion-col size="12" class="ion-text-center">
+    <ion-col size="12" class="custom-title driver ion-text-center">
       <h6>¿Algun comentario?</h6>
     </ion-col>
     <ion-col class="ion-margin-start ion-margin-end">
@@ -70,8 +70,7 @@
 
   <ion-row>
     <ion-col size="12" class="ion-text-center">
-      <ion-button color="light" class="custom-button" (click)="sendRating()">Enviar</ion-button>
+      <ion-button color="light" class="custom-button" (click)="sendRating()" >Enviar</ion-button>
     </ion-col>
   </ion-row>
-
 </ion-content>

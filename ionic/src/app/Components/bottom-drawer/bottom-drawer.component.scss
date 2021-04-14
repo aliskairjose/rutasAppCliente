@@ -413,16 +413,13 @@ ion-note {
       margin: 0;
     }
   }
-  ion-list {
-    padding: 0;
-  }
   ion-note {
     margin: 16px 0 5px;
   }
   h5 {
     font-weight: normal;
     ion-icon {
-      color: var(--rp-color-primary);
+      color: var(--ion-color-rp-primary);
     }
   }
 }

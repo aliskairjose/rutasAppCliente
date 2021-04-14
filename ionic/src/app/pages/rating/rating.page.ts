@@ -38,7 +38,8 @@ export class RatingPage implements OnInit {
     public modalController: ModalController,
     private _storage: StorageService,
   ) {
-    this.data = this.navParams.get('modelId');
+  //  this.data = this.navParams.get('modelId');
+
   }
 
   ngOnInit() {
