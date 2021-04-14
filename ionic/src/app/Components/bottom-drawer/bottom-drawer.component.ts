@@ -13,8 +13,8 @@ import { GestureController, LoadingController, NavController, Platform } from '@
 import { UserService } from '../../services/user.service';
 import { Route } from '../../interfaces/route';
 // import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
-import {AlertController, ModalController, PopoverController} from '@ionic/angular';
-import {RatingPage} from '../../pages/rating/rating.page';
+import { AlertController, ModalController, PopoverController } from '@ionic/angular';
+import { RatingPage } from '../../pages/rating/rating.page';
 
 const { Keyboard } = Plugins;
 
@@ -209,7 +209,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       } );
 
       if ( code?.data ) {
-        this.isOpen = true;
+        this.isOpen = false;
         this.userService.rutasFlow = 40;
         this.scanActive = true;
         this.stopScan();
@@ -303,21 +303,21 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   openModal() {
-   // this.router.navigate(['/rating'], { queryParams: { data: 'example data' } });
+    // this.router.navigate(['/rating'], { queryParams: { data: 'example data' } });
   }
 
-  endTravel(item) {
-      this.modalController.create({
-        component: RatingPage,
-        componentProps: {
-          data: 'example data',
-        },
-      }).then(m => {
-        m.onDidDismiss().then(d => {
-          item = d;
-        });
-        m.present();
-      });
+  endTravel( item ) {
+    this.modalController.create( {
+      component: RatingPage,
+      componentProps: {
+        data: 'example data',
+      },
+    } ).then( m => {
+      m.onDidDismiss().then( d => {
+        item = d;
+      } );
+      m.present();
+    } );
   }
 
 }
