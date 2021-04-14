@@ -32,7 +32,7 @@ export class RatingPage implements OnInit {
 
 
   sendRating() {
-
+    this.endTravel();
   }
 
 
