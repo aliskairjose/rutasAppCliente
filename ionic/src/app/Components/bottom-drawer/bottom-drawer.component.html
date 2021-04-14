@@ -44,7 +44,7 @@
             <img class="clock" src="../../../assets/clock.png" />
             <div class="d-flex flex-column">
               <span>Proxima unidad</span>
-              <ion-note>15 minutos</ion-note>
+              <ion-note>15 minutes</ion-note>
             </div>
           </div>
         </div>
@@ -52,9 +52,9 @@
           <ion-row>
             <ion-col size="12">
               <ion-list-header>
-                <h5>Paradas de la ruta</h5>
+                <ion-label>Paradas de la ruta</ion-label>
               </ion-list-header>
-              <ion-list lines="full">
+              <ion-list>
                 <ion-item *ngFor="let stop of selectedRoute.route_stops">
                   <ion-label>{{ stop.name }}</ion-label>
                   <ion-note>{{ stop.arrival_time | customeTime }}</ion-note>
@@ -104,34 +104,32 @@
             <ion-col>
               <div class="text-center" id="travel-data">
                 <h2>Datos de tu viaje</h2>
-                <img class="rounded-circle shadow-sm avatar ion-margin-vertical" src="./../../../assets/avatar.png">
+                <img class="rounded-circle shadow-sm avatar ion-margin-vertical"
+                  src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
                 <ion-note>Tu conductor</ion-note>
                 <h5>
-                  {{selectedRoute.driver.name}} | 4/5
+                  Luis Duran | 4/5
                   <ion-icon slot="end" name="star" part="icon"></ion-icon>
                 </h5>
                 <ion-note>Tu ruta</ion-note>
-                <ion-list lines="none">
-                  <ion-item>
-                    <ion-avatar slot="start">
-                      <img src="./../../../assets/route.png">
-                    </ion-avatar>
-                    <ion-label>
-                      <h2>{{selectedRoute.name}}</h2>
-                      <h3>{{selectedRoute.start_time | customeTime }} - {{selectedRoute.end_time | customeTime }}</h3>
-                    </ion-label>
-                  </ion-item>
-                </ion-list>
+                <div id="info-route">
+                  <img src="./../../../assets/route.png" />
+                  <div>
+                    <h5>Ruta Ciudad - Tocumen</h5>
+                    <ion-note class="ion-float-left">08:00 AM - 05:00 PM</ion-note>
+                  </div>
+                </div>
+
                 <ion-note>Tu unidad</ion-note>
                 <h5>
-                  Modelo: {{bus.bus_model.name}} <br>
-                  Placa: {{bus.license_plate | uppercase}}
+                  Modelo Yutong V55 <br>
+                  Placa: 456yht7
                 </h5>
 
                 <ion-note>Puestos disponibles</ion-note>
-                <h5>15/{{bus.number_positions}}</h5>
+                <h5>15/30</h5>
 
-                <ion-button (click)="endTravel()" class="button-btn ion-margin-top" color="tertiary">
+                <ion-button (click)="endTravel()" class="button-btn ion-margin-top">
                   <ion-icon slot="start" name="log-out-outline" class="logout-icon"></ion-icon>
                   Finalizar viaje
                 </ion-button>
@@ -142,12 +140,10 @@
 
         <div id="travel-data" *ngIf="!isOpen">
           <div id="info-route">
-            <img src="./../../../assets/avatar.png" style="margin-left: 0 !important;" />
+            <img src="./../../../assets/route.png" style="margin-left: 0 !important;" />
             <div>
-              <h5>{{selectedRoute.driver.name}}</h5>
-              <p style="margin: 0;">
-                Modelo {{bus.bus_model.name}} | Placa: {{bus.license_plate | uppercase}}
-              </p>
+              <h5>Luis Duran</h5>
+              <p style="margin: 0;">Modelo Yutong V55 | Placa: 456yht7</p>
               <ion-note class="ion-float-left">Tiempo de llegada a destino: 25 min</ion-note>
             </div>
           </div>

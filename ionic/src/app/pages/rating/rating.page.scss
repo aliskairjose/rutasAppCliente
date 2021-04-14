@@ -1,14 +1,68 @@
 ion-content {
   --ion-background-color: #fae345 !important;
 }
-.custom-space {
-  height: 15%;
+ion-avatar {
+  width: 5rem;
+  height: 5rem;
 }
-.custom-space-two {
-  height: 5%;
+.custom-row-name {
+  padding-top: 6%;
+}
+.div-avatar {
+  margin: auto;
+}
+@media only screen and (max-width: 321px) and (min-width: 5px)  {
+  .custom-space {
+    height: 1%;
+  }
+  .custom-space-two {
+    height: 1%;
+  }
+}
+@media only screen and (max-width: 361px) and (min-width: 322px)  {
+  .custom-space {
+    height: 8%;
+  }
+  .custom-space-two {
+    height: 2%;
+  }
+}
+@media only screen and (max-width: 376px) and (min-width: 362px)  {
+  .custom-space {
+    height: 8%;
+  }
+  .custom-space-two {
+    height: 3%;
+  }
+}
+@media only screen and (max-width: 415px) and (min-width: 377px)  {
+  .custom-space {
+    height: 15%;
+  }
+  .custom-space-two {
+    height: 3%;
+  }
+}
+@media only screen and (min-width: 416px)  {
+  .custom-space {
+    height: 20%;
+  }
+  .custom-space-two {
+    height: 8%;
+  }
+}
+@media only screen and (min-width: 540px)  {
+  .custom-space {
+    height: 8%;
+  }
+  .custom-space-two {
+    height: 5%;
+  }
 }
 .custom-avatar {
-  margin-left: 50%;
+  .custom-img-avatar {
+    box-shadow: 2px 4px 6px #837f7f;
+  }
 }
 .listImg {
   height: 42px;
@@ -40,6 +94,12 @@ ion-content {
 }
 .custom-title {
   color: black;
+  .driver{
+    font-size: 1.5rem;
+  }
+}
+.custom-row-name {
+  font-size: 1.0rem;
 }
 .custom-close {
   padding-left: 5%;
