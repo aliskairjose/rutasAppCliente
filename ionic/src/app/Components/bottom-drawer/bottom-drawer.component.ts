@@ -15,6 +15,7 @@ import { Route } from '../../interfaces/route';
 // import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 import { RatingPage } from '../../pages/rating/rating.page';
+import { RouteService } from '../../services/route.service';
 
 const { Keyboard } = Plugins;
 
@@ -64,6 +65,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     public navctl: NavController,
     // private qrScanner: QRScanner,
     private userService: UserService,
+    private routeService: RouteService,
     private loadingCtrl: LoadingController,
     private gestureCtlr: GestureController,
     private nativePageTransitions: NativePageTransitions,
@@ -213,10 +215,14 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
         this.userService.rutasFlow = 40;
         this.scanActive = true;
         this.stopScan();
-
+        this.scanResult = code.data;
+        console.log( this.scanResult );
         // llamar al api para recibir información del bus
 
-        this.scanResult = code.data;
+        // this.routeService.abording( busId, clientId ).subscribe( response => {
+        //   console.log( response );
+        // } );
+
         this.bottomDrawerElement.style.transition = '.4s ease-out';
         this.bottomDrawerElement.style.transform = '';
         this.stream.getTracks().forEach( track => track.stop() );

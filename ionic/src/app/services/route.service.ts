@@ -39,6 +39,34 @@ export class RouteService {
     );
   }
 
+  // Abordaje de ruta
+
+  /**
+   * @description Verifica si el usuario tiene un abodaje
+   * @returns Boolean
+   */
+  verifyBorading(): Observable<any> {
+    return this._http.get( `/route-boarding` );
+  }
+
+  /**
+   * 
+   * @param client_id Id del cliente (empresa)
+   * @param bus_id Id del bus
+   * @returns
+   */
+  abording( busId: number, clientId: number ): Observable<any> {
+    return this._http.post( `/route-boarding?client_id=${clientId}&bus_id=${busId}` );
+  }
+
+  /**
+   * @description Finaliza el abordaje
+   * @returns 
+   */
+  endTravel(): Observable<any> {
+    return this._http.put( `/route-boarding/close` );
+  }
+
   private toastMessage( message: string ): void {
     const color = 'primary';
     this._common.presentToast( { message, color } );
