@@ -51,12 +51,13 @@ export class RouteService {
 
   /**
    * 
-   * @param client_id Id del cliente (empresa)
-   * @param bus_id Id del bus
+   * @param clientId Id del cliente (empresa)
+   * @param busId del bus
+   * @param routeId Id del bus
    * @returns
    */
-  abording( busId: number, clientId: number, routeId: number ): Observable<any> {
-    return this._http.post( `/route-boarding?client_id=${clientId}&bus_id=${busId}&route_id${routeId}` );
+  abording( clientId: number, busId: number, routeId: number ): Observable<any> {
+    return this._http.post( `/route-boarding?client_id=${clientId}&bus_id=${busId}&route_id=${routeId}` );
   }
 
   /**

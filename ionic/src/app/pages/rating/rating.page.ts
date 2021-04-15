@@ -13,6 +13,8 @@ import { Route } from '../../interfaces/route';
 } )
 export class RatingPage implements OnInit {
 
+  driverRate = 0;
+  busRate = 0;
   experience: '';
   @Input() data: Route;
 
@@ -35,6 +37,9 @@ export class RatingPage implements OnInit {
     this.endTravel();
   }
 
+  onModelChange( event ) {
+    console.log( event );
+  }
 
   endTravel(): void {
     this.routeService.endTravel().subscribe( async () => {

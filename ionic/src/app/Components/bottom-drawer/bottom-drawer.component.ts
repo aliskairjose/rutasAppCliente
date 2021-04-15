@@ -219,18 +219,19 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       } );
 
       if ( code?.data ) {
+        const hasBoarding = await this.verifyBoarding();
+        this.scanResult = { ...JSON.parse( code.data ) };
+
+        if ( !hasBoarding ) {
+          const user: User = await this._storage.getUser();
+          await this.abording( this.scanResult.id, user.client_id, this.selectedRoute.id );
+        }
+
         this.isOpen = false;
         this.userService.rutasFlow = 40;
         this.scanActive = true;
         this.stopScan();
-        this.scanResult = { ...JSON.parse( code.data ) };
-        console.log( this.scanResult );
-        const user: User = await this._storage.getUser();
-        // llamar al api para recibir información del bus
 
-        this.routeService.abording( this.scanResult.id, user.client_id, this.selectedRoute.id ).subscribe( response => {
-          console.log( response );
-        } );
 
         this.bottomDrawerElement.style.transition = '.4s ease-out';
         this.bottomDrawerElement.style.transform = '';
@@ -317,10 +318,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.seatGesture.enable( true );
   }
 
-  openModal() {
-    // this.router.navigate(['/rating'], { queryParams: { data: 'example data' } });
-  }
-
   async endTravel( item ) {
 
     const modal = await this._common.presentModal( {
@@ -331,6 +328,25 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     modal.present();
     const modalDismiss = await modal.onDidDismiss();
     this.router.navigate( [ '/sidemenu/Inicio' ] );
+  }
+
+
+  private abording( clientId: number, busId: number, routeId: number ): Promise<void> {
+    return new Promise<void>( resolve => {
+      this.routeService.abording( clientId, busId, routeId ).subscribe( response => {
+        console.log( response );
+        resolve();
+      } );
+    } );
+  }
+
+  private async verifyBoarding() {
+    return new Promise( resolve => {
+      this.routeService.verifyBorading().subscribe( response => {
+        console.log( response );
+        resolve( response.hasBoarding );
+      } );
+    } );
   }
 
 }

@@ -4,7 +4,7 @@
   <ion-row>
     <ion-col size="12" class="ion-text-center">
       <h2>
-        !Has llegado a tu destino!
+        ¡Has llegado a tu destino!
       </h2>
     </ion-col>
   </ion-row>
@@ -39,6 +39,8 @@
     </ion-col>
     <ion-col size="7" class="ion-text-center">
       <app-rating> </app-rating>
+      <ion-rating [(ngModel)]="busRate" readonly="false" size="default" (ngModelChange)="onModelChange($event)">
+      </ion-rating>
     </ion-col>
   </ion-row>
   <div class="custom-space-two">

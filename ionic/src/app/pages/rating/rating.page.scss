@@ -1,5 +1,10 @@
 ion-content {
   --ion-background-color: #fae345 !important;
+
+  ion-rating {
+    --star-color: gray;
+    --star-color-filled: green;
+  }
 }
 
 .avatar-route {

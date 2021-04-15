@@ -23,13 +23,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { BarRatingModule } from 'ngx-bar-rating';
 @NgModule( {
   declarations: [
     AppComponent,
   ],
   entryComponents: [],
   imports: [
+    BarRatingModule,
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,

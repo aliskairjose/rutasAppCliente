@@ -10,6 +10,7 @@ import { RoutesFilterPipe } from '../pipes/routes-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { RoutePage } from '../pages/route/route.page';
 import { TooltipsModule } from 'ionic4-tooltips';
+import { BarRatingModule } from 'ngx-bar-rating';
 
 @NgModule( {
   declarations: [
@@ -22,12 +23,14 @@ import { TooltipsModule } from 'ionic4-tooltips';
     RoutePage
   ],
   imports: [
+    BarRatingModule,
     CommonModule,
     IonicModule,
     FormsModule,
     TooltipsModule.forRoot(),
   ],
   exports: [
+    BarRatingModule,
     BottomDrawerComponent,
     MapComponent,
     RatingComponent,
