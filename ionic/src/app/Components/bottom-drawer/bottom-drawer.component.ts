@@ -326,7 +326,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     await this.endTravel();
     loading.dismiss();
 
-    console.log( this._aboardinData )
     const modal = await this._common.presentModal( {
       component: RatingPage,
       cssClass: '',
