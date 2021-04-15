@@ -15,10 +15,10 @@ export class RatingPage implements OnInit {
   driverRate = 1;
   busRate = 1;
   comment: '';
+  isRate = false;
 
-  private loading: any;
-
-  @Input() data: any;
+  @Input() route: Route;
+  @Input() id: number;
 
   constructor(
     private _common: CommonService,
@@ -32,18 +32,18 @@ export class RatingPage implements OnInit {
   ngOnInit() {
   }
 
-
   async sendRating() {
-    this.loading = await this._common.presentLoading();
+    const loading = await this._common.presentLoading();
     const data = {
-      route_boarding_id: this.data.id,
+      route_boarding_id: this.id,
       comment: this.comment,
       bus_rate: this.busRate,
       driver_rate: this.driverRate
     };
 
-    this.routeService.ratingTravel( data ).subscribe( response => {
-      this.endTravel();
+    this.routeService.ratingTravel( data ).subscribe( () => {
+      loading.dismiss();
+      this.isRate = true;
     } );
   }
 
@@ -51,10 +51,8 @@ export class RatingPage implements OnInit {
     ( type === 'driver' ) ? this.driverRate = rate : this.busRate = rate;
   }
 
-  endTravel(): void {
-    this.routeService.endTravel().subscribe( async () => {
-      this.loading.dismiss();
-      await this.modalController.dismiss();
-    } );
+  closeModal(): void {
+    this.modalController.dismiss();
   }
+
 }

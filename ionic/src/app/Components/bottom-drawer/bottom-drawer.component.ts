@@ -321,16 +321,30 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.seatGesture.enable( true );
   }
 
-  async endTravel( item ) {
+  async ratingModal() {
+    const loading = await this._common.presentLoading();
+    await this.endTravel();
+    loading.dismiss();
 
+    console.log( this._aboardinData )
     const modal = await this._common.presentModal( {
       component: RatingPage,
       cssClass: '',
-      componentProps: { data: this._aboardinData }
+      componentProps: {
+        route: this._aboardinData.data.route,
+        id: this._aboardinData.data.id
+      }
     } );
     modal.present();
     await modal.onDidDismiss();
-    this.router.navigate( [ '/sidemenu/Inicio' ] );
+    this.userService.rutasFlow = 0;
+  }
+
+  private endTravel(): Promise<void> {
+    return new Promise<void>( resolve => {
+      this.routeService.endTravel().subscribe( async () => { } );
+      resolve();
+    } );
   }
 
 

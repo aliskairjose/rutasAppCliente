@@ -1,78 +1,96 @@
-<ion-content class="custom-content">
-  <div class="custom-space">
-  </div>
-  <ion-row>
-    <ion-col size="12" class="ion-text-center">
-      <h2>
-        ¡Has llegado a tu destino!
-      </h2>
-    </ion-col>
-  </ion-row>
-
-  <ion-row size="12">
-    <ion-col size="12" class="ion-text-center">
-      <span class="custom-title driver">
-        Califica al conductor
-      </span>
-    </ion-col>
-    <div class="div-avatar">
-      <ion-item lines="none">
-        <ion-avatar slot="start">
-          <img class="custom-img-avatar" src="https://toppng.com/uploads/preview/foto-carnet-11550717604z0lxjntkz4.png">
-        </ion-avatar>
-        <ion-label>
-          <span class="ion-padding-top">{{data.route.driver.name}}</span>
-          <app-rating (ratingChange)="ratingChange($event, 'driver')"> </app-rating>
-        </ion-label>
-      </ion-item>
+<ion-content>
+  <ng-container *ngIf="!isRate; else elseTemplate">
+    <div class="custom-space">
     </div>
-  </ion-row>
-  <div class="custom-space-two">
-  </div>
-  <ion-row>
-    <ion-col size="12" class="ion-text-center">
-      <span class="custom-title driver">
-        Califica la unidad
-      </span>
-    </ion-col>
-    <ion-col size="5" class="ion-text-center">
-    </ion-col>
-    <ion-col size="7" class="ion-text-center">
-      <app-rating (ratingChange)="ratingChange($event, 'bus')"> </app-rating>
-    </ion-col>
-  </ion-row>
-  <div class="custom-space-two">
-  </div>
-  <ion-row>
-    <ion-col size="12" class="ion-text-left">
-      <div class="addressDetailsCustom">
-        <div class="listItemWrapper">
-          <img class="listImg" src="./../../../assets/svg/route_circle.svg" />
-          <div class="listTextWrapper">
-            <div class="listName">
-              <h3 style="margin: 0;">{{ data.route.name}}</h3>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h2>
+          ¡Has llegado a tu destino!
+        </h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row size="12">
+      <ion-col size="12" class="ion-text-center">
+        <span class="custom-title driver">
+          Califica al conductor
+        </span>
+      </ion-col>
+      <div class="div-avatar">
+        <ion-item lines="none">
+          <ion-avatar slot="start">
+            <img class="custom-img-avatar"
+              src="https://toppng.com/uploads/preview/foto-carnet-11550717604z0lxjntkz4.png">
+          </ion-avatar>
+          <ion-label>
+            <span class="ion-padding-top">{{route?.driver?.name}}</span>
+            <app-rating (ratingChange)="ratingChange($event, 'driver')"> </app-rating>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-row>
+    <div class="custom-space-two">
+    </div>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <span class="custom-title driver">
+          Califica la unidad
+        </span>
+      </ion-col>
+      <ion-col size="5" class="ion-text-center">
+      </ion-col>
+      <ion-col size="7" class="ion-text-center">
+        <app-rating (ratingChange)="ratingChange($event, 'bus')"> </app-rating>
+      </ion-col>
+    </ion-row>
+    <div class="custom-space-two">
+    </div>
+    <ion-row>
+      <ion-col size="12" class="ion-text-left">
+        <div class="addressDetailsCustom">
+          <div class="listItemWrapper">
+            <img class="listImg" src="./../../../assets/svg/route_circle.svg" />
+            <div class="listTextWrapper">
+              <div class="listName">
+                <h3 style="margin: 0;">{{ route?.name}}</h3>
+              </div>
+              <ion-note>{{route?.start_time | customeTime }} - {{route?.end_time | customeTime }}</ion-note>
             </div>
-            <ion-note>{{data.route.start_time | customeTime }} - {{data.route.end_time | customeTime }}</ion-note>
           </div>
         </div>
-      </div>
-    </ion-col>
-  </ion-row>
-  <div class="custom-space-two">
-  </div>
-  <ion-row>
-    <ion-col size="12" class="custom-title driver ion-text-center">
-      <h6>¿Algun comentario?</h6>
-    </ion-col>
-    <ion-col class="ion-margin-start ion-margin-end">
-      <ion-textarea class="custom-text-area" rows="4" cols="20" placeholder="Describe tu experiencia..."
-        [(ngModel)]="comment"></ion-textarea>
-    </ion-col>
-  </ion-row>
+      </ion-col>
+    </ion-row>
+    <div class="custom-space-two">
+    </div>
+    <ion-row>
+      <ion-col size="12" class="custom-title driver ion-text-center">
+        <h6>¿Algun comentario?</h6>
+      </ion-col>
+      <ion-col class="ion-margin-start ion-margin-end">
+        <ion-textarea class="custom-text-area" rows="4" cols="20" placeholder="Describe tu experiencia..."
+          [(ngModel)]="comment"></ion-textarea>
+      </ion-col>
+    </ion-row>
 
-  <ion-row>
-    <ion-col size="12" class="ion-text-center">
-      <ion-button color="light" class="custom-button" (click)="sendRating()">Enviar</ion-button>
-    </ion-col>
-  </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button color="light" expand="block" class="custom-button" (click)="sendRating()">Enviar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div class="d-flex justify-content-center thanks">
+      <div class="align-self-center text-center w-75">
+        <h2>Gracias por viajar con nosotros</h2>
+        <p>!Te esperamos pronto!</p>
+        <div>
+          <ion-button (click)="closeModal()" expand="block" color="light">
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            Salir
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
 </ion-content>

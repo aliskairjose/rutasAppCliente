@@ -1,9 +1,13 @@
 ion-content {
-  --ion-background-color: #fae345 !important;
+  --ion-background-color: var(--rp-color-primary) !important;
 
   ion-rating {
     --star-color: gray;
     --star-color-filled: green;
+  }
+
+  .thanks {
+    height: 100vh;
   }
 }
 

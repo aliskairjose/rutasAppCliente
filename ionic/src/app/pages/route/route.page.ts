@@ -30,7 +30,7 @@ export class RoutePage implements OnInit {
     this._routeService.list( user.client_id ).subscribe( ( routes: Route[] ) => {
       this.routes = [ ...routes ];
       loading.dismiss();
-    } );
+    }, () => loading.dismiss() );
   }
 
   selectRoute( route: Route ): void {
