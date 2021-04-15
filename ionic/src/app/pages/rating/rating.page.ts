@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { RatingComponent } from '../../Components/rating/rating.component';
 import { ModalController, NavParams } from '@ionic/angular';
-import { StorageService } from '../../services/storage.service';
 import { RouteService } from '../../services/route.service';
 import { Route } from '../../interfaces/route';
+import { CommonService } from '../../services/common.service';
 
 @Component( {
   selector: 'app-page-rating',
@@ -13,18 +12,19 @@ import { Route } from '../../interfaces/route';
 } )
 export class RatingPage implements OnInit {
 
-  driverRate = 0;
-  busRate = 0;
-  experience: '';
-  @Input() data: Route;
+  driverRate = 1;
+  busRate = 1;
+  comment: '';
+
+  private loading: any;
+
+  @Input() data: any;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
+    private _common: CommonService,
     public rating: RatingComponent,
     public navParams: NavParams,
     public modalController: ModalController,
-    private _storage: StorageService,
     private routeService: RouteService
   ) {
   }
@@ -33,17 +33,28 @@ export class RatingPage implements OnInit {
   }
 
 
-  sendRating() {
-    this.endTravel();
+  async sendRating() {
+    this.loading = await this._common.presentLoading();
+    const data = {
+      route_boarding_id: this.data.id,
+      comment: this.comment,
+      bus_rate: this.busRate,
+      driver_rate: this.driverRate
+    };
+
+    this.routeService.ratingTravel( data ).subscribe( response => {
+      this.endTravel();
+    } );
   }
 
-  onModelChange( event ) {
-    console.log( event );
+  ratingChange( rate: number, type: string ) {
+    ( type === 'driver' ) ? this.driverRate = rate : this.busRate = rate;
   }
 
   endTravel(): void {
     this.routeService.endTravel().subscribe( async () => {
-      await this.modalController.dismiss( this.experience, 'close' );
+      this.loading.dismiss();
+      await this.modalController.dismiss();
     } );
   }
 }

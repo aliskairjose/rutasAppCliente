@@ -21,8 +21,8 @@
           <img class="custom-img-avatar" src="https://toppng.com/uploads/preview/foto-carnet-11550717604z0lxjntkz4.png">
         </ion-avatar>
         <ion-label>
-          <span class="ion-padding-top">{{data.driver.name}}</span>
-          <app-rating> </app-rating>
+          <span class="ion-padding-top">{{data.route.driver.name}}</span>
+          <app-rating (ratingChange)="ratingChange($event, 'driver')"> </app-rating>
         </ion-label>
       </ion-item>
     </div>
@@ -38,9 +38,7 @@
     <ion-col size="5" class="ion-text-center">
     </ion-col>
     <ion-col size="7" class="ion-text-center">
-      <app-rating> </app-rating>
-      <ion-rating [(ngModel)]="busRate" readonly="false" size="default" (ngModelChange)="onModelChange($event)">
-      </ion-rating>
+      <app-rating (ratingChange)="ratingChange($event, 'bus')"> </app-rating>
     </ion-col>
   </ion-row>
   <div class="custom-space-two">
@@ -52,9 +50,9 @@
           <img class="listImg" src="./../../../assets/svg/route_circle.svg" />
           <div class="listTextWrapper">
             <div class="listName">
-              <h3 style="margin: 0;">{{ data.name}}</h3>
+              <h3 style="margin: 0;">{{ data.route.name}}</h3>
             </div>
-            <ion-note>{{data.start_time | customeTime }} - {{data.end_time | customeTime }}</ion-note>
+            <ion-note>{{data.route.start_time | customeTime }} - {{data.route.end_time | customeTime }}</ion-note>
           </div>
         </div>
       </div>
@@ -68,7 +66,7 @@
     </ion-col>
     <ion-col class="ion-margin-start ion-margin-end">
       <ion-textarea class="custom-text-area" rows="4" cols="20" placeholder="Describe tu experiencia..."
-        [(ngModel)]="experience"></ion-textarea>
+        [(ngModel)]="comment"></ion-textarea>
     </ion-col>
   </ion-row>
 

@@ -54,7 +54,7 @@ export class RouteService {
    * @param clientId Id del cliente (empresa)
    * @param busId del bus
    * @param routeId Id del bus
-   * @returns
+   * @returns Null
    */
   abording( clientId: number, busId: number, routeId: number ): Observable<any> {
     return this._http.post( `/route-boarding?client_id=${clientId}&bus_id=${busId}&route_id=${routeId}` );
@@ -62,10 +62,14 @@ export class RouteService {
 
   /**
    * @description Finaliza el abordaje
-   * @returns 
+   * @returns Null
    */
   endTravel(): Observable<any> {
     return this._http.put( `/route-boarding/close` );
+  }
+
+  ratingTravel( data: any ): Observable<any> {
+    return this._http.post( `/route-boarding-experiences`, data );
   }
 
   private toastMessage( message: string ): void {

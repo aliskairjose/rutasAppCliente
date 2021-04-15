@@ -44,10 +44,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   selectedRoute: Route = {};
   searchText = '';
   bus: Bus = {};
-
-  @Output() emitEvent: EventEmitter<any> = new EventEmitter();
-  @Input() component = 'Inicio';
-
   isOpen = false;
   openHeight;
   editOpenHeight;
@@ -64,6 +60,11 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   seats = [];
   showScan = false;
   routes: Route[] = [];
+
+  private _aboardinData: any = {};
+
+  @Output() emitEvent: EventEmitter<any> = new EventEmitter();
+  @Input() component = 'Inicio';
 
   constructor(
     private plt: Platform,
@@ -219,12 +220,14 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       } );
 
       if ( code?.data ) {
-        const hasBoarding = await this.verifyBoarding();
+        const result: any = await this.verifyBoarding();
         this.scanResult = { ...JSON.parse( code.data ) };
 
-        if ( !hasBoarding ) {
+        if ( result.hasBoarding ) { this._aboardinData = result.data; }
+
+        if ( !result.hasBoarding ) {
           const user: User = await this._storage.getUser();
-          await this.abording( this.scanResult.id, user.client_id, this.selectedRoute.id );
+          this._aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
         }
 
         this.isOpen = false;
@@ -323,28 +326,26 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     const modal = await this._common.presentModal( {
       component: RatingPage,
       cssClass: '',
-      componentProps: { data: this.selectedRoute }
+      componentProps: { data: this._aboardinData }
     } );
     modal.present();
-    const modalDismiss = await modal.onDidDismiss();
+    await modal.onDidDismiss();
     this.router.navigate( [ '/sidemenu/Inicio' ] );
   }
 
 
-  private abording( clientId: number, busId: number, routeId: number ): Promise<void> {
-    return new Promise<void>( resolve => {
+  private abording( clientId: number, busId: number, routeId: number ): Promise<any> {
+    return new Promise<any>( resolve => {
       this.routeService.abording( clientId, busId, routeId ).subscribe( response => {
-        console.log( response );
-        resolve();
+        resolve( response );
       } );
     } );
   }
 
-  private async verifyBoarding() {
-    return new Promise( resolve => {
+  private async verifyBoarding(): Promise<any> {
+    return new Promise<any>( resolve => {
       this.routeService.verifyBorading().subscribe( response => {
-        console.log( response );
-        resolve( response.hasBoarding );
+        resolve( response );
       } );
     } );
   }

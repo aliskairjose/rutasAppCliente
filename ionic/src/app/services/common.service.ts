@@ -14,8 +14,7 @@ export class CommonService {
 
   async presentLoading() {
     const loading = await this.loading.create( {
-      message: 'Por favor espere...',
-      duration: 2000
+      message: 'Por favor espere...'
     } );
     return loading;
   }
