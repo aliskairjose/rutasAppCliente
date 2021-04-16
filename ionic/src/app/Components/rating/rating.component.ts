@@ -8,6 +8,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 export class RatingComponent implements OnInit {
 
   rating = [ 1, 2, 3, 4, 5 ];
+  starHalf = false;
 
   @Input() rate = 0;
   @Input() size = 'small';
@@ -16,7 +17,9 @@ export class RatingComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
+
 
   ratingHandler( i ) {
     if ( this.readOnly ) {

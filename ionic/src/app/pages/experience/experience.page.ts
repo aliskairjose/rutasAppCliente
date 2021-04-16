@@ -20,6 +20,14 @@ export class ExperiencePage implements OnInit {
   ) { }
 
   async ngOnInit() {
+
+    const val = 1.8;
+
+    if ( val > 1 && val < 2 ) {
+      console.log( 'El valor medio es ', val )
+    }
+
+
     const loading = await this.common.presentLoading();
     loading.present();
     this.userService.travelList().subscribe( list => {
