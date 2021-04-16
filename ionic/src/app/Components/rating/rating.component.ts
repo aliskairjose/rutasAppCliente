@@ -23,7 +23,7 @@ export class RatingComponent implements OnInit {
       return;
     }
     this.rate = i;
-    this.ratingChange.emit( this.rate + 1 );
+    this.ratingChange.emit( this.rate );
   }
 }
 

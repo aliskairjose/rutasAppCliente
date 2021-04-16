@@ -1,5 +1,11 @@
 <div class="d-flex justify-content-center">
-  <div *ngFor="let p of rating; let i = index" (click)="ratingHandler(i)">
-    <ion-icon [ngClass]="rate >= i ? 'active' : 'deactive'" ng name="star" size="{{size}}"></ion-icon>
+  <div *ngFor="let p of rating; let i = index" (click)="ratingHandler(p)">
+    <!-- <ion-icon [ngClass]="rate >= p ? 'active' : 'deactive'" ng name="star" size="{{size}}"></ion-icon> -->
+    <ng-container *ngIf="rate >= p; else elseTemplate">
+      <ion-icon slot="start" name="star" size="{{size}}"></ion-icon>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <ion-icon slot="start" name="star-outline" size="{{size}}"></ion-icon>
+    </ng-template>
   </div>
 </div>

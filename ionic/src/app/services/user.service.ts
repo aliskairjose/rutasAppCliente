@@ -72,8 +72,10 @@ export class UserService {
     return this.httpService.post( '/comments', data );
   }
 
-  travelList( routeId: number, page = 1 ): Observable<any> {
-    return this.httpService.get( `{{urlLocal}}/api/route-boarding/list?route_id=${routeId}&finalized=1&includes[]=route.bus&page=${page}` );
+  travelList( page = 1 ): Observable<any> {
+    return this.httpService
+      .get( `/route-boarding/list?finalized=1&includes[]=route.bus&page=${page}&includes[]=route&take=5` )
+      .pipe( map( list => list.data ) );
   }
 
   private toastMessage( message: string ): void {
