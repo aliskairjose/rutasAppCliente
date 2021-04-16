@@ -2,7 +2,7 @@ import { SoportePageModule } from './pages/soporte/soporte.module';
 import { InicioPageModule } from './pages/inicio/inicio.module';
 import { environment } from './../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouteReuseStrategy } from '@angular/router';
@@ -18,12 +18,14 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { UserService } from './services/user.service';
 import { FeedbackPageModule } from './pages/feedback/feedback.module';
-import { RatingComponent } from './Components/rating/rating.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData( localeEs );
 @NgModule( {
   declarations: [
     AppComponent,
@@ -49,6 +51,7 @@ import { BarRatingModule } from 'ngx-bar-rating';
   ],
   providers: [
     Geolocation,
+    { provide: LOCALE_ID, useValue: 'es' },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],
