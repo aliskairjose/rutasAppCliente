@@ -13,7 +13,6 @@ export class ExperiencePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log( 'Experience Page' );
   }
 
 }

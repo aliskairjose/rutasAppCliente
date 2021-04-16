@@ -20,7 +20,7 @@ import { BarRatingModule } from 'ngx-bar-rating';
     CustomeTimePipe,
     RoutesFilterPipe,
     HeaderComponent,
-    RoutePage
+    RoutePage,
   ],
   imports: [
     BarRatingModule,

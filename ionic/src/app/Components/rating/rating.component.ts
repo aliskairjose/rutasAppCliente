@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component( {
   selector: 'app-rating',
@@ -7,9 +7,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 } )
 export class RatingComponent implements OnInit {
 
-  rate = 0;
   rating = [ 1, 2, 3, 4, 5 ];
 
+  @Input() rate = 0;
+  @Input() size = 'small';
+  @Input() readOnly = false;
   @Output() ratingChange: EventEmitter<number> = new EventEmitter();
 
   constructor() { }
@@ -17,6 +19,9 @@ export class RatingComponent implements OnInit {
   ngOnInit() { }
 
   ratingHandler( i ) {
+    if ( this.readOnly ) {
+      return;
+    }
     this.rate = i;
     this.ratingChange.emit( this.rate + 1 );
   }

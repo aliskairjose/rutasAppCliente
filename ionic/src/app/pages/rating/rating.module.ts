@@ -6,7 +6,6 @@ import { RatingPageRoutingModule } from './rating-routing.module';
 import { RatingPage } from './rating.page';
 import { SharedComponentsModule } from 'src/app/Components/shared-components.module';
 import { RatingComponent } from '../../Components/rating/rating.component';
-import { IonicRatingModule } from 'ionic-rating';
 
 @NgModule( {
   imports: [
@@ -15,7 +14,6 @@ import { IonicRatingModule } from 'ionic-rating';
     IonicModule,
     RatingPageRoutingModule,
     SharedComponentsModule,
-    IonicRatingModule,
   ],
   declarations: [ RatingPage ],
   providers: [ RatingComponent ],
