@@ -322,21 +322,25 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   async ratingModal() {
-    const loading = await this._common.presentLoading();
-    await this.endTravel();
-    loading.dismiss();
+    const confirm = await this._common.alert();
+    if ( confirm ) {
+      const loading = await this._common.presentLoading();
+      await this.endTravel();
+      loading.dismiss();
 
-    const modal = await this._common.presentModal( {
-      component: RatingPage,
-      cssClass: '',
-      componentProps: {
-        route: this._aboardinData.data.route,
-        id: this._aboardinData.data.id
-      }
-    } );
-    modal.present();
-    await modal.onDidDismiss();
-    this.userService.rutasFlow = 0;
+      const modal = await this._common.presentModal( {
+        component: RatingPage,
+        cssClass: '',
+        componentProps: {
+          route: this._aboardinData.data.route,
+          id: this._aboardinData.data.id
+        }
+      } );
+      modal.present();
+      await modal.onDidDismiss();
+      this.userService.rutasFlow = 0;
+    }
+
   }
 
   private endTravel(): Promise<void> {

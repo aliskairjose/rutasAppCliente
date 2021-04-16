@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { CommonService } from '../../services/common.service';
-
+import { IonInfiniteScroll } from '@ionic/angular';
 @Component( {
   selector: 'app-experience',
   templateUrl: './experience.page.html',
@@ -11,6 +11,8 @@ export class ExperiencePage implements OnInit {
 
   list = [];
   rating = 0;
+
+  @ViewChild( IonInfiniteScroll ) infiniteScroll: IonInfiniteScroll;
 
   constructor(
     private common: CommonService,
@@ -27,10 +29,6 @@ export class ExperiencePage implements OnInit {
       this.rating = val.reduce( ( a, b ) => a + b, 0 ) / this.list.length;
       loading.dismiss();
     } );
-  }
-
-  ratingChange( rate ) {
-    console.log( rate );
   }
 
 }
