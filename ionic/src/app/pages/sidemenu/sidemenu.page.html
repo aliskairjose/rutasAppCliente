@@ -17,7 +17,6 @@
               <ion-note class="align-16">Hola</ion-note>
               <span class="align-16 heading-name">{{ user.name }}</span>
             </div>
-            <ion-icon class="more align-16" name="ellipsis-horizontal"></ion-icon>
           </div>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" (click)="menuOptionClickHandle(p, i)" lines="none" detail="false">
