@@ -20,7 +20,7 @@ export class UserService {
   constructor(
     private platform: Platform,
     private _common: CommonService,
-    private _httpService: HttpService
+    private httpService: HttpService
   ) { }
 
 
@@ -29,7 +29,7 @@ export class UserService {
    * @returns Lista de usuarios
    */
   list(): Observable<User[]> {
-    return this._httpService.get( '/users' ).pipe( map( response => response.data ) );
+    return this.httpService.get( '/users' ).pipe( map( response => response.data ) );
   }
 
   /**
@@ -38,7 +38,7 @@ export class UserService {
    * @returns usuario registrado
    */
   add( usuario: User ): Observable<any> {
-    return this._httpService.post( '/users', usuario );
+    return this.httpService.post( '/users', usuario );
   }
 
   /**
@@ -48,7 +48,7 @@ export class UserService {
    * @returns usuario Actualizado
    */
   update( id: number, client: any ): Observable<any> {
-    return this._httpService.put( `/users/${id}`, client );
+    return this.httpService.put( `/users/${id}`, client );
   }
 
   /**
@@ -57,7 +57,7 @@ export class UserService {
    * @returns Notificación
    */
   delete( id: number ): Observable<any> {
-    return this._httpService.delete( `/users/${id}` ).pipe(
+    return this.httpService.delete( `/users/${id}` ).pipe(
       map( response => {
         this.toastMessage( response.message );
       } )
@@ -69,7 +69,11 @@ export class UserService {
       type_comment_id: 4,
       comment
     };
-    return this._httpService.post( '/comments', data );
+    return this.httpService.post( '/comments', data );
+  }
+
+  travelList( routeId: number, page = 1 ): Observable<any> {
+    return this.httpService.get( `{{urlLocal}}/api/route-boarding/list?route_id=${routeId}&finalized=1&includes[]=route.bus&page=${page}` );
   }
 
   private toastMessage( message: string ): void {
