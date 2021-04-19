@@ -10,51 +10,30 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col>
-        <div class="d-flex justify-content-between">
-          <div>
-            <ion-item>
-              <ion-label position="floating">MM/DD/YYYY</ion-label>
-              <ion-datetime displayFormat="MM/DD/YYYY" min="1994-03-14" max="2012-12-09"
-                value="2002-09-23T15:03:46.789">
-              </ion-datetime>
-            </ion-item>
-          </div>
-          <div>
-            <ion-item>
-              <ion-label position="floating">MM/DD/YYYY</ion-label>
-              <ion-datetime displayFormat="MM/DD/YYYY" min="1994-03-14" max="2012-12-09"
-                value="2002-09-23T15:03:46.789">
-              </ion-datetime>
-            </ion-item>
-          </div>
-          <ion-button (click)="search()" color="tertiary">
-            <ion-icon slot="icon-only" name="search-outline"></ion-icon>
-          </ion-button>
+        <div>
+          <ion-item>
+            <ion-label>Notificaciones</ion-label>
+            <ion-select value="all" [interfaceOptions]="customOptions" (ionChange)="onChange($event.detail.value)">
+              <ion-select-option value="all">Todas</ion-select-option>
+              <ion-select-option value="1">Respondidas</ion-select-option>
+              <ion-select-option value="0">No respondidas</ion-select-option>
+            </ion-select>
+          </ion-item>
         </div>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
         <ion-list lines="full">
-          <ion-item>
+          <ion-item button (click)="detail(comment)" detail="true" *ngFor="let comment of comments; let i=index">
             <ion-avatar slot="start">
               <img src="./../../../assets/svg/chat.svg" />
             </ion-avatar>
             <ion-label>
-              <h2>Accidente Vial</h2>
-              <h3>Hubo un accidente...</h3>
+              <h3>Rutas Panamá</h3>
+              <h4>{{comment.status === 1 ?'Respondio su comentario':'En espera de respuesta'}}</h4>
             </ion-label>
-            <ion-note>Lunes</ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="./../../../assets/svg/chat.svg" />
-            </ion-avatar>
-            <ion-label>
-              <h2>Protesta</h2>
-              <h3>Hubo una protesta...</h3>
-            </ion-label>
-            <ion-note>Martes</ion-note>
+            <ion-note>{{comment.updated_at | date: 'EEEE' }}</ion-note>
           </ion-item>
         </ion-list>
       </ion-col>

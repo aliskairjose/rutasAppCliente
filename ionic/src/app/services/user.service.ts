@@ -5,6 +5,7 @@ import { HttpService } from './http.service';
 import { User } from '../interfaces/user';
 import { map } from 'rxjs/operators';
 import { CommonService } from './common.service';
+import { Comment, CommentResponse } from '../interfaces/comment';
 
 @Injectable( {
   providedIn: 'root'
@@ -72,6 +73,12 @@ export class UserService {
     return this.httpService.post( '/comments', data );
   }
 
+  commentList(): Observable<any> {
+    return this.httpService
+      .get( `/comments?includes[]=responses&includes[]=typeComment` )
+      .pipe( map( response => response.data ) );
+  }
+
   travelList( page = 1 ): Observable<any> {
     return this.httpService
       .get( `/route-boarding/list?finalized=1&includes[]=route.bus&page=${page}&includes[]=route&take=10` )
@@ -106,4 +113,6 @@ export class UserService {
   flowhObserver(): Observable<number> {
     return this.$flow.asObservable();
   }
+
+
 }

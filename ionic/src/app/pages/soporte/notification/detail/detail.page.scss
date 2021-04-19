@@ -1,3 +1,8 @@
+ion-back-button {
+  margin: 3vh;
+  --background: var(--rp-color-primary);
+}
+
 ion-content {
   .avatar {
     border-radius: 0px !important;

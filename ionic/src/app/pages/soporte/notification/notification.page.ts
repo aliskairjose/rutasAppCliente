@@ -40,8 +40,9 @@ export class NotificationPage implements OnInit {
     console.log( 'search' );
   }
 
-  detail(): void {
-    this.router.navigate( [ 'notification/detail' ] );
+  detail( comment: Comment ): void {
+    const _comment = window.btoa( JSON.stringify( comment ) );
+    this.router.navigate( [ 'notification/detail' ], { queryParams: { comment: _comment } } );
   }
 
   // Controla el valor de cambio en el select

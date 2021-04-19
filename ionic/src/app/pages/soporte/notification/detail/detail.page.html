@@ -23,25 +23,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>
-              <ion-item lines="none">
-                <ion-avatar slot="start">
-                  <img class="avatar" src="./../../../assets/svg/chat.svg" />
-                </ion-avatar>
-                <ion-label>
-                  <h2>Rutas Panamá</h2>
-                  <h4>08/02/2021 - 06:00 pm</h4>
-                </ion-label>
-              </ion-item>
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile,
-            and climb a mountain or spend a week in the woods. Wash your spirit clean.
-          </ion-card-content>
-        </ion-card>
+
         <ion-card>
           <ion-card-header>
             <ion-card-subtitle>
@@ -51,16 +33,36 @@
                 </ion-avatar>
                 <ion-label>
                   <h2>Tú</h2>
-                  <h4>08/02/2021 - 06:00 pm</h4>
+                  <h4>{{ comment.created_at | date:'short' }}</h4>
                 </ion-label>
               </ion-item>
             </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile,
-            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+            {{comment.comment}}
           </ion-card-content>
         </ion-card>
+        <!-- 08/02/2021 - 06:00 pm -->
+        <div *ngIf="comment.responses">
+          <ion-card *ngFor="let response of comment.responses">
+            <ion-card-header>
+              <ion-card-title>
+                <ion-item lines="none">
+                  <ion-avatar slot="start">
+                    <img class="avatar" src="./../../../assets/svg/chat.svg" />
+                  </ion-avatar>
+                  <ion-label>
+                    <h2>Rutas Panamá</h2>
+                    <h4>{{response.created_at | date:'short' }}</h4>
+                  </ion-label>
+                </ion-item>
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              {{response.comment}}
+            </ion-card-content>
+          </ion-card>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
