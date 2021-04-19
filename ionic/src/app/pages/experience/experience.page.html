@@ -1,13 +1,15 @@
-<ion-content class="ion-margin-bottom">
-  <ion-grid fixed>
+<ion-content class="ion-margin-bottom" scroll-y="false">
+  <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <img src="../../../assets/svg/faces/face7.svg" alt="" class="rating-face">
-        <div class="rating-header ion-text-center">
-          <div>
-            <h3>Calificación del servicio</h3>
-            <app-rating size="large" readOnly="true" rate="{{rating}}"></app-rating>
-            <p>{{rating}}/5 | Servicio satisfactorio</p>
+        <div>
+          <img src="../../../assets/svg/faces/face7.svg" alt="" class="rating-face">
+          <div class="rating-header ion-text-center">
+            <div>
+              <h3>Calificación del servicio</h3>
+              <app-rating size="large" readOnly="true" rate="{{rating}}"></app-rating>
+              <p>{{rating}}/5 | Servicio satisfactorio</p>
+            </div>
           </div>
         </div>
       </ion-col>
