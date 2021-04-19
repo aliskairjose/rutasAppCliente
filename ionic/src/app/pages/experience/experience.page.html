@@ -30,7 +30,7 @@
             </ion-label>
             <div>
               <div class="text-end">
-                <ion-note>{{ l.created_at | date: 'EEEE' }}</ion-note>
+                <ion-note>{{ l.created_at | date: 'short' }}</ion-note>
               </div>
               <app-rating readOnly="true" rate="{{l.calification_route }}"> </app-rating>
             </div>
