@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CameraDirection, CameraResultType, Plugins } from '@capacitor/core';
 
 import { LOGO, USER } from '../../constants/global-constants';
 import { User } from '../../interfaces/user';
@@ -8,6 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { CommonService } from '../../services/common.service';
 import { StorageService } from '../../services/storage.service';
 import { UserService } from '../../services/user.service';
+import { Plugins, CameraResultType, CameraDirection } from '@capacitor/core';
 
 const { Camera } = Plugins;
 
@@ -39,7 +39,6 @@ export class SidemenuPage implements OnInit {
     private router: Router,
     private _auth: AuthService,
     private _common: CommonService,
-    private storage: StorageService,
     private userService: UserService,
     private _storage: StorageService,
     private changeDetectorRef: ChangeDetectorRef,
@@ -95,7 +94,7 @@ export class SidemenuPage implements OnInit {
       const message = result.message;
       const color = 'primary';
       this._common.presentToast( { message, color } );
-      this.storage.store( USER, result.data );
+      this._storage.store( USER, result.data );
       this.avatar = result.data.avatar;
     }, () => loading.dismiss() );
   }
