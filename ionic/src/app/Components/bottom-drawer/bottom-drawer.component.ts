@@ -1,12 +1,12 @@
 import jsQR from 'jsqr';
 
 import {
-  AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild
+  AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
 import {
-  NativePageTransitions, NativeTransitionOptions
+  NativePageTransitions,
 } from '@ionic-native/native-page-transitions/ngx';
 import { GestureController, LoadingController, NavController, Platform } from '@ionic/angular';
 
@@ -17,9 +17,9 @@ import { RatingPage } from '../../pages/rating/rating.page';
 import { RouteService } from '../../services/route.service';
 import { Bus } from '../../interfaces/bus';
 import { StorageService } from '../../services/storage.service';
-import { User } from '../../interfaces/user';
 import { CommonService } from '../../services/common.service';
-import { QrScanModalComponent } from '../../modals/qr-scan-modal/qr-scan-modal.component';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { User } from 'src/app/interfaces/user';
 
 const { Keyboard } = Plugins;
 
@@ -79,6 +79,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     public popoverCtrl: PopoverController,
     public modalController: ModalController,
     private _storage: StorageService,
+    private barcodeScanner: BarcodeScanner,
+
   ) {
     this.userService.flowhObserver().subscribe( flow => this.userService.rutasFlow = flow );
   }
@@ -194,27 +196,40 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   async scannerOn() {
-    const modal = await this._common.presentModal( {
-      component: QrScanModalComponent,
-      cssClass: ''
+    this.showScan = true;
+    const options: BarcodeScannerOptions = {
+      preferFrontCamera: false,
+      showFlipCameraButton: true,
+      showTorchButton: true,
+      torchOn: false,
+      prompt: 'Place a barcode inside the scan area',
+      resultDisplayDuration: 500,
+      formats: 'EAN_13,EAN_8,QR_CODE,PDF_417 ',
+      orientation: 'portrait',
+    };
+
+    this.barcodeScanner.scan( options ).then( async ( barcodeData ) => {
+      this.scanResult = JSON.parse( barcodeData.text );
+      const result: any = await this.verifyBoarding();
+
+      if ( result.hasBoarding ) { this._aboardinData = result.data; }
+      if ( !result.hasBoarding ) {
+        const user: User = await this._storage.getUser();
+        this._aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
+      }
+      this.showScan = true;
+      this.isOpen = false;
+      this.userService.rutasFlow = 40;
+      this.scanActive = true;
+      this.bottomDrawerElement.style.transition = '.4s ease-out';
+      this.bottomDrawerElement.style.transform = '';
+      this.gesture.enable( true );
+      this.dragable = true;
+    } ).catch( () => {
+      const message = 'Ha ocurrido un error';
+      const color = 'danger';
+      this._common.presentToast( { message, color } );
     } );
-    modal.present();
-    await modal.onDidDismiss();
-    const scannedData = await modal.onDidDismiss();
-
-    this.scanResult = { ...JSON.parse( scannedData.data ) };
-
-    const result: any = await this.verifyBoarding();
-
-    if ( result.hasBoarding ) { this._aboardinData = result.data; }
-
-    if ( !result.hasBoarding ) {
-      const user: User = await this._storage.getUser();
-      this._aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
-    }
-
-    this.isOpen = false;
-    this.userService.rutasFlow = 40;
 
   }
 
