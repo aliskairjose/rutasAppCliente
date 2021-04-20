@@ -85,12 +85,15 @@
             </div>
           </div>
           <div class="w-100 mt-5">
-            <ion-button *ngIf="!showScan" (click)="scannerOn()" expand="block" color="tertiary">
-              Escanear QR
-            </ion-button>
-            <ion-button *ngIf="showScan" (click)="stopScan()" expand="block" color="tertiary">
+            <div *ngIf="!showScan">
+              <ion-button (click)="scannerOn()" expand="block" color="tertiary">
+                Escanear QR
+              </ion-button>
+              {{ scanResult }}
+            </div>
+            <!-- <ion-button *ngIf="showScan" (click)="stopScan()" expand="block" color="tertiary">
               <label class="label-button" for="">Volver</label>
-            </ion-button>
+            </ion-button> -->
           </div>
         </div>
       </div>
