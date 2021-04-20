@@ -83,7 +83,7 @@ export class SidemenuPage implements OnInit {
       quality: 50,
       allowEditing: false,
       resultType: CameraResultType.Base64,
-      direction: CameraDirection.Rear // iOS and Web only
+      direction: CameraDirection.Front // iOS and Web only
     } );
 
     const imageUrl = `data:image/png;base64,${image.base64String}`;
