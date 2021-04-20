@@ -12,15 +12,14 @@ import { GestureController, LoadingController, NavController, Platform } from '@
 
 import { UserService } from '../../services/user.service';
 import { Route } from '../../interfaces/route';
-// import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
-import { AlertController, ModalController, PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { RatingPage } from '../../pages/rating/rating.page';
 import { RouteService } from '../../services/route.service';
 import { Bus } from '../../interfaces/bus';
 import { StorageService } from '../../services/storage.service';
-import { USER } from '../../constants/global-constants';
 import { User } from '../../interfaces/user';
 import { CommonService } from '../../services/common.service';
+import { QrScanModalComponent } from '../../modals/qr-scan-modal/qr-scan-modal.component';
 
 const { Keyboard } = Plugins;
 
@@ -266,6 +265,15 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   async scannerOn() {
+    const modal = await this._common.presentModal( {
+      component: QrScanModalComponent,
+      cssClass: ''
+    } );
+    modal.present();
+    await modal.onDidDismiss();
+  }
+
+  async scannerOn_() {
     this.loading = await this.loadingCtrl.create( {} );
     await this.loading.present();
     this.showScan = true;

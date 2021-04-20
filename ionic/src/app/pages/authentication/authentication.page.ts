@@ -69,7 +69,12 @@ export class AuthenticationPage implements OnInit {
    * @description Registro del usuario google
    */
   private async registerGoogleUSer( googleUser ): Promise<void> {
-    const modal = await this._common.presentModal( { component: ClientsModalPage, cssClass: '', componentProps: { user: googleUser } } );
+    const modal = await this._common.presentModal(
+      {
+        component: ClientsModalPage,
+        cssClass: '',
+        componentProps: { user: googleUser }
+      } );
     modal.present();
     const modalData = await modal.onDidDismiss();
     if ( modalData.role === 'submit' ) {

@@ -24,6 +24,9 @@
     },
     "cordova-plugin-ionic-keyboard": {
       "PACKAGE_NAME": "MyApp"
+    },
+    "phonegap-plugin-barcodescanner": {
+      "PACKAGE_NAME": "MyApp"
     }
   },
   "dependent_plugins": {}
