@@ -17,10 +17,10 @@ export class QrScanModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.scanBarcode();
   }
 
-  scanBarcode() {
+  private scanBarcode() {
     const options: BarcodeScannerOptions = {
       preferFrontCamera: false,
       showFlipCameraButton: true,
