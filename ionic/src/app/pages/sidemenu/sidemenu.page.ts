@@ -81,10 +81,10 @@ export class SidemenuPage implements OnInit {
 
   async takePicture() {
     const image = await Camera.getPhoto( {
-      quality: 90,
+      quality: 50,
       allowEditing: false,
       resultType: CameraResultType.Base64,
-      direction: CameraDirection.Front
+      direction: CameraDirection.Rear // iOS and Web only
     } );
 
     const imageUrl = `data:image/png;base64,${image.base64String}`;
@@ -95,10 +95,9 @@ export class SidemenuPage implements OnInit {
       const message = result.message;
       const color = 'primary';
       this._common.presentToast( { message, color } );
-      this._auth.AuthSubject( result.data );
       this.storage.store( USER, result.data );
       this.avatar = result.data.avatar;
-    } );
+    }, () => loading.dismiss() );
   }
 
 }
