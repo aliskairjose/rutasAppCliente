@@ -36,6 +36,7 @@ export class RatingPage implements OnInit {
 
   async sendRating() {
     const loading = await this._common.presentLoading();
+    loading.present();
     const data = {
       route_boarding_id: this.id,
       comment: this.comment,
