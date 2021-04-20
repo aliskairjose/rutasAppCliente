@@ -7,7 +7,7 @@
 
           <div class="menu-list-header">
 
-            <ng-container *ngIf="avatar.includes('avatar_default.jpg'); else elseTemplate">
+            <ng-container *ngIf="user?.avatar?.includes('avatar_default.jpg'); else elseTemplate">
               <div class="avatar-container" (click)="takePicture()">
                 <span class="profile-pic">{{ abrv | uppercase }}</span>
                 <ion-icon slot="end" name="camera"></ion-icon>
@@ -16,7 +16,7 @@
             <ng-template #elseTemplate>
               <div class="avatar-container" (click)="takePicture()">
                 <ion-avatar>
-                  <img [src]="avatar">
+                  <img [src]="user?.avatar">
                 </ion-avatar>
                 <ion-icon slot="end" name="camera"></ion-icon>
               </div>

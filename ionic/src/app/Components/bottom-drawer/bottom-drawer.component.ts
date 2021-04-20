@@ -193,77 +193,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.bottomDrawerElement.style.transform = `translateY(${-this.openHeight}px`;
   }
 
-  async scan() {
-
-    if ( this.videoElement.readyState === this.videoElement.HAVE_ENOUGH_DATA ) {
-
-      if ( this.loading ) {
-        await this.loading.dismiss();
-        this.loading = null;
-        this.scanActive = true;
-      }
-
-      this.canvasElement.height = this.videoElement.videoHeight;
-      this.canvasElement.width = this.videoElement.videoWidth;
-      this.canvasContext = this.canvasElement.getContext( '2d' );
-
-      this.canvasContext.drawImage(
-        this.videoElement, 0, 0, this.canvasElement.width, this.canvasElement.height
-      );
-      const imageData = this.canvasContext.getImageData(
-        0, 0, this.canvasElement.width, this.canvasElement.height
-      );
-
-      const code = jsQR( imageData.data, imageData.width, imageData.height, {
-        inversionAttempts: 'dontInvert'
-      } );
-
-      if ( code?.data ) {
-        const result: any = await this.verifyBoarding();
-        this.scanResult = { ...JSON.parse( code.data ) };
-
-        if ( result.hasBoarding ) { this._aboardinData = result.data; }
-
-        if ( !result.hasBoarding ) {
-          const user: User = await this._storage.getUser();
-          this._aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
-        }
-
-        this.isOpen = false;
-        this.userService.rutasFlow = 40;
-        this.scanActive = true;
-        this.stopScan();
-
-
-        this.bottomDrawerElement.style.transition = '.4s ease-out';
-        this.bottomDrawerElement.style.transform = '';
-        this.stream.getTracks().forEach( track => track.stop() );
-        this.gesture.enable( true );
-        this.dragable = true;
-        this.emitEvent.emit( {
-          type: 'scan-success'
-        } );
-      } else {
-        if ( this.scanActive ) {
-          requestAnimationFrame( this.scan.bind( this ) );
-        }
-      }
-
-    } else {
-      requestAnimationFrame( this.scan.bind( this ) );
-    }
-  }
-
-  stopScan() {
-    this.bottomDrawerElement = this.bottomDrawer.nativeElement;
-    this.bottomDrawerElement.style.transition = '.4s ease-out';
-    this.bottomDrawerElement.style.transform = '';
-    this.stream.getTracks().forEach( track => track.stop() );
-    this.gesture.enable( true );
-    this.showScan = false;
-    this.scanActive = false;
-  }
-
   async scannerOn() {
     const modal = await this._common.presentModal( {
       component: QrScanModalComponent,
@@ -271,35 +200,22 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     } );
     modal.present();
     await modal.onDidDismiss();
-  }
+    const scannedData = await modal.onDidDismiss();
 
-  async scannerOn_() {
-    this.loading = await this.loadingCtrl.create( {} );
-    await this.loading.present();
-    this.showScan = true;
-    this.stream = await navigator.mediaDevices.getUserMedia( { video: { facingMode: 'environment' } } );
+    this.scanResult = { ...JSON.parse( scannedData.data ) };
 
-    this.videoElement = this.video.nativeElement;
-    this.canvasElement = this.canvas.nativeElement;
-    this.videoElement.srcObject = this.stream;
-    this.videoElement.setAttribute( 'playsinline', true );
-    this.videoElement.play();
-    requestAnimationFrame( this.scan.bind( this ) );
+    const result: any = await this.verifyBoarding();
 
-  }
+    if ( result.hasBoarding ) { this._aboardinData = result.data; }
 
-  goToFeedback() {
-    this.emitEvent.emit( {
-      type: 'stop-track'
-    } );
-    this.router.navigateByUrl( '/sidemenu/Feedback' );
-    const options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 400,
-      slowdownfactor: -1,
-    };
-    this.nativePageTransitions.slide( options );
-    this.navctl.navigateRoot( '/sidemenu/Feedback' );
+    if ( !result.hasBoarding ) {
+      const user: User = await this._storage.getUser();
+      this._aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
+    }
+
+    this.isOpen = false;
+    this.userService.rutasFlow = 40;
+
   }
 
   goToHome() {

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LOGO, USER } from '../../constants/global-constants';
@@ -16,7 +16,7 @@ const { Camera } = Plugins;
   templateUrl: './sidemenu.page.html',
   styleUrls: [ './sidemenu.page.scss' ],
 } )
-export class SidemenuPage implements OnInit {
+export class SidemenuPage implements OnInit, OnChanges {
 
   backdropVisible = false;
   drawerVar = 'Inicio';
@@ -45,6 +45,22 @@ export class SidemenuPage implements OnInit {
   ) {
     this.user = {};
     this._auth.authObserver().subscribe( ( user: any ) => {
+      this.user = { ...user };
+      this.avatar = this.user.avatar;
+      const value = this.user.name.split( ' ' );
+      this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
+    } );
+  }
+
+  ngOnChanges(): void {
+    console.log( 'changes' )
+    this._auth.authObserver().subscribe( ( user: any ) => {
+      this.user = { ...user };
+      this.avatar = this.user.avatar;
+      const value = this.user.name.split( ' ' );
+      this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
+    } );
+    this._storage.get( USER ).then( ( user: any ) => {
       this.user = { ...user };
       this.avatar = this.user.avatar;
       const value = this.user.name.split( ' ' );
@@ -89,13 +105,15 @@ export class SidemenuPage implements OnInit {
     const imageUrl = `data:image/png;base64,${image.base64String}`;
     const loading = await this._common.presentLoading();
     loading.present();
-    this.userService.updateAvatar( { avatar: imageUrl } ).subscribe( result => {
+    this.userService.updateAvatar( { avatar: imageUrl } ).subscribe( async ( result ) => {
       loading.dismiss();
+      await this._storage.store( USER, result.data );
+      this._auth.AuthSubject( result.data );
+      this.user = { ...result.data };
       const message = result.message;
       const color = 'primary';
       this._common.presentToast( { message, color } );
-      this._storage.store( USER, result.data );
-      this.avatar = result.data.avatar;
+      this.ngOnChanges();
     }, () => loading.dismiss() );
   }
 
