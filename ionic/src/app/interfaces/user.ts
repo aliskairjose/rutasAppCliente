@@ -2,6 +2,7 @@ import { Role } from './role';
 
 export interface User {
   id?: string;
+  avatar?: string;
   address?: string;
   charge?: string;
   client_id?: number;
@@ -15,6 +16,7 @@ export interface User {
   license?: string;
   license_expiration?: string;
   name?: string;
+  imgUrl?: string;
   phone?: string;
   roles?: Array<Role>;
   updated_at?: string;
@@ -22,5 +24,6 @@ export interface User {
   verified_by_client?: number;
   years_experiencie?: number;
   facebook_id?: string;
+  rating?: number;
   google_id?: string;
 }

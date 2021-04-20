@@ -119,6 +119,15 @@
     --color: var(--ion-color-primary);
   }
 
+  .avatar-container {
+    display: flex;
+    align-items: flex-end;
+    ion-icon {
+      position: fixed;
+      font-size: 1.3em;
+    }
+  }
+
   .menu-list-header {
     background-color: #fae345;
     display: flex;

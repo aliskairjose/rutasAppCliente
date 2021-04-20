@@ -4,7 +4,23 @@
     "uninstalled": []
   },
   "config_munge": {
-    "files": {}
+    "files": {
+      "package.phone.appxmanifest": {
+        "parents": {
+          "/Package/Capabilities": []
+        }
+      },
+      "package.windows.appxmanifest": {
+        "parents": {
+          "/Package/Capabilities": []
+        }
+      },
+      "package.windows10.appxmanifest": {
+        "parents": {
+          "/Package/Capabilities": []
+        }
+      }
+    }
   },
   "installed_plugins": {
     "cordova-plugin-whitelist": {

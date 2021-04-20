@@ -24,6 +24,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { registerLocaleData } from '@angular/common';
+import { CameraPreview } from '@ionic-native/camera-preview/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 import localeEs from '@angular/common/locales/es';
 registerLocaleData( localeEs );
 @NgModule( {
@@ -50,7 +52,9 @@ registerLocaleData( localeEs );
     AngularFireAuthModule,
   ],
   providers: [
+    Camera,
     Geolocation,
+    CameraPreview,
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }

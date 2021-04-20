@@ -65,6 +65,15 @@ export class UserService {
     );
   }
 
+  /**
+   * @description Actualiza la foto de perfil
+   * @param data Foto en base64
+   * @returns Foto nueva
+   */
+  updateAvatar( data: any ): Observable<any> {
+    return this.httpService.post( `/update-avatar`, data );
+  }
+
   comment( comment: string ): Observable<any> {
     const data = {
       type_comment_id: 4,
