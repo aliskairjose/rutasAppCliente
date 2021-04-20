@@ -196,7 +196,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   async scannerOn() {
-    this.showScan = true;
     const options: BarcodeScannerOptions = {
       preferFrontCamera: false,
       showFlipCameraButton: true,
@@ -209,6 +208,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     };
 
     this.barcodeScanner.scan( options ).then( async ( barcodeData ) => {
+      const loading = await this._common.presentLoading();
+      loading.present();
       this.scanResult = JSON.parse( barcodeData.text );
       const result: any = await this.verifyBoarding();
 
@@ -217,7 +218,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
         const user: User = await this._storage.getUser();
         this._aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
       }
-      this.showScan = true;
+      loading.dismiss();
+
       this.isOpen = false;
       this.userService.rutasFlow = 40;
       this.scanActive = true;
