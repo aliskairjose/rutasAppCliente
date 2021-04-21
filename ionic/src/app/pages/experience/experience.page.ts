@@ -10,6 +10,7 @@ import { IonInfiniteScroll } from '@ionic/angular';
 export class ExperiencePage implements OnInit {
 
   list = [];
+  face = '../../../assets/svg/faces/1.svg';
   rating = 0;
 
   @ViewChild( IonInfiniteScroll ) infiniteScroll: IonInfiniteScroll;
@@ -29,6 +30,7 @@ export class ExperiencePage implements OnInit {
       this.list.forEach( l => rateSum.push( l.calification_route ) );
       this.rating = rateSum.reduce( ( a, b ) => a + b, 0 ) / this.list.length;
       this.rating = Math.round( this.rating );
+      this.face = `../../../assets/svg/faces/${this.rating}.svg`;
       loading.dismiss();
     }, () => loading.dismiss() );
   }
