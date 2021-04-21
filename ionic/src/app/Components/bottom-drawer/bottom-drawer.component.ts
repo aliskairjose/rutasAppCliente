@@ -278,7 +278,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       } );
       modal.present();
       await modal.onDidDismiss();
-      this.userService.rutasFlow = 0;
+      // this.userService.rutasFlow = 0;
+      this.goToHome();
     }
 
   }

@@ -25,7 +25,6 @@ export class SidemenuPage implements OnInit, OnChanges {
   user: User = {};
   abrv = '';
   logo = LOGO;
-  avatar = 'avatar_default.jpg';
 
   appPages = [
     { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/menu/home.png', route: 0 },
@@ -46,23 +45,19 @@ export class SidemenuPage implements OnInit, OnChanges {
     this.user = {};
     this._auth.authObserver().subscribe( ( user: any ) => {
       this.user = { ...user };
-      this.avatar = this.user.avatar;
       const value = this.user.name.split( ' ' );
       this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
     } );
   }
 
   ngOnChanges(): void {
-    console.log( 'changes' )
     this._auth.authObserver().subscribe( ( user: any ) => {
       this.user = { ...user };
-      this.avatar = this.user.avatar;
       const value = this.user.name.split( ' ' );
       this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
     } );
     this._storage.get( USER ).then( ( user: any ) => {
       this.user = { ...user };
-      this.avatar = this.user.avatar;
       const value = this.user.name.split( ' ' );
       this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
     } );
@@ -71,7 +66,6 @@ export class SidemenuPage implements OnInit, OnChanges {
   ngOnInit() {
     this._storage.get( USER ).then( ( user: any ) => {
       this.user = { ...user };
-      this.avatar = this.user.avatar;
       const value = this.user.name.split( ' ' );
       this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
     } );
@@ -96,13 +90,18 @@ export class SidemenuPage implements OnInit, OnChanges {
 
   async takePicture() {
     const image = await Camera.getPhoto( {
-      quality: 50,
+      quality: 30,
+      height: 120,
+      width: 120,
+      preserveAspectRatio: true,
       allowEditing: false,
       resultType: CameraResultType.Base64,
       direction: CameraDirection.Front // iOS and Web only
     } );
 
-    const imageUrl = `data:image/png;base64,${image.base64String}`;
+    const fileExt = this.user.avatar.includes( 'jpg' ) ? 'png' : 'jpg';
+
+    const imageUrl = `data:image/${fileExt};base64,${image.base64String}`;
     const loading = await this._common.presentLoading();
     loading.present();
     this.userService.updateAvatar( { avatar: imageUrl } ).subscribe( async ( result ) => {
