@@ -238,7 +238,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
   goToHome() {
     this.openHeight = ( this.plt.height() / 100 ) * 60;
-    this.userService.rutasFlow = 1;
+    this.userService.rutasFlow = 0;
     this.showScan = false;
     this.dragable = false;
     this.gesture.enable( true );
@@ -280,7 +280,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       } );
       modal.present();
       await modal.onDidDismiss();
-      this.userService.rutasFlow = 0;
+      // this.userService.rutasFlow = 0;
+      this.goToHome();
     }
 
   }
