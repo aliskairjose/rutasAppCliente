@@ -13,7 +13,6 @@ const { Camera } = Plugins;
 
 @Component( {
   selector: 'app-sidemenu',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sidemenu.page.html',
   styleUrls: [ './sidemenu.page.scss' ],
 } )
@@ -43,6 +42,7 @@ export class SidemenuPage implements OnInit {
     private _storage: StorageService,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
+    this.user = {};
     this._auth.authObserver().subscribe( ( user: User ) => {
       this.user = { ...user };
       const value = this.user.name.split( ' ' );
@@ -94,7 +94,7 @@ export class SidemenuPage implements OnInit {
       const message = result.message;
       const color = 'primary';
       this._common.presentToast( { message, color } );
-      this.ngOnInit()
+      this.ngOnInit();
     }, () => loading.dismiss() );
   }
 
