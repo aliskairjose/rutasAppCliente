@@ -222,7 +222,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
       this.isOpen = false;
       this.userService.rutasFlow = 40;
-      this.scanActive = true;
       this.bottomDrawerElement.style.transition = '.4s ease-out';
       this.bottomDrawerElement.style.transform = '';
       this.gesture.enable( true );
