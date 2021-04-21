@@ -10,8 +10,8 @@ import { IonInfiniteScroll } from '@ionic/angular';
 export class ExperiencePage implements OnInit {
 
   list = [];
-  face = '../../../assets/svg/faces/1.svg';
-  rating = 0;
+  face = '../../../assets/svg/faces/2.svg';
+  rating = 1;
   serviceMesg = [
     'Pésimo servicio',
     'Servicio deficiente',
