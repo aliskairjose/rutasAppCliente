@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, OnChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LOGO, USER } from '../../constants/global-constants';
@@ -13,10 +13,11 @@ const { Camera } = Plugins;
 
 @Component( {
   selector: 'app-sidemenu',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sidemenu.page.html',
   styleUrls: [ './sidemenu.page.scss' ],
 } )
-export class SidemenuPage implements OnInit, OnChanges {
+export class SidemenuPage implements OnInit {
 
   backdropVisible = false;
   drawerVar = 'Inicio';
@@ -25,7 +26,6 @@ export class SidemenuPage implements OnInit, OnChanges {
   user: User = {};
   abrv = '';
   logo = LOGO;
-  avatar = 'avatar_default.jpg';
 
   appPages = [
     { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/menu/home.png', route: 0 },
@@ -43,35 +43,17 @@ export class SidemenuPage implements OnInit, OnChanges {
     private _storage: StorageService,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
-    this.user = {};
-    this._auth.authObserver().subscribe( ( user: any ) => {
+    this._auth.authObserver().subscribe( ( user: User ) => {
       this.user = { ...user };
-      this.avatar = this.user.avatar;
       const value = this.user.name.split( ' ' );
       this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
     } );
   }
 
-  ngOnChanges(): void {
-    console.log( 'changes' )
-    this._auth.authObserver().subscribe( ( user: any ) => {
-      this.user = { ...user };
-      this.avatar = this.user.avatar;
-      const value = this.user.name.split( ' ' );
-      this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
-    } );
-    this._storage.get( USER ).then( ( user: any ) => {
-      this.user = { ...user };
-      this.avatar = this.user.avatar;
-      const value = this.user.name.split( ' ' );
-      this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
-    } );
-  }
 
   ngOnInit() {
     this._storage.get( USER ).then( ( user: any ) => {
       this.user = { ...user };
-      this.avatar = this.user.avatar;
       const value = this.user.name.split( ' ' );
       this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
     } );
@@ -106,14 +88,13 @@ export class SidemenuPage implements OnInit, OnChanges {
     const loading = await this._common.presentLoading();
     loading.present();
     this.userService.updateAvatar( { avatar: imageUrl } ).subscribe( async ( result ) => {
-      loading.dismiss();
-      await this._storage.store( USER, result.data );
       this._auth.AuthSubject( result.data );
-      this.user = { ...result.data };
+      await this._storage.store( USER, result.data );
+      loading.dismiss();
       const message = result.message;
       const color = 'primary';
       this._common.presentToast( { message, color } );
-      this.ngOnChanges();
+      this.ngOnInit()
     }, () => loading.dismiss() );
   }
 

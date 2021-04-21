@@ -6,7 +6,6 @@
         <ion-list id="inbox-list">
 
           <div class="menu-list-header">
-
             <ng-container *ngIf="user?.avatar?.includes('avatar_default.jpg'); else elseTemplate">
               <div class="avatar-container" (click)="takePicture()">
                 <span class="profile-pic">{{ abrv | uppercase }}</span>
