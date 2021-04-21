@@ -196,6 +196,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   async scannerOn() {
+    this.showScan = true;
+
     const options: BarcodeScannerOptions = {
       preferFrontCamera: false,
       showFlipCameraButton: true,
