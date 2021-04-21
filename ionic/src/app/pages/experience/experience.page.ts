@@ -12,6 +12,15 @@ export class ExperiencePage implements OnInit {
   list = [];
   face = '../../../assets/svg/faces/1.svg';
   rating = 0;
+  serviceMesg = [
+    'Pésimo servicio',
+    'Servicio deficiente',
+    'Servicio regular',
+    'Buen servicio',
+    'Servicio satisfactorio',
+  ];
+
+  msg = '';
 
   @ViewChild( IonInfiniteScroll ) infiniteScroll: IonInfiniteScroll;
 
@@ -31,6 +40,7 @@ export class ExperiencePage implements OnInit {
       this.rating = rateSum.reduce( ( a, b ) => a + b, 0 ) / this.list.length;
       this.rating = Math.round( this.rating );
       this.face = `../../../assets/svg/faces/${this.rating}.svg`;
+      this.msg = this.serviceMesg.find( ( item, index ) => index === this.rating - 1 );
       loading.dismiss();
     }, () => loading.dismiss() );
   }
