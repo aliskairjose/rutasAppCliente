@@ -16,6 +16,8 @@
             <ion-select value="all" [interfaceOptions]="customOptions" (ionChange)="onChange($event.detail.value)">
               <ion-select-option value="all">Todas</ion-select-option>
               <ion-select-option value="1">Respondidas</ion-select-option>
+              <ion-select-option value="1">Respondidas</ion-select-option>
+              <ion-select-option value="1">Respondidas</ion-select-option>
               <ion-select-option value="0">No respondidas</ion-select-option>
             </ion-select>
           </ion-item>
@@ -25,13 +27,24 @@
     <ion-row>
       <ion-col>
         <ion-list lines="full">
-          <ion-item button (click)="detail(comment)" detail="true" *ngFor="let comment of comments; let i=index">
-            <ion-avatar slot="start">
-              <img src="./../../../assets/svg/chat.svg" />
-            </ion-avatar>
+          <ion-item button (click)="detail(comment)" detail="false" *ngFor="let comment of comments; let i=index">
+
+            <ng-container *ngIf="comment.status; else elseTemplate">
+              <ion-icon [name]="comment.read ? 'mail-open-outline' : 'mail-unread-outline' " slot="start">
+              </ion-icon>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <ion-icon slot="start" name="mail-outline"></ion-icon>
+            </ng-template>
+
             <ion-label>
-              <h3>Rutas Panamá</h3>
-              <h4>{{comment.status === 1 ?'Respondio su comentario':'En espera de respuesta'}}</h4>
+              <p>Rutas Panamá</p>
+              <ng-container *ngIf="comment.status; else enEspera">
+                <p>{{comment.responses[0].comment}}</p>
+              </ng-container>
+              <ng-template #enEspera>
+                <p>En espera de respuesta</p>
+              </ng-template>
             </ion-label>
             <ion-note>{{comment.updated_at | date: 'short' }}</ion-note>
           </ion-item>

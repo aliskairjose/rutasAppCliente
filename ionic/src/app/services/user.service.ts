@@ -82,9 +82,15 @@ export class UserService {
     return this.httpService.post( '/comments', data );
   }
 
-  commentList(): Observable<any> {
+  commentList(): Observable<Comment[]> {
     return this.httpService
       .get( `/comments?includes[]=responses&includes[]=typeComment` )
+      .pipe( map( response => response.data ) );
+  }
+
+  commentById( id: number ): Observable<Comment> {
+    return this.httpService
+      .get( `/comments/${id}?includes[]=responses&includes[]=typeComment` )
       .pipe( map( response => response.data ) );
   }
 

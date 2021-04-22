@@ -36,13 +36,11 @@ export class NotificationPage implements OnInit {
     }, () => loading.dismiss() );
   }
 
-  search(): void {
-    console.log( 'search' );
-  }
-
   detail( comment: Comment ): void {
-    const _comment = window.btoa( JSON.stringify( comment ) );
-    this.router.navigate( [ 'notification/detail' ], { queryParams: { comment: _comment } } );
+    if ( !comment.status ) {
+      return;
+    }
+    this.router.navigate( [ `notification/detail/${comment.id}` ] );
   }
 
   // Controla el valor de cambio en el select
