@@ -43,7 +43,6 @@ export class RatingPage implements OnInit {
     };
 
     this.routeService.ratingTravel( data ).subscribe( () => {
-      loading.dismiss();
       this.isRate = true;
     } );
   }
