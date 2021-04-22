@@ -242,6 +242,9 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.gesture.enable( true );
     this.bottomDrawerElement.style.transition = '.4s ease-out';
     this.bottomDrawerElement.style.transform = ``;
+    this.emitEvent.emit( {
+      type: 'loadMap'
+    } );
 
   }
 
