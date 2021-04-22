@@ -4,7 +4,6 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { RouteService } from '../../services/route.service';
 import { Route } from '../../interfaces/route';
 import { CommonService } from '../../services/common.service';
-import { Subscription } from 'rxjs';
 
 @Component( {
   selector: 'app-page-rating',
@@ -17,15 +16,14 @@ export class RatingPage implements OnInit {
   busRate = 1;
   comment: '';
   isRate = false;
-  subscription: Subscription;
 
   @Input() route: Route;
   @Input() id: number;
 
   constructor(
+    public navParams: NavParams,
     private _common: CommonService,
     public rating: RatingComponent,
-    public navParams: NavParams,
     public modalController: ModalController,
     private routeService: RouteService
   ) {
@@ -34,7 +32,7 @@ export class RatingPage implements OnInit {
   ngOnInit() {
   }
 
-  async sendRating() {
+  async sendRating( type?: string ) {
     const loading = await this._common.presentLoading();
     loading.present();
     const data = {
@@ -44,7 +42,7 @@ export class RatingPage implements OnInit {
       driver_rate: this.driverRate
     };
 
-    this.subscription = this.routeService.ratingTravel( data ).subscribe( () => {
+    this.routeService.ratingTravel( data ).subscribe( () => {
       loading.dismiss();
       this.isRate = true;
     } );
@@ -55,7 +53,6 @@ export class RatingPage implements OnInit {
   }
 
   closeModal(): void {
-    this.subscription.unsubscribe();
     this.modalController.dismiss();
   }
 
