@@ -52,6 +52,11 @@ export class RatingPage implements OnInit {
     ( type === 'driver' ) ? this.driverRate = rate : this.busRate = rate;
   }
 
+  noRate(): void {
+    this.isRate = true;
+    this.closeModal();
+  }
+
   closeModal(): void {
     this.modalController.dismiss();
   }
