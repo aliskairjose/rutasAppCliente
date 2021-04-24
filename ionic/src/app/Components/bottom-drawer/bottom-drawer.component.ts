@@ -39,7 +39,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   videoElement: any;
   canvasElement: any;
   canvasContext: any;
-  loading: HTMLIonLoadingElement;
+  loading: any;
   selectedRoute: Route = {};
   searchText = '';
   bus: Bus = {};
@@ -208,8 +208,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     };
 
     this.barcodeScanner.scan( options ).then( async ( barcodeData ) => {
-      const loading = await this._common.presentLoading();
-      loading.present();
+      this.loading = await this._common.presentLoading();
+      this.loading.present();
       this.scanResult = JSON.parse( barcodeData.text );
       const result: any = await this.verifyBoarding();
 
@@ -218,7 +218,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
         const user: User = await this._storage.getUser();
         this._aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
       }
-      loading.dismiss();
+      this.loading.dismiss();
 
       this.isOpen = false;
       this.userService.rutasFlow = 40;
@@ -227,6 +227,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       this.gesture.enable( true );
       this.dragable = true;
     } ).catch( () => {
+      this.loading.dismisst();
       const message = 'Ha ocurrido un error';
       const color = 'danger';
       this._common.presentToast( { message, color } );

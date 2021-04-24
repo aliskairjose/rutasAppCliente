@@ -7,12 +7,12 @@ ion-content {
     .header-rating {
       display: flex;
       flex-flow: column;
-
+      width: 100vw;
       .rating-face {
         display: flex;
         margin: auto;
         margin-bottom: -1.4em;
-        width: 53%;
+        width: 12em;
         border: 24px var(--rp-color-primary) solid;
         border-radius: 50%;
       }
