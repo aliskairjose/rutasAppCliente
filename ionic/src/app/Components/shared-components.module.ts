@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { RoutePage } from '../pages/route/route.page';
 import { TooltipsModule } from 'ionic4-tooltips';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { DashboardPage } from '../pages/dashboard/dashboard.page';
 
 @NgModule( {
   declarations: [
@@ -21,6 +22,7 @@ import { BarRatingModule } from 'ngx-bar-rating';
     RoutesFilterPipe,
     HeaderComponent,
     RoutePage,
+    DashboardPage,
   ],
   imports: [
     BarRatingModule,

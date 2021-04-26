@@ -46,7 +46,11 @@ const routes: Routes = [
   {
     path: 'rating',
     loadChildren: () => import( './pages/rating/rating.module' ).then( m => m.RatingPageModule )
+  },  {
+    path: 'dashboard',
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
   }
+
 ];
 
 @NgModule( {

@@ -44,7 +44,6 @@ export class SidemenuPage implements OnInit {
   ) {
     this.user = {};
     this._auth.authObserver().subscribe( ( user: any ) => {
-      console.log( user );
       this.user = { ...user };
       const value = this.user.name.split( ' ' );
       this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
