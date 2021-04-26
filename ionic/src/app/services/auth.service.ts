@@ -11,7 +11,7 @@ import { TOKEN } from '../constants/global-constants';
   providedIn: 'root'
 } )
 export class AuthService {
-  $auth: Subject<any> = new Subject<any>();
+  private auth$: Subject<User> = new Subject<User>();
 
   constructor(
     private _common: CommonService,
@@ -69,8 +69,7 @@ export class AuthService {
    * @description Genera el stream de eventos usando next() para crear el evento
    */
   AuthSubject( user: User ): void {
-    this.$auth.next( user );
-    // this.$auth.complete();
+    this.auth$.next( user );
   }
 
   /**
@@ -78,7 +77,7 @@ export class AuthService {
    * @returns Observable
    */
   authObserver(): Observable<User> {
-    return this.$auth.asObservable();
+    return this.auth$.asObservable();
   }
 
 

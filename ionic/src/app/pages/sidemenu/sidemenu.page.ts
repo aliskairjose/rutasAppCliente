@@ -49,6 +49,7 @@ export class SidemenuPage implements OnInit {
       const value = this.user.name.split( ' ' );
       this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
     } );
+
   }
 
   ngOnInit() {
