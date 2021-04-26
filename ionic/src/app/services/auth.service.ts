@@ -70,7 +70,7 @@ export class AuthService {
    */
   AuthSubject( user: User ): void {
     this.$auth.next( user );
-    this.$auth.complete();
+    // this.$auth.complete();
   }
 
   /**

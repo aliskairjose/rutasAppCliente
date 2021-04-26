@@ -226,12 +226,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       this.bottomDrawerElement.style.transform = '';
       this.gesture.enable( true );
       this.dragable = true;
-    } ).catch( () => {
-      this.loading.dismisst();
-      const message = 'Ha ocurrido un error';
-      const color = 'danger';
-      this._common.presentToast( { message, color } );
-    } );
+    } ).catch( () => this.loading.dismiss() );
 
   }
 

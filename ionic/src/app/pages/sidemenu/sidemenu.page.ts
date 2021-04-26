@@ -16,7 +16,7 @@ const { Camera } = Plugins;
   templateUrl: './sidemenu.page.html',
   styleUrls: [ './sidemenu.page.scss' ],
 } )
-export class SidemenuPage implements OnInit, OnChanges {
+export class SidemenuPage implements OnInit {
 
   backdropVisible = false;
   drawerVar = 'Inicio';
@@ -44,19 +44,7 @@ export class SidemenuPage implements OnInit, OnChanges {
   ) {
     this.user = {};
     this._auth.authObserver().subscribe( ( user: any ) => {
-      this.user = { ...user };
-      const value = this.user.name.split( ' ' );
-      this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
-    } );
-  }
-
-  ngOnChanges(): void {
-    this._auth.authObserver().subscribe( ( user: any ) => {
-      this.user = { ...user };
-      const value = this.user.name.split( ' ' );
-      this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
-    } );
-    this._storage.get( USER ).then( ( user: any ) => {
+      console.log( user );
       this.user = { ...user };
       const value = this.user.name.split( ' ' );
       this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
@@ -111,7 +99,7 @@ export class SidemenuPage implements OnInit, OnChanges {
       const message = result.message;
       const color = 'primary';
       this._common.presentToast( { message, color } );
-      this.ngOnChanges();
+      // this.ngOnChanges();
     }, () => loading.dismiss() );
   }
 
