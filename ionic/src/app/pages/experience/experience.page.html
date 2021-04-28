@@ -22,21 +22,23 @@
           <h3>Listado de viajes</h3>
         </ion-list-header>
         <ion-list lines="full">
-          <ion-item *ngFor="let l of list; let i=index">
-            <ion-avatar slot="start">
-              <img src="./../../../assets/route.png">
-            </ion-avatar>
-            <ion-label>
-              <h2>{{l.route.name}}</h2>
-              <h3>Bus: {{l.route.bus.license_plate | uppercase }} </h3>
-            </ion-label>
-            <div>
-              <div class="text-end">
-                <ion-note>{{ l.created_at | date: 'short' }}</ion-note>
+          <ng-container *ngFor="let l of list; let i=index">
+            <ion-item>
+              <ion-avatar slot="start">
+                <img src="./../../../assets/route.png">
+              </ion-avatar>
+              <ion-label>
+                <h2>{{l.route.name}}</h2>
+                <h3>Bus: {{l.route.bus.license_plate | uppercase }} </h3>
+              </ion-label>
+              <div>
+                <div class="text-end">
+                  <ion-note>{{ l.created_at | date: 'short' }}</ion-note>
+                </div>
+                <app-rating readOnly="true" rate="{{l.calification_route }}"> </app-rating>
               </div>
-              <app-rating readOnly="true" rate="{{l.calification_route }}"> </app-rating>
-            </div>
-          </ion-item>
+            </ion-item>
+          </ng-container>
         </ion-list>
       </ion-col>
     </ion-row>

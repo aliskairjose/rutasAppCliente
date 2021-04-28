@@ -18,13 +18,7 @@ export class DashboardPage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    const user: any = await this.storage.getUser();
-    const loading = await this.common.presentLoading();
-    loading.present();
-    this.routeService.list( user.client_id ).subscribe( ( routes: Route[] ) => {
-      console.log( routes )
-      loading.dismiss();
-    }, () => loading.dismiss() );
+
   }
 
 

@@ -13,11 +13,11 @@ export class ExperiencePage implements OnInit {
   face = '../../../assets/svg/faces/2.svg';
   rating = 1;
   serviceMesg = [
-    'Pésimo servicio',
-    'Servicio deficiente',
-    'Servicio regular',
-    'Buen servicio',
+    'Mal Servicio',
+    'Servicio Regular',
+    'Buen Servicio',
     'Servicio satisfactorio',
+    'Excelente Servicio',
   ];
 
   msg = '';
