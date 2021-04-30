@@ -19,8 +19,7 @@
       <div class="div-avatar">
         <ion-item lines="none">
           <ion-avatar slot="start">
-            <img class="custom-img-avatar"
-              src="https://toppng.com/uploads/preview/foto-carnet-11550717604z0lxjntkz4.png">
+            <img class="custom-img-avatar" [src]="route?.driver.avatar">
           </ion-avatar>
           <ion-label>
             <span class="ion-padding-top">{{route?.driver?.name}}</span>
@@ -66,8 +65,7 @@
       </ion-col>
       <ion-col class="ion-margin-start ion-margin-end">
         <ion-item>
-          <ion-label>Describe tu experiencia...</ion-label>
-          <ion-select value="1" multiple="false" (ionChange)="onChange($event.detail.value)">
+          <ion-select value="Excelente" multiple="false" (ionChange)="onChange($event.detail.value)">
             <ng-container *ngFor="let option of options; let i=index">
               <ion-select-option [value]="option.value">{{ option.text}}</ion-select-option>
             </ng-container>

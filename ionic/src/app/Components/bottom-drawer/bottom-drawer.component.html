@@ -95,8 +95,7 @@
             <ion-col>
               <div class="text-center" id="travel-data">
                 <h2>Datos de tu viaje</h2>
-                <img class="rounded-circle shadow-sm avatar ion-margin-vertical"
-                  src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                <img class="rounded-circle shadow-sm avatar ion-margin-vertical" [src]="selectedRoute?.driver.avatar">
                 <ion-note>Tu conductor</ion-note>
                 <h5>
                   {{selectedRoute?.driver?.name}} | {{selectedRute?.driver.rating}}/5

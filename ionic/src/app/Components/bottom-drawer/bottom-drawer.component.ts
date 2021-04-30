@@ -211,15 +211,12 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       this.loading = await this._common.presentLoading();
       this.loading.present();
       this.scanResult = JSON.parse( barcodeData.text );
-      alert( barcodeData.text );
       const result: any = await this.verifyBoarding();
 
       if ( result.hasBoarding ) { this._aboardinData = result.data; }
       if ( !result.hasBoarding ) {
         const user: User = await this._storage.getUser();
         this._aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
-        console.log( this._aboardinData );
-        alert( JSON.stringify( this._aboardinData ) );
       }
       this.loading.dismiss();
 
@@ -275,8 +272,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
         component: RatingPage,
         cssClass: '',
         componentProps: {
-          route: this._aboardinData.data.route,
-          id: this._aboardinData.data.id
+          route: this._aboardinData?.data?.route,
+          id: this._aboardinData?.data.id
         }
       } );
       modal.present();
