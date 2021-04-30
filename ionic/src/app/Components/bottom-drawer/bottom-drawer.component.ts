@@ -260,6 +260,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     this.seatGesture.enable( true );
   }
 
+  // Abre el modal para calificar el viaje
   async ratingModal() {
     const confirm = await this._common.alert();
     if ( confirm ) {
@@ -277,7 +278,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       } );
       modal.present();
       await modal.onDidDismiss();
-      // this.userService.rutasFlow = 0;
       this.goToHome();
     }
 

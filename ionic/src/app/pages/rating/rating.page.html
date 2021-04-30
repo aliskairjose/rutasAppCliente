@@ -65,8 +65,20 @@
         <h6>¿Algun comentario?</h6>
       </ion-col>
       <ion-col class="ion-margin-start ion-margin-end">
-        <ion-textarea class="custom-text-area" rows="4" cols="20" placeholder="Describe tu experiencia..."
-          [(ngModel)]="comment"></ion-textarea>
+        <ion-item>
+          <ion-label>Describe tu experiencia...</ion-label>
+          <ion-select value="1" multiple="false" (ionChange)="onChange($event.detail.value)">
+            <ng-container *ngFor="let option of options; let i=index">
+              <ion-select-option [value]="option.value">{{ option.text}}</ion-select-option>
+            </ng-container>
+          </ion-select>
+        </ion-item>
+
+        <ng-container *ngIf="comment === 'Otro">
+          <ion-textarea class="custom-text-area" rows="4" cols="20" placeholder="Describe tu experiencia..."
+            [(ngModel)]="otherComment"></ion-textarea>
+        </ng-container>
+
       </ion-col>
     </ion-row>
 

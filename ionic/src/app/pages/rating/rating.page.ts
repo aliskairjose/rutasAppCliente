@@ -14,8 +14,15 @@ export class RatingPage implements OnInit {
 
   driverRate = 1;
   busRate = 1;
-  comment: '';
+  comment = '';
   isRate = false;
+  otherComment = '';
+  options = [
+    { value: 'Excelente', text: 'Excelente' },
+    { value: 'Satisfactorio', text: 'Satisfactorio' },
+    { value: 'Regular', text: 'Regular' },
+    { value: 'Otro', text: 'Otro' },
+  ];
 
   @Input() route: Route;
   @Input() id: number;
@@ -32,12 +39,17 @@ export class RatingPage implements OnInit {
   ngOnInit() {
   }
 
+  // Seleccion de tipo de comentario
+  onChange( value: string ): void {
+    this.comment = value;
+  }
+
   async sendRating( type?: string ) {
     const loading = await this._common.presentLoading();
     loading.present();
     const data = {
       route_boarding_id: this.id,
-      comment: this.comment,
+      comment: this.comment !== 'Otro' ? this.comment : this.otherComment,
       bus_rate: this.busRate,
       driver_rate: this.driverRate
     };
