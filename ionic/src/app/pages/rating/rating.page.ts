@@ -24,7 +24,7 @@ export class RatingPage implements OnInit {
     { value: 'Otro', text: 'Otro' },
   ];
 
-  @Input() route: Route;
+  @Input() route: Route = {};
   @Input() id: number;
 
   constructor(

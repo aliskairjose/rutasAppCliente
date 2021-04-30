@@ -211,12 +211,15 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       this.loading = await this._common.presentLoading();
       this.loading.present();
       this.scanResult = JSON.parse( barcodeData.text );
+      alert( this.scanResult );
       const result: any = await this.verifyBoarding();
 
       if ( result.hasBoarding ) { this._aboardinData = result.data; }
       if ( !result.hasBoarding ) {
         const user: User = await this._storage.getUser();
         this._aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
+        console.log( this._aboardinData );
+        alert( JSON.stringify( this._aboardinData ) );
       }
       this.loading.dismiss();
 

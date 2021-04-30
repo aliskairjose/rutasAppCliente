@@ -99,8 +99,8 @@
                   src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
                 <ion-note>Tu conductor</ion-note>
                 <h5>
-                  {{selectedRoute.driver.name}} | 4/5
-                  <ion-icon slot="end" name="star" part="icon"></ion-icon>
+                  {{selectedRoute?.driver?.name}} | {{selectedRute?.driver.rating}}/5
+                  <app-rating readOnly="true" rate="{{selectedRute?.driver.rating}}"> </app-rating>
                 </h5>
                 <ion-note>Tu ruta</ion-note>
                 <ion-item>
@@ -108,19 +108,19 @@
                     <img src="./../../../assets/route.png" />
                   </ion-avatar>
                   <ion-label>
-                    <h2>{{selectedRoute.name }}</h2>
-                    <h3>{{selectedRoute.start_time | customeTime }} - {{selectedRoute.end_time | customeTime }}</h3>
+                    <h2>{{selectedRoute?.name }}</h2>
+                    <h3>{{selectedRoute?.start_time | customeTime }} - {{selectedRoute?.end_time | customeTime }}</h3>
                   </ion-label>
                 </ion-item>
 
                 <ion-note>Tu unidad</ion-note>
                 <h5>
-                  Modelo {{ scanResult.bus_model.name }} {{scanResult.unit_number}}<br>
-                  Placa: {{ scanResult.license_plate | uppercase }}
+                  Modelo {{ scanResult?.bus_model?.name }} {{scanResult?.unit_number}}<br>
+                  Placa: {{ scanResult?.license_plate | uppercase }}
                 </h5>
 
                 <ion-note>Puestos disponibles</ion-note>
-                <h5>15/ {{ scanResult.number_positions }}</h5>
+                <h5>15/ {{ scanResult?.number_positions }}</h5>
 
                 <ion-button (click)="ratingModal()" class="button-btn ion-margin-top" color="tertiary">
                   <ion-icon slot="start" name="log-out-outline" class="logout-icon"></ion-icon>
@@ -135,9 +135,9 @@
           <div id="info-route">
             <img src="./../../../assets/route.png" style="margin-left: 0 !important;" />
             <div>
-              <h5>{{selectedRoute.driver.name}}</h5>
-              <p style="margin: 0;">Modelo {{ scanResult.bus_model.name }} {{scanResult.unit_number}} | Placa: {{
-                scanResult.number_positions }}
+              <h5>{{selectedRoute?.driver.name}}</h5>
+              <p style="margin: 0;">Modelo {{ scanResult?.bus_model?.name }} {{scanResult?.unit_number}} | Placa: {{
+                scanResult?.number_positions }}
               </p>
               <ion-note class="ion-float-left">Tiempo de llegada a destino: 25 min</ion-note>
             </div>
