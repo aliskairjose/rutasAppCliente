@@ -100,7 +100,7 @@
                 <ion-note>Tu conductor</ion-note>
                 <h5>
                   {{selectedRoute?.driver?.name}} | {{selectedRute?.driver.rating}}/5
-                  <app-rating readOnly="true" rate="{{selectedRute?.driver.rating}}"> </app-rating>
+                  <app-rating readOnly="true" [rate]="selectedRute?.driver.rating"> </app-rating>
                 </h5>
                 <ion-note>Tu ruta</ion-note>
                 <ion-item>
