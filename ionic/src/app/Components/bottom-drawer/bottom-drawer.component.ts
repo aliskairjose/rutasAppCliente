@@ -201,7 +201,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       showFlipCameraButton: true,
       showTorchButton: true,
       torchOn: false,
-      prompt: 'Place a barcode inside the scan area',
+      prompt: 'Coloque un código de barras dentro del área de escaneo',
       resultDisplayDuration: 500,
       formats: 'EAN_13,EAN_8,QR_CODE,PDF_417 ',
       orientation: 'portrait',
