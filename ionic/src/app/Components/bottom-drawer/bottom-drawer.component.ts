@@ -208,8 +208,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     };
 
     this.barcodeScanner.scan( options ).then( async ( barcodeData ) => {
-      this.loading = await this.common.presentLoading();
-      this.loading.present();
       this.scanResult = JSON.parse( barcodeData.text );
       const result: any = await this.verifyBoarding();
 
@@ -218,7 +216,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
         const user: User = await this.storage.getUser();
         this._aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
       }
-      this.loading.dismiss();
 
       this.isOpen = false;
       this.userService.rutasFlow = 40;
@@ -226,7 +223,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       this.bottomDrawerElement.style.transform = '';
       this.gesture.enable( true );
       this.dragable = true;
-    } ).catch( () => this.loading.dismiss() );
+    } );
 
   }
 
@@ -290,20 +287,25 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     } );
   }
 
-
   private abording( clientId: number, busId: number, routeId: number ): Promise<any> {
-    return new Promise<any>( resolve => {
+    return new Promise<any>( async ( resolve ) => {
+      const loading = await this.common.presentLoading();
+      loading.present();
       this.routeService.abording( clientId, busId, routeId ).subscribe( response => {
+        loading.dismiss();
         resolve( response );
-      } );
+      }, () => loading.dismiss() );
     } );
   }
 
   private async verifyBoarding(): Promise<any> {
-    return new Promise<any>( resolve => {
+    return new Promise<any>( async ( resolve ) => {
+      const loading = await this.common.presentLoading();
+      loading.present();
       this.routeService.verifyBorading().subscribe( response => {
+        loading.dismiss();
         resolve( response );
-      } );
+      }, () => loading.dismiss() );
     } );
   }
 

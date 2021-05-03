@@ -68,8 +68,8 @@ export class RatingPage implements OnInit {
     this.isRate = true;
   }
 
-  closeModal(): void {
-    this.modalController.dismiss();
-  }
+  // closeModal(): void {
+  //   this.modalController.dismiss();
+  // }
 
 }
