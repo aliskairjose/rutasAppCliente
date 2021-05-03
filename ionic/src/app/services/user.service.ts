@@ -96,7 +96,7 @@ export class UserService {
 
   travelList( page = 1 ): Observable<any> {
     return this.httpService
-      .get( `/route-boarding/list?finalized=1&includes[]=route.bus&page=${page}&includes[]=route&take=10` )
+      .get( `/route-boarding/list?finalized=1&includes[]=route.bus&page=${page}&includes[]=route&take=10&qualified=1` )
       .pipe( map( list => list.data ) );
   }
 
