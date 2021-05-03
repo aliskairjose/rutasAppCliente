@@ -85,12 +85,13 @@
         <ion-button color="light" expand="block" class="custom-button" (click)="sendRating()">Enviar</ion-button>
       </ion-col>
       <ion-col size="12" class="ion-text-center">
-        <ion-button color="secondary" expand="block" class="custom-button" (click)="noRate()">
+        <ion-button color="secondary" expand="block" class="custom-button" (click)="isRate = true ">
           No quiero calificar
         </ion-button>
       </ion-col>
     </ion-row>
   </ng-container>
+
   <ng-template #elseTemplate>
     <div class="d-flex justify-content-center thanks">
       <div class="align-self-center text-center w-75">

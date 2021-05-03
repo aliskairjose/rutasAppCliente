@@ -60,7 +60,8 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   showScan = false;
   routes: Route[] = [];
 
-  private _aboardinData: any = {};
+  private rating = 0;
+  private aboardinData: any = {};
 
   @Output() emitEvent: EventEmitter<any> = new EventEmitter();
   @Input() component = 'Inicio';
@@ -175,6 +176,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   routeHandler( route: Route ) {
     this.isOpen = false;
     this.selectedRoute = route;
+    this.rating = Math.round( this.selectedRoute.driver.rating );
     this.userService.rutasData = route;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
     this.gesture.enable( true );
@@ -188,6 +190,20 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   async startScan() {
+    const result: any = await this.verifyBoarding();
+
+    if ( result.hasBoarding ) {
+      this.aboardinData = result.data;
+      this.isOpen = false;
+      this.userService.rutasFlow = 40;
+      this.bottomDrawerElement.style.transition = '.4s ease-out';
+      this.bottomDrawerElement.style.transform = '';
+      this.gesture.enable( true );
+      this.dragable = true;
+
+      return;
+    }
+
     this.userService.rutasFlow = 4;
     this.showScan = false;
     this.bottomDrawerElement = this.bottomDrawer.nativeElement;
@@ -196,6 +212,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
   }
 
   async scannerOn() {
+
     const options: BarcodeScannerOptions = {
       preferFrontCamera: false,
       showFlipCameraButton: true,
@@ -209,13 +226,9 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
     this.barcodeScanner.scan( options ).then( async ( barcodeData ) => {
       this.scanResult = JSON.parse( barcodeData.text );
-      const result: any = await this.verifyBoarding();
 
-      if ( result.hasBoarding ) { this._aboardinData = result.data; }
-      if ( !result.hasBoarding ) {
-        const user: User = await this.storage.getUser();
-        this._aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
-      }
+      const user: User = await this.storage.getUser();
+      this.aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
 
       this.isOpen = false;
       this.userService.rutasFlow = 40;
@@ -226,6 +239,60 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     } );
 
   }
+
+  // Abre el modal para calificar el viaje
+  async ratingModal() {
+    const confirm = await this.common.alert();
+    if ( confirm ) {
+      await this.endTravel();
+      const modal = await this.common.presentModal( {
+        component: RatingPage,
+        cssClass: '',
+        componentProps: {
+          route: this.aboardinData?.data?.route,
+          id: this.aboardinData?.data.id
+        }
+      } );
+      modal.present();
+      await modal.onDidDismiss();
+      this.goToHome();
+    }
+
+  }
+
+  private endTravel(): Promise<void> {
+    return new Promise<void>( async ( resolve ) => {
+      const loading = await this.common.presentLoading();
+      loading.present();
+      this.routeService.endTravel().subscribe( () => {
+        loading.dismiss();
+        resolve();
+      }, () => loading.dismiss() );
+    } );
+  }
+
+  private abording( clientId: number, busId: number, routeId: number ): Promise<any> {
+    return new Promise<any>( async ( resolve ) => {
+      const loading = await this.common.presentLoading();
+      loading.present();
+      this.routeService.abording( clientId, busId, routeId ).subscribe( response => {
+        loading.dismiss();
+        resolve( response );
+      }, () => loading.dismiss() );
+    } );
+  }
+
+  private async verifyBoarding(): Promise<any> {
+    return new Promise<any>( async ( resolve ) => {
+      const loading = await this.common.presentLoading();
+      loading.present();
+      this.routeService.verifyBorading().subscribe( response => {
+        loading.dismiss();
+        resolve( response );
+      }, () => loading.dismiss() );
+    } );
+  }
+
 
   goToHome() {
     this.openHeight = ( this.plt.height() / 100 ) * 60;
@@ -255,58 +322,6 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
       }
     } );
     this.seatGesture.enable( true );
-  }
-
-  // Abre el modal para calificar el viaje
-  async ratingModal() {
-    const confirm = await this.common.alert();
-    if ( confirm ) {
-      const loading = await this.common.presentLoading();
-      await this.endTravel();
-      loading.dismiss();
-
-      const modal = await this.common.presentModal( {
-        component: RatingPage,
-        cssClass: '',
-        componentProps: {
-          route: this._aboardinData?.data?.route,
-          id: this._aboardinData?.data.id
-        }
-      } );
-      modal.present();
-      await modal.onDidDismiss();
-      this.goToHome();
-    }
-
-  }
-
-  private endTravel(): Promise<void> {
-    return new Promise<void>( resolve => {
-      this.routeService.endTravel().subscribe( async () => { } );
-      resolve();
-    } );
-  }
-
-  private abording( clientId: number, busId: number, routeId: number ): Promise<any> {
-    return new Promise<any>( async ( resolve ) => {
-      const loading = await this.common.presentLoading();
-      loading.present();
-      this.routeService.abording( clientId, busId, routeId ).subscribe( response => {
-        loading.dismiss();
-        resolve( response );
-      }, () => loading.dismiss() );
-    } );
-  }
-
-  private async verifyBoarding(): Promise<any> {
-    return new Promise<any>( async ( resolve ) => {
-      const loading = await this.common.presentLoading();
-      loading.present();
-      this.routeService.verifyBorading().subscribe( response => {
-        loading.dismiss();
-        resolve( response );
-      }, () => loading.dismiss() );
-    } );
   }
 
 }

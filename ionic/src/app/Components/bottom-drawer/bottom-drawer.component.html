@@ -98,8 +98,8 @@
                 <img class="rounded-circle shadow-sm avatar ion-margin-vertical" [src]="selectedRoute?.driver.avatar">
                 <ion-note>Tu conductor</ion-note>
                 <h5>
-                  {{selectedRoute?.driver?.name}} | {{selectedRute?.driver.rating}}/5
-                  <app-rating readOnly="true" [rate]="selectedRute?.driver.rating"> </app-rating>
+                  {{selectedRoute?.driver?.name}} | {{rating}}/5
+                  <app-rating readOnly="true" [rate]="rating"> </app-rating>
                 </h5>
                 <ion-note>Tu ruta</ion-note>
                 <ion-item>
@@ -114,12 +114,12 @@
 
                 <ion-note>Tu unidad</ion-note>
                 <h5>
-                  Modelo {{ scanResult?.bus_model?.name }} {{scanResult?.unit_number}}<br>
-                  Placa: {{ scanResult?.license_plate | uppercase }}
+                  Modelo {{ selectedRoute.bus.bus_model.name }} {{selectedRoute.bus.unit_number}}<br>
+                  Placa: {{ selectedRoute.bus.license_plate | uppercase }}
                 </h5>
 
                 <ion-note>Puestos disponibles</ion-note>
-                <h5>{{selectedRoute.occuped_seats}}/{{ scanResult?.number_positions }}</h5>
+                <h5>{{selectedRoute.occuped_seats}}/{{ selectedRoute?.bus?.number_positions }}</h5>
 
                 <ion-button (click)="ratingModal()" class="button-btn ion-margin-top" color="tertiary">
                   <ion-icon slot="start" name="log-out-outline" class="logout-icon"></ion-icon>

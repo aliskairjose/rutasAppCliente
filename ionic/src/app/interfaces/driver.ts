@@ -6,6 +6,7 @@ export interface Driver {
   created_at?: string;
   deleted_at?: string;
   department?: string;
+  rating?: number;
   email?: string;
   email_verified_at?: string;
   facebook_id?: string;
