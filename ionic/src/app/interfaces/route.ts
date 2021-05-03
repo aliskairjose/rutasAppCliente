@@ -8,6 +8,7 @@ export interface Route {
   driver_id?: number;
   start_time?: string;
   end_time?: string;
+  occuped_seats?: number;
   route_stops?: RouteStop[];
   driver?: Driver;
 }

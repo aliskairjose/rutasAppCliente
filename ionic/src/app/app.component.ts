@@ -11,12 +11,12 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private _storage: StorageService,
+    private storage: StorageService,
   ) {
 
   }
   async ngOnInit() {
-    const isLoggedin = await this._storage.get( TOKEN );
+    const isLoggedin = await this.storage.get( TOKEN );
     const route = isLoggedin ? '/sidemenu/Inicio' : '/initial';
     this.router.navigate( [ route ] );
   }

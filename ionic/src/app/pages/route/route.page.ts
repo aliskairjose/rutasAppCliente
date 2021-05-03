@@ -18,14 +18,14 @@ export class RoutePage implements OnInit, OnDestroy {
   @Output() routeEvent: EventEmitter<Route> = new EventEmitter<Route>();
 
   constructor(
-    private _common: CommonService,
-    private _storage: StorageService,
+    private common: CommonService,
+    private storage: StorageService,
     private routeService: RouteService
   ) { }
 
   async ngOnInit() {
-    const user: any = await this._storage.getUser();
-    const loading = await this._common.presentLoading();
+    const user: any = await this.storage.getUser();
+    const loading = await this.common.presentLoading();
     loading.present();
     this.subscription = this.routeService.list( user.client_id ).subscribe( ( routes: Route[] ) => {
       this.routes = [ ...routes ];

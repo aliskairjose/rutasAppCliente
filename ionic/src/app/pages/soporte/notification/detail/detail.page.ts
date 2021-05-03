@@ -19,13 +19,13 @@ export class DetailPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private common: CommonService,
-    private _storage: StorageService,
+    private storage: StorageService,
     private userService: UserService,
   ) { }
 
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get( 'id' );
-    this._storage.get( USER ).then( ( user: any ) => this.user = { ...user } );
+    this.storage.get( USER ).then( ( user: any ) => this.user = { ...user } );
     const loading = await this.common.presentLoading();
     loading.present();
     this.userService.commentById( +id ).subscribe( ( comment: Comment ) => {

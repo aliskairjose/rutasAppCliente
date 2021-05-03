@@ -29,7 +29,7 @@ export class RatingPage implements OnInit {
 
   constructor(
     public navParams: NavParams,
-    private _common: CommonService,
+    private common: CommonService,
     public rating: RatingComponent,
     public modalController: ModalController,
     private routeService: RouteService
@@ -45,7 +45,7 @@ export class RatingPage implements OnInit {
   }
 
   async sendRating( type?: string ) {
-    const loading = await this._common.presentLoading();
+    const loading = await this.common.presentLoading();
     loading.present();
     const data = {
       route_boarding_id: this.id,

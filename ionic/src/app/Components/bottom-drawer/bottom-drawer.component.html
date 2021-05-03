@@ -119,7 +119,7 @@
                 </h5>
 
                 <ion-note>Puestos disponibles</ion-note>
-                <h5>15/ {{ scanResult?.number_positions }}</h5>
+                <h5>{{selectedRoute.occuped_seats}}/{{ scanResult?.number_positions }}</h5>
 
                 <ion-button (click)="ratingModal()" class="button-btn ion-margin-top" color="tertiary">
                   <ion-icon slot="start" name="log-out-outline" class="logout-icon"></ion-icon>

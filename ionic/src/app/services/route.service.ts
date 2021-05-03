@@ -12,7 +12,7 @@ export class RouteService {
 
   constructor(
     private _http: HttpService,
-    private _common: CommonService
+    private common: CommonService
   ) { }
 
   /**
@@ -21,7 +21,7 @@ export class RouteService {
    * @returns Arreglo de Rutas
    */
   list( id: number ): Observable<Route[]> {
-    return this._http.get( `/routes?client_id=${id}&includes[]=driver&includes[]=routeType&includes[]=routeStops&includes[]=bus` )
+    return this._http.get( `/routes?client_id=${id}&includes[]=driver&includes[]=routeType&includes[]=routeStops&includes[]=bus&occupedSeats=1` )
       .pipe( map( response => response.data ) );
   }
 
@@ -74,6 +74,6 @@ export class RouteService {
 
   private toastMessage( message: string ): void {
     const color = 'primary';
-    this._common.presentToast( { message, color } );
+    this.common.presentToast( { message, color } );
   }
 }

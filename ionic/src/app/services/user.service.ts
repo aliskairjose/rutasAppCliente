@@ -20,7 +20,7 @@ export class UserService {
 
   constructor(
     private platform: Platform,
-    private _common: CommonService,
+    private common: CommonService,
     private httpService: HttpService
   ) { }
 
@@ -102,7 +102,7 @@ export class UserService {
 
   private toastMessage( message: string ): void {
     const color = 'primary';
-    this._common.presentToast( { message, color } );
+    this.common.presentToast( { message, color } );
   }
 
   subscribeBackHandler() {

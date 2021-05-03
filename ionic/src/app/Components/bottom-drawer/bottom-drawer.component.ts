@@ -70,7 +70,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     private router: Router,
     public navctl: NavController,
     // private qrScanner: QRScanner,
-    private _common: CommonService,
+    private common: CommonService,
     private userService: UserService,
     private routeService: RouteService,
     private loadingCtrl: LoadingController,
@@ -78,7 +78,7 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     private nativePageTransitions: NativePageTransitions,
     public popoverCtrl: PopoverController,
     public modalController: ModalController,
-    private _storage: StorageService,
+    private storage: StorageService,
     private barcodeScanner: BarcodeScanner,
 
   ) {
@@ -208,14 +208,14 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
     };
 
     this.barcodeScanner.scan( options ).then( async ( barcodeData ) => {
-      this.loading = await this._common.presentLoading();
+      this.loading = await this.common.presentLoading();
       this.loading.present();
       this.scanResult = JSON.parse( barcodeData.text );
       const result: any = await this.verifyBoarding();
 
       if ( result.hasBoarding ) { this._aboardinData = result.data; }
       if ( !result.hasBoarding ) {
-        const user: User = await this._storage.getUser();
+        const user: User = await this.storage.getUser();
         this._aboardinData = await this.abording( user.client_id, this.scanResult.id, this.selectedRoute.id );
       }
       this.loading.dismiss();
@@ -262,13 +262,13 @@ export class BottomDrawerComponent implements AfterViewInit, OnInit {
 
   // Abre el modal para calificar el viaje
   async ratingModal() {
-    const confirm = await this._common.alert();
+    const confirm = await this.common.alert();
     if ( confirm ) {
-      const loading = await this._common.presentLoading();
+      const loading = await this.common.presentLoading();
       await this.endTravel();
       loading.dismiss();
 
-      const modal = await this._common.presentModal( {
+      const modal = await this.common.presentModal( {
         component: RatingPage,
         cssClass: '',
         componentProps: {

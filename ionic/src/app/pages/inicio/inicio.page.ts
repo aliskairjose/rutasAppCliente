@@ -5,6 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Route, RouteStop } from '../../interfaces/route';
 import { MAP } from '../../constants/global-constants';
 import { CommonService } from '../../services/common.service';
+import { SidemenuPage } from '../sidemenu/sidemenu.page';
 declare var google: any;
 
 @Component( {
@@ -25,9 +26,10 @@ export class InicioPage implements OnInit {
   @ViewChild( 'map' ) mapElement: ElementRef;
 
   constructor(
-    private _common: CommonService,
+    private common: CommonService,
     public userService: UserService,
     private geolocation: Geolocation,
+    private sidMenu: SidemenuPage
   ) {
     this.userService
       .flowhObserver()
@@ -40,18 +42,6 @@ export class InicioPage implements OnInit {
   }
 
   bottomDrawerEvent( event: any ) {
-    if ( event.type === 'item-selected' ) {
-      this.handleItemSelect( event.data );
-      return;
-    }
-    if ( event.type === 'scan-success' ) {
-      this.startTracking();
-      return;
-    }
-    if ( event.type === 'stop-track' ) {
-      this.stopTracking();
-      return;
-    }
     switch ( event.type ) {
       case 'item-selected':
         this.handleItemSelect( event.data );
@@ -64,6 +54,7 @@ export class InicioPage implements OnInit {
         break;
       default:
         this.loadMap();
+        this.sidMenu.activeRoute = 0;
         break;
     }
   }
@@ -110,7 +101,7 @@ export class InicioPage implements OnInit {
     const stops: RouteStop[] = [ ...this.selectedItem.route_stops ];
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer( { map, suppressMarkers: true } );
-    const loading = await this._common.presentLoading();
+    const loading = await this.common.presentLoading();
     loading.present();
 
     await this.calculateAndDisplayRoute( stops, directionsRenderer, directionsService, map );
