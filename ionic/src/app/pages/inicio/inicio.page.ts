@@ -224,10 +224,10 @@ export class InicioPage implements OnInit {
       this.trackMarker = new google.maps.Marker( {
         position: loc,
         map: this.map,
-        icon: {
-          scaledSize: new google.maps.Size( 25, 25 ),
-          url: './../../../assets/bus.png'
-        }
+        // icon: {
+        //   scaledSize: new google.maps.Size( 25, 25 ),
+        //   url: './../../../assets/bus.png'
+        // }
       } );
     } );
   }
