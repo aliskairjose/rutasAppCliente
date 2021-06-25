@@ -50,6 +50,7 @@
     "moment": "^2.29.1",
     "ngx-bar-rating": "^2.0.0",
     "phonegap-plugin-barcodescanner": "^8.1.0",
+    "pusher-js": "^7.0.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

@@ -4,6 +4,7 @@ import { Route } from '../../interfaces/route';
 import { CommonService } from '../../services/common.service';
 import { StorageService } from '../../services/storage.service';
 import { Subscription } from 'rxjs';
+import { PusherService } from '../../services/pusher.service';
 @Component( {
   selector: 'app-route',
   templateUrl: './route.page.html',
@@ -20,7 +21,7 @@ export class RoutePage implements OnInit, OnDestroy {
   constructor(
     private common: CommonService,
     private storage: StorageService,
-    private routeService: RouteService
+    private routeService: RouteService,
   ) { }
 
   async ngOnInit() {

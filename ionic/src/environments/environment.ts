@@ -12,7 +12,11 @@ export const environment = {
     storageBucket: 'rutasapp-305809.appspot.com',
     messagingSenderId: '466798676316',
     appId: '1:466798676316:web:c6063ad42c2c7acf46d999'
-  }
+  },
+  PUSHER_APP_ID: 1190909,
+  PUSHER_APP_KEY: '17f57ce05bb3f97f1ee8',
+  PUSHER_APP_SECRET: '02ac7fdf7b269ff38226',
+  PUSHER_APP_CLUSTER: 'mt1',
 };
 
 /*

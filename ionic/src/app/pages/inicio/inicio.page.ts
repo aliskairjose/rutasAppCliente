@@ -6,6 +6,7 @@ import { Route, RouteStop } from '../../interfaces/route';
 import { MAP } from '../../constants/global-constants';
 import { CommonService } from '../../services/common.service';
 import { SidemenuPage } from '../sidemenu/sidemenu.page';
+import { PusherService } from '../../services/pusher.service';
 declare var google: any;
 
 @Component( {
@@ -29,7 +30,8 @@ export class InicioPage implements OnInit {
     private common: CommonService,
     public userService: UserService,
     private geolocation: Geolocation,
-    private sidMenu: SidemenuPage
+    private sidMenu: SidemenuPage,
+    private pusher: PusherService
   ) {
     this.userService
       .flowhObserver()
@@ -96,6 +98,7 @@ export class InicioPage implements OnInit {
 
     // actualizamos el mapa y limpiamos la rutas previas
     await this.updateMap( [ data ], '', map );
+    this.bindChannel( route.id );
 
     this.selectedItem = { ...route };
     const stops: RouteStop[] = [ ...this.selectedItem.route_stops ];
@@ -270,4 +273,28 @@ export class InicioPage implements OnInit {
     } );
 
   }
+
+  bindChannel( id: number ): void {
+    const channel = this.pusher.init( id );
+    channel.bind( 'App\\Events\\RoutePositionEvent', ( { route_id, lattitude, longitude } ) => {
+      this.updateBusPosition( { route_id, lattitude, longitude } );
+    } );
+  }
+
+  async updateBusPosition( { ...params } ) {
+    console.log( 'updateBusPosition', params );
+    const loc = new google.maps.LatLng( params.lattitude, params.longitude );
+    this.trackMarker?.setMap( null );
+    this.trackMarker = new google.maps.Marker( {
+      position: loc,
+      map: this.map,
+      icon: {
+        scaledSize: new google.maps.Size( 25, 25 ),
+        url: './../../../assets/bus.png'
+      }
+    } );
+
+  }
+
+
 }
