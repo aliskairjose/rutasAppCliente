@@ -235,7 +235,7 @@ export class InicioPage implements OnInit {
         map: this.map,
         icon: {
           scaledSize: new google.maps.Size( 25, 25 ),
-          url: './../../../assets/bus.png'
+          url: '/assets/bus.png'
         }
       } );
     } );
@@ -276,24 +276,26 @@ export class InicioPage implements OnInit {
 
   bindChannel( id: number ): void {
     const channel = this.pusher.init( id );
-    channel.bind( 'App\\Events\\RoutePositionEvent', ( { route_id, lattitude, longitude } ) => {
-      this.updateBusPosition( { route_id, lattitude, longitude } );
+    channel.bind( 'App\\Events\\RoutePositionEvent', ( { route_id, latitude, longitude } ) => {
+      this.updateBusPosition( { route_id, latitude, longitude } );
     } );
+
+    setTimeout( () => {
+      this.updateBusPosition( { route_id: 18, latitude: '9.1252951739686', longitude: '-79.72450854979547' } );
+    }, 2000 );
   }
 
   async updateBusPosition( { ...params } ) {
-    console.log( 'updateBusPosition', params );
-    const loc = new google.maps.LatLng( params.lattitude, params.longitude );
+    const loc = new google.maps.LatLng( params.latitude, params.longitude );
     this.trackMarker?.setMap( null );
     this.trackMarker = new google.maps.Marker( {
       position: loc,
       map: this.map,
       icon: {
         scaledSize: new google.maps.Size( 25, 25 ),
-        url: './../../../assets/bus.png'
+        url: '/assets/bus.png'
       }
     } );
-
   }
 
 
