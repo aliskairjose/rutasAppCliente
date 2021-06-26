@@ -48,12 +48,6 @@ export class InicioPage implements OnInit {
       case 'item-selected':
         this.handleItemSelect( event.data );
         break;
-      case 'scan-success':
-        this.startTracking();
-        break;
-      case 'stop-track':
-        this.stopTracking();
-        break;
       default:
         this.loadMap();
         this.sidMenu.activeRoute = 0;
@@ -225,27 +219,6 @@ export class InicioPage implements OnInit {
 
   }
 
-  startTracking() {
-    this.watchId = navigator.geolocation.watchPosition( ( position ) => {
-
-      const loc = new google.maps.LatLng( position.coords.latitude, position.coords.longitude );
-      this.trackMarker?.setMap( null );
-      this.trackMarker = new google.maps.Marker( {
-        position: loc,
-        map: this.map,
-        icon: {
-          scaledSize: new google.maps.Size( 25, 25 ),
-          url: '/assets/bus.png'
-        }
-      } );
-    } );
-  }
-
-  stopTracking() {
-    navigator.geolocation.clearWatch( this.watchId );
-    this.trackMarker.setMap( null );
-  }
-
   private async updateMap(
     locations,
     extraInfo: string,
@@ -276,17 +249,14 @@ export class InicioPage implements OnInit {
 
   bindChannel( id: number ): void {
     const channel = this.pusher.init( id );
-    channel.bind( 'App\\Events\\RoutePositionEvent', ( { route_id, latitude, longitude } ) => {
-      this.updateBusPosition( { route_id, latitude, longitude } );
+    channel.bind( 'App\\Events\\RoutePositionEvent', ( { route_id, lattitude, longitude } ) => {
+      this.updateBusPosition( { route_id, lattitude, longitude } );
     } );
 
-    setTimeout( () => {
-      this.updateBusPosition( { route_id: 18, latitude: '9.1252951739686', longitude: '-79.72450854979547' } );
-    }, 2000 );
   }
 
-  async updateBusPosition( { ...params } ) {
-    const position = new google.maps.LatLng( params.latitude, params.longitude );
+  updateBusPosition( { ...params } ) {
+    const position = { lat: parseFloat( params.lattitude ), lng: parseFloat( params.longitude ) };
     this.trackMarker?.setMap( null );
     this.trackMarker = new google.maps.Marker( {
       position,
