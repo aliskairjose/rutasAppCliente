@@ -80,9 +80,9 @@ export class InicioPage implements OnInit {
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.map
     };
-    const map: google.maps.Map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
+    this.map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
 
-    this.updateMap( [ data ], '', map );
+    this.updateMap( [ data ], '', this.map );
   }
 
   async handleItemSelect( route: Route ) {
@@ -94,20 +94,20 @@ export class InicioPage implements OnInit {
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.map
     };
-    const map: google.maps.Map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
+    // const map: google.maps.Map = new google.maps.Map( this.mapElement.nativeElement, mapOptions );
 
     // actualizamos el mapa y limpiamos la rutas previas
-    await this.updateMap( [ data ], '', map );
+    await this.updateMap( [ data ], '', this.map );
     this.bindChannel( route.id );
 
     this.selectedItem = { ...route };
     const stops: RouteStop[] = [ ...this.selectedItem.route_stops ];
     const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer( { map, suppressMarkers: true } );
+    const directionsRenderer = new google.maps.DirectionsRenderer( { map: this.map, suppressMarkers: true } );
     const loading = await this.common.presentLoading();
     loading.present();
 
-    await this.calculateAndDisplayRoute( stops, directionsRenderer, directionsService, map );
+    await this.calculateAndDisplayRoute( stops, directionsRenderer, directionsService, this.map );
     loading.dismiss();
   }
 
@@ -286,10 +286,10 @@ export class InicioPage implements OnInit {
   }
 
   async updateBusPosition( { ...params } ) {
-    const loc = new google.maps.LatLng( params.latitude, params.longitude );
+    const position = new google.maps.LatLng( params.latitude, params.longitude );
     this.trackMarker?.setMap( null );
     this.trackMarker = new google.maps.Marker( {
-      position: loc,
+      position,
       map: this.map,
       icon: {
         scaledSize: new google.maps.Size( 25, 25 ),
