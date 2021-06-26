@@ -80,8 +80,6 @@ export class InicioPage implements OnInit {
   }
 
   async handleItemSelect( route: Route ) {
-    this.pusher.finish( route.id ); // finalizamos primera para no tener dos escuchas de la misma ruta
-
     const resp = await this.geolocation.getCurrentPosition();
     const data = { coord: new google.maps.LatLng( resp.coords.latitude, resp.coords.longitude ), name: 'Aquí estoy' };
     const mapOptions = {
@@ -93,7 +91,7 @@ export class InicioPage implements OnInit {
 
     // actualizamos el mapa y limpiamos la rutas previas
     await this.updateMap( [ data ], '', this.map );
-    this.bindChannel( route.id );
+    this.bindChannel( route );
 
     this.selectedItem = { ...route };
     const stops: RouteStop[] = [ ...this.selectedItem.route_stops ];
@@ -103,6 +101,8 @@ export class InicioPage implements OnInit {
     loading.present();
 
     await this.calculateAndDisplayRoute( stops, directionsRenderer, directionsService, this.map );
+
+
     loading.dismiss();
   }
 
@@ -248,24 +248,27 @@ export class InicioPage implements OnInit {
 
   }
 
-  bindChannel( id: number ): void {
-    const channel = this.pusher.init( id );
+  bindChannel( route: Route ): void {
+    const channel = this.pusher.init( route.id );
+
+    channel.bind( 'pusher:subscription_succeeded', () => {
+      this.updateBusPosition( { route_id: route.id, lattitude: route.latitude, longitude: route.longitude } );
+    } );
+
     channel.bind( 'App\\Events\\RoutePositionEvent', ( { route_id, lattitude, longitude } ) => {
+      console.log( 'bind' );
       this.updateBusPosition( { route_id, lattitude, longitude } );
     } );
 
   }
 
-  updateBusPosition( { ...params } ) {
+  private updateBusPosition( { ...params } ) {
     const position = { lat: parseFloat( params.lattitude ), lng: parseFloat( params.longitude ) };
     this.trackMarker?.setMap( null );
     this.trackMarker = new google.maps.Marker( {
       position,
       map: this.map,
-      icon: {
-        scaledSize: new google.maps.Size( 25, 25 ),
-        url: '/assets/bus.png'
-      }
+      icon: MAP.BUS
     } );
   }
 

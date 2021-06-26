@@ -11,6 +11,8 @@ export interface Route {
   occuped_seats?: number;
   route_stops?: RouteStop[];
   driver?: Driver;
+  longitude?: string;
+  latitude?: string;
 }
 
 export interface RouteStop {
