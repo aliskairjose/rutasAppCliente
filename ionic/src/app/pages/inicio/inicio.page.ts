@@ -80,6 +80,7 @@ export class InicioPage implements OnInit {
   }
 
   async handleItemSelect( route: Route ) {
+    this.pusher.finish( route.id ); // finalizamos primera para no tener dos escuchas de la misma ruta
 
     const resp = await this.geolocation.getCurrentPosition();
     const data = { coord: new google.maps.LatLng( resp.coords.latitude, resp.coords.longitude ), name: 'Aquí estoy' };
