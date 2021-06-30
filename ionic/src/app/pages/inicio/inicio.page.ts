@@ -1,6 +1,5 @@
 import { UserService } from 'src/app/services/user.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Route, RouteStop } from '../../interfaces/route';
 import { MAP } from '../../constants/global-constants';
@@ -256,7 +255,6 @@ export class InicioPage implements OnInit {
     } );
 
     channel.bind( 'App\\Events\\RoutePositionEvent', ( { route_id, lattitude, longitude } ) => {
-      console.log( 'bind' );
       this.updateBusPosition( { route_id, lattitude, longitude } );
     } );
 

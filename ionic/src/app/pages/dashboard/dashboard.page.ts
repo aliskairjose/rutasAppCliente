@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RouteService } from 'src/app/services/route.service';
-import { StorageService } from '../../services/storage.service';
-import { CommonService } from '../../services/common.service';
-import { Route } from '../../interfaces/route';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { RouteService } from '../../services/route.service';
 
 @Component( {
   selector: 'app-dashboard',
@@ -12,13 +10,15 @@ import { Route } from '../../interfaces/route';
 export class DashboardPage implements OnInit {
 
   constructor(
+    private geolocation: Geolocation,
     private routeService: RouteService,
-    private storage: StorageService,
-    private common: CommonService
   ) { }
 
-  async ngOnInit() {
+  async ngOnInit(
+  ) {
+    const pos = await this.geolocation.getCurrentPosition();
 
+    this.routeService.closestRoute( pos.coords.latitude, pos.coords.longitude ).subscribe( console.log );
   }
 
 
