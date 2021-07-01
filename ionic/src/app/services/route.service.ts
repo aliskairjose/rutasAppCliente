@@ -44,7 +44,7 @@ export class RouteService {
    * @returns Ruta mas cercana
    */
   closestRoute( latitude, longitude ): Observable<any> {
-    return this.http.get( `/closest-route?latitude=${latitude}&longitude=${longitude}` );
+    return this.http.get( `/routes/closest-route?latitude=${latitude}&longitude=${longitude}` );
   }
 
   // Abordaje de ruta
