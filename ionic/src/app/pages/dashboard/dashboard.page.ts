@@ -10,11 +10,10 @@ import { Route } from '../../interfaces/route';
 } )
 export class DashboardPage implements OnInit {
 
-  route: Route;
+  route: Route = {};
   message: string;
 
   @Output() routeEvent: EventEmitter<Route> = new EventEmitter<Route>();
-
 
   constructor(
     private geolocation: Geolocation,
@@ -27,9 +26,9 @@ export class DashboardPage implements OnInit {
 
     this.routeService.closestRoute( pos.coords.latitude, pos.coords.longitude ).subscribe( response => {
       if ( response.message ) { this.message = response.message; }
+      this.route = response.data;
     } );
   }
-
 
   selectRoute( route: Route ): void {
     this.routeEvent.emit( route );

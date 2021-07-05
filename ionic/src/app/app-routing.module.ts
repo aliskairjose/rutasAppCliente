@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
+import { AuthGuard } from './guards/auth-guard.guard';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'signin',
-    loadChildren: () => import( './pages/authentication/authentication.module' ).then( m => m.AuthenticationPageModule )
+    loadChildren: () => import( './pages/authentication/authentication.module' ).then( m => m.AuthenticationPageModule ),
+
   },
   {
     path: 'forgot-password',
@@ -46,9 +48,10 @@ const routes: Routes = [
   {
     path: 'rating',
     loadChildren: () => import( './pages/rating/rating.module' ).then( m => m.RatingPageModule )
-  },  {
+  },
+  {
     path: 'dashboard',
-    loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+    loadChildren: () => import( './pages/dashboard/dashboard.module' ).then( m => m.DashboardPageModule )
   }
 
 ];

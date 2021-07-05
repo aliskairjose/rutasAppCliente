@@ -5,7 +5,7 @@ import { StorageService } from './storage.service';
 import { User } from '@codetrix-studio/capacitor-google-auth/dist/esm/user';
 import { map } from 'rxjs/operators';
 import { CommonService } from './common.service';
-import { TOKEN } from '../constants/global-constants';
+import { TOKEN, USER } from '../constants/global-constants';
 
 @Injectable( {
   providedIn: 'root'
