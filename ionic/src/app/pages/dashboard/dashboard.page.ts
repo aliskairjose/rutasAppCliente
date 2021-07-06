@@ -25,9 +25,10 @@ export class DashboardPage implements OnInit {
   ) {
     const pos = await this.geolocation.getCurrentPosition();
 
-    this.routeService.closestRoute( 36.124918, -115.291053 ).subscribe( response => {
+    this.routeService.closestRoute( pos.coords.latitude, pos.coords.longitude ).subscribe( response => {
       if ( response.message ) { this.message = response.message; }
       if ( response.errors ) { this.hasRoute = false; }
+
       this.route = response.data;
     } );
   }
