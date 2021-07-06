@@ -12,7 +12,7 @@ export class DashboardPage implements OnInit {
 
   route: Route = {};
   message: string;
-  hasRoute = true;
+  hasRoute = false;
 
   @Output() routeEvent: EventEmitter<Route> = new EventEmitter<Route>();
 
@@ -24,12 +24,12 @@ export class DashboardPage implements OnInit {
   async ngOnInit(
   ) {
     const pos = await this.geolocation.getCurrentPosition();
-
     this.routeService.closestRoute( pos.coords.latitude, pos.coords.longitude ).subscribe( response => {
-      if ( response.message ) { this.message = response.message; }
-      if ( response.errors ) { this.hasRoute = false; }
-
-      this.route = response.data;
+      this.message = response.message;
+      if ( response.data ) {
+        this.hasRoute = true;
+        this.route = response.data;
+      }
     } );
   }
 

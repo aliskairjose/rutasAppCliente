@@ -1,7 +1,7 @@
 <h2>Dashboard</h2>
 <p>{{message}}</p>
 
-<ng-container *ngIf="hasRoute; else elseTemplate">
+<ng-container *ngIf="hasRoute">
   <ion-list lines="none">
     <ion-item (click)="selectRoute(route)">
       <ion-avatar slot="start">
