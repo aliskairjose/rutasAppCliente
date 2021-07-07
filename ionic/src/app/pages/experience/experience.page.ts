@@ -10,7 +10,7 @@ import { IonInfiniteScroll } from '@ionic/angular';
 export class ExperiencePage implements OnInit {
 
   list = [];
-  face = '../../../assets/svg/faces/2.svg';
+  face = '/assets/svg/faces/2.svg';
   rating = 1;
   serviceMesg = [
     'Mal Servicio',
@@ -38,8 +38,9 @@ export class ExperiencePage implements OnInit {
       const rateSum = [];
       this.list.forEach( l => rateSum.push( l.calification_route ) );
       this.rating = rateSum.reduce( ( a, b ) => a + b, 0 ) / this.list.length;
-      this.rating = Math.round( this.rating );
-      this.face = `../../../assets/svg/faces/${this.rating}.svg`;
+      const rat = Math.round( this.rating );
+      ( rat === 0 ) ? this.rating = 1 : this.rating = rat;
+      this.face = `/assets/svg/faces/${this.rating}.svg`;
       this.msg = this.serviceMesg.find( ( item, index ) => index === this.rating - 1 );
       loading.dismiss();
     }, () => loading.dismiss() );

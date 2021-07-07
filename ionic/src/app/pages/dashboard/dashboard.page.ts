@@ -11,7 +11,7 @@ import { Route } from '../../interfaces/route';
 export class DashboardPage implements OnInit {
 
   route: Route = {};
-  message: string;
+  message: 'No se ha encontrado ninguna ruta cercana a tu ubicación';
   hasRoute = false;
 
   @Output() routeEvent: EventEmitter<Route> = new EventEmitter<Route>();
