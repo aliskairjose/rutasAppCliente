@@ -30,6 +30,25 @@ export class InicioPage implements OnInit {
   busLat = 51.678418;
   busLng = 7.809007;
   busIcon = MAP.BUS;
+  renderOptions = {
+    suppressMarkers: true,
+  };
+
+  markerOptions = {
+    origin: {
+      icon: MAP.STOP_MARK,
+      draggable: false,
+    },
+    destination: {
+      icon: MAP.END_ROUTE_MARK,
+      draggable: false,
+    },
+    waypoints: [
+      {
+        icon: MAP.STOP_MARK
+      },
+    ],
+  };
 
   @ViewChild( 'map' ) mapElement: ElementRef;
 
@@ -46,16 +65,22 @@ export class InicioPage implements OnInit {
   }
 
   async ngOnInit() {
-  }
-
-  // Cuando el mapa esta completamente cargado, obtenemos la ubicacion
-  async mapReady() {
     const message = 'Obteniendo ubicación';
     const loading = await this.common.presentLoading( message );
     loading.present();
     const resp = await this.geolocation.getCurrentPosition();
     this.coords = resp.coords;
     loading.dismiss();
+  }
+
+  // Cuando el mapa esta completamente cargado, obtenemos la ubicacion
+  async mapReady() {
+    // const message = 'Obteniendo ubicación';
+    // const loading = await this.common.presentLoading( message );
+    // loading.present();
+    // const resp = await this.geolocation.getCurrentPosition();
+    // this.coords = resp.coords;
+    // loading.dismiss();
   }
 
   bottomDrawerEvent( event: any ) {
@@ -70,10 +95,12 @@ export class InicioPage implements OnInit {
   }
 
   async handleItemSelect( route: Route ) {
-
     this.selectedItem = { ...route };
     const stops: RouteStop[] = [ ...this.selectedItem.route_stops ];
-    this.calculateAndDisplayRoute( stops );
+    const loading = await this.common.presentLoading();
+    loading.present();
+    await this.calculateAndDisplayRoute( stops );
+    loading.dismiss();
   }
 
   bindChannel( route: Route ): void {
@@ -89,34 +116,33 @@ export class InicioPage implements OnInit {
 
   }
 
-  private calculateAndDisplayRoute( locations: RouteStop[] ): void {
-
-    this.directions.origin = {
-      icon: MAP.STOP_MARK,
-      lat: locations[ 0 ].lattitude,
-      lng: locations[ 0 ].longitude
-    };
-    if ( locations.length > 1 ) {
-      this.directions.destination = {
-        icon: MAP.END_ROUTE_MARK,
-        lat: locations[ locations.length - 1 ].lattitude,
-        lng: locations[ locations.length - 1 ].longitude
+  private calculateAndDisplayRoute( locations: RouteStop[] ) {
+    return new Promise( resolve => {
+      this.directions.origin = {
+        lat: +locations[ 0 ].lattitude,
+        lng: +locations[ 0 ].longitude
       };
-    }
+      if ( locations.length > 1 ) {
+        this.directions.destination = {
+          lat: +locations[ locations.length - 1 ].lattitude,
+          lng: +locations[ locations.length - 1 ].longitude
+        };
+      }
 
-    if ( locations.length > 2 ) {
-      locations.forEach( ( location, index ) => {
-        if ( index > 0 && index < locations.length - 1 ) {
-          this.waypoints.push(
-            {
-              icon: MAP.STOP_MARK,
-              location: { lat: location.lattitude, lng: location.longitude },
-              stopover: false,
-            },
-          );
-        }
-      } );
-    }
+      if ( locations.length > 2 ) {
+        locations.forEach( ( location, index ) => {
+          if ( index > 0 && index < locations.length - 1 ) {
+            this.waypoints.push(
+              {
+                location: { lat: +location.lattitude, lng: +location.longitude },
+                stopover: false,
+              },
+            );
+          }
+        } );
+      }
+      resolve( true );
+    } );
   }
 
   private updateBusPosition( { ...params } ) {
