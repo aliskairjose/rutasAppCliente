@@ -27,8 +27,8 @@ export class InicioPage implements OnInit {
   directions: any = {};
   waypoints: any[] = [];
   userMarker = MAP.USER_MARK;
-  busLat = 51.678418;
-  busLng = 7.809007;
+  busLat: number;
+  busLng: number;
   busIcon = MAP.BUS;
   renderOptions = {
     suppressMarkers: true,
