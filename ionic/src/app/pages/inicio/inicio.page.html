@@ -29,5 +29,11 @@
     </ion-input>
   </div>
 </div>
-<div #map id='map'></div>
+<!-- <div #map id='map'></div> -->
+<agm-map [latitude]="coords?.latitude" [longitude]="coords?.longitude" [zoom]="zoom" (mapReady)="mapReady($event)">
+  <agm-marker [latitude]="coords?.latitude" [longitude]="coords?.longitude" [iconUrl]="userMarker"></agm-marker>
+  <agm-direction *ngIf="directions" [origin]="directions.origin" [destination]="directions.destination"
+    [waypoints]="waypoints">
+  </agm-direction>
+</agm-map>
 <app-bottom-drawer component="Inicio" (emitEvent)="bottomDrawerEvent($event)"></app-bottom-drawer>
