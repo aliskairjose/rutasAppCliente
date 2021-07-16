@@ -12,7 +12,6 @@ export class FeedbackPage implements OnInit {
   feedbackFlow = 0;
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     public userService: UserService,
 
   ) {

@@ -19,12 +19,11 @@
       <div class="div-avatar">
         <ion-item lines="none">
           <ion-avatar slot="start">
-            <img class="custom-img-avatar"
-              src="https://toppng.com/uploads/preview/foto-carnet-11550717604z0lxjntkz4.png">
+            <img class="custom-img-avatar" [src]="route?.driver.avatar">
           </ion-avatar>
           <ion-label>
             <span class="ion-padding-top">{{route?.driver?.name}}</span>
-            <app-rating (ratingChange)="ratingChange($event, 'driver')"> </app-rating>
+            <app-rating (ratingChange)="ratingChange($event, 'driver')" rate="1"> </app-rating>
           </ion-label>
         </ion-item>
       </div>
@@ -38,7 +37,7 @@
         </span>
       </ion-col>
       <ion-col size="12" class="ion-text-center">
-        <app-rating (ratingChange)="ratingChange($event, 'bus')"> </app-rating>
+        <app-rating (ratingChange)="ratingChange($event, 'bus')" rate="1"> </app-rating>
       </ion-col>
     </ion-row>
     <div class="custom-space-two">
@@ -65,8 +64,19 @@
         <h6>¿Algun comentario?</h6>
       </ion-col>
       <ion-col class="ion-margin-start ion-margin-end">
-        <ion-textarea class="custom-text-area" rows="4" cols="20" placeholder="Describe tu experiencia..."
-          [(ngModel)]="comment"></ion-textarea>
+        <ion-item>
+          <ion-select value="Excelente" multiple="false" (ionChange)="onChange($event.detail.value)">
+            <ng-container *ngFor="let option of options; let i=index">
+              <ion-select-option [value]="option.value">{{ option.text}}</ion-select-option>
+            </ng-container>
+          </ion-select>
+        </ion-item>
+
+        <ng-container *ngIf="comment === 'Otro'">
+          <ion-textarea class="custom-text-area" rows="4" cols="20" placeholder="Describe tu experiencia..."
+            [(ngModel)]="otherComment"></ion-textarea>
+        </ng-container>
+
       </ion-col>
     </ion-row>
 
@@ -74,15 +84,21 @@
       <ion-col size="12" class="ion-text-center">
         <ion-button color="light" expand="block" class="custom-button" (click)="sendRating()">Enviar</ion-button>
       </ion-col>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button color="secondary" expand="block" class="custom-button" (click)="isRate = true ">
+          No quiero calificar
+        </ion-button>
+      </ion-col>
     </ion-row>
   </ng-container>
+
   <ng-template #elseTemplate>
     <div class="d-flex justify-content-center thanks">
       <div class="align-self-center text-center w-75">
         <h2>Gracias por viajar con nosotros</h2>
         <p>!Te esperamos pronto!</p>
         <div>
-          <ion-button (click)="closeModal()" expand="block" color="light">
+          <ion-button (click)="modalController.dismiss()" expand="block" color="light">
             <ion-icon slot="start" name="log-out-outline"></ion-icon>
             Salir
           </ion-button>

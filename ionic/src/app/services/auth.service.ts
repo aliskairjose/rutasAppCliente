@@ -5,17 +5,17 @@ import { StorageService } from './storage.service';
 import { User } from '@codetrix-studio/capacitor-google-auth/dist/esm/user';
 import { map } from 'rxjs/operators';
 import { CommonService } from './common.service';
-import { TOKEN } from '../constants/global-constants';
+import { TOKEN, USER } from '../constants/global-constants';
 
 @Injectable( {
   providedIn: 'root'
 } )
 export class AuthService {
-  $auth: Subject<any> = new Subject<any>();
+  private auth$: Subject<User> = new Subject<User>();
 
   constructor(
-    private _common: CommonService,
-    private _storage: StorageService,
+    private common: CommonService,
+    private storage: StorageService,
     private _httpService: HttpService,
   ) { }
 
@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this._storage.get( TOKEN ) ? true : false;
+    return this.storage.get( TOKEN ) ? true : false;
   }
 
   /**
@@ -62,15 +62,14 @@ export class AuthService {
 
   private toastMessage( message: string ): void {
     const color = 'primary';
-    this._common.presentToast( { message, color } );
+    this.common.presentToast( { message, color } );
   }
 
   /**
    * @description Genera el stream de eventos usando next() para crear el evento
    */
   AuthSubject( user: User ): void {
-    this.$auth.next( user );
-    // this.$auth.complete();
+    this.auth$.next( user );
   }
 
   /**
@@ -78,7 +77,7 @@ export class AuthService {
    * @returns Observable
    */
   authObserver(): Observable<User> {
-    return this.$auth.asObservable();
+    return this.auth$.asObservable();
   }
 
 

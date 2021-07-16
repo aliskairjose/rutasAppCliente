@@ -11,8 +11,8 @@ import { CommonService } from './common.service';
 export class RouteService {
 
   constructor(
-    private _http: HttpService,
-    private _common: CommonService
+    private http: HttpService,
+    private common: CommonService
   ) { }
 
   /**
@@ -21,7 +21,7 @@ export class RouteService {
    * @returns Arreglo de Rutas
    */
   list( id: number ): Observable<Route[]> {
-    return this._http.get( `/routes?client_id=${id}&includes[]=driver&includes[]=routeType&includes[]=RouteStops&includes[]=bus` )
+    return this.http.get( `/routes?client_id=${id}&includes[]=driver&includes[]=routeType&includes[]=routeStops&includes[]=bus.busModel&occupedSeats=1` )
       .pipe( map( response => response.data ) );
   }
 
@@ -31,12 +31,20 @@ export class RouteService {
    * @returns Confirmación de agregado
    */
   add( data: Route ): Observable<Route> {
-    return this._http.post( '/routes', data ).pipe(
+    return this.http.post( '/routes', data ).pipe(
       map( response => {
         this.toastMessage( response.message );
         return response.data;
       } )
     );
+  }
+
+  /**
+   * @description Ruta mas cercana
+   * @returns Ruta mas cercana
+   */
+  closestRoute( latitude, longitude ): Observable<any> {
+    return this.http.get( `/routes/closest-route?latitude=${latitude}&longitude=${longitude}` );
   }
 
   // Abordaje de ruta
@@ -46,7 +54,7 @@ export class RouteService {
    * @returns Boolean
    */
   verifyBorading(): Observable<any> {
-    return this._http.get( `/route-boarding` );
+    return this.http.get( `/route-boarding` );
   }
 
   /**
@@ -57,7 +65,7 @@ export class RouteService {
    * @returns Null
    */
   abording( clientId: number, busId: number, routeId: number ): Observable<any> {
-    return this._http.post( `/route-boarding?client_id=${clientId}&bus_id=${busId}&route_id=${routeId}` );
+    return this.http.post( `/route-boarding?client_id=${clientId}&bus_id=${busId}&route_id=${routeId}` );
   }
 
   /**
@@ -65,15 +73,15 @@ export class RouteService {
    * @returns Null
    */
   endTravel(): Observable<any> {
-    return this._http.put( `/route-boarding/close` );
+    return this.http.put( `/route-boarding/close` );
   }
 
   ratingTravel( data: any ): Observable<any> {
-    return this._http.post( `/route-boarding-experiences`, data );
+    return this.http.post( `/route-boarding-experiences`, data );
   }
 
   private toastMessage( message: string ): void {
     const color = 'primary';
-    this._common.presentToast( { message, color } );
+    this.common.presentToast( { message, color } );
   }
 }

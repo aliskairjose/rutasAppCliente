@@ -17,14 +17,14 @@ export class AuthInterceptorService implements HttpInterceptor {
   constructor(
     private router: Router,
     private commonService: CommonService,
-    private _storage: StorageService,
+    private storage: StorageService,
   ) {
 
   }
 
   intercept( request: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
 
-    return from( this._storage.get( TOKEN ) ).pipe(
+    return from( this.storage.get( TOKEN ) ).pipe(
       switchMap( token => {
 
         // Importante: modificamos de forma inmutable, haciendo el clonado de la petición
@@ -33,9 +33,23 @@ export class AuthInterceptorService implements HttpInterceptor {
         // Pasamos al siguiente interceptor de la cadena la petición modificada
         return next.handle( headers ).pipe(
           catchError( result => {
-            const message = result.error.message;
+            const errors = result.error.errors;
             const color = 'danger';
-            this.commonService.presentToast( { message, color } );
+            let mensaje = '';
+
+            if ( Object.entries( errors ).length ) {
+              for ( const key in errors ) {
+                if ( Object.prototype.hasOwnProperty.call( errors, key ) ) {
+                  const element = errors[ key ];
+                  mensaje += `${element} <br>`;
+                }
+              }
+              this.commonService.presentToast( { message: mensaje, color } );
+            }
+            else {
+              const message = result.error.message;
+              this.commonService.presentToast( { message, color } );
+            }
             return throwError( result );
           } )
         );

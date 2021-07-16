@@ -8,13 +8,15 @@ export const ERROR_FORM = {
   minLength: 'El mínimo de caracteres es de '
 };
 
-export const LOGO = './../../../assets/loginLogo.png';
+export const LOGO = '/assets/loginLogo.png';
 export const TOKEN = 'rp_token';
 export const USER = 'rp_user';
 
 export const MAP = {
-  END_ROUTE_MARK: './../../../assets/location-sharp.svg',
-  USER_MARK: './../../../assets/user_mark.svg',
-  STOP_MARK: './../../../assets/waypoints.svg'
+  END_ROUTE_MARK: '/assets/location-sharp.svg',
+  USER_MARK: '/assets/user_mark.svg',
+  STOP_MARK: '/assets/waypoints.svg',
+  BUS: '/assets/svg/bus.svg',
+  BUSPNG: '/assets/bus.png'
 };
 

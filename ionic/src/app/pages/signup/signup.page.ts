@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
-@Component({
+@Component( {
   selector: 'app-signup',
   templateUrl: './signup.page.html',
-  styleUrls: ['./signup.page.scss'],
-})
+  styleUrls: [ './signup.page.scss' ],
+} )
 
 export class SignupPage implements OnInit {
 
@@ -77,34 +77,31 @@ export class SignupPage implements OnInit {
     private router: Router
   ) {
 
-    this.registerForm = formBuilder.group({
-      Nombre: ['', Validators.compose([Validators.required])],
-      Empresa: ['', Validators.compose([Validators.required])],
-      Departamento: ['', Validators.compose([Validators.required])],
-      Cargo: ['', Validators.compose([Validators.required, Validators.pattern(this.ipList[3].regEx)])],
-      Correo: ['', Validators.compose([Validators.required])],
-      Contrasena: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-      repetir_contrasena: ['', Validators.compose([ Validators.required])]
+    this.registerForm = formBuilder.group( {
+      Nombre: [ '', Validators.compose( [ Validators.required ] ) ],
+      Empresa: [ '', Validators.compose( [ Validators.required ] ) ],
+      Departamento: [ '', Validators.compose( [ Validators.required ] ) ],
+      Cargo: [ '', Validators.compose( [ Validators.required, Validators.pattern( this.ipList[ 3 ].regEx ) ] ) ],
+      Correo: [ '', Validators.compose( [ Validators.required ] ) ],
+      Contrasena: [ '', Validators.compose( [ Validators.minLength( 6 ), Validators.required ] ) ],
+      repetir_contrasena: [ '', Validators.compose( [ Validators.required ] ) ]
     },
-    {
-      validator: this.ConfirmPasswordValidator('Contrasena', 'repetir_contrasena')
-    });
+      {
+        validator: this.ConfirmPasswordValidator( 'Contrasena', 'repetir_contrasena' )
+      } );
   }
 
-  ConfirmPasswordValidator(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
-      if (
-        matchingControl.errors &&
-        !matchingControl.errors.confirmPasswordValidator
-      ) {
+  ConfirmPasswordValidator( controlName: string, matchingControlName: string ) {
+    return ( formGroup: FormGroup ) => {
+      const control = formGroup.controls[ controlName ];
+      const matchingControl = formGroup.controls[ matchingControlName ];
+      if ( matchingControl.errors && !matchingControl.errors.confirmPasswordValidator ) {
         return;
       }
-      if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ confirmPasswordValidator: true });
+      if ( control.value !== matchingControl.value ) {
+        matchingControl.setErrors( { confirmPasswordValidator: true } );
       } else {
-        matchingControl.setErrors(null);
+        matchingControl.setErrors( null );
       }
     };
   }
@@ -112,12 +109,12 @@ export class SignupPage implements OnInit {
   ngOnInit() {
   }
 
-  gotoLogin(){
-    this.router.navigate(['/signin']);
+  gotoLogin() {
+    this.router.navigate( [ '/signin' ] );
   }
 
-  onChanges(){
-    console.log('changes', this.registerForm);
+  onChanges() {
+    console.log( 'changes', this.registerForm );
   }
 
   // signup() {

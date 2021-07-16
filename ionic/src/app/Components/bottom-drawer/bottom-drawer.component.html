@@ -27,7 +27,7 @@
           <ion-row>
             <ion-col>
               <div class="text-center">
-                <h2>Dashboard</h2>
+                <app-dashboard (routeEvent)="routeHandler($event)"></app-dashboard>
               </div>
             </ion-col>
           </ion-row>
@@ -39,7 +39,7 @@
       </div>
       <!-- Detalle de ruta -->
       <div *ngSwitchCase=10>
-        <div class="d-flex flex-row">
+        <!-- <div class="d-flex flex-row">
           <div class="d-flex flex-grow-1">
             <img class="clock" src="../../../assets/clock.png" />
             <div class="d-flex flex-column">
@@ -47,7 +47,7 @@
               <ion-note>15 minutos</ion-note>
             </div>
           </div>
-        </div>
+        </div> -->
         <ion-grid fixed *ngIf="isOpen">
           <ion-row>
             <ion-col size="12">
@@ -82,59 +82,58 @@
 
           </div>
         </div>
-        <!-- Travel Detail -->
-        <div *ngSwitchCase="40">
-          <ion-grid fixed *ngIf="isOpen">
-            <ion-row>
-              <ion-col>
-                <div class="text-center" id="travel-data">
-                  <h2>Datos de tu viaje</h2>
-                  <img class="rounded-circle shadow-sm avatar ion-margin-vertical"
-                    src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-                  <ion-note>Tu conductor</ion-note>
-                  <h5>
-                    {{selectedRoute.driver.name}} | 4/5
-                    <ion-icon slot="end" name="star" part="icon"></ion-icon>
-                  </h5>
-                  <ion-note>Tu ruta</ion-note>
-                  <ion-item>
-                    <ion-avatar slot="start">
-                      <img src="./../../../assets/route.png" />
-                    </ion-avatar>
-                    <ion-label>
-                      <h2>{{selectedRoute.name }}</h2>
-                      <h3>{{selectedRoute.start_time | customeTime }} - {{selectedRoute.end_time | customeTime }}</h3>
-                    </ion-label>
-                  </ion-item>
+      </div>
+      <!-- Travel Detail -->
+      <div *ngSwitchCase="40">
+        <ion-grid fixed *ngIf="isOpen">
+          <ion-row>
+            <ion-col>
+              <div class="text-center" id="travel-data">
+                <h2>Datos de tu viaje</h2>
+                <img class="rounded-circle shadow-sm avatar ion-margin-vertical" [src]="selectedRoute?.driver.avatar">
+                <ion-note>Tu conductor</ion-note>
+                <h5>
+                  {{selectedRoute?.driver?.name}} | {{rating}}/5
+                  <app-rating readOnly="true" [rate]="rating"> </app-rating>
+                </h5>
+                <ion-note>Tu ruta</ion-note>
+                <ion-item>
+                  <ion-avatar slot="start">
+                    <img src="./../../../assets/route.png" />
+                  </ion-avatar>
+                  <ion-label>
+                    <h2>{{selectedRoute?.name }}</h2>
+                    <h3>{{selectedRoute?.start_time | customeTime }} - {{selectedRoute?.end_time | customeTime }}</h3>
+                  </ion-label>
+                </ion-item>
 
-                  <ion-note>Tu unidad</ion-note>
-                  <h5>
-                    Modelo {{ scanResult.bus_model.name }} {{scanResult.unit_number}}<br>
-                    Placa: {{ scanResult.license_plate | uppercase }}
-                  </h5>
+                <ion-note>Tu unidad</ion-note>
+                <h5>
+                  Modelo {{ selectedRoute.bus.bus_model.name }} {{selectedRoute.bus.unit_number}}<br>
+                  Placa: {{ selectedRoute.bus.license_plate | uppercase }}
+                </h5>
 
-                  <ion-note>Puestos disponibles</ion-note>
-                  <h5>15/ {{ scanResult.number_positions }}</h5>
+                <ion-note>Puestos disponibles</ion-note>
+                <h5>{{selectedRoute.occuped_seats}}/{{ selectedRoute?.bus?.number_positions }}</h5>
 
-                  <ion-button (click)="ratingModal()" class="button-btn ion-margin-top" color="tertiary">
-                    <ion-icon slot="start" name="log-out-outline" class="logout-icon"></ion-icon>
-                    Finalizar viaje
-                  </ion-button>
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-
-          <div id="travel-data" *ngIf="!isOpen">
-            <div id="info-route">
-              <img src="./../../../assets/route.png" style="margin-left: 0 !important;" />
-              <div>
-                <h5>{{selectedRoute.driver.name}}</h5>
-                <p style="margin: 0;">Modelo {{ scanResult.bus_model.name }} {{scanResult.unit_number}} | Placa: {{
-                  scanResult.number_positions }}
-                </p>
-                <ion-note class="ion-float-left">Tiempo de llegada a destino: 25 min</ion-note>
+                <ion-button (click)="ratingModal()" class="button-btn ion-margin-top" color="tertiary">
+                  <ion-icon slot="start" name="log-out-outline" class="logout-icon"></ion-icon>
+                  Finalizar viaje
+                </ion-button>
               </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div id="travel-data" *ngIf="!isOpen">
+          <div id="info-route">
+            <img src="./../../../assets/route.png" style="margin-left: 0 !important;" />
+            <div>
+              <h5>{{selectedRoute?.driver.name}}</h5>
+              <p style="margin: 0;">Modelo {{ scanResult?.bus_model?.name }} {{scanResult?.unit_number}} | Placa: {{
+                scanResult?.number_positions }}
+              </p>
+              <ion-note class="ion-float-left">Tiempo de llegada a destino: 25 min</ion-note>
             </div>
             <ion-button expand="full" class="confirmRutas my-3" (click)="ratingModal()" color="tertiary">
               <ion-icon slot="start" name="log-out-outline" class="logout-icon"></ion-icon>

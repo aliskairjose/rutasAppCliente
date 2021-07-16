@@ -20,7 +20,7 @@ export class UserService {
 
   constructor(
     private platform: Platform,
-    private _common: CommonService,
+    private common: CommonService,
     private httpService: HttpService
   ) { }
 
@@ -82,21 +82,27 @@ export class UserService {
     return this.httpService.post( '/comments', data );
   }
 
-  commentList(): Observable<any> {
+  commentList(): Observable<Comment[]> {
     return this.httpService
       .get( `/comments?includes[]=responses&includes[]=typeComment` )
       .pipe( map( response => response.data ) );
   }
 
+  commentById( id: number ): Observable<Comment> {
+    return this.httpService
+      .get( `/comments/${id}?includes[]=responses&includes[]=typeComment` )
+      .pipe( map( response => response.data ) );
+  }
+
   travelList( page = 1 ): Observable<any> {
     return this.httpService
-      .get( `/route-boarding/list?finalized=1&includes[]=route.bus&page=${page}&includes[]=route&take=10` )
+      .get( `/route-boarding/list?finalized=1&includes[]=route.bus&page=${page}&includes[]=route&take=10&qualified=1` )
       .pipe( map( list => list.data ) );
   }
 
   private toastMessage( message: string ): void {
     const color = 'primary';
-    this._common.presentToast( { message, color } );
+    this.common.presentToast( { message, color } );
   }
 
   subscribeBackHandler() {

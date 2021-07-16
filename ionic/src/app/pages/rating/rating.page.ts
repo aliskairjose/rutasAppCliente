@@ -4,7 +4,6 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { RouteService } from '../../services/route.service';
 import { Route } from '../../interfaces/route';
 import { CommonService } from '../../services/common.service';
-import { Subscription } from 'rxjs';
 
 @Component( {
   selector: 'app-page-rating',
@@ -15,17 +14,23 @@ export class RatingPage implements OnInit {
 
   driverRate = 1;
   busRate = 1;
-  comment: '';
+  comment = '';
   isRate = false;
-  subscription: Subscription;
+  otherComment = '';
+  options = [
+    { value: 'Excelente', text: 'Excelente' },
+    { value: 'Satisfactorio', text: 'Satisfactorio' },
+    { value: 'Regular', text: 'Regular' },
+    { value: 'Otro', text: 'Otro' },
+  ];
 
-  @Input() route: Route;
+  @Input() route: Route = {};
   @Input() id: number;
 
   constructor(
-    private _common: CommonService,
-    public rating: RatingComponent,
     public navParams: NavParams,
+    private common: CommonService,
+    public rating: RatingComponent,
     public modalController: ModalController,
     private routeService: RouteService
   ) {
@@ -34,17 +39,22 @@ export class RatingPage implements OnInit {
   ngOnInit() {
   }
 
-  async sendRating() {
-    const loading = await this._common.presentLoading();
+  // Seleccion de tipo de comentario
+  onChange( value: string ): void {
+    this.comment = value;
+  }
+
+  async sendRating( type?: string ) {
+    const loading = await this.common.presentLoading();
     loading.present();
     const data = {
       route_boarding_id: this.id,
-      comment: this.comment,
+      comment: this.comment !== 'Otro' ? this.comment : this.otherComment,
       bus_rate: this.busRate,
       driver_rate: this.driverRate
     };
 
-    this.subscription = this.routeService.ratingTravel( data ).subscribe( () => {
+    this.routeService.ratingTravel( data ).subscribe( () => {
       loading.dismiss();
       this.isRate = true;
     } );
@@ -54,9 +64,8 @@ export class RatingPage implements OnInit {
     ( type === 'driver' ) ? this.driverRate = rate : this.busRate = rate;
   }
 
-  closeModal(): void {
-    this.subscription.unsubscribe();
-    this.modalController.dismiss();
+  noRate(): void {
+    this.isRate = true;
   }
 
 }

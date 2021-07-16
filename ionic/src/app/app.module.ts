@@ -27,6 +27,7 @@ import { registerLocaleData } from '@angular/common';
 import { Camera } from '@ionic-native/camera/ngx';
 import localeEs from '@angular/common/locales/es';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { PusherService } from './services/pusher.service';
 registerLocaleData( localeEs );
 @NgModule( {
   declarations: [
@@ -55,6 +56,7 @@ registerLocaleData( localeEs );
     Camera,
     Geolocation,
     BarcodeScanner,
+    PusherService,
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }

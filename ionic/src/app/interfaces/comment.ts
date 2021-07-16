@@ -2,12 +2,13 @@ export interface Comment {
   comment?: string;
   created_at?: string;
   id?: number;
-  responses?: [];
   status?: number;
-  type_comment?: CommentType;
   type_comment_id?: number;
   updated_at?: string;
   user_id?: number;
+  read?: number;
+  responses?: CommentResponse[];
+  type_comment?: CommentType;
 }
 
 export interface CommentType {

@@ -20,11 +20,11 @@ export class SidemenuPage implements OnInit {
 
   backdropVisible = false;
   drawerVar = 'Inicio';
-  activeRoute = 0;
   addressClicked = 0;
   user: User = {};
   abrv = '';
   logo = LOGO;
+  private _activeRoute = 0;
 
   appPages = [
     { title: 'Inicio', url: '/sidemenu/Inicio', icon: '../../../assets/menu/home.png', route: 0 },
@@ -37,9 +37,9 @@ export class SidemenuPage implements OnInit {
   constructor(
     private router: Router,
     private _auth: AuthService,
-    private _common: CommonService,
+    private common: CommonService,
     private userService: UserService,
-    private _storage: StorageService,
+    private storage: StorageService,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
     this.user = {};
@@ -48,11 +48,11 @@ export class SidemenuPage implements OnInit {
       const value = this.user.name.split( ' ' );
       this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
     } );
+
   }
 
-
   ngOnInit() {
-    this._storage.get( USER ).then( ( user: any ) => {
+    this.storage.get( USER ).then( ( user: any ) => {
       this.user = { ...user };
       const value = this.user.name.split( ' ' );
       this.abrv = `${value[ 0 ].charAt( 0 )}${value[ 1 ].charAt( 0 )}`;
@@ -78,24 +78,38 @@ export class SidemenuPage implements OnInit {
 
   async takePicture() {
     const image = await Camera.getPhoto( {
-      quality: 50,
+      quality: 30,
+      height: 120,
+      width: 120,
+      preserveAspectRatio: true,
       allowEditing: false,
       resultType: CameraResultType.Base64,
       direction: CameraDirection.Front // iOS and Web only
     } );
 
+
     const imageUrl = `data:image/png;base64,${image.base64String}`;
-    const loading = await this._common.presentLoading();
+    const loading = await this.common.presentLoading();
     loading.present();
     this.userService.updateAvatar( { avatar: imageUrl } ).subscribe( async ( result ) => {
+      loading.dismiss();
+      await this.storage.store( USER, result.data );
       this._auth.AuthSubject( result.data );
       await this._storage.store( USER, result.data );
       loading.dismiss();
       const message = result.message;
       const color = 'primary';
-      this._common.presentToast( { message, color } );
-      this.ngOnInit();
+      this.common.presentToast( { message, color } );
+      // this.ngOnChanges();
     }, () => loading.dismiss() );
+  }
+
+  set activeRoute( i: number ) {
+    this._activeRoute = i;
+  }
+
+  get activeRoute(): number {
+    return this._activeRoute;
   }
 
 }
