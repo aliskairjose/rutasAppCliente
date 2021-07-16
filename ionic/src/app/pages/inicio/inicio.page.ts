@@ -63,10 +63,10 @@ export class InicioPage implements OnInit {
   }
 
   async ngOnInit() {
-  }
-
-  // Cuando el mapa esta completamente cargado, obtenemos la ubicacion
-  async mapReady() {
+    console.log( 'ngOnInit inicio page' );
+    this.waypoints.length = 0;
+    this.hasBusPosition = false;
+    this.hasDirections = false;
     const message = 'Obteniendo ubicación';
     const loading = await this.common.presentLoading( message );
     loading.present();
@@ -84,7 +84,6 @@ export class InicioPage implements OnInit {
         this.waypoints.length = 0;
         this.hasBusPosition = false;
         this.hasDirections = false;
-        this.mapReady();
         break;
       default:
         this.sidMenu.activeRoute = 0;

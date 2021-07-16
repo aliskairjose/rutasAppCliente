@@ -29,7 +29,7 @@
     </ion-input>
   </div>
 </div>
-<agm-map [latitude]="coords?.latitude" [longitude]="coords?.longitude" [zoom]="zoom" (mapReady)="mapReady($event)">
+<agm-map [latitude]="coords?.latitude" [longitude]="coords?.longitude" [zoom]="zoom">
   <!-- Marcador para la posision del usuario -->
   <agm-marker [latitude]="coords?.latitude" [longitude]="coords?.longitude" [iconUrl]="userMarker"></agm-marker>
   <!-- Marcador para la posicion del bus -->
