@@ -95,7 +95,7 @@ export class SidemenuPage implements OnInit {
       loading.dismiss();
       await this.storage.store( USER, result.data );
       this._auth.AuthSubject( result.data );
-      await this._storage.store( USER, result.data );
+      await this.storage.store( USER, result.data );
       loading.dismiss();
       const message = result.message;
       const color = 'primary';

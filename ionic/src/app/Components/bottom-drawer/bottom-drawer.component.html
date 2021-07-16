@@ -13,6 +13,7 @@
       </ion-note>
     </div>
   </div>
+
   <div *ngIf="dragable" class="ion-text-center ">
     <ion-button fill="clear" expand="full" (click)="toggleDrawer()" class="minH">
       <div class="drawer-pull"></div>
@@ -39,15 +40,6 @@
       </div>
       <!-- Detalle de ruta -->
       <div *ngSwitchCase=10>
-        <!-- <div class="d-flex flex-row">
-          <div class="d-flex flex-grow-1">
-            <img class="clock" src="../../../assets/clock.png" />
-            <div class="d-flex flex-column">
-              <span>Proxima unidad</span>
-              <ion-note>15 minutos</ion-note>
-            </div>
-          </div>
-        </div> -->
         <ion-grid fixed *ngIf="isOpen">
           <ion-row>
             <ion-col size="12">
@@ -77,9 +69,8 @@
             <div class="d-flex flex-column align-items-center justify-content-center" *ngIf="!showScan">
               <ion-note class="ion-text-center">Para escanear código enfoca el QR ubicado en la entrada del bus
               </ion-note>
-              <img class="scannerImg" src="../../../assets/scanner.png" />
+              <img class="scannerImg" src="/assets/scanner.png" />
             </div>
-
           </div>
         </div>
       </div>
@@ -99,7 +90,7 @@
                 <ion-note>Tu ruta</ion-note>
                 <ion-item>
                   <ion-avatar slot="start">
-                    <img src="./../../../assets/route.png" />
+                    <img src="/assets/route.png" />
                   </ion-avatar>
                   <ion-label>
                     <h2>{{selectedRoute?.name }}</h2>
@@ -127,7 +118,7 @@
 
         <div id="travel-data" *ngIf="!isOpen">
           <div id="info-route">
-            <img src="./../../../assets/route.png" style="margin-left: 0 !important;" />
+            <img src="/assets/route.png" style="margin-left: 0 !important;" />
             <div>
               <h5>{{selectedRoute?.driver.name}}</h5>
               <p style="margin: 0;">Modelo {{ scanResult?.bus_model?.name }} {{scanResult?.unit_number}} | Placa: {{
@@ -140,8 +131,8 @@
               Finalizar viaje
             </ion-button>
           </div>
-
         </div>
+      </div>
     </ion-content>
   </div>
 </div>
