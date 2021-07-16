@@ -6,7 +6,6 @@ import { MAP } from '../../constants/global-constants';
 import { CommonService } from '../../services/common.service';
 import { SidemenuPage } from '../sidemenu/sidemenu.page';
 import { PusherService } from '../../services/pusher.service';
-declare var google: any;
 
 @Component( {
   selector: 'app-inicio',
@@ -17,7 +16,6 @@ export class InicioPage implements OnInit {
 
   map: google.maps.Map;
   markers: google.maps.Marker[] = [];
-  // userMarker: google.maps.Marker[] = [];
   watch = null;
   selectedItem: Route;
   watchId = null;
@@ -65,22 +63,16 @@ export class InicioPage implements OnInit {
   }
 
   async ngOnInit() {
+  }
+
+  // Cuando el mapa esta completamente cargado, obtenemos la ubicacion
+  async mapReady() {
     const message = 'Obteniendo ubicación';
     const loading = await this.common.presentLoading( message );
     loading.present();
     const resp = await this.geolocation.getCurrentPosition();
     this.coords = resp.coords;
     loading.dismiss();
-  }
-
-  // Cuando el mapa esta completamente cargado, obtenemos la ubicacion
-  async mapReady() {
-    // const message = 'Obteniendo ubicación';
-    // const loading = await this.common.presentLoading( message );
-    // loading.present();
-    // const resp = await this.geolocation.getCurrentPosition();
-    // this.coords = resp.coords;
-    // loading.dismiss();
   }
 
   bottomDrawerEvent( event: any ) {
@@ -96,6 +88,7 @@ export class InicioPage implements OnInit {
 
   async handleItemSelect( route: Route ) {
     this.selectedItem = { ...route };
+    this.bindChannel( route );
     const stops: RouteStop[] = [ ...this.selectedItem.route_stops ];
     const loading = await this.common.presentLoading();
     loading.present();
@@ -146,15 +139,9 @@ export class InicioPage implements OnInit {
   }
 
   private updateBusPosition( { ...params } ) {
-    this.busLat = params.latitude;
-    this.busLng = params.longitude;
-    // const position = { lat: parseFloat( params.lattitude ), lng: parseFloat( params.longitude ) };
-    // this.trackMarker?.setMap( null );
-    // this.trackMarker = new google.maps.Marker( {
-    //   position,
-    //   map: this.map,
-    //   icon: MAP.BUS
-    // } );
+    console.log( 'update bus posision' );
+    this.busLat = +params.lattitude;
+    this.busLng = +params.longitude;
   }
 
 
