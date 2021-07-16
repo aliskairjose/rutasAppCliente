@@ -27,6 +27,9 @@ export class InicioPage implements OnInit {
   directions: any = {};
   waypoints: any[] = [];
   userMarker = MAP.USER_MARK;
+  busLat = 51.678418;
+  busLng = 7.809007;
+  busIcon = MAP.BUS;
 
   @ViewChild( 'map' ) mapElement: ElementRef;
 
@@ -117,6 +120,8 @@ export class InicioPage implements OnInit {
   }
 
   private updateBusPosition( { ...params } ) {
+    this.busLat = params.latitude;
+    this.busLng = params.longitude;
     // const position = { lat: parseFloat( params.lattitude ), lng: parseFloat( params.longitude ) };
     // this.trackMarker?.setMap( null );
     // this.trackMarker = new google.maps.Marker( {
