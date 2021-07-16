@@ -28,6 +28,8 @@ export class InicioPage implements OnInit {
   busLat: number;
   busLng: number;
   busIcon = MAP.BUS;
+  hasBusPosition = false;
+  hasDirections = false;
   renderOptions = {
     suppressMarkers: true,
   };
@@ -47,8 +49,6 @@ export class InicioPage implements OnInit {
       },
     ],
   };
-
-  @ViewChild( 'map' ) mapElement: ElementRef;
 
   constructor(
     private common: CommonService,
@@ -80,6 +80,12 @@ export class InicioPage implements OnInit {
       case 'item-selected':
         this.handleItemSelect( event.data );
         break;
+      case 'loadMap':
+        this.waypoints.length = 0;
+        this.hasBusPosition = false;
+        this.hasDirections = false;
+        this.mapReady();
+        break;
       default:
         this.sidMenu.activeRoute = 0;
         break;
@@ -87,6 +93,9 @@ export class InicioPage implements OnInit {
   }
 
   async handleItemSelect( route: Route ) {
+    this.waypoints.length = 0;
+    this.hasBusPosition = false;
+    this.hasDirections = false;
     this.selectedItem = { ...route };
     this.bindChannel( route );
     const stops: RouteStop[] = [ ...this.selectedItem.route_stops ];
@@ -134,15 +143,15 @@ export class InicioPage implements OnInit {
           }
         } );
       }
+      this.hasDirections = true;
       resolve( true );
     } );
   }
 
   private updateBusPosition( { ...params } ) {
-    console.log( 'update bus posision' );
+    this.hasBusPosition = true;
     this.busLat = +params.lattitude;
     this.busLng = +params.longitude;
   }
-
 
 }
