@@ -63,7 +63,6 @@ export class InicioPage implements OnInit {
   }
 
   async ngOnInit() {
-    console.log( 'ngOnInit inicio page' );
     this.waypoints.length = 0;
     this.hasBusPosition = false;
     this.hasDirections = false;
