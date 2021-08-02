@@ -14,7 +14,7 @@ export class RatingPage implements OnInit {
 
   driverRate = 1;
   busRate = 1;
-  comment = '';
+  comment = 'Excelente';
   isRate = false;
   otherComment = '';
   options = [

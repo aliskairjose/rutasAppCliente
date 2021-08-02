@@ -28,6 +28,8 @@ import { Camera } from '@ionic-native/camera/ngx';
 import localeEs from '@angular/common/locales/es';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { PusherService } from './services/pusher.service';
+import { AgmCoreModule } from '@agm/core';
+
 registerLocaleData( localeEs );
 @NgModule( {
   declarations: [

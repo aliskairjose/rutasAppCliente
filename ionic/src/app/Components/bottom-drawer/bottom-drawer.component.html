@@ -69,8 +69,13 @@
             <div class="d-flex flex-column align-items-center justify-content-center" *ngIf="!showScan">
               <ion-note class="ion-text-center">Para escanear código enfoca el QR ubicado en la entrada del bus
               </ion-note>
-              <img class="scannerImg" src="/assets/scanner.png" />
+              <img class="scannerImg" src="../../../assets/scanner.png" />
             </div>
+          </div>
+          <div class="w-100 mt-5">
+            <ion-button (click)="scannerOn()" expand="block" color="tertiary">
+              Escanear QR
+            </ion-button>
           </div>
         </div>
       </div>
@@ -118,13 +123,14 @@
 
         <div id="travel-data" *ngIf="!isOpen">
           <div id="info-route">
-            <img src="/assets/route.png" style="margin-left: 0 !important;" />
-            <div>
-              <h5>{{selectedRoute?.driver.name}}</h5>
-              <p style="margin: 0;">Modelo {{ scanResult?.bus_model?.name }} {{scanResult?.unit_number}} | Placa: {{
-                scanResult?.number_positions }}
-              </p>
-              <ion-note class="ion-float-left">Tiempo de llegada a destino: 25 min</ion-note>
+            <div class="d-flex">
+              <img src="/assets/route.png" style="margin-left: 0 !important;" />
+              <div>
+                <h5>{{selectedRoute?.driver.name}}</h5>
+                <p style="margin: 0;">Modelo {{ scanResult?.bus_model?.name }} {{scanResult?.unit_number}} | Placa: {{
+                  scanResult?.number_positions }}
+                </p>
+              </div>
             </div>
             <ion-button expand="full" class="confirmRutas my-3" (click)="ratingModal()" color="tertiary">
               <ion-icon slot="start" name="log-out-outline" class="logout-icon"></ion-icon>

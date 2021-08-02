@@ -389,6 +389,7 @@ ion-note {
 #travel-data {
   #info-route {
     display: flex;
+    flex-direction: column;
     img {
       width: 48px;
       height: 48px;
