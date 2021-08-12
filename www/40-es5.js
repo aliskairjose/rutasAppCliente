@@ -34,59 +34,59 @@
       /* harmony import */
 
 
-      var _index_92848855_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! ./index-92848855.js */
-      "sxy2");
+      var _index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! ./index-e806d1f6.js */
+      "A36C");
       /* harmony import */
 
 
-      var _ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! ./ionic-global-23e7365a.js */
-      "N4tN");
+      var _ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ./ionic-global-9d5c8ee3.js */
+      "Zgba");
       /* harmony import */
 
 
-      var _helpers_47d562d2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! ./helpers-47d562d2.js */
-      "9t5z");
+      var _helpers_90f46169_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ./helpers-90f46169.js */
+      "QPqR");
       /* harmony import */
 
 
-      var _animation_239bd3e5_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! ./animation-239bd3e5.js */
-      "L1bk");
+      var _animation_54fe0237_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! ./animation-54fe0237.js */
+      "z1RL");
       /* harmony import */
 
 
-      var _index_79d74e0b_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! ./index-79d74e0b.js */
-      "PQ8F");
+      var _index_9e3fe806_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ./index-9e3fe806.js */
+      "39oe");
       /* harmony import */
 
 
-      var _hardware_back_button_7b6ede21_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ./hardware-back-button-7b6ede21.js */
-      "x/Nk");
+      var _hardware_back_button_4a6b37fb_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ./hardware-back-button-4a6b37fb.js */
+      "B4Jq");
       /* harmony import */
 
 
-      var _overlays_d577c227_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ./overlays-d577c227.js */
-      "xG4I");
+      var _overlays_12c20431_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ./overlays-12c20431.js */
+      "oLNq");
       /* harmony import */
 
 
-      var _theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ./theme-5641d27f.js */
-      "sPtc");
+      var _theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! ./theme-ff3fc52f.js */
+      "74mu");
       /**
        * iOS Toast Enter Animation
        */
 
 
       var iosEnterAnimation = function iosEnterAnimation(baseEl, position) {
-        var baseAnimation = Object(_animation_239bd3e5_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
-        var wrapperAnimation = Object(_animation_239bd3e5_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+        var baseAnimation = Object(_animation_54fe0237_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+        var wrapperAnimation = Object(_animation_54fe0237_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
         var hostEl = baseEl.host || baseEl;
         var wrapperEl = baseEl.querySelector('.toast-wrapper');
         var bottom = "calc(-10px - var(--ion-safe-area-bottom, 0px))";
@@ -117,8 +117,8 @@
 
 
       var iosLeaveAnimation = function iosLeaveAnimation(baseEl, position) {
-        var baseAnimation = Object(_animation_239bd3e5_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
-        var wrapperAnimation = Object(_animation_239bd3e5_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+        var baseAnimation = Object(_animation_54fe0237_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+        var wrapperAnimation = Object(_animation_54fe0237_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
         var hostEl = baseEl.host || baseEl;
         var wrapperEl = baseEl.querySelector('.toast-wrapper');
         var bottom = "calc(-10px - var(--ion-safe-area-bottom, 0px))";
@@ -147,8 +147,8 @@
 
 
       var mdEnterAnimation = function mdEnterAnimation(baseEl, position) {
-        var baseAnimation = Object(_animation_239bd3e5_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
-        var wrapperAnimation = Object(_animation_239bd3e5_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+        var baseAnimation = Object(_animation_54fe0237_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+        var wrapperAnimation = Object(_animation_54fe0237_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
         var hostEl = baseEl.host || baseEl;
         var wrapperEl = baseEl.querySelector('.toast-wrapper');
         var bottom = "calc(8px + var(--ion-safe-area-bottom, 0px))";
@@ -181,8 +181,8 @@
 
 
       var mdLeaveAnimation = function mdLeaveAnimation(baseEl) {
-        var baseAnimation = Object(_animation_239bd3e5_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
-        var wrapperAnimation = Object(_animation_239bd3e5_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+        var baseAnimation = Object(_animation_54fe0237_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+        var wrapperAnimation = Object(_animation_54fe0237_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
         var hostEl = baseEl.host || baseEl;
         var wrapperEl = baseEl.querySelector('.toast-wrapper');
         wrapperAnimation.addElement(wrapperEl).fromTo('opacity', 0.99, 0);
@@ -198,11 +198,11 @@
 
           _classCallCheck(this, Toast);
 
-          Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
-          this.didPresent = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionToastDidPresent", 7);
-          this.willPresent = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionToastWillPresent", 7);
-          this.willDismiss = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionToastWillDismiss", 7);
-          this.didDismiss = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionToastDidDismiss", 7);
+          Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+          this.didPresent = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionToastDidPresent", 7);
+          this.willPresent = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionToastWillPresent", 7);
+          this.willDismiss = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionToastWillDismiss", 7);
+          this.didDismiss = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionToastDidDismiss", 7);
           this.presented = false;
           /**
            * How many milliseconds to wait before hiding the toast. By default, it will show
@@ -236,7 +236,7 @@
           this.dispatchCancelHandler = function (ev) {
             var role = ev.detail.role;
 
-            if (Object(_overlays_d577c227_js__WEBPACK_IMPORTED_MODULE_6__["i"])(role)) {
+            if (Object(_overlays_12c20431_js__WEBPACK_IMPORTED_MODULE_6__["i"])(role)) {
               var cancelButton = _this.getButtons().find(function (b) {
                 return b.role === 'cancel';
               });
@@ -249,7 +249,7 @@
         _createClass(Toast, [{
           key: "connectedCallback",
           value: function connectedCallback() {
-            Object(_overlays_d577c227_js__WEBPACK_IMPORTED_MODULE_6__["e"])(this.el);
+            Object(_overlays_12c20431_js__WEBPACK_IMPORTED_MODULE_6__["e"])(this.el);
           }
           /**
            * Present the toast overlay after it has been created.
@@ -266,7 +266,7 @@
                   switch (_context.prev = _context.next) {
                     case 0:
                       _context.next = 2;
-                      return Object(_overlays_d577c227_js__WEBPACK_IMPORTED_MODULE_6__["d"])(this, 'toastEnter', iosEnterAnimation, mdEnterAnimation, this.position);
+                      return Object(_overlays_12c20431_js__WEBPACK_IMPORTED_MODULE_6__["d"])(this, 'toastEnter', iosEnterAnimation, mdEnterAnimation, this.position);
 
                     case 2:
                       if (this.duration > 0) {
@@ -306,7 +306,7 @@
               clearTimeout(this.durationTimeout);
             }
 
-            return Object(_overlays_d577c227_js__WEBPACK_IMPORTED_MODULE_6__["f"])(this, data, role, 'toastLeave', iosLeaveAnimation, mdLeaveAnimation, this.position);
+            return Object(_overlays_12c20431_js__WEBPACK_IMPORTED_MODULE_6__["f"])(this, data, role, 'toastLeave', iosLeaveAnimation, mdLeaveAnimation, this.position);
           }
           /**
            * Returns a promise that resolves when the toast did dismiss.
@@ -315,7 +315,7 @@
         }, {
           key: "onDidDismiss",
           value: function onDidDismiss() {
-            return Object(_overlays_d577c227_js__WEBPACK_IMPORTED_MODULE_6__["g"])(this.el, 'ionToastDidDismiss');
+            return Object(_overlays_12c20431_js__WEBPACK_IMPORTED_MODULE_6__["g"])(this.el, 'ionToastDidDismiss');
           }
           /**
            * Returns a promise that resolves when the toast will dismiss.
@@ -324,7 +324,7 @@
         }, {
           key: "onWillDismiss",
           value: function onWillDismiss() {
-            return Object(_overlays_d577c227_js__WEBPACK_IMPORTED_MODULE_6__["g"])(this.el, 'ionToastWillDismiss');
+            return Object(_overlays_12c20431_js__WEBPACK_IMPORTED_MODULE_6__["g"])(this.el, 'ionToastWillDismiss');
           }
         }, {
           key: "getButtons",
@@ -347,7 +347,7 @@
                     case 0:
                       role = button.role;
 
-                      if (!Object(_overlays_d577c227_js__WEBPACK_IMPORTED_MODULE_6__["i"])(role)) {
+                      if (!Object(_overlays_12c20431_js__WEBPACK_IMPORTED_MODULE_6__["i"])(role)) {
                         _context2.next = 3;
                         break;
                       }
@@ -401,7 +401,7 @@
 
                       _context3.prev = 1;
                       _context3.next = 4;
-                      return Object(_overlays_d577c227_js__WEBPACK_IMPORTED_MODULE_6__["s"])(button.handler);
+                      return Object(_overlays_12c20431_js__WEBPACK_IMPORTED_MODULE_6__["s"])(button.handler);
 
                     case 4:
                       rtn = _context3.sent;
@@ -448,16 +448,16 @@
               return;
             }
 
-            var mode = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
+            var mode = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
 
             var buttonGroupsClasses = _defineProperty({
               'toast-button-group': true
             }, "toast-button-group-".concat(side), true);
 
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": buttonGroupsClasses
             }, buttons.map(function (b) {
-              return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", {
+              return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("button", {
                 type: "button",
                 "class": buttonClass(b),
                 tabIndex: 0,
@@ -465,13 +465,13 @@
                   return _this3.buttonClick(b);
                 },
                 part: "button"
-              }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+              }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
                 "class": "toast-button-inner"
-              }, b.icon && Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", {
+              }, b.icon && Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-icon", {
                 icon: b.icon,
                 slot: b.text === undefined ? 'icon-only' : undefined,
                 "class": "toast-icon"
-              }), b.text), mode === 'md' && Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", {
+              }), b.text), mode === 'md' && Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", {
                 type: b.icon !== undefined && b.text === undefined ? 'unbounded' : 'bounded'
               }));
             }));
@@ -486,41 +486,41 @@
             var endButtons = allButtons.filter(function (b) {
               return b.side !== 'start';
             });
-            var mode = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
+            var mode = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
 
             var wrapperClass = _defineProperty({
               'toast-wrapper': true
             }, "toast-".concat(this.position), true);
 
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
               style: {
                 zIndex: "".concat(60000 + this.overlayIndex)
               },
-              "class": Object(_theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_7__["c"])(this.color, Object.assign(Object.assign(_defineProperty({}, mode, true), Object(_theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_7__["g"])(this.cssClass)), {
+              "class": Object(_theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_7__["c"])(this.color, Object.assign(Object.assign(_defineProperty({}, mode, true), Object(_theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_7__["g"])(this.cssClass)), {
                 'toast-translucent': this.translucent
               })),
               tabindex: "-1",
               onIonToastWillDismiss: this.dispatchCancelHandler
-            }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": wrapperClass
-            }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "toast-container",
               part: "container"
-            }, this.renderButtons(startButtons, 'start'), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }, this.renderButtons(startButtons, 'start'), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "toast-content"
-            }, this.header !== undefined && Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }, this.header !== undefined && Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "toast-header",
               part: "header"
-            }, this.header), this.message !== undefined && Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }, this.header), this.message !== undefined && Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "toast-message",
               part: "message",
-              innerHTML: Object(_index_79d74e0b_js__WEBPACK_IMPORTED_MODULE_4__["s"])(this.message)
+              innerHTML: Object(_index_9e3fe806_js__WEBPACK_IMPORTED_MODULE_4__["s"])(this.message)
             })), this.renderButtons(endButtons, 'end'))));
           }
         }, {
           key: "el",
           get: function get() {
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
           }
         }]);
 
@@ -533,7 +533,7 @@
         return Object.assign((_Object$assign2 = {
           'toast-button': true,
           'toast-button-icon-only': button.icon !== undefined && button.text === undefined
-        }, _defineProperty(_Object$assign2, "toast-button-".concat(button.role), button.role !== undefined), _defineProperty(_Object$assign2, 'ion-focusable', true), _defineProperty(_Object$assign2, 'ion-activatable', true), _Object$assign2), Object(_theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_7__["g"])(button.cssClass));
+        }, _defineProperty(_Object$assign2, "toast-button-".concat(button.role), button.role !== undefined), _defineProperty(_Object$assign2, 'ion-focusable', true), _defineProperty(_Object$assign2, 'ion-activatable', true), _Object$assign2), Object(_theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_7__["g"])(button.cssClass));
       };
 
       Toast.style = {

@@ -1,8 +1,9 @@
 {
-  "name": "rutas",
+  "name": "Rutas PANAMA",
   "integrations": {
-    "cordova": {},
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "id": "04f68b35"
 }

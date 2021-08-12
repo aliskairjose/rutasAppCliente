@@ -1,34 +1,65 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
+import { AuthGuard } from './guards/auth-guard.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'initial',
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path: 'initial',
+    loadChildren: () => import( './pages/initial/initial.module' ).then( m => m.InitialPageModule )
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    path: 'signin',
+    loadChildren: () => import( './pages/authentication/authentication.module' ).then( m => m.AuthenticationPageModule ),
+
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: 'forgot-password',
+    loadChildren: () => import( './pages/forgot-password/forgot-password.module' ).then( m => m.ForgotPasswordPageModule )
   },
   {
-    path: 'register-user',
-    loadChildren: () => import('./register-user/register-user.module').then( m => m.RegisterUserPageModule)
+    path: 'sidemenu',
+    loadChildren: () => import( './pages/sidemenu/sidemenu.module' ).then( m => m.SidemenuPageModule )
+  },
+  {
+    path: 'soporte',
+    loadChildren: () => import( './pages/soporte/soporte.module' ).then( m => m.SoportePageModule )
+  },
+  {
+    path: 'register',
+    loadChildren: () => import( './pages/register/register.module' ).then( m => m.RegisterPageModule )
+  },
+  {
+    path: 'clients-modal',
+    loadChildren: () => import( './modals/clients-modal/clients-modal.module' ).then( m => m.ClientsModalPageModule )
+  },
+  {
+    path: 'route',
+    loadChildren: () => import( './pages/route/route.module' ).then( m => m.RoutePageModule )
+  },
+  {
+    path: 'experience',
+    loadChildren: () => import( './pages/experience/experience.module' ).then( m => m.ExperiencePageModule )
+  },
+  {
+    path: 'rating',
+    loadChildren: () => import( './pages/rating/rating.module' ).then( m => m.RatingPageModule )
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import( './pages/dashboard/dashboard.module' ).then( m => m.DashboardPageModule )
   }
+
 ];
 
-@NgModule({
+@NgModule( {
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot( routes, { preloadingStrategy: PreloadAllModules } )
   ],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {}
+  exports: [ RouterModule ]
+} )
+export class AppRoutingModule { }

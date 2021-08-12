@@ -1,23 +1,22 @@
 {
-  "appId": "com.rutaspanama.app",
-  "appName": "rutas",
+  "appId": "io.ionic.rutas",
+  "appName": "myFirstIonicProject",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0
+    },
+    "GoogleAuth": {
+      "scopes": [
+        "profile",
+        "email"
+      ],
+      "serverClientId": "466798676316-02u4gktreb9lcqhfcq32mchcvtc6tpog.apps.googleusercontent.com",
+      "forceCodeForRefreshToken": true
     }
   },
-  "cordova": {
-    "preferences": {
-      "ScrollEnabled": "false",
-      "BackupWebStorage": "none",
-      "SplashMaintainAspectRatio": "true",
-      "FadeSplashScreenDuration": "300",
-      "SplashShowOnlyFirstTime": "false",
-      "SplashScreen": "screen",
-      "SplashScreenDelay": "3000"
-    }
-  }
+  "cordova": {},
+  "linuxAndroidStudioPath": "/home/aponiar14/Downloads/android-studio/bin/studio.sh"
 }

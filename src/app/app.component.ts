@@ -1,75 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
+import { StorageService } from './services/storage.service';
+import { TOKEN } from './constants/global-constants';
+import { Platform } from '@ionic/angular';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 @Component( {
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: [ 'app.component.scss' ]
+  styleUrls: [ 'app.component.scss' ],
 } )
 export class AppComponent implements OnInit {
-  public selectedIndex = 0;
-  public appPages = [
-    {
-      title: 'Inicio',
-      url: '/home',
-      icon: 'home'
-    },
-    {
-      title: 'Rutas',
-      url: '/home',
-      icon: 'map'
-    },
-    {
-      title: 'Experiencia',
-      url: '/home',
-      icon: 'reader'
-    },
-    {
-      title: 'Soporte/Ayuda',
-      url: '/home',
-      icon: 'call'
-    }/*,
-    {
-      title: 'Trash',
-      url: '/folder/Trash',
-      icon: 'trash'
-    },
-    {
-      title: 'Spam',
-      url: '/folder/Spam',
-      icon: 'warning'
-    }*/
-  ];
-  // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
     private router: Router,
-    private statusBar: StatusBar
+    private geolocation: Geolocation,
+    private platform: Platform,
+    private storage: StorageService,
   ) {
     this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then( () => {
-      this.router.navigateByUrl( 'login' );
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+  async ngOnInit() {
+
+  }
+
+  initializeApp(): void {
+    this.platform.ready().then( async () => {
+      const isLoggedin = await this.storage.get( TOKEN );
+      const route = isLoggedin ? '/sidemenu/Inicio' : '/initial';
+      this.router.navigate( [ route ] );
+      await this.geolocation.getCurrentPosition();
     } );
-  }
-
-  ngOnInit() {
-    const path = window.location.pathname.split( 'folder/' )[ 1 ];
-    if ( path !== undefined ) {
-      this.selectedIndex = this.appPages.findIndex( page => page.title.toLowerCase() === path.toLowerCase() );
-    }
-  }
-
-  exit() {
-    // this.router.navigate(['/login']);
   }
 }

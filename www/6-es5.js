@@ -36,27 +36,27 @@
       /* harmony import */
 
 
-      var _index_92848855_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! ./index-92848855.js */
-      "sxy2");
+      var _index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! ./index-e806d1f6.js */
+      "A36C");
       /* harmony import */
 
 
-      var _ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! ./ionic-global-23e7365a.js */
-      "N4tN");
+      var _ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ./ionic-global-9d5c8ee3.js */
+      "Zgba");
       /* harmony import */
 
 
-      var _helpers_47d562d2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! ./helpers-47d562d2.js */
-      "9t5z");
+      var _helpers_90f46169_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ./helpers-90f46169.js */
+      "QPqR");
       /* harmony import */
 
 
-      var _theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! ./theme-5641d27f.js */
-      "sPtc");
+      var _theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! ./theme-ff3fc52f.js */
+      "74mu");
 
       var CACHED_MAP;
 
@@ -111,7 +111,7 @@
           return url;
         }
 
-        return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["k"])("svg/".concat(iconName, ".svg"));
+        return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["k"])("svg/".concat(iconName, ".svg"));
       };
 
       var getName = function getName(iconName, icon, mode, ios, md) {
@@ -180,12 +180,13 @@
 
           _classCallCheck(this, Button);
 
-          Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
-          this.ionFocus = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionFocus", 7);
-          this.ionBlur = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionBlur", 7);
+          Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+          this.ionFocus = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionFocus", 7);
+          this.ionBlur = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionBlur", 7);
           this.inItem = false;
           this.inListHeader = false;
           this.inToolbar = false;
+          this.inheritedAttributes = {};
           /**
            * The type of button.
            */
@@ -215,8 +216,8 @@
 
           this.handleClick = function (ev) {
             if (_this.type === 'button') {
-              Object(_theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_3__["o"])(_this.href, ev, _this.routerDirection, _this.routerAnimation);
-            } else if (Object(_helpers_47d562d2_js__WEBPACK_IMPORTED_MODULE_2__["i"])(_this.el)) {
+              Object(_theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_3__["o"])(_this.href, ev, _this.routerDirection, _this.routerAnimation);
+            } else if (Object(_helpers_90f46169_js__WEBPACK_IMPORTED_MODULE_2__["j"])(_this.el)) {
               // this button wants to specifically submit a form
               // climb up the dom to see if we're in a <form>
               // and if so, then use JS to submit it
@@ -249,62 +250,7 @@
             this.inToolbar = !!this.el.closest('ion-buttons');
             this.inListHeader = !!this.el.closest('ion-list-header');
             this.inItem = !!this.el.closest('ion-item') || !!this.el.closest('ion-item-divider');
-          }
-        }, {
-          key: "render",
-          value: function render() {
-            var _Object;
-
-            var mode = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
-            var buttonType = this.buttonType,
-                type = this.type,
-                disabled = this.disabled,
-                rel = this.rel,
-                target = this.target,
-                size = this.size,
-                href = this.href,
-                color = this.color,
-                expand = this.expand,
-                hasIconOnly = this.hasIconOnly,
-                shape = this.shape,
-                strong = this.strong;
-            var finalSize = size === undefined && this.inItem ? 'small' : size;
-            var TagType = href === undefined ? 'button' : 'a';
-            var attrs = TagType === 'button' ? {
-              type: type
-            } : {
-              download: this.download,
-              href: href,
-              rel: rel,
-              target: target
-            };
-            var fill = this.fill;
-
-            if (fill === undefined) {
-              fill = this.inToolbar || this.inListHeader ? 'clear' : 'solid';
-            }
-
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-              onClick: this.handleClick,
-              "aria-disabled": disabled ? 'true' : null,
-              "class": Object(_theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_3__["c"])(color, (_Object = {}, _defineProperty(_Object, mode, true), _defineProperty(_Object, buttonType, true), _defineProperty(_Object, "".concat(buttonType, "-").concat(expand), expand !== undefined), _defineProperty(_Object, "".concat(buttonType, "-").concat(finalSize), finalSize !== undefined), _defineProperty(_Object, "".concat(buttonType, "-").concat(shape), shape !== undefined), _defineProperty(_Object, "".concat(buttonType, "-").concat(fill), true), _defineProperty(_Object, "".concat(buttonType, "-strong"), strong), _defineProperty(_Object, 'in-toolbar', Object(_theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_3__["h"])('ion-toolbar', this.el)), _defineProperty(_Object, 'in-toolbar-color', Object(_theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_3__["h"])('ion-toolbar[color]', this.el)), _defineProperty(_Object, 'button-has-icon-only', hasIconOnly), _defineProperty(_Object, 'button-disabled', disabled), _defineProperty(_Object, 'ion-activatable', true), _defineProperty(_Object, 'ion-focusable', true), _Object))
-            }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])(TagType, Object.assign({}, attrs, {
-              "class": "button-native",
-              part: "native",
-              disabled: disabled,
-              onFocus: this.onFocus,
-              onBlur: this.onBlur
-            }), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", {
-              "class": "button-inner"
-            }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
-              name: "icon-only"
-            }), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
-              name: "start"
-            }), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
-              name: "end"
-            })), mode === 'md' && Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", {
-              type: this.rippleType
-            })));
+            this.inheritedAttributes = Object(_helpers_90f46169_js__WEBPACK_IMPORTED_MODULE_2__["i"])(this.el, ['aria-label']);
           }
         }, {
           key: "hasIconOnly",
@@ -324,9 +270,66 @@
             return 'bounded';
           }
         }, {
+          key: "render",
+          value: function render() {
+            var _Object;
+
+            var mode = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
+            var buttonType = this.buttonType,
+                type = this.type,
+                disabled = this.disabled,
+                rel = this.rel,
+                target = this.target,
+                size = this.size,
+                href = this.href,
+                color = this.color,
+                expand = this.expand,
+                hasIconOnly = this.hasIconOnly,
+                shape = this.shape,
+                strong = this.strong,
+                inheritedAttributes = this.inheritedAttributes;
+            var finalSize = size === undefined && this.inItem ? 'small' : size;
+            var TagType = href === undefined ? 'button' : 'a';
+            var attrs = TagType === 'button' ? {
+              type: type
+            } : {
+              download: this.download,
+              href: href,
+              rel: rel,
+              target: target
+            };
+            var fill = this.fill;
+
+            if (fill === undefined) {
+              fill = this.inToolbar || this.inListHeader ? 'clear' : 'solid';
+            }
+
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+              onClick: this.handleClick,
+              "aria-disabled": disabled ? 'true' : null,
+              "class": Object(_theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_3__["c"])(color, (_Object = {}, _defineProperty(_Object, mode, true), _defineProperty(_Object, buttonType, true), _defineProperty(_Object, "".concat(buttonType, "-").concat(expand), expand !== undefined), _defineProperty(_Object, "".concat(buttonType, "-").concat(finalSize), finalSize !== undefined), _defineProperty(_Object, "".concat(buttonType, "-").concat(shape), shape !== undefined), _defineProperty(_Object, "".concat(buttonType, "-").concat(fill), true), _defineProperty(_Object, "".concat(buttonType, "-strong"), strong), _defineProperty(_Object, 'in-toolbar', Object(_theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_3__["h"])('ion-toolbar', this.el)), _defineProperty(_Object, 'in-toolbar-color', Object(_theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_3__["h"])('ion-toolbar[color]', this.el)), _defineProperty(_Object, 'button-has-icon-only', hasIconOnly), _defineProperty(_Object, 'button-disabled', disabled), _defineProperty(_Object, 'ion-activatable', true), _defineProperty(_Object, 'ion-focusable', true), _Object))
+            }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])(TagType, Object.assign({}, attrs, {
+              "class": "button-native",
+              part: "native",
+              disabled: disabled,
+              onFocus: this.onFocus,
+              onBlur: this.onBlur
+            }, inheritedAttributes), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("span", {
+              "class": "button-inner"
+            }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
+              name: "icon-only"
+            }), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
+              name: "start"
+            }), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
+              name: "end"
+            })), mode === 'md' && Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("ion-ripple-effect", {
+              type: this.rippleType
+            })));
+          }
+        }, {
           key: "el",
           get: function get() {
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
           }
         }]);
 
@@ -428,7 +431,7 @@
         function Icon(hostRef) {
           _classCallCheck(this, Icon);
 
-          Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+          Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
           this.isVisible = false;
           /**
            * The mode determines which platform styles to use.
@@ -524,20 +527,20 @@
 
             var mode = this.mode || 'md';
             var flipRtl = this.flipRtl || this.ariaLabel && (this.ariaLabel.indexOf('arrow') > -1 || this.ariaLabel.indexOf('chevron') > -1) && this.flipRtl !== false;
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
               role: "img",
               "class": Object.assign(Object.assign(_defineProperty({}, mode, true), createColorClasses(this.color)), (_Object$assign2 = {}, _defineProperty(_Object$assign2, "icon-".concat(this.size), !!this.size), _defineProperty(_Object$assign2, 'flip-rtl', !!flipRtl && this.el.ownerDocument.dir === 'rtl'), _Object$assign2))
-            }, this.svgContent ? Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }, this.svgContent ? Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "icon-inner",
               innerHTML: this.svgContent
-            }) : Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }) : Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "icon-inner"
             }));
           }
         }, {
           key: "el",
           get: function get() {
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
           }
         }], [{
           key: "assetsDirs",

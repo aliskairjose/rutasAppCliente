@@ -1,19 +1,30 @@
 (function () {
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["polyfills-css-shim"], {
     /***/
-    "4aJg":
+    "PC2G":
     /*!****************************************************************!*\
-      !*** ./node_modules/@ionic/core/dist/esm/css-shim-a659079f.js ***!
+      !*** ./node_modules/@ionic/core/dist/esm/css-shim-419db344.js ***!
       \****************************************************************/
 
     /*! no static exports found */
 
     /***/
-    function aJg(module, exports) {
+    function PC2G(module, exports) {
       /*
-       Stencil Client Patch v1.17.3 | MIT Licensed | https://stenciljs.com
+       Stencil Client Patch Esm v2.1.2 | MIT Licensed | https://stenciljs.com
        */
-      var StyleNode = function StyleNode() {
+      var _assign = function __assign() {
+        return (_assign = Object.assign || function (e) {
+          for (var t, r = 1, n = arguments.length; r < n; r++) {
+            for (var s in t = arguments[r]) {
+              Object.prototype.hasOwnProperty.call(t, s) && (e[s] = t[s]);
+            }
+          }
+
+          return e;
+        }).apply(this, arguments);
+      },
+          StyleNode = function StyleNode() {
         this.start = 0, this.end = 0, this.previous = null, this.parent = null, this.rules = null, this.parsedCssText = "", this.cssText = "", this.atRule = !1, this.type = 0, this.keyframesName = "", this.selector = "", this.parsedSelector = "";
       };
 
@@ -330,11 +341,11 @@
           return "string" == typeof r ? replaceScope(r, e.scopeId, t) : r;
         }),
             n = e.selectors.map(function (r) {
-          return Object.assign(Object.assign({}, r), {
+          return _assign(_assign({}, r), {
             selector: replaceScope(r.selector, e.scopeId, t)
           });
         });
-        return Object.assign(Object.assign({}, e), {
+        return _assign(_assign({}, e), {
           template: r,
           selectors: n,
           scopeId: t

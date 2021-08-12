@@ -1,9 +1,9 @@
 (function () {
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
   function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -76,118 +76,136 @@
       /* harmony import */
 
 
-      var _index_92848855_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! ./index-92848855.js */
-      "sxy2");
+      var _index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! ./index-e806d1f6.js */
+      "A36C");
       /* harmony import */
 
 
-      var _ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! ./ionic-global-23e7365a.js */
-      "N4tN");
+      var _ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ./ionic-global-9d5c8ee3.js */
+      "Zgba");
       /* harmony import */
 
 
-      var _helpers_47d562d2_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! ./helpers-47d562d2.js */
-      "9t5z");
+      var _helpers_90f46169_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ./helpers-90f46169.js */
+      "QPqR");
       /* harmony import */
 
 
-      var _index_96111fa9_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! ./index-96111fa9.js */
-      "gN1R");
+      var _index_d8cfb4a8_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! ./index-d8cfb4a8.js */
+      "S0TR");
       /* harmony import */
 
 
-      var _cubic_bezier_685f606a_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! ./cubic-bezier-685f606a.js */
-      "PLvT");
+      var _cubic_bezier_eea9a7a9_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ./cubic-bezier-eea9a7a9.js */
+      "bC4P");
       /* harmony import */
 
 
-      var _theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ./theme-5641d27f.js */
-      "sPtc");
+      var _theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ./theme-ff3fc52f.js */
+      "74mu");
       /* harmony import */
 
 
-      var _framework_delegate_d1eb6504_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ./framework-delegate-d1eb6504.js */
-      "NqGI");
+      var _framework_delegate_4584ab5a_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ./framework-delegate-4584ab5a.js */
+      "ZaV5");
 
-      var appCss = "html.plt-mobile ion-app{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}ion-app.force-statusbar-padding{--ion-safe-area-top:20px}";
+      var appCss = "html.plt-mobile ion-app{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}html.plt-mobile ion-app [contenteditable]{-webkit-user-select:text;-moz-user-select:text;-ms-user-select:text;user-select:text}ion-app.force-statusbar-padding{--ion-safe-area-top:20px}";
 
       var App = /*#__PURE__*/function () {
         function App(hostRef) {
           _classCallCheck(this, App);
 
-          Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+          Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
         }
 
         _createClass(App, [{
           key: "componentDidLoad",
           value: function componentDidLoad() {
             {
-              rIC(function () {
-                var isHybrid = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["i"])(window, 'hybrid');
+              rIC( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                var isHybrid, hardwareBackButtonModule;
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                  while (1) {
+                    switch (_context.prev = _context.next) {
+                      case 0:
+                        isHybrid = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["i"])(window, 'hybrid');
 
-                if (!_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('_testing')) {
-                  __webpack_require__.e(
-                  /*! import() | tap-click-9e4a1234-js */
-                  "tap-click-9e4a1234-js").then(__webpack_require__.bind(null,
-                  /*! ./tap-click-9e4a1234.js */
-                  "OEt5")).then(function (module) {
-                    return module.startTapClick(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["c"]);
-                  });
-                }
+                        if (!_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('_testing')) {
+                          __webpack_require__.e(
+                          /*! import() | tap-click-71d2324a-js */
+                          "tap-click-71d2324a-js").then(__webpack_require__.bind(null,
+                          /*! ./tap-click-71d2324a.js */
+                          "zlY0")).then(function (module) {
+                            return module.startTapClick(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["c"]);
+                          });
+                        }
 
-                if (_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('statusTap', isHybrid)) {
-                  __webpack_require__.e(
-                  /*! import() | status-tap-0b3e89c4-js */
-                  "status-tap-0b3e89c4-js").then(__webpack_require__.bind(null,
-                  /*! ./status-tap-0b3e89c4.js */
-                  "9r5H")).then(function (module) {
-                    return module.startStatusTap();
-                  });
-                }
+                        if (_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('statusTap', isHybrid)) {
+                          __webpack_require__.e(
+                          /*! import() | status-tap-b46a1b02-js */
+                          "status-tap-b46a1b02-js").then(__webpack_require__.bind(null,
+                          /*! ./status-tap-b46a1b02.js */
+                          "s0NH")).then(function (module) {
+                            return module.startStatusTap();
+                          });
+                        }
 
-                if (_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('inputShims', needInputShims())) {
-                  __webpack_require__.e(
-                  /*! import() | input-shims-ba28b23a-js */
-                  "input-shims-ba28b23a-js").then(__webpack_require__.bind(null,
-                  /*! ./input-shims-ba28b23a.js */
-                  "wSK7")).then(function (module) {
-                    return module.startInputShims(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["c"]);
-                  });
-                }
+                        if (_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('inputShims', needInputShims())) {
+                          __webpack_require__.e(
+                          /*! import() | input-shims-7a52f98d-js */
+                          "input-shims-7a52f98d-js").then(__webpack_require__.bind(null,
+                          /*! ./input-shims-7a52f98d.js */
+                          "5raE")).then(function (module) {
+                            return module.startInputShims(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["c"]);
+                          });
+                        }
 
-                if (_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('hardwareBackButton', isHybrid)) {
-                  Promise.resolve().then(__webpack_require__.bind(null,
-                  /*! ./hardware-back-button-7b6ede21.js */
-                  "x/Nk")).then(function (module) {
-                    return module.startHardwareBackButton();
-                  });
-                }
+                        _context.next = 6;
+                        return Promise.resolve().then(__webpack_require__.bind(null,
+                        /*! ./hardware-back-button-4a6b37fb.js */
+                        "B4Jq"));
 
-                if (typeof window !== 'undefined') {
-                  __webpack_require__.e(
-                  /*! import() | keyboard-dd970efc-js */
-                  "keyboard-dd970efc-js").then(__webpack_require__.bind(null,
-                  /*! ./keyboard-dd970efc.js */
-                  "SLyW")).then(function (module) {
-                    return module.startKeyboardAssist(window);
-                  });
-                }
+                      case 6:
+                        hardwareBackButtonModule = _context.sent;
 
-                __webpack_require__.e(
-                /*! import() | focus-visible-15ada7f7-js */
-                "focus-visible-15ada7f7-js").then(__webpack_require__.bind(null,
-                /*! ./focus-visible-15ada7f7.js */
-                "uz1i")).then(function (module) {
-                  return module.startFocusVisible();
-                });
-              });
+                        if (_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('hardwareBackButton', isHybrid)) {
+                          hardwareBackButtonModule.startHardwareBackButton();
+                        } else {
+                          hardwareBackButtonModule.blockHardwareBackButton();
+                        }
+
+                        if (typeof window !== 'undefined') {
+                          __webpack_require__.e(
+                          /*! import() | keyboard-5742b5da-js */
+                          "keyboard-5742b5da-js").then(__webpack_require__.bind(null,
+                          /*! ./keyboard-5742b5da.js */
+                          "nGaW")).then(function (module) {
+                            return module.startKeyboardAssist(window);
+                          });
+                        }
+
+                        __webpack_require__.e(
+                        /*! import() | focus-visible-f4ad4f1a-js */
+                        "focus-visible-f4ad4f1a-js").then(__webpack_require__.bind(null,
+                        /*! ./focus-visible-f4ad4f1a.js */
+                        "Tsnu")).then(function (module) {
+                          return module.startFocusVisible();
+                        });
+
+                      case 10:
+                      case "end":
+                        return _context.stop();
+                    }
+                  }
+                }, _callee);
+              })));
             }
           }
         }, {
@@ -195,15 +213,15 @@
           value: function render() {
             var _class;
 
-            var mode = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-              "class": (_class = {}, _defineProperty(_class, mode, true), _defineProperty(_class, 'ion-page', true), _defineProperty(_class, 'force-statusbar-padding', _ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('_forceStatusbarPadding')), _class)
+            var mode = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+              "class": (_class = {}, _defineProperty(_class, mode, true), _defineProperty(_class, 'ion-page', true), _defineProperty(_class, 'force-statusbar-padding', _ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('_forceStatusbarPadding')), _class)
             });
           }
         }, {
           key: "el",
           get: function get() {
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
           }
         }]);
 
@@ -211,7 +229,7 @@
       }();
 
       var needInputShims = function needInputShims() {
-        return Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["i"])(window, 'ios') && Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["i"])(window, 'mobile');
+        return Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["i"])(window, 'ios') && Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["i"])(window, 'mobile');
       };
 
       var rIC = function rIC(callback) {
@@ -230,7 +248,7 @@
         function Buttons(hostRef) {
           _classCallCheck(this, Buttons);
 
-          Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+          Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
           /**
            * If true, buttons will disappear when its
            * parent toolbar has fully collapsed if the toolbar
@@ -252,8 +270,8 @@
           value: function render() {
             var _class2;
 
-            var mode = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+            var mode = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
               "class": (_class2 = {}, _defineProperty(_class2, mode, true), _defineProperty(_class2, 'buttons-collapse', this.collapse), _class2)
             });
           }
@@ -266,16 +284,16 @@
         ios: buttonsIosCss,
         md: buttonsMdCss
       };
-      var contentCss = ":host{--background:var(--ion-background-color, #fff);--color:var(--ion-text-color, #000);--padding-top:0px;--padding-bottom:0px;--padding-start:0px;--padding-end:0px;--keyboard-offset:0px;--offset-top:0px;--offset-bottom:0px;--overflow:auto;display:block;position:relative;-ms-flex:1;flex:1;width:100%;height:100%;margin:0 !important;padding:0 !important;font-family:var(--ion-font-family, inherit);contain:size style}:host(.ion-color) .inner-scroll{background:var(--ion-color-base);color:var(--ion-color-contrast)}:host(.outer-content){--background:var(--ion-color-step-50, #f2f2f2)}#background-content{left:0px;right:0px;top:calc(var(--offset-top) * -1);bottom:calc(var(--offset-bottom) * -1);position:absolute;background:var(--background)}.inner-scroll{left:0px;right:0px;top:calc(var(--offset-top) * -1);bottom:calc(var(--offset-bottom) * -1);padding-left:var(--padding-start);padding-right:var(--padding-end);padding-top:calc(var(--padding-top) + var(--offset-top));padding-bottom:calc(var(--padding-bottom) + var(--keyboard-offset) + var(--offset-bottom));position:absolute;color:var(--color);-webkit-box-sizing:border-box;box-sizing:border-box;overflow:hidden}@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0){.inner-scroll{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--padding-start);padding-inline-start:var(--padding-start);-webkit-padding-end:var(--padding-end);padding-inline-end:var(--padding-end)}}.scroll-y,.scroll-x{-webkit-overflow-scrolling:touch;will-change:scroll-position}.scroll-y{-ms-touch-action:pan-y;touch-action:pan-y;overflow-y:var(--overflow);overscroll-behavior-y:contain}.scroll-x{-ms-touch-action:pan-x;touch-action:pan-x;overflow-x:var(--overflow);overscroll-behavior-x:contain}.scroll-x.scroll-y{-ms-touch-action:auto;touch-action:auto}.overscroll::before,.overscroll::after{position:absolute;width:1px;height:1px;content:\"\"}.overscroll::before{bottom:-1px}.overscroll::after{top:-1px}:host(.content-sizing){contain:none}:host(.content-sizing) .inner-scroll{position:relative}.transition-effect{display:none;position:absolute;left:-100%;width:100%;height:100vh;opacity:0;pointer-events:none}.transition-cover{position:absolute;right:0;width:100%;height:100%;background:black;opacity:0.1}.transition-shadow{display:block;position:absolute;right:0;width:10px;height:100%;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTE3MDgzRkQ5QTkyMTFFOUEwNzQ5MkJFREE1NUY2MjQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTE3MDgzRkU5QTkyMTFFOUEwNzQ5MkJFREE1NUY2MjQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxMTcwODNGQjlBOTIxMUU5QTA3NDkyQkVEQTU1RjYyNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxMTcwODNGQzlBOTIxMUU5QTA3NDkyQkVEQTU1RjYyNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PmePEuQAAABNSURBVHjaYvz//z8DIxAwMDAwATGMhmFmPDQuOSZks0AMmoJBaQHjkPfB0Lfg/2gQjVow+HPy/yHvg9GiYjQfjMbBqAWjFgy/4hogwADYqwdzxy5BuwAAAABJRU5ErkJggg==);background-repeat:repeat-y;background-size:10px 16px}::slotted([slot=fixed]){position:absolute}";
+      var contentCss = ":host{--background:var(--ion-background-color, #fff);--color:var(--ion-text-color, #000);--padding-top:0px;--padding-bottom:0px;--padding-start:0px;--padding-end:0px;--keyboard-offset:0px;--offset-top:0px;--offset-bottom:0px;--overflow:auto;display:block;position:relative;-ms-flex:1;flex:1;width:100%;height:100%;margin:0 !important;padding:0 !important;font-family:var(--ion-font-family, inherit);contain:size style}:host(.ion-color) .inner-scroll{background:var(--ion-color-base);color:var(--ion-color-contrast)}:host(.outer-content){--background:var(--ion-color-step-50, #f2f2f2)}#background-content{left:0px;right:0px;top:calc(var(--offset-top) * -1);bottom:calc(var(--offset-bottom) * -1);position:absolute;background:var(--background)}.inner-scroll{left:0px;right:0px;top:calc(var(--offset-top) * -1);bottom:calc(var(--offset-bottom) * -1);padding-left:var(--padding-start);padding-right:var(--padding-end);padding-top:calc(var(--padding-top) + var(--offset-top));padding-bottom:calc(var(--padding-bottom) + var(--keyboard-offset) + var(--offset-bottom));position:absolute;color:var(--color);-webkit-box-sizing:border-box;box-sizing:border-box;overflow:hidden}@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0){.inner-scroll{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--padding-start);padding-inline-start:var(--padding-start);-webkit-padding-end:var(--padding-end);padding-inline-end:var(--padding-end)}}.scroll-y,.scroll-x{-webkit-overflow-scrolling:touch;z-index:0;will-change:scroll-position}.scroll-y{-ms-touch-action:pan-y;touch-action:pan-y;overflow-y:var(--overflow);overscroll-behavior-y:contain}.scroll-x{-ms-touch-action:pan-x;touch-action:pan-x;overflow-x:var(--overflow);overscroll-behavior-x:contain}.scroll-x.scroll-y{-ms-touch-action:auto;touch-action:auto}.overscroll::before,.overscroll::after{position:absolute;width:1px;height:1px;content:\"\"}.overscroll::before{bottom:-1px}.overscroll::after{top:-1px}:host(.content-sizing){contain:none}:host(.content-sizing) .inner-scroll{position:relative}.transition-effect{display:none;position:absolute;left:-100%;width:100%;height:100vh;opacity:0;pointer-events:none}.transition-cover{position:absolute;right:0;width:100%;height:100%;background:black;opacity:0.1}.transition-shadow{display:block;position:absolute;right:0;width:10px;height:100%;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTE3MDgzRkQ5QTkyMTFFOUEwNzQ5MkJFREE1NUY2MjQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTE3MDgzRkU5QTkyMTFFOUEwNzQ5MkJFREE1NUY2MjQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxMTcwODNGQjlBOTIxMUU5QTA3NDkyQkVEQTU1RjYyNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxMTcwODNGQzlBOTIxMUU5QTA3NDkyQkVEQTU1RjYyNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PmePEuQAAABNSURBVHjaYvz//z8DIxAwMDAwATGMhmFmPDQuOSZks0AMmoJBaQHjkPfB0Lfg/2gQjVow+HPy/yHvg9GiYjQfjMbBqAWjFgy/4hogwADYqwdzxy5BuwAAAABJRU5ErkJggg==);background-repeat:repeat-y;background-size:10px 16px}::slotted([slot=fixed]){position:absolute}";
 
       var Content = /*#__PURE__*/function () {
         function Content(hostRef) {
           _classCallCheck(this, Content);
 
-          Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
-          this.ionScrollStart = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionScrollStart", 7);
-          this.ionScroll = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionScroll", 7);
-          this.ionScrollEnd = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionScrollEnd", 7);
+          Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+          this.ionScrollStart = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionScrollStart", 7);
+          this.ionScroll = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionScroll", 7);
+          this.ionScrollEnd = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionScrollEnd", 7);
           this.isScrolling = false;
           this.lastScroll = 0;
           this.queued = false;
@@ -349,8 +367,8 @@
           key: "shouldForceOverscroll",
           value: function shouldForceOverscroll() {
             var forceOverscroll = this.forceOverscroll;
-            var mode = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
-            return forceOverscroll === undefined ? mode === 'ios' && Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["i"])('ios') : forceOverscroll;
+            var mode = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
+            return forceOverscroll === undefined ? mode === 'ios' && Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["i"])('ios') : forceOverscroll;
           }
         }, {
           key: "resize",
@@ -358,12 +376,12 @@
             var _this = this;
 
             if (this.fullscreen) {
-              Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["f"])(function () {
+              Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["f"])(function () {
                 return _this.readDimensions();
               });
             } else if (this.cTop !== 0 || this.cBottom !== 0) {
               this.cTop = this.cBottom = 0;
-              Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["j"])(this);
+              Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["j"])(this);
             }
           }
         }, {
@@ -377,7 +395,7 @@
             if (dirty) {
               this.cTop = top;
               this.cBottom = bottom;
-              Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["j"])(this);
+              Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["j"])(this);
             }
           }
         }, {
@@ -395,7 +413,7 @@
 
             if (!this.queued && this.scrollEvents) {
               this.queued = true;
-              Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["f"])(function (ts) {
+              Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["f"])(function (ts) {
                 _this2.queued = false;
                 _this2.detail.event = ev;
                 updateScrollDetail(_this2.detail, _this2.scrollEl, ts, shouldStart);
@@ -467,7 +485,7 @@
         }, {
           key: "scrollToPoint",
           value: function () {
-            var _scrollToPoint = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(x, y) {
+            var _scrollToPoint = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(x, y) {
               var duration,
                   el,
                   resolve,
@@ -478,16 +496,16 @@
                   deltaY,
                   deltaX,
                   step,
-                  _args = arguments;
-              return regeneratorRuntime.wrap(function _callee$(_context) {
+                  _args2 = arguments;
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
-                  switch (_context.prev = _context.next) {
+                  switch (_context2.prev = _context2.next) {
                     case 0:
-                      duration = _args.length > 2 && _args[2] !== undefined ? _args[2] : 0;
+                      duration = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : 0;
                       el = this.scrollEl;
 
                       if (!(duration < 32)) {
-                        _context.next = 6;
+                        _context2.next = 6;
                         break;
                       }
 
@@ -499,7 +517,7 @@
                         el.scrollLeft = x;
                       }
 
-                      return _context.abrupt("return");
+                      return _context2.abrupt("return");
 
                     case 6:
                       startTime = 0;
@@ -538,14 +556,14 @@
                         startTime = ts;
                         step(ts);
                       });
-                      return _context.abrupt("return", promise);
+                      return _context2.abrupt("return", promise);
 
                     case 15:
                     case "end":
-                      return _context.stop();
+                      return _context2.stop();
                   }
                 }
-              }, _callee, this);
+              }, _callee2, this);
             }));
 
             function scrollToPoint(_x, _x2) {
@@ -596,22 +614,22 @@
 
             var scrollX = this.scrollX,
                 scrollY = this.scrollY;
-            var mode = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
+            var mode = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
             var forceOverscroll = this.shouldForceOverscroll();
 
-            var transitionShadow = mode === 'ios' && _ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('experimentalTransitionShadow', true);
+            var transitionShadow = mode === 'ios' && _ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('experimentalTransitionShadow', true);
 
             this.resize();
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-              "class": Object(_theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_5__["c"])(this.color, (_Object = {}, _defineProperty(_Object, mode, true), _defineProperty(_Object, 'content-sizing', Object(_theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_5__["h"])('ion-popover', this.el)), _defineProperty(_Object, 'overscroll', forceOverscroll), _Object)),
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+              "class": Object(_theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_5__["c"])(this.color, (_Object = {}, _defineProperty(_Object, mode, true), _defineProperty(_Object, 'content-sizing', Object(_theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_5__["h"])('ion-popover', this.el)), _defineProperty(_Object, 'overscroll', forceOverscroll), _Object)),
               style: {
                 '--offset-top': "".concat(this.cTop, "px"),
                 '--offset-bottom': "".concat(this.cBottom, "px")
               }
-            }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               id: "background-content",
               part: "background"
-            }), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("main", {
+            }), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("main", {
               "class": {
                 'inner-scroll': true,
                 'scroll-x': scrollX,
@@ -625,20 +643,20 @@
                 return _this4.onScroll(ev);
               } : undefined,
               part: "scroll"
-            }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)), transitionShadow ? Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)), transitionShadow ? Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "transition-effect"
-            }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "transition-cover"
-            }), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "transition-shadow"
-            })) : null, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
+            })) : null, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
               name: "fixed"
             }));
           }
         }, {
           key: "el",
           get: function get() {
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
           }
         }]);
 
@@ -714,7 +732,7 @@
         function Footer(hostRef) {
           _classCallCheck(this, Footer);
 
-          Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+          Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
           /**
            * If `true`, the footer will be translucent.
            * Only applies when the mode is `"ios"` and the device supports
@@ -732,14 +750,14 @@
           value: function render() {
             var _class3;
 
-            var mode = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
+            var mode = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
             var translucent = this.translucent;
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
               role: "contentinfo",
               "class": (_class3 = {}, _defineProperty(_class3, mode, true), _defineProperty(_class3, "footer-".concat(mode), true), _defineProperty(_class3, "footer-translucent", translucent), _defineProperty(_class3, "footer-translucent-".concat(mode), translucent), _class3)
-            }, mode === 'ios' && translucent && Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }, mode === 'ios' && translucent && Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "footer-background"
-            }), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null));
+            }), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null));
           }
         }]);
 
@@ -788,14 +806,14 @@
       };
 
       var handleContentScroll = function handleContentScroll(scrollEl, scrollHeaderIndex, contentEl) {
-        Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["f"])(function () {
+        Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["f"])(function () {
           var scrollTop = scrollEl.scrollTop;
-          var scale = Object(_helpers_47d562d2_js__WEBPACK_IMPORTED_MODULE_2__["e"])(1, 1 + -scrollTop / 500, 1.1); // Native refresher should not cause titles to scale
+          var scale = Object(_helpers_90f46169_js__WEBPACK_IMPORTED_MODULE_2__["h"])(1, 1 + -scrollTop / 500, 1.1); // Native refresher should not cause titles to scale
 
           var nativeRefresher = contentEl.querySelector('ion-refresher.refresher-native');
 
           if (nativeRefresher === null) {
-            Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["c"])(function () {
+            Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["c"])(function () {
               scaleLargeTitles(scrollHeaderIndex.toolbars, scale);
             });
           }
@@ -835,7 +853,7 @@
 
 
       var handleToolbarIntersection = function handleToolbarIntersection(ev, mainHeaderIndex, scrollHeaderIndex) {
-        Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["c"])(function () {
+        Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["c"])(function () {
           handleToolbarBorderIntersection(ev, mainHeaderIndex);
           var event = ev[0];
           var intersection = event.intersectionRect;
@@ -907,7 +925,7 @@
         function Header(hostRef) {
           _classCallCheck(this, Header);
 
-          Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+          Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
           this.collapsibleHeaderInitialized = false;
           /**
            * If `true`, the header will be translucent.
@@ -924,32 +942,7 @@
         _createClass(Header, [{
           key: "componentDidLoad",
           value: function () {
-            var _componentDidLoad = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                while (1) {
-                  switch (_context2.prev = _context2.next) {
-                    case 0:
-                      _context2.next = 2;
-                      return this.checkCollapsibleHeader();
-
-                    case 2:
-                    case "end":
-                      return _context2.stop();
-                  }
-                }
-              }, _callee2, this);
-            }));
-
-            function componentDidLoad() {
-              return _componentDidLoad.apply(this, arguments);
-            }
-
-            return componentDidLoad;
-          }()
-        }, {
-          key: "componentDidUpdate",
-          value: function () {
-            var _componentDidUpdate = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            var _componentDidLoad = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
               return regeneratorRuntime.wrap(function _callee3$(_context3) {
                 while (1) {
                   switch (_context3.prev = _context3.next) {
@@ -963,6 +956,31 @@
                   }
                 }
               }, _callee3, this);
+            }));
+
+            function componentDidLoad() {
+              return _componentDidLoad.apply(this, arguments);
+            }
+
+            return componentDidLoad;
+          }()
+        }, {
+          key: "componentDidUpdate",
+          value: function () {
+            var _componentDidUpdate = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                while (1) {
+                  switch (_context4.prev = _context4.next) {
+                    case 0:
+                      _context4.next = 2;
+                      return this.checkCollapsibleHeader();
+
+                    case 2:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4, this);
             }));
 
             function componentDidUpdate() {
@@ -979,48 +997,48 @@
         }, {
           key: "checkCollapsibleHeader",
           value: function () {
-            var _checkCollapsibleHeader = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+            var _checkCollapsibleHeader = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
               var hasCollapse, canCollapse, pageEl, contentEl;
-              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
-                  switch (_context4.prev = _context4.next) {
+                  switch (_context5.prev = _context5.next) {
                     case 0:
                       // Determine if the header can collapse
                       hasCollapse = this.collapse === 'condense';
-                      canCollapse = hasCollapse && Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this) === 'ios' ? hasCollapse : false;
+                      canCollapse = hasCollapse && Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this) === 'ios' ? hasCollapse : false;
 
                       if (!(!canCollapse && this.collapsibleHeaderInitialized)) {
-                        _context4.next = 6;
+                        _context5.next = 6;
                         break;
                       }
 
                       this.destroyCollapsibleHeader();
-                      _context4.next = 12;
+                      _context5.next = 12;
                       break;
 
                     case 6:
                       if (!(canCollapse && !this.collapsibleHeaderInitialized)) {
-                        _context4.next = 12;
+                        _context5.next = 12;
                         break;
                       }
 
                       pageEl = this.el.closest('ion-app,ion-page,.ion-page,page-inner');
                       contentEl = pageEl ? pageEl.querySelector('ion-content') : null; // Cloned elements are always needed in iOS transition
 
-                      Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["c"])(function () {
+                      Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["c"])(function () {
                         var title = cloneElement('ion-title');
                         title.size = 'large';
                         cloneElement('ion-back-button');
                       });
-                      _context4.next = 12;
+                      _context5.next = 12;
                       return this.setupCollapsibleHeader(contentEl, pageEl);
 
                     case 12:
                     case "end":
-                      return _context4.stop();
+                      return _context5.stop();
                   }
                 }
-              }, _callee4, this);
+              }, _callee5, this);
             }));
 
             function checkCollapsibleHeader() {
@@ -1050,58 +1068,58 @@
         }, {
           key: "setupCollapsibleHeader",
           value: function () {
-            var _setupCollapsibleHeader = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(contentEl, pageEl) {
+            var _setupCollapsibleHeader = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(contentEl, pageEl) {
               var _this5 = this;
 
               var headers, mainHeaderIndex, scrollHeaderIndex, toolbarIntersection;
-              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              return regeneratorRuntime.wrap(function _callee6$(_context6) {
                 while (1) {
-                  switch (_context5.prev = _context5.next) {
+                  switch (_context6.prev = _context6.next) {
                     case 0:
                       if (!(!contentEl || !pageEl)) {
-                        _context5.next = 3;
+                        _context6.next = 3;
                         break;
                       }
 
                       console.error('ion-header requires a content to collapse, make sure there is an ion-content.');
-                      return _context5.abrupt("return");
+                      return _context6.abrupt("return");
 
                     case 3:
                       if (!(typeof IntersectionObserver === 'undefined')) {
-                        _context5.next = 5;
+                        _context6.next = 5;
                         break;
                       }
 
-                      return _context5.abrupt("return");
+                      return _context6.abrupt("return");
 
                     case 5:
-                      _context5.next = 7;
+                      _context6.next = 7;
                       return contentEl.getScrollElement();
 
                     case 7:
-                      this.scrollEl = _context5.sent;
+                      this.scrollEl = _context6.sent;
                       headers = pageEl.querySelectorAll('ion-header');
                       this.collapsibleMainHeader = Array.from(headers).find(function (header) {
                         return header.collapse !== 'condense';
                       });
 
                       if (this.collapsibleMainHeader) {
-                        _context5.next = 12;
+                        _context6.next = 12;
                         break;
                       }
 
-                      return _context5.abrupt("return");
+                      return _context6.abrupt("return");
 
                     case 12:
                       mainHeaderIndex = createHeaderIndex(this.collapsibleMainHeader);
                       scrollHeaderIndex = createHeaderIndex(this.el);
 
                       if (!(!mainHeaderIndex || !scrollHeaderIndex)) {
-                        _context5.next = 16;
+                        _context6.next = 16;
                         break;
                       }
 
-                      return _context5.abrupt("return");
+                      return _context6.abrupt("return");
 
                     case 16:
                       setHeaderActive(mainHeaderIndex, false);
@@ -1135,7 +1153,7 @@
                       };
 
                       this.scrollEl.addEventListener('scroll', this.contentScrollCallback);
-                      Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["c"])(function () {
+                      Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["c"])(function () {
                         if (_this5.collapsibleMainHeader !== undefined) {
                           _this5.collapsibleMainHeader.classList.add('header-collapse-main');
                         }
@@ -1144,10 +1162,10 @@
 
                     case 25:
                     case "end":
-                      return _context5.stop();
+                      return _context6.stop();
                   }
                 }
-              }, _callee5, this);
+              }, _callee6, this);
             }));
 
             function setupCollapsibleHeader(_x3, _x4) {
@@ -1162,19 +1180,19 @@
             var _class4;
 
             var translucent = this.translucent;
-            var mode = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
+            var mode = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
             var collapse = this.collapse || 'none';
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
               role: "banner",
               "class": (_class4 = {}, _defineProperty(_class4, mode, true), _defineProperty(_class4, "header-".concat(mode), true), _defineProperty(_class4, "header-translucent", this.translucent), _defineProperty(_class4, "header-collapse-".concat(collapse), true), _defineProperty(_class4, "header-translucent-".concat(mode), this.translucent), _class4)
-            }, mode === 'ios' && translucent && Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }, mode === 'ios' && translucent && Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "header-background"
-            }), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null));
+            }), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null));
           }
         }, {
           key: "el",
           get: function get() {
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
           }
         }]);
 
@@ -1191,16 +1209,16 @@
         function RouterOutlet(hostRef) {
           _classCallCheck(this, RouterOutlet);
 
-          Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
-          this.ionNavWillLoad = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionNavWillLoad", 7);
-          this.ionNavWillChange = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionNavWillChange", 3);
-          this.ionNavDidChange = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionNavDidChange", 3);
+          Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+          this.ionNavWillLoad = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionNavWillLoad", 7);
+          this.ionNavWillChange = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionNavWillChange", 3);
+          this.ionNavDidChange = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionNavDidChange", 3);
           this.animationEnabled = true;
           /**
            * The mode determines which platform styles to use.
            */
 
-          this.mode = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
+          this.mode = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
           /**
            * If `true`, the router-outlet should animate the transition of components.
            */
@@ -1218,22 +1236,22 @@
         }, {
           key: "connectedCallback",
           value: function () {
-            var _connectedCallback = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+            var _connectedCallback = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
               var _this6 = this;
 
-              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+              return regeneratorRuntime.wrap(function _callee7$(_context7) {
                 while (1) {
-                  switch (_context6.prev = _context6.next) {
+                  switch (_context7.prev = _context7.next) {
                     case 0:
-                      _context6.next = 2;
+                      _context7.next = 2;
                       return __webpack_require__.e(
-                      /*! import() | swipe-back-2c765762-js */
-                      "swipe-back-2c765762-js").then(__webpack_require__.bind(null,
-                      /*! ./swipe-back-2c765762.js */
-                      "3wQK"));
+                      /*! import() | swipe-back-2154c9a7-js */
+                      "swipe-back-2154c9a7-js").then(__webpack_require__.bind(null,
+                      /*! ./swipe-back-2154c9a7.js */
+                      "V+6w"));
 
                     case 2:
-                      this.gesture = _context6.sent.createSwipeBackGesture(this.el, function () {
+                      this.gesture = _context7.sent.createSwipeBackGesture(this.el, function () {
                         return !!_this6.swipeHandler && _this6.swipeHandler.canStart() && _this6.animationEnabled;
                       }, function () {
                         return _this6.swipeHandler && _this6.swipeHandler.onStart();
@@ -1267,9 +1285,9 @@
                           if (!shouldComplete) {
                             _this6.ani.easing('cubic-bezier(1, 0, 0.68, 0.28)');
 
-                            newStepValue += Object(_cubic_bezier_685f606a_js__WEBPACK_IMPORTED_MODULE_4__["g"])([0, 0], [1, 0], [0.68, 0.28], [1, 1], step)[0];
+                            newStepValue += Object(_cubic_bezier_eea9a7a9_js__WEBPACK_IMPORTED_MODULE_4__["g"])([0, 0], [1, 0], [0.68, 0.28], [1, 1], step)[0];
                           } else {
-                            newStepValue += Object(_cubic_bezier_685f606a_js__WEBPACK_IMPORTED_MODULE_4__["g"])([0, 0], [0.32, 0.72], [0, 1], [1, 1], step)[0];
+                            newStepValue += Object(_cubic_bezier_eea9a7a9_js__WEBPACK_IMPORTED_MODULE_4__["g"])([0, 0], [0.32, 0.72], [0, 1], [1, 1], step)[0];
                           }
 
                           _this6.ani.progressEnd(shouldComplete ? 1 : 0, newStepValue, dur);
@@ -1279,10 +1297,10 @@
 
                     case 4:
                     case "end":
-                      return _context6.stop();
+                      return _context7.stop();
                   }
                 }
-              }, _callee6, this);
+              }, _callee7, this);
             }));
 
             function connectedCallback() {
@@ -1309,42 +1327,42 @@
         }, {
           key: "commit",
           value: function () {
-            var _commit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(enteringEl, leavingEl, opts) {
+            var _commit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(enteringEl, leavingEl, opts) {
               var unlock, changed;
-              return regeneratorRuntime.wrap(function _callee7$(_context7) {
+              return regeneratorRuntime.wrap(function _callee8$(_context8) {
                 while (1) {
-                  switch (_context7.prev = _context7.next) {
+                  switch (_context8.prev = _context8.next) {
                     case 0:
-                      _context7.next = 2;
+                      _context8.next = 2;
                       return this.lock();
 
                     case 2:
-                      unlock = _context7.sent;
+                      unlock = _context8.sent;
                       changed = false;
-                      _context7.prev = 4;
-                      _context7.next = 7;
+                      _context8.prev = 4;
+                      _context8.next = 7;
                       return this.transition(enteringEl, leavingEl, opts);
 
                     case 7:
-                      changed = _context7.sent;
-                      _context7.next = 13;
+                      changed = _context8.sent;
+                      _context8.next = 13;
                       break;
 
                     case 10:
-                      _context7.prev = 10;
-                      _context7.t0 = _context7["catch"](4);
-                      console.error(_context7.t0);
+                      _context8.prev = 10;
+                      _context8.t0 = _context8["catch"](4);
+                      console.error(_context8.t0);
 
                     case 13:
                       unlock();
-                      return _context7.abrupt("return", changed);
+                      return _context8.abrupt("return", changed);
 
                     case 15:
                     case "end":
-                      return _context7.stop();
+                      return _context8.stop();
                   }
                 }
-              }, _callee7, this, [[4, 10]]);
+              }, _callee8, this, [[4, 10]]);
             }));
 
             function commit(_x5, _x6, _x7) {
@@ -1358,13 +1376,13 @@
         }, {
           key: "setRouteId",
           value: function () {
-            var _setRouteId = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(id, params, direction, animation) {
+            var _setRouteId = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(id, params, direction, animation) {
               var changed;
-              return regeneratorRuntime.wrap(function _callee8$(_context8) {
+              return regeneratorRuntime.wrap(function _callee9$(_context9) {
                 while (1) {
-                  switch (_context8.prev = _context8.next) {
+                  switch (_context9.prev = _context9.next) {
                     case 0:
-                      _context8.next = 2;
+                      _context9.next = 2;
                       return this.setRoot(id, params, {
                         duration: direction === 'root' ? 0 : undefined,
                         direction: direction === 'back' ? 'back' : 'forward',
@@ -1372,18 +1390,18 @@
                       });
 
                     case 2:
-                      changed = _context8.sent;
-                      return _context8.abrupt("return", {
+                      changed = _context9.sent;
+                      return _context9.abrupt("return", {
                         changed: changed,
                         element: this.activeEl
                       });
 
                     case 4:
                     case "end":
-                      return _context8.stop();
+                      return _context9.stop();
                   }
                 }
-              }, _callee8, this);
+              }, _callee9, this);
             }));
 
             function setRouteId(_x8, _x9, _x10, _x11) {
@@ -1397,24 +1415,24 @@
         }, {
           key: "getRouteId",
           value: function () {
-            var _getRouteId = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+            var _getRouteId = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
               var active;
-              return regeneratorRuntime.wrap(function _callee9$(_context9) {
+              return regeneratorRuntime.wrap(function _callee10$(_context10) {
                 while (1) {
-                  switch (_context9.prev = _context9.next) {
+                  switch (_context10.prev = _context10.next) {
                     case 0:
                       active = this.activeEl;
-                      return _context9.abrupt("return", active ? {
+                      return _context10.abrupt("return", active ? {
                         id: active.tagName,
                         element: active
                       } : undefined);
 
                     case 2:
                     case "end":
-                      return _context9.stop();
+                      return _context10.stop();
                   }
                 }
-              }, _callee9, this);
+              }, _callee10, this);
             }));
 
             function getRouteId() {
@@ -1426,46 +1444,46 @@
         }, {
           key: "setRoot",
           value: function () {
-            var _setRoot = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(component, params, opts) {
+            var _setRoot = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(component, params, opts) {
               var leavingEl, enteringEl;
-              return regeneratorRuntime.wrap(function _callee10$(_context10) {
+              return regeneratorRuntime.wrap(function _callee11$(_context11) {
                 while (1) {
-                  switch (_context10.prev = _context10.next) {
+                  switch (_context11.prev = _context11.next) {
                     case 0:
                       if (!(this.activeComponent === component)) {
-                        _context10.next = 2;
+                        _context11.next = 2;
                         break;
                       }
 
-                      return _context10.abrupt("return", false);
+                      return _context11.abrupt("return", false);
 
                     case 2:
                       // attach entering view to DOM
                       leavingEl = this.activeEl;
-                      _context10.next = 5;
-                      return Object(_framework_delegate_d1eb6504_js__WEBPACK_IMPORTED_MODULE_6__["a"])(this.delegate, this.el, component, ['ion-page', 'ion-page-invisible'], params);
+                      _context11.next = 5;
+                      return Object(_framework_delegate_4584ab5a_js__WEBPACK_IMPORTED_MODULE_6__["a"])(this.delegate, this.el, component, ['ion-page', 'ion-page-invisible'], params);
 
                     case 5:
-                      enteringEl = _context10.sent;
+                      enteringEl = _context11.sent;
                       this.activeComponent = component;
                       this.activeEl = enteringEl; // commit animation
 
-                      _context10.next = 10;
+                      _context11.next = 10;
                       return this.commit(enteringEl, leavingEl, opts);
 
                     case 10:
-                      _context10.next = 12;
-                      return Object(_framework_delegate_d1eb6504_js__WEBPACK_IMPORTED_MODULE_6__["d"])(this.delegate, leavingEl);
+                      _context11.next = 12;
+                      return Object(_framework_delegate_4584ab5a_js__WEBPACK_IMPORTED_MODULE_6__["d"])(this.delegate, leavingEl);
 
                     case 12:
-                      return _context10.abrupt("return", true);
+                      return _context11.abrupt("return", true);
 
                     case 13:
                     case "end":
-                      return _context10.stop();
+                      return _context11.stop();
                   }
                 }
-              }, _callee10, this);
+              }, _callee11, this);
             }));
 
             function setRoot(_x12, _x13, _x14) {
@@ -1477,7 +1495,7 @@
         }, {
           key: "transition",
           value: function () {
-            var _transition = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(enteringEl, leavingEl) {
+            var _transition = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee12(enteringEl, leavingEl) {
               var _this7 = this;
 
               var opts,
@@ -1485,28 +1503,28 @@
                   mode,
                   animated,
                   animationBuilder,
-                  _args11 = arguments;
-              return regeneratorRuntime.wrap(function _callee11$(_context11) {
+                  _args12 = arguments;
+              return regeneratorRuntime.wrap(function _callee12$(_context12) {
                 while (1) {
-                  switch (_context11.prev = _context11.next) {
+                  switch (_context12.prev = _context12.next) {
                     case 0:
-                      opts = _args11.length > 2 && _args11[2] !== undefined ? _args11[2] : {};
+                      opts = _args12.length > 2 && _args12[2] !== undefined ? _args12[2] : {};
 
                       if (!(leavingEl === enteringEl)) {
-                        _context11.next = 3;
+                        _context12.next = 3;
                         break;
                       }
 
-                      return _context11.abrupt("return", false);
+                      return _context12.abrupt("return", false);
 
                     case 3:
                       // emit nav will change event
                       this.ionNavWillChange.emit();
                       el = this.el, mode = this.mode;
-                      animated = this.animated && _ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('animated', true);
-                      animationBuilder = this.animation || opts.animationBuilder || _ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["c"].get('navAnimation');
-                      _context11.next = 9;
-                      return Object(_index_96111fa9_js__WEBPACK_IMPORTED_MODULE_3__["t"])(Object.assign(Object.assign({
+                      animated = this.animated && _ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["c"].getBoolean('animated', true);
+                      animationBuilder = this.animation || opts.animationBuilder || _ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["c"].get('navAnimation');
+                      _context12.next = 9;
+                      return Object(_index_d8cfb4a8_js__WEBPACK_IMPORTED_MODULE_3__["t"])(Object.assign(Object.assign({
                         mode: mode,
                         animated: animated,
                         enteringEl: enteringEl,
@@ -1522,14 +1540,14 @@
                     case 9:
                       // emit nav changed event
                       this.ionNavDidChange.emit();
-                      return _context11.abrupt("return", true);
+                      return _context12.abrupt("return", true);
 
                     case 11:
                     case "end":
-                      return _context11.stop();
+                      return _context12.stop();
                   }
                 }
-              }, _callee11, this);
+              }, _callee12, this);
             }));
 
             function transition(_x15, _x16) {
@@ -1541,11 +1559,11 @@
         }, {
           key: "lock",
           value: function () {
-            var _lock = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
+            var _lock = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
               var p, resolve;
-              return regeneratorRuntime.wrap(function _callee12$(_context12) {
+              return regeneratorRuntime.wrap(function _callee13$(_context13) {
                 while (1) {
-                  switch (_context12.prev = _context12.next) {
+                  switch (_context13.prev = _context13.next) {
                     case 0:
                       p = this.waitPromise;
                       this.waitPromise = new Promise(function (r) {
@@ -1553,22 +1571,22 @@
                       });
 
                       if (!(p !== undefined)) {
-                        _context12.next = 5;
+                        _context13.next = 5;
                         break;
                       }
 
-                      _context12.next = 5;
+                      _context13.next = 5;
                       return p;
 
                     case 5:
-                      return _context12.abrupt("return", resolve);
+                      return _context13.abrupt("return", resolve);
 
                     case 6:
                     case "end":
-                      return _context12.stop();
+                      return _context13.stop();
                   }
                 }
-              }, _callee12, this);
+              }, _callee13, this);
             }));
 
             function lock() {
@@ -1580,12 +1598,12 @@
         }, {
           key: "render",
           value: function render() {
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null);
           }
         }, {
           key: "el",
           get: function get() {
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
           }
         }], [{
           key: "watchers",
@@ -1607,8 +1625,8 @@
         function ToolbarTitle(hostRef) {
           _classCallCheck(this, ToolbarTitle);
 
-          Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
-          this.ionStyle = Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionStyle", 7);
+          Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+          this.ionStyle = Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["e"])(this, "ionStyle", 7);
         }
 
         _createClass(ToolbarTitle, [{
@@ -1637,18 +1655,18 @@
           value: function render() {
             var _Object2;
 
-            var mode = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
+            var mode = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
             var size = this.getSize();
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-              "class": Object(_theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_5__["c"])(this.color, (_Object2 = {}, _defineProperty(_Object2, mode, true), _defineProperty(_Object2, "title-".concat(size), true), _Object2))
-            }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+              "class": Object(_theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_5__["c"])(this.color, (_Object2 = {}, _defineProperty(_Object2, mode, true), _defineProperty(_Object2, "title-".concat(size), true), _Object2))
+            }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "toolbar-title"
-            }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)));
+            }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)));
           }
         }, {
           key: "el",
           get: function get() {
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
           }
         }], [{
           key: "watchers",
@@ -1673,7 +1691,7 @@
         function Toolbar(hostRef) {
           _classCallCheck(this, Toolbar);
 
-          Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
+          Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["r"])(this, hostRef);
           this.childrenStyles = new Map();
         }
 
@@ -1726,7 +1744,7 @@
 
             if (hasStyleChange) {
               this.childrenStyles.set(tagName, newStyles);
-              Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["j"])(this);
+              Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["j"])(this);
             }
           }
         }, {
@@ -1734,33 +1752,33 @@
           value: function render() {
             var _Object3;
 
-            var mode = Object(_ionic_global_23e7365a_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
+            var mode = Object(_ionic_global_9d5c8ee3_js__WEBPACK_IMPORTED_MODULE_1__["b"])(this);
             var childStyles = {};
             this.childrenStyles.forEach(function (value) {
               Object.assign(childStyles, value);
             });
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
-              "class": Object.assign(Object.assign({}, childStyles), Object(_theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_5__["c"])(this.color, (_Object3 = {}, _defineProperty(_Object3, mode, true), _defineProperty(_Object3, 'in-toolbar', Object(_theme_5641d27f_js__WEBPACK_IMPORTED_MODULE_5__["h"])('ion-toolbar', this.el)), _Object3)))
-            }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["H"], {
+              "class": Object.assign(Object.assign({}, childStyles), Object(_theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_5__["c"])(this.color, (_Object3 = {}, _defineProperty(_Object3, mode, true), _defineProperty(_Object3, 'in-toolbar', Object(_theme_ff3fc52f_js__WEBPACK_IMPORTED_MODULE_5__["h"])('ion-toolbar', this.el)), _Object3)))
+            }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "toolbar-background"
-            }), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "toolbar-container"
-            }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
+            }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
               name: "start"
-            }), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
+            }), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
               name: "secondary"
-            }), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
+            }), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div", {
               "class": "toolbar-content"
-            }, Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
+            }, Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", null)), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
               name: "primary"
-            }), Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
+            }), Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["h"])("slot", {
               name: "end"
             })));
           }
         }, {
           key: "el",
           get: function get() {
-            return Object(_index_92848855_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
+            return Object(_index_e806d1f6_js__WEBPACK_IMPORTED_MODULE_0__["i"])(this);
           }
         }]);
 
