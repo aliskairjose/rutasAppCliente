@@ -37,7 +37,13 @@ export class AuthInterceptorService implements HttpInterceptor {
             const color = 'danger';
             let mensaje = '';
 
+            if ( result.error.message ) {
+              this.commonService.presentToast( { message: result.error.message, color } );
+              return;
+            }
+
             if ( Object.entries( errors ).length ) {
+              console.log( '1' );
               for ( const key in errors ) {
                 if ( Object.prototype.hasOwnProperty.call( errors, key ) ) {
                   const element = errors[ key ];
@@ -47,6 +53,7 @@ export class AuthInterceptorService implements HttpInterceptor {
               this.commonService.presentToast( { message: mensaje, color } );
             }
             else {
+              console.log( '2' );
               const message = result.error.message;
               this.commonService.presentToast( { message, color } );
             }
