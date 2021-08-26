@@ -39,7 +39,6 @@ export class AuthInterceptorService implements HttpInterceptor {
 
             if ( result.error.message ) {
               this.commonService.presentToast( { message: result.error.message, color } );
-              return;
             }
 
             if ( Object.entries( errors ).length ) {
