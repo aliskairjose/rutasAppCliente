@@ -565,7 +565,8 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    api: 'http://api.rutaspanama.dev.cronapis.com/api',
+    // api: 'http://api.rutaspanama.dev.cronapis.com/api',
+    api: 'https://api.rutas.prod.dev.cronapis.com/api',
     firebase: {
         apiKey: 'AIzaSyAwpsAm2BlfpUCa20hymcmxrp97tjCIlPs',
         authDomain: 'rutasapp-305809.firebaseapp.com',
@@ -2109,6 +2110,9 @@ let AuthInterceptorService = class AuthInterceptorService {
                 const errors = result.error.errors;
                 const color = 'danger';
                 let mensaje = '';
+                if (result.error.message) {
+                    this.commonService.presentToast({ message: result.error.message, color });
+                }
                 if (Object.entries(errors).length) {
                     for (const key in errors) {
                         if (Object.prototype.hasOwnProperty.call(errors, key)) {

@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.rutas",
-  "appName": "myFirstIonicProject",
+  "appId": "com.cronapis.rutas",
+  "appName": "RutasPanama",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

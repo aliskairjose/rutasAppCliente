@@ -989,7 +989,8 @@
 
       var environment = {
         production: false,
-        api: 'http://api.rutaspanama.dev.cronapis.com/api',
+        // api: 'http://api.rutaspanama.dev.cronapis.com/api',
+        api: 'https://api.rutas.prod.dev.cronapis.com/api',
         firebase: {
           apiKey: 'AIzaSyAwpsAm2BlfpUCa20hymcmxrp97tjCIlPs',
           authDomain: 'rutasapp-305809.firebaseapp.com',
@@ -3919,6 +3920,13 @@
                 var errors = result.error.errors;
                 var color = 'danger';
                 var mensaje = '';
+
+                if (result.error.message) {
+                  _this19.commonService.presentToast({
+                    message: result.error.message,
+                    color: color
+                  });
+                }
 
                 if (Object.entries(errors).length) {
                   for (var key in errors) {

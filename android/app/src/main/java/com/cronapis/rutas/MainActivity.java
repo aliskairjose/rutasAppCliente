@@ -1,4 +1,4 @@
-package com.rutaspanama.app;
+package com.cronapis.rutas;
 
 import android.os.Bundle;
 
