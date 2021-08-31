@@ -13,8 +13,8 @@ import { CommonService } from '../../../../services/common.service';
   styleUrls: [ './detail.page.scss' ],
 } )
 export class DetailPage implements OnInit {
-  user: User = {};
-  comment: Comment = {};
+  user: User = { };
+  comment: Comment = { };
 
   constructor(
     private route: ActivatedRoute,
@@ -29,10 +29,9 @@ export class DetailPage implements OnInit {
     const loading = await this.common.presentLoading();
     loading.present();
     this.userService.commentById( +id ).subscribe( ( comment: Comment ) => {
-      console.log( comment )
       loading.dismiss();
       this.comment = { ...comment };
-    } );
+    }, () => loading.dismiss() );
   }
 
 }

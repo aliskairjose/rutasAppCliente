@@ -58,7 +58,7 @@ export class ClientsModalPage implements OnInit {
       this._clientService.list().subscribe( result => {
         loading.dismiss();
         resolve( result.data );
-      } );
+      }, () => loading.dismiss() );
     } );
   }
 

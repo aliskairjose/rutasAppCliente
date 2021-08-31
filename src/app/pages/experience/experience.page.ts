@@ -38,6 +38,7 @@ export class ExperiencePage implements OnInit {
       const rateSum = [];
       this.list.forEach( l => rateSum.push( l.calification_route ) );
       this.rating = rateSum.reduce( ( a, b ) => a + b, 0 ) / this.list.length;
+      if ( isNaN( this.rating ) ) { this.rating = 1; }
       const rat = Math.round( this.rating );
       ( rat === 0 ) ? this.rating = 1 : this.rating = rat;
       this.face = `/assets/svg/faces/${this.rating}.svg`;

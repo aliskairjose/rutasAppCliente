@@ -39,7 +39,7 @@ export class ForgotPasswordPage implements OnInit {
       this._auth.recoverPassword( this.registerForgotForm.value ).subscribe( () => {
         loading.dismiss();
         this.router.navigate( [ '/signin' ] );
-      } );
+      }, () => loading.dismiss() );
     }
   }
 
