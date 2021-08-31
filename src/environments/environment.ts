@@ -19,7 +19,7 @@ export const environment = {
   PUSHER_APP_SECRET: '02ac7fdf7b269ff38226',
   PUSHER_APP_CLUSTER: 'mt1',
   googleConfig: {
-    webClientId: '902176399419-e10ng3a6vsiv7ib90ub4f95n3knkgnur.apps.googleusercontent.com',
+    webClientId: '1039606389128-hic9ptafl426ba4ojvmc7ku35husk587.apps.googleusercontent.com/',
     offline: true,
   },
 };
