@@ -97,7 +97,7 @@ export class AuthenticationPage implements OnInit {
       await this.storage.store( TOKEN, response.data );
       await this.storage.store( USER, response.user );
       this.router.navigate( [ '/sidemenu/Inicio' ] );
-    } );
+    }, () => loading.dismiss() );
   }
 
   private createForm(): void {

@@ -29,7 +29,7 @@ export class SupportPage implements OnInit {
       const color = 'primary';
       const message = 'Su comentario ha sido procesado, gracias!';
       this.common.presentToast( { message, color } );
-    } );
+    }, () => loading.dismiss() );
   }
 
 
