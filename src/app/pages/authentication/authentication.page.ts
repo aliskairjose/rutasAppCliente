@@ -8,6 +8,9 @@ import { StorageService } from '../../services/storage.service';
 import { ERROR_FORM, LOGO, TOKEN, USER } from '../../constants/global-constants';
 import { CommonService } from '../../services/common.service';
 import { ClientsModalPage } from '../../modals/clients-modal/clients-modal.page';
+import { Platform } from '@ionic/angular';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { environment } from '../../../environments/environment';
 @Component( {
   selector: 'app-authentication',
   templateUrl: './authentication.page.html',
@@ -23,7 +26,9 @@ export class AuthenticationPage implements OnInit {
   constructor(
     private router: Router,
     private _auth: AuthService,
+    private platform: Platform,
     private common: CommonService,
+    private googlePlus: GooglePlus,
     private formBuilder: FormBuilder,
     private storage: StorageService,
   ) {
@@ -36,18 +41,37 @@ export class AuthenticationPage implements OnInit {
 
   get f() { return this.loginForm.controls; }
 
-  async googleLogin() {
-    const googleUser = await Plugins.GoogleAuth.signIn();
+  // async googleLogin() {
+  //   const googleUser = await Plugins.GoogleAuth.signIn();
 
-    if ( googleUser.authentication.idToken ) {
-      const loading = await this.common.presentLoading();
-      loading.present();
-      const exist = await this._auth.exist( googleUser.email );
-      loading.dismiss();
-      ( exist ) ? this.googleAccess( { email: googleUser.email, google_id: googleUser.id } ) : this.registerGoogleUSer( googleUser );
+  //   if ( googleUser.authentication.idToken ) {
+  //     const loading = await this.common.presentLoading();
+  //     loading.present();
+  //     const exist = await this._auth.exist( googleUser.email );
+  //     loading.dismiss();
+  //     ( exist ) ? this.googleAccess( { email: googleUser.email, google_id: googleUser.id } ) : this.registerGoogleUSer( googleUser );
+  //   }
+  // }
+
+  async googleLogin() {
+    const isMobile = ( this.platform.is( 'android' ) || this.platform.is( 'ios' ) );
+    console.log( 'isMobile', isMobile );
+    if ( isMobile ) {
+      try {
+        const gplusUser = await this.googlePlus.login( environment.googleConfig );
+        if ( gplusUser.idToken ) {
+          const loading = await this.common.presentLoading();
+          const exist = await this._auth.exist( gplusUser.email );
+          loading.dismiss();
+          ( exist ) ?
+            this.googleAccess( { email: gplusUser.email, google_id: gplusUser.id } ) :
+            this.registerGoogleUSer( gplusUser );
+        }
+      } catch ( error ) {
+
+      }
     }
   }
-
   async onSubmit() {
     this.submitted = true;
     if ( this.loginForm.valid ) {

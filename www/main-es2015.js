@@ -20,7 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\repositorios\cronapis\rutasPanama\rutas_app\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\Users\Ddeveloper\Documents\Cronapis\Projects\mobile\rutas_app\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -579,6 +579,10 @@ const environment = {
     PUSHER_APP_KEY: '17f57ce05bb3f97f1ee8',
     PUSHER_APP_SECRET: '02ac7fdf7b269ff38226',
     PUSHER_APP_CLUSTER: 'mt1',
+    googleConfig: {
+        webClientId: '902176399419-e10ng3a6vsiv7ib90ub4f95n3knkgnur.apps.googleusercontent.com',
+        offline: true,
+    },
 };
 /*
  * For easier debugging in development mode, you can import the following file
@@ -1791,6 +1795,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_locales_es__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_es__WEBPACK_IMPORTED_MODULE_24__);
 /* harmony import */ var _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @ionic-native/barcode-scanner/ngx */ "WdVq");
 /* harmony import */ var _services_pusher_service__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./services/pusher.service */ "7Efn");
+/* harmony import */ var _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @ionic-native/google-plus/ngx */ "up+p");
+
 
 
 
@@ -1854,6 +1860,7 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _angular_fire_auth__WEBPACK_IMPORTED_MODULE_15__["AngularFireAuthModule"],
         ],
         providers: [
+            _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_27__["GooglePlus"],
             _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_23__["Camera"],
             _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_20__["Geolocation"],
             _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_25__["BarcodeScanner"],
@@ -2622,6 +2629,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
 /* harmony import */ var _common_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./common.service */ "OlR4");
 /* harmony import */ var _constants_global_constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../constants/global-constants */ "s8rx");
+/* harmony import */ var _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/google-plus/ngx */ "up+p");
+
 
 
 
@@ -2631,10 +2640,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AuthService = class AuthService {
-    constructor(common, storage, _httpService) {
+    constructor(common, storage, _httpService, oGooglePlus) {
         this.common = common;
         this.storage = storage;
         this._httpService = _httpService;
+        this.oGooglePlus = oGooglePlus;
         this.auth$ = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
     /**
@@ -2690,7 +2700,8 @@ let AuthService = class AuthService {
 AuthService.ctorParameters = () => [
     { type: _common_service__WEBPACK_IMPORTED_MODULE_6__["CommonService"] },
     { type: _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"] },
-    { type: _http_service__WEBPACK_IMPORTED_MODULE_2__["HttpService"] }
+    { type: _http_service__WEBPACK_IMPORTED_MODULE_2__["HttpService"] },
+    { type: _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_8__["GooglePlus"] }
 ];
 AuthService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -3224,6 +3235,9 @@ let ExperiencePage = class ExperiencePage {
                 const rateSum = [];
                 this.list.forEach(l => rateSum.push(l.calification_route));
                 this.rating = rateSum.reduce((a, b) => a + b, 0) / this.list.length;
+                if (isNaN(this.rating)) {
+                    this.rating = 1;
+                }
                 const rat = Math.round(this.rating);
                 (rat === 0) ? this.rating = 1 : this.rating = rat;
                 this.face = `/assets/svg/faces/${this.rating}.svg`;

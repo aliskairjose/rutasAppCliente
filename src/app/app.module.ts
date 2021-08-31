@@ -29,6 +29,7 @@ import localeEs from '@angular/common/locales/es';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { PusherService } from './services/pusher.service';
 import { AgmCoreModule } from '@agm/core';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 registerLocaleData( localeEs );
 @NgModule( {
@@ -55,6 +56,7 @@ registerLocaleData( localeEs );
     AngularFireAuthModule,
   ],
   providers: [
+    GooglePlus,
     Camera,
     Geolocation,
     BarcodeScanner,
