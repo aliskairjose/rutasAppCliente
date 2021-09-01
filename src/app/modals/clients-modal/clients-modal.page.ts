@@ -64,8 +64,8 @@ export class ClientsModalPage implements OnInit {
 
   private createForm(): void {
     this.registerForm = this._fb.group( {
-      google_id: [ this.user.id ],
-      name: [ this.user.name ],
+      google_id: [ this.user.userId ],
+      name: [ this.user.displayName ],
       email: [ this.user.email ],
       department: [ '', [ Validators.required ] ],
       charge: [ '', [ Validators.required ] ],

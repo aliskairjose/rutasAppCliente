@@ -43,18 +43,6 @@ export class AuthenticationPage implements OnInit {
 
   get f() { return this.loginForm.controls; }
 
-  // async googleLogin() {
-  //   const googleUser = await Plugins.GoogleAuth.signIn();
-
-  //   if ( googleUser.authentication.idToken ) {
-  //     const loading = await this.common.presentLoading();
-  //     loading.present();
-  //     const exist = await this._auth.exist( googleUser.email );
-  //     loading.dismiss();
-  //     ( exist ) ? this.googleAccess( { email: googleUser.email, google_id: googleUser.id } ) : this.registerGoogleUSer( googleUser );
-  //   }
-  // }
-
   googleLogin() {
     this.googlePlus.login( environment.googleConfig ).then( async ( gplusUser ) => {
       if ( gplusUser.idToken ) {
