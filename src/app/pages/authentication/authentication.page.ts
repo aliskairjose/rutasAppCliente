@@ -55,24 +55,19 @@ export class AuthenticationPage implements OnInit {
   //   }
   // }
 
-  async googleLogin() {
-    const isMobile = ( this.platform.is( 'android' ) || this.platform.is( 'ios' ) );
-    if ( isMobile ) {
-      // try {
-      //   const gplusUser = await this.googlePlus.login( environment.googleConfig );
-      //   if ( gplusUser.idToken ) {
-      //     const loading = await this.common.presentLoading();
-      //     const exist = await this._auth.exist( gplusUser.email );
-      //     loading.dismiss();
-      //     ( exist ) ?
-      //       this.googleAccess( { email: gplusUser.email, google_id: gplusUser.id } ) :
-      //       this.registerGoogleUSer( gplusUser );
-      //   }
-      // } catch ( error ) {
-      // }
-      this.googlePlus.login( environment.googleConfig ).then( res => this.response = res )
-        .catch( err => this.error = err );
-    }
+  googleLogin() {
+    this.googlePlus.login( environment.googleConfig ).then( async ( gplusUser ) => {
+      if ( gplusUser.idToken ) {
+        const loading = await this.common.presentLoading();
+        loading.present();
+        const exist = await this._auth.exist( gplusUser.email );
+        loading.dismiss();
+        ( exist ) ?
+          this.googleAccess( { email: gplusUser.email, google_id: gplusUser.userId } ) :
+          this.registerGoogleUSer( gplusUser );
+      }
+    }, ( err ) => this.common.presentToast( { message: err } ) );
+
   }
   async onSubmit() {
     this.submitted = true;
