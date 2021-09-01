@@ -54,6 +54,10 @@
         </div>
       </form>
     </div>
+    <div>
+      {{response | json}}
+      {{error | json}}
+    </div>
     <div class="btnWrapper">
       <ion-text class="signupSmallText signupGrayText">o inicie sesión con</ion-text>
       <ion-button color="light" (click)="googleLogin()">

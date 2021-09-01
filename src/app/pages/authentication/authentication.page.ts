@@ -22,6 +22,8 @@ export class AuthenticationPage implements OnInit {
   submitted: boolean;
   formError = ERROR_FORM;
   logo = LOGO;
+  response: any;
+  error: any;
 
   constructor(
     private router: Router,
@@ -67,17 +69,9 @@ export class AuthenticationPage implements OnInit {
       //       this.registerGoogleUSer( gplusUser );
       //   }
       // } catch ( error ) {
-
       // }
-      try {
-        this.googlePlus
-          .login( environment.googleConfig )
-          .then( res => console.log( res ) )
-          .catch( err => console.log( err ) );
-      } catch ( error ) {
-        console.log( error );
-
-      }
+      this.googlePlus.login( environment.googleConfig ).then( res => this.response = res )
+        .catch( err => this.error = err );
     }
   }
   async onSubmit() {
