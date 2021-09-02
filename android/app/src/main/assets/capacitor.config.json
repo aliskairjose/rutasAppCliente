@@ -1,6 +1,6 @@
 {
   "appId": "com.cronapis.rutas",
-  "appName": "Rutas Panamá",
+  "appName": "RutasPanama",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

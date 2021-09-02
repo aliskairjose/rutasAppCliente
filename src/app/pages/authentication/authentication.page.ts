@@ -8,6 +8,9 @@ import { StorageService } from '../../services/storage.service';
 import { ERROR_FORM, LOGO, TOKEN, USER } from '../../constants/global-constants';
 import { CommonService } from '../../services/common.service';
 import { ClientsModalPage } from '../../modals/clients-modal/clients-modal.page';
+import { Platform } from '@ionic/angular';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { environment } from '../../../environments/environment';
 @Component( {
   selector: 'app-authentication',
   templateUrl: './authentication.page.html',
@@ -19,11 +22,15 @@ export class AuthenticationPage implements OnInit {
   submitted: boolean;
   formError = ERROR_FORM;
   logo = LOGO;
+  response: any;
+  error: any;
 
   constructor(
     private router: Router,
     private _auth: AuthService,
+    private platform: Platform,
     private common: CommonService,
+    private googlePlus: GooglePlus,
     private formBuilder: FormBuilder,
     private storage: StorageService,
   ) {
@@ -36,18 +43,28 @@ export class AuthenticationPage implements OnInit {
 
   get f() { return this.loginForm.controls; }
 
-  async googleLogin() {
-    const googleUser = await Plugins.GoogleAuth.signIn();
+  googleLogin() {
+    this.googlePlus.login( environment.googleConfig ).then( async ( gplusUser ) => {
+      if ( gplusUser.idToken ) {
+        const loading = await this.common.presentLoading();
+        loading.present();
+        const result = await this._auth.exist( gplusUser.email );
+        loading.dismiss();
+        if ( result.exist ) {
+          if ( result.user.roles[ 0 ].name === 'admin' ) {
+            const message = 'No puedes acceder con esta cuenta, ya que esta asociada a otro rol en el sistema.';
+            const color = 'danger';
+            this.common.presentToast( { message, color } );
+            return;
+          }
+          this.googleAccess( { email: gplusUser.email, google_id: gplusUser.userId } );
+        } else {
+          this.registerGoogleUSer( gplusUser );
+        }
+      }
+    }, ( err ) => this.common.presentToast( { message: err } ) );
 
-    if ( googleUser.authentication.idToken ) {
-      const loading = await this.common.presentLoading();
-      loading.present();
-      const exist = await this._auth.exist( googleUser.email );
-      loading.dismiss();
-      ( exist ) ? this.googleAccess( { email: googleUser.email, google_id: googleUser.id } ) : this.registerGoogleUSer( googleUser );
-    }
   }
-
   async onSubmit() {
     this.submitted = true;
     if ( this.loginForm.valid ) {

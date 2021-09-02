@@ -6,17 +6,21 @@ import { User } from '@codetrix-studio/capacitor-google-auth/dist/esm/user';
 import { map } from 'rxjs/operators';
 import { CommonService } from './common.service';
 import { TOKEN, USER } from '../constants/global-constants';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import firebase from 'firebase';
 
 @Injectable( {
   providedIn: 'root'
 } )
 export class AuthService {
+
   private auth$: Subject<User> = new Subject<User>();
 
   constructor(
     private common: CommonService,
     private storage: StorageService,
     private _httpService: HttpService,
+    private oGooglePlus: GooglePlus,
   ) { }
 
   /**
@@ -54,8 +58,8 @@ export class AuthService {
    * @param email Email del usuario a consultar
    * @returns True o False
    */
-  exist( email: string ): Promise<boolean> {
-    return new Promise<boolean>( resolve => {
+  exist( email: string ): Promise<any> {
+    return new Promise<any>( resolve => {
       this._httpService.get( `/verify-email/${email}` ).subscribe( res => resolve( res ) );
     } );
   }
@@ -79,6 +83,5 @@ export class AuthService {
   authObserver(): Observable<User> {
     return this.auth$.asObservable();
   }
-
 
 }

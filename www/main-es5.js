@@ -51,7 +51,7 @@
     /***/
     function _(module, exports, __webpack_require__) {
       module.exports = __webpack_require__(
-      /*! C:\xampp\htdocs\repositorios\cronapis\rutasPanama\rutas_app\src\main.ts */
+      /*! C:\Users\Ddeveloper\Documents\Cronapis\Projects\mobile\rutas_app\src\main.ts */
       "zUnb");
       /***/
     },
@@ -1002,7 +1002,11 @@
         PUSHER_APP_ID: 1190909,
         PUSHER_APP_KEY: '17f57ce05bb3f97f1ee8',
         PUSHER_APP_SECRET: '02ac7fdf7b269ff38226',
-        PUSHER_APP_CLUSTER: 'mt1'
+        PUSHER_APP_CLUSTER: 'mt1',
+        googleConfig: {
+          webClientId: '1039606389128-ns6baogrl084sdutqm1b6rkhumcam2e1.apps.googleusercontent.com',
+          offline: true
+        }
       };
       /*
        * For easier debugging in development mode, you can import the following file
@@ -3423,6 +3427,12 @@
       var _services_pusher_service__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
       /*! ./services/pusher.service */
       "7Efn");
+      /* harmony import */
+
+
+      var _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
+      /*! @ionic-native/google-plus/ngx */
+      "up+p");
 
       Object(_angular_common__WEBPACK_IMPORTED_MODULE_7__["registerLocaleData"])(_angular_common_locales_es__WEBPACK_IMPORTED_MODULE_24___default.a);
 
@@ -3445,7 +3455,7 @@
         imports: [ngx_bar_rating__WEBPACK_IMPORTED_MODULE_22__["BarRatingModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["BrowserModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__["BrowserAnimationsModule"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["CommonModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["IonicModule"].forRoot({
           mode: 'md'
         }), _app_routing_module__WEBPACK_IMPORTED_MODULE_11__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_18__["HttpClientModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"], _pages_sidemenu_sidemenu_module__WEBPACK_IMPORTED_MODULE_12__["SidemenuPageModule"], _pages_soporte_soporte_module__WEBPACK_IMPORTED_MODULE_1__["SoportePageModule"], _pages_inicio_inicio_module__WEBPACK_IMPORTED_MODULE_2__["InicioPageModule"], _pages_feedback_feedback_module__WEBPACK_IMPORTED_MODULE_17__["FeedbackPageModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_13__["AngularFireModule"].initializeApp(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].firebase), _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_14__["AngularFirestoreModule"], _angular_fire_auth__WEBPACK_IMPORTED_MODULE_15__["AngularFireAuthModule"]],
-        providers: [_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_23__["Camera"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_20__["Geolocation"], _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_25__["BarcodeScanner"], _services_pusher_service__WEBPACK_IMPORTED_MODULE_26__["PusherService"], {
+        providers: [_ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_27__["GooglePlus"], _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_23__["Camera"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_20__["Geolocation"], _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_25__["BarcodeScanner"], _services_pusher_service__WEBPACK_IMPORTED_MODULE_26__["PusherService"], {
           provide: _angular_core__WEBPACK_IMPORTED_MODULE_5__["LOCALE_ID"],
           useValue: 'es'
         }, {
@@ -4513,14 +4523,21 @@
       var _constants_global_constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ../constants/global-constants */
       "s8rx");
+      /* harmony import */
+
+
+      var _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! @ionic-native/google-plus/ngx */
+      "up+p");
 
       var AuthService = /*#__PURE__*/function () {
-        function AuthService(common, storage, _httpService) {
+        function AuthService(common, storage, _httpService, oGooglePlus) {
           _classCallCheck(this, AuthService);
 
           this.common = common;
           this.storage = storage;
           this._httpService = _httpService;
+          this.oGooglePlus = oGooglePlus;
           this.auth$ = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
         }
         /**
@@ -4618,6 +4635,8 @@
           type: _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"]
         }, {
           type: _http_service__WEBPACK_IMPORTED_MODULE_2__["HttpService"]
+        }, {
+          type: _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_8__["GooglePlus"]
         }];
       };
 
@@ -5623,6 +5642,11 @@
                         _this25.rating = rateSum.reduce(function (a, b) {
                           return a + b;
                         }, 0) / _this25.list.length;
+
+                        if (isNaN(_this25.rating)) {
+                          _this25.rating = 1;
+                        }
+
                         var rat = Math.round(_this25.rating);
                         rat === 0 ? _this25.rating = 1 : _this25.rating = rat;
                         _this25.face = "/assets/svg/faces/".concat(_this25.rating, ".svg");
