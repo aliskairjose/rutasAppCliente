@@ -95,7 +95,8 @@ export class AuthenticationPage implements OnInit {
     modal.present();
     const modalData = await modal.onDidDismiss();
     if ( modalData.role === 'submit' ) {
-      this.googleAccess( modalData.data );
+      // this.googleAccess( modalData.data );
+      this.common.presentToast( { message: 'Registro exitoso, espere por aprobación del administrador', color: 'success' } );
     }
   }
 
