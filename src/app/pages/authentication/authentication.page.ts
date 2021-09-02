@@ -48,11 +48,19 @@ export class AuthenticationPage implements OnInit {
       if ( gplusUser.idToken ) {
         const loading = await this.common.presentLoading();
         loading.present();
-        const exist = await this._auth.exist( gplusUser.email );
+        const result = await this._auth.exist( gplusUser.email );
         loading.dismiss();
-        ( exist ) ?
-          this.googleAccess( { email: gplusUser.email, google_id: gplusUser.userId } ) :
+        if ( result.exist ) {
+          if ( result.user.roles[ 0 ].name === 'admin' ) {
+            const message = 'No puedes acceder con esta cuenta, ya que esta asociada a otro rol en el sistema.';
+            const color = 'danger';
+            this.common.presentToast( { message, color } );
+            return;
+          }
+          this.googleAccess( { email: gplusUser.email, google_id: gplusUser.userId } );
+        } else {
           this.registerGoogleUSer( gplusUser );
+        }
       }
     }, ( err ) => this.common.presentToast( { message: err } ) );
 
