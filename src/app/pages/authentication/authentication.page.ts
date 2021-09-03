@@ -51,7 +51,7 @@ export class AuthenticationPage implements OnInit {
         const result = await this._auth.exist( gplusUser.email );
         loading.dismiss();
         if ( result.exist ) {
-          if ( result.user.roles[ 0 ].name === 'admin' ) {
+          if ( result.user.roles[ 0 ].name !== 'user' ) {
             const message = 'No puedes acceder con esta cuenta, ya que esta asociada a otro rol en el sistema.';
             const color = 'danger';
             this.common.presentToast( { message, color } );
@@ -62,9 +62,10 @@ export class AuthenticationPage implements OnInit {
           this.registerGoogleUSer( gplusUser );
         }
       }
-    }, ( err ) => this.common.presentToast( { message: err } ) );
+    }, ( err ) => { } );
 
   }
+
   async onSubmit() {
     this.submitted = true;
     if ( this.loginForm.valid ) {
@@ -74,6 +75,7 @@ export class AuthenticationPage implements OnInit {
         this._auth.AuthSubject( response.user );
         await this.storage.store( TOKEN, response.data );
         await this.storage.store( USER, response.user );
+        await this.storage.store( 'googleLogin', false );
         this.submitted = false;
         this.loginForm.reset();
         loading.dismiss();
@@ -113,6 +115,7 @@ export class AuthenticationPage implements OnInit {
       this.common.presentToast( { message, color } );
       await this.storage.store( TOKEN, response.data );
       await this.storage.store( USER, response.user );
+      await this.storage.store( 'googleLogin', true );
       this.router.navigate( [ '/sidemenu/Inicio' ] );
     }, () => loading.dismiss() );
   }

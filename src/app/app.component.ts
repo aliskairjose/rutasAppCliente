@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   initializeApp(): void {
     this.platform.ready().then( async () => {
       const isLoggedin = await this.storage.get( TOKEN );
-      const route = isLoggedin ? '/sidemenu/Inicio' : '/initial';
+      const route = isLoggedin ? '/sidemenu/Inicio' : '/signin';
       this.router.navigate( [ route ] );
       await this.geolocation.getCurrentPosition();
     } );
