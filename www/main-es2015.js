@@ -307,7 +307,7 @@ let RouteService = class RouteService {
      * @returns Arreglo de Rutas
      */
     list(id) {
-        return this.http.get(`/routes?client_id=${id}&includes[]=driver&includes[]=routeType&includes[]=routeStops&includes[]=bus.busModel&occupedSeats=1`)
+        return this.http.get(`/routes?client_id=${id}&includes[]=driver&includes[]=routeType&includes[]=routeStops&includes[]=bus.busModel&occupedSeats=1&orderBy=start_time&orderDirection=ASC`)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(response => response.data));
     }
     /**
@@ -1445,6 +1445,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_storage_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/storage.service */ "n90K");
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../services/user.service */ "qfBg");
 /* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @capacitor/core */ "gcOT");
+/* harmony import */ var _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/google-plus/ngx */ "up+p");
+
 
 
 
@@ -1458,12 +1460,13 @@ __webpack_require__.r(__webpack_exports__);
 
 const { Camera } = _capacitor_core__WEBPACK_IMPORTED_MODULE_10__["Plugins"];
 let SidemenuPage = class SidemenuPage {
-    constructor(router, _auth, common, userService, storage, changeDetectorRef) {
+    constructor(router, _auth, common, userService, storage, googlePlus, changeDetectorRef) {
         this.router = router;
         this._auth = _auth;
         this.common = common;
         this.userService = userService;
         this.storage = storage;
+        this.googlePlus = googlePlus;
         this.changeDetectorRef = changeDetectorRef;
         this.backdropVisible = false;
         this.drawerVar = 'Inicio';
@@ -1497,8 +1500,18 @@ let SidemenuPage = class SidemenuPage {
         this.changeDetectorRef.detectChanges();
     }
     logout() {
-        localStorage.clear();
-        this.router.navigate(['/signin']);
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const googleLogin = yield this.storage.get('googleLogin');
+            if (googleLogin) {
+                this.googlePlus.disconnect().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+                    yield this.storage.clear();
+                    this.router.navigate(['/signin']);
+                }));
+                return;
+            }
+            yield this.storage.clear();
+            this.router.navigate(['/signin']);
+        });
     }
     menuOptionClickHandle(p, i) {
         this.userService.flowSubject(p.route);
@@ -1546,6 +1559,7 @@ SidemenuPage.ctorParameters = () => [
     { type: _services_common_service__WEBPACK_IMPORTED_MODULE_7__["CommonService"] },
     { type: _services_user_service__WEBPACK_IMPORTED_MODULE_9__["UserService"] },
     { type: _services_storage_service__WEBPACK_IMPORTED_MODULE_8__["StorageService"] },
+    { type: _ionic_native_google_plus_ngx__WEBPACK_IMPORTED_MODULE_11__["GooglePlus"] },
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"] }
 ];
 SidemenuPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
@@ -1616,7 +1630,8 @@ let AppComponent = class AppComponent {
     initializeApp() {
         this.platform.ready().then(() => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const isLoggedin = yield this.storage.get(_constants_global_constants__WEBPACK_IMPORTED_MODULE_6__["TOKEN"]);
-            const route = isLoggedin ? '/sidemenu/Inicio' : '/initial';
+            alert(isLoggedin);
+            const route = isLoggedin ? '/sidemenu/Inicio' : '/signin';
             this.router.navigate([route]);
             yield this.geolocation.getCurrentPosition();
         }));
