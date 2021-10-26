@@ -45,9 +45,7 @@
             <ion-col size="12">
               <p><strong>Chofer: </strong>{{selectedRoute.driver.name}}</p>
               <p><strong>Unidad: </strong>{{selectedRoute.bus.unit_number}} - {{selectedRoute.bus.license_plate}}</p>
-              <ion-list-header>
-                <p>Paradas de la ruta</p>
-              </ion-list-header>
+              <p><strong>Paradas de la ruta </strong></p>
               <ion-list>
                 <ion-item *ngFor="let stop of selectedRoute.route_stops">
                   <ion-label>{{ stop.name }}</ion-label>
